@@ -1,5 +1,11 @@
 # @cubicsui/cli
 
+## 1.2.1
+
+### Patch Changes(Experimental)
+
+- Added new command "create" which allows users to create a new component using `npx cui create <component>`
+
 ## 1.2.0
 
 ### Minor Changes
