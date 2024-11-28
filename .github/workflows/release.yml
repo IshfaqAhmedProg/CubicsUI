@@ -1,6 +1,12 @@
 name: Release
 
 on:
+  workflow_dispatch:
+    inputs:
+      packages:
+        description: "Packages to release (comma-separated, e.g. @myorg/cli,@myorg/generator)"
+        required: false
+        type: string
   push:
     branches:
       - main
@@ -30,15 +36,25 @@ jobs:
       - name: Install Dependencies
         run: pnpm i
 
-      - name: Create Release Pull Request or Publish to npm
+      - name: Publish to npm
         id: changesets
         uses: changesets/action@v1
         with:
-          # This expects you to have a script called release which does a build for your packages and calls changeset publish
+          # Builds packages and calls changeset publish
           publish: pnpm release
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+      - name: Selective Package Release
+        if: ${{ github.event_name == 'workflow_dispatch' && inputs.packages }}
+        run: |
+          PACKAGES=(${{ inputs.packages }})
+          for PACKAGE in "${PACKAGES[@]}"; do
+            pnpm changeset publish --filter=$PACKAGE
+          done
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       # - name: Send a Slack notification if a publish happens
       #   if: steps.changesets.outputs.published == 'true'
