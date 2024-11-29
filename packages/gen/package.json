@@ -1,12 +1,13 @@
 {
-  "name": "gen",
+  "name": "@cubicsui/gen",
   "version": "1.0.0",
   "description": "The main generator that builds the components, hooks and styles, based on what you need",
-  "private": false,
+  "private": true,
   "main": "dist/main.js",
   "scripts": {
-    "build": "tsc -b",
-    "gen": "npm run build && node dist/main.js"
+    "build": "tsc && pnpm gen",
+    "gen": "node dist/main.js",
+    "clean": "rimraf node_modules .turbo dist"
   },
   "keywords": [
     "gen",
@@ -16,7 +17,11 @@
   ],
   "author": "Ishfaq Ahmed",
   "license": "MIT",
+  "dependencies": {
+    "lodash": "^4.17.21"
+  },
   "devDependencies": {
+    "@types/lodash": "^4.17.13",
     "@types/node": "^22.10.1",
     "prettier": "^3.4.1",
     "typescript": "^5.7.2"

@@ -1,5 +1,11 @@
 # @cubicsui/cli
 
+## 1.2.2
+
+### Patch Changes
+
+- New package called "gen" created this is where all the code which will create the individual components reside.
+
 ## 1.2.1
 
 ### Patch Changes(Experimental)

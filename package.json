@@ -4,24 +4,26 @@
     "build": "turbo build",
     "dev": "turbo dev",
     "lint": "turbo lint",
-    "clean": "turbo clean && rm -rf node_modules",
+    "clean": "turbo clean",
     "format": "prettier --write \"**/*.{ts,tsx,md}\"",
     "changeset": "changeset && changeset version",
-    "release": "turbo build --filter=@cubicsui* && changeset publish"
+    "release": "turbo build --filter=@cubicsui/cli && changeset publish",
+    "preinstall": "npx only-allow pnpm"
   },
   "devDependencies": {
     "@changesets/cli": "^2.27.1",
     "eslint": "^9.15.0",
-    "prettier": "^3.2.5",
+    "prettier": "^3.4.1",
+    "rimraf": "^6.0.1",
     "turbo": "^2.3.3"
   },
   "engines": {
-    "node": ">=18"
+    "node": ">=20.18.0"
   },
   "name": "cubicsui",
-  "packageManager": "pnpm@8.15.6",
   "workspaces": [
     "apps/*",
     "packages/*"
-  ]
+  ],
+  "packageManager": "pnpm@9.14.3+sha512.c0f53ee99477ed969b82b289ad011a5d16bf1623c957e7f29eabe8d0c00b574c29b8c7f54f6c67ee710c73f285c8154d07ce44b46fe2c0eeb476a90441bac371"
 }

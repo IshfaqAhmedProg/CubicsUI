@@ -5,6 +5,7 @@ const ConfigSchema = z.object({
   library: z.enum(["react", "svelte"]),
   styleEngine: z.enum(["css", "scss", "tailwind"]),
   mode: z.enum(["typescript", "javascript"]),
+  comments: z.boolean(),
 });
 
 // Configuration type
@@ -15,6 +16,7 @@ export const defaultValues: ConfigProps = {
   library: "react",
   styleEngine: "css",
   mode: "typescript",
+  comments: true,
 };
 
 /**
@@ -46,8 +48,10 @@ export function defineConfig(config: Partial<ConfigProps> = {}): ConfigProps {
  * Default configs formatted to be printed in the final config file
  */
 export const defaultConfigsFormatted = `{
+    library: "${defaultValues.library}",
     styleEngine: "${defaultValues.styleEngine}",
     mode: "${defaultValues.mode}",
+    comments: ${defaultValues.comments},
 }`;
 
 /**

@@ -1,0 +1,1 @@
+export { genPropsTypes } from "./genPropsTypes";
