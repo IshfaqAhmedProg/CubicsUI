@@ -90,7 +90,7 @@ export default function genReactButton({
     componentPropsName: "ButtonProps",
     mode,
     innerContent: `
-    ${genDeconstructedPropsInit(DeconstructButtonProps)}
+    ${genDeconstructedPropsInit(DeconstructButtonProps, "buttonProps")}
     ${genConstInit("buttonCn", genStringLiteral(`${genStringLiteralVar(`${stylesName}.button`)} ${genStringLiteralVar(`${stylesName}[variant]`)} ${genStringLiteralVar("className")}`))}
     ${genConstInit("startDecorationCn", genStringLiteral(`${genStringLiteralVar(`${stylesName}.decoration`)} ${genStringLiteralVar(`${stylesName}.start`)}`))}
     ${genConstInit("endDecorationCn", genStringLiteral(`${genStringLiteralVar(`${stylesName}.decoration`)} ${genStringLiteralVar(`${stylesName}.end`)}`))}

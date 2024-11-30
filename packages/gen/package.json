@@ -4,13 +4,12 @@
   "description": "The main generator that builds the components, hooks and styles, based on what you need",
   "private": true,
   "main": "dist/main.js",
-  "bin": {
-    "@cubicsui/gen": "bin/main.js",
-    "gen": "bin/main.js"
-  },
   "scripts": {
-    "build": "tsc && pnpm gen",
-    "clean": "rimraf node_modules .turbo dist"
+    "build:src": "tsc -p tsconfig.app.json",
+    "build:gen": "tsc -p tsconfig.node.json",
+    "build": "pnpm build:src && pnpm build:gen",
+    "clean": "rimraf node_modules .turbo dist bin",
+    "gen": "pnpm build && node bin/generator.js"
   },
   "keywords": [
     "gen",
@@ -25,10 +24,10 @@
   },
   "license": "MIT",
   "dependencies": {
-    "lodash": "^4.17.21"
+    "lodash": "^4.17.21",
+    "commander": "^12.1.0"
   },
   "devDependencies": {
-    "@cubicsui/configs": "*",
     "@types/lodash": "^4.17.13",
     "@types/node": "^22.10.1",
     "typescript": "^5.7.2"
