@@ -26,6 +26,9 @@ importers:
 
   packages/cli:
     dependencies:
+      '@cubicsui/cli':
+        specifier: '*'
+        version: 1.2.2
       commander:
         specifier: ^12.1.0
         version: 12.1.0
@@ -52,9 +55,6 @@ importers:
       '@types/node':
         specifier: ^22.10.1
         version: 22.10.1
-      prettier:
-        specifier: ^3.4.1
-        version: 3.4.1
       typescript:
         specifier: ^5.7.2
         version: 5.7.2
@@ -119,6 +119,10 @@ packages:
 
   '@changesets/write@0.3.2':
     resolution: {integrity: sha512-kDxDrPNpUgsjDbWBvUo27PzKX4gqeKOlhibaOXDJA6kuBisGqNHv/HwGJrAu8U/dSf8ZEFIeHIPtvSlZI1kULw==}
+
+  '@cubicsui/cli@1.2.2':
+    resolution: {integrity: sha512-6UKR5nlZwF7kA+DutWcjsl95fuuE7EPxp6wyjql6b228T4Ti3iJW/nGVYDMhFAemEhJMyioy9FHDlkCC0TLdiw==}
+    hasBin: true
 
   '@eslint-community/eslint-utils@4.4.1':
     resolution: {integrity: sha512-s3O3waFUrMV8P/XaF/+ZTp1X9XBZW1a4B97ZnjQF2KYWaFD2A8KyFBsrsfSjEmjn3RGWAIuvlneuZm3CUK3jbA==}
@@ -1019,6 +1023,11 @@ snapshots:
       fs-extra: 7.0.1
       human-id: 1.0.2
       prettier: 2.8.8
+
+  '@cubicsui/cli@1.2.2':
+    dependencies:
+      commander: 12.1.0
+      zod: 3.23.8
 
   '@eslint-community/eslint-utils@4.4.1(eslint@9.15.0)':
     dependencies:
