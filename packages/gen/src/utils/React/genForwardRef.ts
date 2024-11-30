@@ -13,7 +13,7 @@ export default function genForwardRef({
   mode,
   innerContent,
 }: GenForwardRefProps) {
-  let typings =
-    mode == "typescript" ? `<${refTypeName}, ${componentPropsName}>` : "";
-  return `const ${name} = forwardRef${typings}(function inner${name}(props, ref){${innerContent}});`;
+  const t =
+    mode == "typescript" ? `<${refTypeName},${componentPropsName}>` : "";
+  return `const ${name}=forwardRef${t}(function inner${name}(props, ref){${innerContent}});`;
 }

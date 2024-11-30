@@ -33,7 +33,9 @@ export const genReactModularImports = (
 ) => {
   return `import ${withDefault ? "React," : ""} { ${modulesAsString.join(", ")} } from 'react';`;
 };
-export const genReactTypeImports = (modulesAsString: ReactTypeExport[]) => {
+export const genReactTypeImports = (
+  modulesAsString: (ReactTypeExport | ReactNamedExport)[]
+) => {
   return `import type { ${modulesAsString.join(", ")} } from 'react';`;
 };
 

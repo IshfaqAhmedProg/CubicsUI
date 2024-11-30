@@ -11,5 +11,5 @@ export type GenReactButtonProps = {} & GenComponentBase;
 export type KVBase = {
   key: string;
   value?: string;
-  [key: string]: any;
+  [key: string]: unknown;
 };

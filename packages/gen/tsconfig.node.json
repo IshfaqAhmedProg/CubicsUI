@@ -9,6 +9,10 @@
     "forceConsistentCasingInFileNames": true,
     "outDir": "bin",
     "rootDir": "generator",
+    "baseUrl": "dist",
+    "paths": {
+      "@dist/*": ["dist/*"]
+    },
 
     /* Linting */
     "strict": true,
@@ -17,5 +21,5 @@
     "noFallthroughCasesInSwitch": true,
     "noUncheckedSideEffectImports": true
   },
-  "include": ["generator"]
+  "include": ["generator", "dist"]
 }

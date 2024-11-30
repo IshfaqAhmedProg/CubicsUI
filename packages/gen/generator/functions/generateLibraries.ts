@@ -2,8 +2,9 @@ import { existsSync, mkdirSync } from "fs";
 import { writeFile } from "fs/promises";
 import * as prettier from "prettier";
 import path from "path";
-import genReactButton from "../../dist/components/button/reactButton";
+import genReactButton from "../../dist/components/button/genReactButton";
 import { initialiseLibraryPackage } from "../constants/libraryPackagesManifest";
+import { ComponentName, COMPONENTS, Framework, FRAMEWORKS } from "../generator";
 
 /**
  * This function is responsible to generate all the components under packages/library/
@@ -25,20 +26,15 @@ import { initialiseLibraryPackage } from "../constants/libraryPackagesManifest";
  * npm i @cubicsui/react-button
  *
  */
-const COMPONENTS = ["button"] as const;
-const FRAMEWORKS = ["react", "svelte", "next"] as const;
 
-export type ComponentName = (typeof COMPONENTS)[number];
-export type Framework = (typeof FRAMEWORKS)[number];
-
-export default async function generateLibraries() {
-  let componentName: ComponentName = "button",
-    framework: Framework = "react";
-
-  const button = genReactButton({
-    componentName: "button",
+export default async function generateLibraries(
+  componentName: ComponentName = COMPONENTS[0],
+  framework: Framework = FRAMEWORKS[0]
+) {
+  const cmp = genReactButton({
+    componentName,
     mode: "typescript",
-    styleEngine: "css",
+    styleEngine: "tailwind",
     stylesName: "cssStyles",
   });
 
@@ -50,7 +46,7 @@ export default async function generateLibraries() {
     );
     const indexPath = path.resolve(
       componentDir,
-      `${componentDir}/src/${componentName}.tsx`
+      `${componentDir}/src/index.tsx`
     );
     const pkgPath = path.resolve(componentDir, `${componentDir}/package.json`);
 
@@ -63,7 +59,7 @@ export default async function generateLibraries() {
     // if [framework]/[componentName]/package.json doesnt exist
     // initialise package.json with libPkgJSONInit
     if (!existsSync(pkgPath)) {
-      let prettierPkg = await prettier.format(
+      const prettierPkg = await prettier.format(
         JSON.stringify(
           initialiseLibraryPackage(componentName, framework)
         ).trim(),
@@ -74,7 +70,7 @@ export default async function generateLibraries() {
       await writeFile(pkgPath, prettierPkg);
     }
     // Format the final config with prettier
-    const prettierComponentContent = await prettier.format(button, {
+    const prettierComponentContent = await prettier.format(cmp, {
       parser: "babel-ts",
     });
     await writeFile(indexPath, prettierComponentContent, {

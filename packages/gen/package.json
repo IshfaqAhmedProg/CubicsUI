@@ -5,9 +5,10 @@
   "private": true,
   "main": "dist/main.js",
   "scripts": {
+    "lint": "pnpm exec eslint .",
     "build:src": "tsc -p tsconfig.app.json",
     "build:gen": "tsc -p tsconfig.node.json",
-    "build": "pnpm build:src && pnpm build:gen",
+    "build": "pnpm lint && pnpm build:src && pnpm build:gen",
     "clean": "rimraf node_modules .turbo dist bin",
     "gen": "pnpm build && node bin/generator.js"
   },
@@ -24,12 +25,15 @@
   },
   "license": "MIT",
   "dependencies": {
-    "lodash": "^4.17.21",
-    "commander": "^12.1.0"
+    "commander": "^12.1.0",
+    "lodash": "^4.17.21"
   },
   "devDependencies": {
+    "@eslint/js": "^9.16.0",
     "@types/lodash": "^4.17.13",
     "@types/node": "^22.10.1",
-    "typescript": "^5.7.2"
+    "eslint": "^9.15.0",
+    "typescript": "^5.7.2",
+    "typescript-eslint": "^8.16.0"
   }
 }

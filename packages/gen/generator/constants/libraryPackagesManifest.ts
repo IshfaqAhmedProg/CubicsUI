@@ -1,14 +1,32 @@
-import { ComponentName, Framework } from "../functions/generateLibraries";
+import { ComponentName, Framework } from "../generator";
 
-export const libPkgScripts = {
-  build: "tsup",
+type LibraryPackageManifestType = {
+  [key in ComponentName]: { description: string };
 };
-export const libPkgDevDeps = {
+
+export const libraryPackagesManifest: LibraryPackageManifestType = {
+  button: {
+    description: "This is a button",
+  },
+  iconbutton: {
+    description: "This is an icon button",
+  },
+};
+
+export const devDependencies = {
   tsup: "^8.3.5",
+  "@types/react": "^18.3.12",
 };
-export const libPkgPeerDeps = {
-  react: "^18",
+export const peerDependencies = {
+  react: "^18.3.1",
 };
+export const tsup = {
+  entry: ["src/index.tsx"],
+  splitting: false,
+  sourcemap: true,
+  clean: true,
+};
+
 export function initialiseLibraryPackage(
   componentName: ComponentName,
   framework: Framework
@@ -17,19 +35,11 @@ export function initialiseLibraryPackage(
     name: `@cubicsui/${framework}-${componentName}`,
     ...libraryPackagesManifest[componentName],
     version: "0.0.0",
-    scripts: { ...libPkgScripts },
-    peerDependecies: { ...libPkgPeerDeps },
-    devDependencies: { ...libPkgDevDeps },
+    ...{ tsup },
+    scripts: {
+      build: `tsup`,
+    },
+    ...{ peerDependencies },
+    ...{ devDependencies },
   };
 }
-
-type LibraryPackageManifestType = {
-  [key in ComponentName]: { description: string };
-};
-
-export const libraryPackagesManifest: LibraryPackageManifestType = {
-  button: {
-    description:
-      "The main generator that builds the components, hooks and styles, based on what you need",
-  },
-};
