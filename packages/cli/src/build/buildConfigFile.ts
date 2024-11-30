@@ -52,7 +52,7 @@ export default async function buildConfigFile() {
     // Format the final config with prettier
     const finalConfigContent = await prettier.format(
       finalConfig.content.trim(),
-      { semi: false, parser: "babel" }
+      { semi: false, parser: "babel-ts" }
     );
     await writeFile(finalConfig.path, finalConfigContent);
 

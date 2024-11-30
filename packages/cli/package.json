@@ -23,7 +23,11 @@
     "cui",
     "initialization"
   ],
-  "author": "Ishfaq Ahmed",
+  "author": {
+    "name": "Studio Cubics",
+    "email": "studiocubics7@gmail.com",
+    "url": "https://studio-cubics.vercel.app"
+  },
   "license": "MIT",
   "dependencies": {
     "commander": "^12.1.0",
