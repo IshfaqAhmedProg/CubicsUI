@@ -1,4 +1,4 @@
-import { GenComponentBase } from "../../components/button/reactButton";
+import { GenComponentBase } from "../../interfaces/misc";
 
 type GenForwardRefProps = {
   name: string;

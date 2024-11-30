@@ -1,4 +1,4 @@
-import { KVBase } from "../../components/button/reactButton";
+import { KVBase } from "../../interfaces/misc";
 
 export function genConstInit(name: string, initialValue: string) {
   return `const ${name} = ${initialValue}`;

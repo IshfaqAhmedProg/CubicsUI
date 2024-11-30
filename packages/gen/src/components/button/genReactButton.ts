@@ -12,22 +12,7 @@ import {
   genStringLiteral,
   genStringLiteralVar,
 } from "../../utils/Javascript";
-
-export type GenComponentBase = {
-  fileName?: string;
-  componentName?: string;
-  stylesName?: string;
-  mode?: "typescript" | "javascript";
-  styleEngine?: "css" | "scss" | "tailwind";
-};
-
-type GenReactButtonProps = {} & GenComponentBase;
-
-export type KVBase = {
-  key: string;
-  value?: string;
-  [key: string]: any;
-};
+import { GenReactButtonProps, KVBase } from "../../interfaces/misc";
 
 const ButtonProps: KVBase[] = [
   { key: "startDecoration", value: "ReactNode", optional: true },
@@ -60,7 +45,7 @@ export default function genReactButton({
   stylesName = "styles",
 }: GenReactButtonProps) {
   const reactImports = `
-  ${genReactModularImports(["useState", "forwardRef"])}
+  ${genReactModularImports(["forwardRef"])}
   ${genReactTypeImports(["ComponentPropsWithoutRef", "ReactNode"])}`;
 
   const styleImports = !(styleEngine == "css" || styleEngine == "scss")

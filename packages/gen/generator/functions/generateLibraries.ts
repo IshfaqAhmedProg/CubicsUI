@@ -3,6 +3,7 @@ import { writeFile } from "fs/promises";
 import * as prettier from "prettier";
 import path from "path";
 import genReactButton from "../../dist/components/button/reactButton";
+import { initialiseLibraryPackage } from "../constants/libraryPackagesManifest";
 
 /**
  * This function is responsible to generate all the components under packages/library/
@@ -24,29 +25,61 @@ import genReactButton from "../../dist/components/button/reactButton";
  * npm i @cubicsui/react-button
  *
  */
+const COMPONENTS = ["button"] as const;
+const FRAMEWORKS = ["react", "svelte", "next"] as const;
+
+export type ComponentName = (typeof COMPONENTS)[number];
+export type Framework = (typeof FRAMEWORKS)[number];
+
 export default async function generateLibraries() {
+  let componentName: ComponentName = "button",
+    framework: Framework = "react";
+
   const button = genReactButton({
     componentName: "button",
     mode: "typescript",
     styleEngine: "css",
     stylesName: "cssStyles",
   });
+
   try {
-    const packagesPath = path.resolve(process.cwd(), "..");
-    let outPath = path.resolve(packagesPath, "library/React/Button/button.tsx");
+    const rootDir = path.resolve(process.cwd(), "..");
+    const componentDir = path.resolve(
+      rootDir,
+      `library/${framework}/${componentName}`
+    );
+    const indexPath = path.resolve(
+      componentDir,
+      `${componentDir}/src/${componentName}.tsx`
+    );
+    const pkgPath = path.resolve(componentDir, `${componentDir}/package.json`);
 
     // Ensure the directory exists before writing
-    const dirPath = path.dirname(outPath);
+    const dirPath = path.dirname(indexPath);
     if (!existsSync(dirPath)) {
       mkdirSync(dirPath, { recursive: true });
     }
 
+    // if [framework]/[componentName]/package.json doesnt exist
+    // initialise package.json with libPkgJSONInit
+    if (!existsSync(pkgPath)) {
+      let prettierPkg = await prettier.format(
+        JSON.stringify(
+          initialiseLibraryPackage(componentName, framework)
+        ).trim(),
+        {
+          parser: "json",
+        }
+      );
+      await writeFile(pkgPath, prettierPkg);
+    }
     // Format the final config with prettier
-    const prettierButton = await prettier.format(button, {
-      semi: false,
+    const prettierComponentContent = await prettier.format(button, {
       parser: "babel-ts",
     });
-    await writeFile(outPath, prettierButton, { flag: "w+" });
+    await writeFile(indexPath, prettierComponentContent, {
+      flag: "w+",
+    });
   } catch (error) {
     console.error("Error while writing file:", error);
   }
