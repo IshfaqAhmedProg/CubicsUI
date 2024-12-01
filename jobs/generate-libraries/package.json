@@ -1,19 +1,18 @@
 {
-  "name": "@cubicsui/gen",
-  "version": "1.0.1",
-  "description": "The main generator that builds the components, hooks and styles, based on what you need",
-  "private": false,
-  "publishConfig": {
-    "access": "public"
-  },
-  "main": "dist/main.js",
+  "name": "@cubicsui/generate-libraries",
+  "version": "0.0.0",
+  "description": "The  generator that builds the components for the library based install",
+  "private": true,
+  "main": "dist/index.js",
   "scripts": {
     "lint": "eslint",
-    "build": "tsc",
-    "clean": "rimraf node_modules .turbo dist"
+    "build": "pnpm lint && tsc",
+    "clean": "rimraf node_modules .turbo dist",
+    "gen": "node bin.js"
   },
   "keywords": [
-    "gen",
+    "job",
+    "generate-libraries",
     "studiocubics",
     "cubicsui",
     "cui"
@@ -24,13 +23,9 @@
     "url": "https://studio-cubics.vercel.app"
   },
   "license": "MIT",
-  "dependencies": {
-    "commander": "^12.1.0",
-    "lodash": "^4.17.21"
-  },
   "devDependencies": {
+    "@cubicsui/gen": "workspace:*",
     "@eslint/js": "^9.16.0",
-    "@types/lodash": "^4.17.13",
     "@types/node": "^22.10.1",
     "eslint": "^9.15.0",
     "typescript": "^5.7.2",

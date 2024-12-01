@@ -24,7 +24,8 @@
   "name": "cubicsui",
   "workspaces": [
     "apps/*",
-    "packages/**"
+    "packages/**",
+    "jobs/*"
   ],
   "packageManager": "pnpm@9.14.4",
   "author": {

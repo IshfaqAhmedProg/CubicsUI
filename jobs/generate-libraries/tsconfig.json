@@ -2,17 +2,13 @@
   "compilerOptions": {
     "composite": true,
     "target": "ESNext",
-    "tsBuildInfoFile": "./node_modules/.tmp/tsconfig.node.tsbuildinfo",
+    "tsBuildInfoFile": "./node_modules/.tmp/tsconfig.tsbuildinfo",
     "useDefineForClassFields": true,
     "module": "CommonJS",
     "esModuleInterop": true,
     "forceConsistentCasingInFileNames": true,
-    "outDir": "bin",
-    "rootDir": "generator",
-    "baseUrl": "dist",
-    "paths": {
-      "@dist/*": ["dist/*"]
-    },
+    "outDir": "dist",
+    "rootDir": "src",
 
     /* Linting */
     "strict": true,
@@ -21,5 +17,5 @@
     "noFallthroughCasesInSwitch": true,
     "noUncheckedSideEffectImports": true
   },
-  "include": ["generator", "dist"]
+  "include": ["src"]
 }

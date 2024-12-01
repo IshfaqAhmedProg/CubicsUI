@@ -1,4 +1,4 @@
-import { ComponentName, Framework } from "../generator";
+import { ComponentName, Framework } from "..";
 
 type LibraryPackageManifestType = {
   [key in ComponentName]: { description: string };

@@ -2,9 +2,9 @@ import { existsSync, mkdirSync } from "fs";
 import { writeFile } from "fs/promises";
 import * as prettier from "prettier";
 import path from "path";
-import genReactButton from "../../dist/components/button/genReactButton";
+import { genReactButton } from "@cubicsui/gen";
 import { initialiseLibraryPackage } from "../constants/libraryPackagesManifest";
-import { ComponentName, COMPONENTS, Framework, FRAMEWORKS } from "../generator";
+import { ComponentName, COMPONENTS, Framework, FRAMEWORKS } from "..";
 
 /**
  * This function is responsible to generate all the components under packages/library/
@@ -39,7 +39,7 @@ export default async function generateLibraries(
   });
 
   try {
-    const rootDir = path.resolve(process.cwd(), "..");
+    const rootDir = path.resolve(process.cwd(), "../..");
     const componentDir = path.resolve(
       rootDir,
       `library/${framework}/${componentName}`
@@ -77,6 +77,6 @@ export default async function generateLibraries(
       flag: "w+",
     });
   } catch (error) {
-    console.error("Error while writing file:", error);
+    console.error("✖ Error while generating library:", error);
   }
 }

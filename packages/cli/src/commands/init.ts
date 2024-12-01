@@ -20,7 +20,12 @@ export const possibleConfigs = [
   },
 ];
 
-export default async function buildConfigFile() {
+/**
+ * Builds the config file for cli, the config file determines what kind of component should be created
+ * when running
+ * @`npx cui create <component>`
+ */
+export default async function init() {
   let finalConfig = possibleConfigs[0];
 
   // Check if config already exists

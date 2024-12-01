@@ -1,11 +1,11 @@
 import { existsSync, mkdirSync } from "fs";
-import { possibleConfigs } from "./buildConfigFile";
+import { possibleConfigs } from "./init";
 import { genReactButton } from "@cubicsui/gen";
 import * as prettier from "prettier";
 import { writeFile } from "fs/promises";
 import path from "path";
 
-export default async function buildComponent(component: string) {
+export default async function create(component: string) {
   const outPath = path.resolve(
     process.cwd(),
     `components/${component}/${component}.tsx`
