@@ -2,7 +2,10 @@
   "name": "@cubicsui/gen",
   "version": "1.0.1",
   "description": "The main generator that builds the components, hooks and styles, based on what you need",
-  "private": true,
+  "private": false,
+  "publishConfig": {
+    "access": "public"
+  },
   "main": "dist/main.js",
   "scripts": {
     "lint": "pnpm exec eslint .",
