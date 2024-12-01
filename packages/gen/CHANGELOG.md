@@ -1,5 +1,11 @@
 # @cubicsui/gen
 
+## 1.0.1
+
+### Patch Changes
+
+- Added gen to cli
+
 ## 1.0.0
 
 ### Major Changes

@@ -1,5 +1,13 @@
 # @cubicsui/cli
 
+## 1.2.3
+
+### Patch Changes
+
+- Added gen to cli
+- Updated dependencies
+  - @cubicsui/gen@1.0.1
+
 ## 1.2.2
 
 ### Patch Changes
