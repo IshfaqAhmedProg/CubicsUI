@@ -1,1 +1,1 @@
-export { default } from "./button/genReactButton";
+export { default as genReactButton } from "./button/genReactButton";

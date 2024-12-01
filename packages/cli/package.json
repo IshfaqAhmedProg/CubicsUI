@@ -32,7 +32,7 @@
   "dependencies": {
     "commander": "^12.1.0",
     "zod": "^3.23.8",
-    "@cubicsui/cli": "*"
+    "@cubicsui/gen": "workspace:*"
   },
   "devDependencies": {
     "@types/node": "^22.10.1",
