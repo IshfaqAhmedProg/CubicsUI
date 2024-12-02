@@ -14,6 +14,9 @@ importers:
       eslint:
         specifier: ^9.15.0
         version: 9.15.0
+      lowdb:
+        specifier: ^7.0.1
+        version: 7.0.1
       prettier:
         specifier: ^3.4.1
         version: 3.4.1
@@ -24,11 +27,18 @@ importers:
         specifier: ^2.3.3
         version: 2.3.3
 
-  jobs/generate-libraries:
-    devDependencies:
+  packages/cli:
+    dependencies:
       '@cubicsui/gen':
         specifier: workspace:*
-        version: link:../../packages/gen
+        version: link:../gen
+      commander:
+        specifier: ^12.1.0
+        version: 12.1.0
+      zod:
+        specifier: ^3.23.8
+        version: 3.23.8
+    devDependencies:
       '@eslint/js':
         specifier: ^9.16.0
         version: 9.16.0
@@ -45,25 +55,6 @@ importers:
         specifier: ^8.16.0
         version: 8.16.0(eslint@9.15.0)(typescript@5.7.2)
 
-  packages/cli:
-    dependencies:
-      '@cubicsui/gen':
-        specifier: workspace:*
-        version: link:../gen
-      commander:
-        specifier: ^12.1.0
-        version: 12.1.0
-      zod:
-        specifier: ^3.23.8
-        version: 3.23.8
-    devDependencies:
-      '@types/node':
-        specifier: ^22.10.1
-        version: 22.10.1
-      typescript:
-        specifier: ^5.7.2
-        version: 5.7.2
-
   packages/gen:
     dependencies:
       commander:
@@ -79,6 +70,27 @@ importers:
       '@types/lodash':
         specifier: ^4.17.13
         version: 4.17.13
+      '@types/node':
+        specifier: ^22.10.1
+        version: 22.10.1
+      eslint:
+        specifier: ^9.15.0
+        version: 9.15.0
+      typescript:
+        specifier: ^5.7.2
+        version: 5.7.2
+      typescript-eslint:
+        specifier: ^8.16.0
+        version: 8.16.0(eslint@9.15.0)(typescript@5.7.2)
+
+  packages/jobs/generate-libraries:
+    devDependencies:
+      '@cubicsui/gen':
+        specifier: workspace:*
+        version: link:../../gen
+      '@eslint/js':
+        specifier: ^9.16.0
+        version: 9.16.0
       '@types/node':
         specifier: ^22.10.1
         version: 22.10.1
@@ -670,6 +682,10 @@ packages:
   lodash@4.17.21:
     resolution: {integrity: sha512-v2kDEe57lecTulaDIuNTPy3Ry4gLGJ6Z1O3vE1krgXZNrsQ+LFTGHVxVjcXPs17LhbZVGedAJv8XZ1tvj5FvSg==}
 
+  lowdb@7.0.1:
+    resolution: {integrity: sha512-neJAj8GwF0e8EpycYIDFqEPcx9Qz4GUho20jWFR7YiFeXzF1YMLdxB36PypcTSPMA+4+LvgyMacYhlr18Zlymw==}
+    engines: {node: '>=18'}
+
   lru-cache@11.0.2:
     resolution: {integrity: sha512-123qHRfJBmo2jXDbo/a5YOQrJoHF/GNQTLzQ5+IdK5pWpceK17yRc6ozlWd25FxvGKQbIUs91fDFkXmDHTKcyA==}
     engines: {node: 20 || >=22}
@@ -860,6 +876,10 @@ packages:
 
   sprintf-js@1.0.3:
     resolution: {integrity: sha512-D9cPgkvLlV3t3IzL0D0YLvGA9Ahk4PcvVwUbN0dSGr1aP0Nrt4AEnTUbuGvquEC0mA64Gqt1fzirlRs5ibXx8g==}
+
+  steno@4.0.2:
+    resolution: {integrity: sha512-yhPIQXjrlt1xv7dyPQg2P17URmXbuM5pdGkpiMB3RenprfiBlvK415Lctfe0eshk90oA7/tNq7WEiMK8RSP39A==}
+    engines: {node: '>=18'}
 
   string-width@4.2.3:
     resolution: {integrity: sha512-wKyQRQpjJ0sIp62ErSZdGsjMJWsap5oRNihHhu6G7JVO/9jIB6UyevL+tXuOqrng8j/cxKTWyWUwvSTriiZz/g==}
@@ -1680,6 +1700,10 @@ snapshots:
 
   lodash@4.17.21: {}
 
+  lowdb@7.0.1:
+    dependencies:
+      steno: 4.0.2
+
   lru-cache@11.0.2: {}
 
   merge2@1.4.1: {}
@@ -1825,6 +1849,8 @@ snapshots:
       signal-exit: 4.1.0
 
   sprintf-js@1.0.3: {}
+
+  steno@4.0.2: {}
 
   string-width@4.2.3:
     dependencies:
