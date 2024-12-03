@@ -32,7 +32,7 @@
     "url": "https://studio-cubics.vercel.app"
   },
   "license": "MIT",
-  "peerDependencies": {
+  "dependencies": {
     "commander": "^12.1.0",
     "zod": "^3.23.8",
     "@cubicsui/gen": "workspace:*",
