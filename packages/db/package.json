@@ -1,6 +1,6 @@
 {
   "name": "@cubicsui/db",
-  "version": "0.0.0",
+  "version": "1.0.0",
   "description": "The database containing all the component definitions",
   "private": false,
   "publishConfig": {

@@ -1,5 +1,13 @@
 # @cubicsui/cli
 
+## 1.2.4
+
+### Patch Changes
+
+- Releasing major version of @cubicsui/db and patching @cubicsui/cli and @cubicsui/gen
+- Updated dependencies
+  - @cubicsui/gen@1.0.2
+
 ## 1.2.3
 
 ### Patch Changes
