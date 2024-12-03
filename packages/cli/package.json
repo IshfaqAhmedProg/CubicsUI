@@ -35,7 +35,8 @@
   "peerDependencies": {
     "commander": "^12.1.0",
     "zod": "^3.23.8",
-    "@cubicsui/gen": "workspace:*"
+    "@cubicsui/gen": "workspace:*",
+    "prettier": "^3.4.1"
   },
   "devDependencies": {
     "@eslint/js": "^9.16.0",
