@@ -1,0 +1,38 @@
+{
+  "react": {
+    "button": {
+      "description": "This is a button",
+      "aliases": ["Button", "btn"],
+      "category": "components"
+    },
+    "iconbutton": {
+      "description": "This is an icon button",
+      "aliases": ["IconButton", "Iconbutton", "ibtn"],
+      "category": "components"
+    }
+  },
+  "next": {
+    "button": {
+      "description": "This is a button",
+      "aliases": ["Button", "btn"],
+      "category": "components"
+    },
+    "iconbutton": {
+      "description": "This is an icon button",
+      "aliases": ["IconButton", "Iconbutton", "ibtn"],
+      "category": "components"
+    }
+  },
+  "svelte": {
+    "button": {
+      "description": "This is a button",
+      "aliases": ["Button", "btn"],
+      "category": "components"
+    },
+    "iconbutton": {
+      "description": "This is an icon button",
+      "aliases": ["IconButton", "Iconbutton", "ibtn"],
+      "category": "components"
+    }
+  }
+}

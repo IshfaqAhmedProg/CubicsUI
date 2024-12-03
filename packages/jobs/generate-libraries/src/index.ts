@@ -1,27 +1,24 @@
+import LPC from "@cubicsui/db/library-packages-catalog.json";
+import generateLibrary from "./functions/generateLibraries";
 import { execSync } from "child_process";
-import generateLibraries from "./functions/generateLibraries";
-
-export const COMPONENTS = ["button", "iconbutton"] as const;
-export const FRAMEWORKS = ["react", "svelte", "next"] as const;
-
-export type ComponentName = (typeof COMPONENTS)[number];
-export type Framework = (typeof FRAMEWORKS)[number];
+import { PackageFramework, PackageName } from "./interfaces/Library";
 
 (async function main() {
   console.log("⏳ Generating libraries...");
-  for (let index = 0; index < FRAMEWORKS.length; index++) {
-    const fw = FRAMEWORKS[index];
-    for (let index = 0; index < COMPONENTS.length; index++) {
-      const cmp = COMPONENTS[index];
-      await generateLibraries(cmp, fw);
+
+  const frameworks = Object.keys(LPC) as PackageFramework[];
+  for (let index = 0; index < frameworks.length; index++) {
+    const pkgFramework = frameworks[index];
+    const pkgNames = Object.keys(LPC[pkgFramework]) as PackageName[];
+    for (let index = 0; index < pkgNames.length; index++) {
+      const pkgName = pkgNames[index];
+      await generateLibrary({ pkgFramework, pkgName });
     }
   }
-
   try {
     console.log("⏳ Installing dependencies...");
     execSync("pnpm i");
     console.log("✔ Successfully installed dependencies!");
-
     console.log("⏳ Building libraries...");
     execSync("cd ../../.. && pnpm build");
     console.log("✔ Successfully built libraries!");

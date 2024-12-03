@@ -5,7 +5,7 @@
     "dev": "turbo dev",
     "lint": "turbo lint",
     "clean": "turbo clean",
-    "gen": "cd packages/gen/ && pnpm gen",
+    "gen": "cd packages/jobs/generate-libraries && pnpm gen",
     "format": "prettier --write \"**/*.{ts,tsx,md}\"",
     "changeset": "changeset && changeset version",
     "release": "turbo build --filter=@cubicsui/cli --filter=@cubicsui/gen && changeset publish",
@@ -24,7 +24,6 @@
   },
   "name": "cubicsui",
   "workspaces": [
-    "apps/*",
     "packages/**"
   ],
   "packageManager": "pnpm@9.14.4",

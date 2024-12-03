@@ -4,6 +4,7 @@
     "target": "ESNext",
     "tsBuildInfoFile": "./node_modules/.tmp/tsconfig.tsbuildinfo",
     "useDefineForClassFields": true,
+    "resolveJsonModule": true,
     "module": "CommonJS",
     "esModuleInterop": true,
     "forceConsistentCasingInFileNames": true,

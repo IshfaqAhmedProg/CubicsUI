@@ -55,6 +55,8 @@ importers:
         specifier: ^8.16.0
         version: 8.16.0(eslint@9.15.0)(typescript@5.7.2)
 
+  packages/db: {}
+
   packages/gen:
     dependencies:
       commander:
@@ -85,6 +87,9 @@ importers:
 
   packages/jobs/generate-libraries:
     devDependencies:
+      '@cubicsui/db':
+        specifier: workspace:*
+        version: link:../../db
       '@cubicsui/gen':
         specifier: workspace:*
         version: link:../../gen

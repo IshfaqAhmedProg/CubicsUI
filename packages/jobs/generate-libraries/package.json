@@ -1,5 +1,5 @@
 {
-  "name": "@cubicsui/generate-libraries",
+  "name": "@cubicsui/job_generate-libraries",
   "version": "0.0.0",
   "description": "The  generator that builds the components for the library based install",
   "private": true,
@@ -24,6 +24,7 @@
   },
   "license": "MIT",
   "devDependencies": {
+    "@cubicsui/db": "workspace:*",
     "@cubicsui/gen": "workspace:*",
     "@eslint/js": "^9.16.0",
     "@types/node": "^22.10.1",

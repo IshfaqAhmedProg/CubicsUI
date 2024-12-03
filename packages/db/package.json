@@ -1,0 +1,21 @@
+{
+  "name": "@cubicsui/db",
+  "version": "0.0.0",
+  "description": "The database containing all the component definitions",
+  "private": false,
+  "publishConfig": {
+    "access": "public"
+  },
+  "keywords": [
+    "db",
+    "studiocubics",
+    "cubicsui",
+    "cui"
+  ],
+  "author": {
+    "name": "Studio Cubics",
+    "email": "studiocubics7@gmail.com",
+    "url": "https://studio-cubics.vercel.app"
+  },
+  "license": "MIT"
+}

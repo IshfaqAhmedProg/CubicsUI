@@ -4,7 +4,7 @@ import * as prettier from "prettier";
 import path from "path";
 import { genReactButton } from "@cubicsui/gen";
 import { initialiseLibraryPackage } from "../constants/libraryPackagesManifest";
-import { ComponentName, COMPONENTS, Framework, FRAMEWORKS } from "..";
+import { LibraryInterface } from "../interfaces/Library";
 
 /**
  * This function is responsible to generate all the components under packages/library/
@@ -27,12 +27,9 @@ import { ComponentName, COMPONENTS, Framework, FRAMEWORKS } from "..";
  *
  */
 
-export default async function generateLibraries(
-  componentName: ComponentName = COMPONENTS[0],
-  framework: Framework = FRAMEWORKS[0]
-) {
+export default async function generateLibrary(lib: LibraryInterface) {
   const cmp = genReactButton({
-    componentName,
+    componentName: lib.pkgName,
     mode: "typescript",
     styleEngine: "tailwind",
     stylesName: "cssStyles",
@@ -42,7 +39,7 @@ export default async function generateLibraries(
     const rootDir = path.resolve(process.cwd(), "../..");
     const componentDir = path.resolve(
       rootDir,
-      `library/${framework}/${componentName}`
+      `library/${lib.pkgFramework}/${lib.pkgName}`
     );
     const indexPath = path.resolve(
       componentDir,
@@ -60,9 +57,7 @@ export default async function generateLibraries(
     // initialise package.json with libPkgJSONInit
     if (!existsSync(pkgPath)) {
       const prettierPkg = await prettier.format(
-        JSON.stringify(
-          initialiseLibraryPackage(componentName, framework)
-        ).trim(),
+        JSON.stringify(initialiseLibraryPackage(lib)).trim(),
         {
           parser: "json",
         }

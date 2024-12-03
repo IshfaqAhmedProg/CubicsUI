@@ -1,17 +1,19 @@
-import { ComponentName, Framework } from "..";
+import LPC from "@cubicsui/db/library-packages-catalog.json";
+import { LibraryInterface } from "../interfaces/Library";
+// import { ComponentName, Framework } from "..";
 
-type LibraryPackageManifestType = {
-  [key in ComponentName]: { description: string };
-};
+// type LibraryPackageManifestType = {
+//   [key in ComponentName]: { description: string };
+// };
 
-export const libraryPackagesManifest: LibraryPackageManifestType = {
-  button: {
-    description: "This is a button",
-  },
-  iconbutton: {
-    description: "This is an icon button",
-  },
-};
+// export const libraryPackagesManifest: LibraryPackageManifestType = {
+//   button: {
+//     description: "This is a button",
+//   },
+//   iconbutton: {
+//     description: "This is an icon button",
+//   },
+// };
 
 export const devDependencies = {
   tsup: "^8.3.5",
@@ -25,15 +27,16 @@ export const tsup = {
   splitting: false,
   sourcemap: true,
   clean: true,
+  minify: true,
 };
 
-export function initialiseLibraryPackage(
-  componentName: ComponentName,
-  framework: Framework
-) {
+export function initialiseLibraryPackage({
+  pkgName,
+  pkgFramework,
+}: LibraryInterface) {
   return {
-    name: `@cubicsui/${framework}-${componentName}`,
-    ...libraryPackagesManifest[componentName],
+    name: `@cubicsui/${pkgFramework}-${pkgName}`,
+    description: LPC[pkgFramework][pkgName].description,
     version: "0.0.0",
     ...{ tsup },
     scripts: {
