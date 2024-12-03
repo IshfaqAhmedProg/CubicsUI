@@ -8,7 +8,7 @@
     "gen": "cd packages/jobs/generate-libraries && pnpm gen",
     "format": "prettier --write \"**/*.{ts,tsx,md}\"",
     "changeset": "changeset && changeset version",
-    "release": "turbo build --filter=@cubicsui/cli --filter=@cubicsui/gen && changeset publish",
+    "release": "turbo build --filter=@cubicsui/* && changeset publish",
     "preinstall": "npx only-allow pnpm"
   },
   "devDependencies": {
