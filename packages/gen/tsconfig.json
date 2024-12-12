@@ -1,26 +1,9 @@
 {
+  "extends": "@cubicsui/configs/typescript/tsconfig.node.json",
   "compilerOptions": {
-    "composite": true,
-    "target": "ES2023",
     "tsBuildInfoFile": "./node_modules/.tmp/tsconfig.app.tsbuildinfo",
-    "useDefineForClassFields": true,
-    "module": "Node16",
-    "moduleResolution": "node16",
-    "esModuleInterop": true,
-    "forceConsistentCasingInFileNames": true,
     "outDir": "dist",
-    "rootDir": "src",
-
-    // TODO set paths for package
-    // "baseUrl": ".",
-    // "paths": { "@app/*": ["./src/*"] },
-
-    /* Linting */
-    "strict": true,
-    "noUnusedLocals": true,
-    "noUnusedParameters": true,
-    "noFallthroughCasesInSwitch": true,
-    "noUncheckedSideEffectImports": true
+    "rootDir": "src"
   },
   "include": ["src"]
 }

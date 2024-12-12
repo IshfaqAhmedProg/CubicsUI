@@ -30,6 +30,7 @@
     "lowdb": "^7.0.1"
   },
   "devDependencies": {
+    "@cubicsui/configs": "workspace:^",
     "@types/lodash": "^4.17.13",
     "typescript": "^5.7.2"
   }

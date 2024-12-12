@@ -1,5 +1,5 @@
 import { existsSync, mkdirSync } from "fs";
-import { possibleConfigs } from "./init";
+import { possibleConfigs } from "./init.js";
 import { genReactButton } from "@cubicsui/gen";
 import * as prettier from "prettier";
 import { writeFile } from "fs/promises";

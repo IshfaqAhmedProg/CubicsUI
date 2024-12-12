@@ -1,1 +1,1 @@
-export { defineConfig } from "./defaults";
+export { defineConfig } from "./defaults.js";

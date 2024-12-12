@@ -3,7 +3,7 @@ import * as prettier from "prettier";
 import {
   defaultConfigTemplateJS,
   defaultConfigTemplateTS,
-} from "../config/defaults";
+} from "../config/defaults.js";
 import { writeFile } from "fs/promises";
 import { existsSync } from "fs";
 

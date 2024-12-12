@@ -30,6 +30,7 @@
     "lodash": "^4.17.21"
   },
   "devDependencies": {
+    "@cubicsui/configs": "workspace:^",
     "@eslint/js": "^9.16.0",
     "@types/lodash": "^4.17.13",
     "@types/node": "^22.10.1",
