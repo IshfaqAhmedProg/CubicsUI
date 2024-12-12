@@ -1,4 +1,4 @@
-import { GenComponentBase } from "../../interfaces/misc";
+import { GenComponentBase } from "../../interfaces/misc.js";
 
 type GenForwardRefProps = {
   name: string;

@@ -1,18 +1,18 @@
-import { genPropsTypes } from "../../utils/Typescript";
+import { genPropsTypes } from "../../utils/Typescript/index.js";
 import {
   genForwardRef,
   genDefaultExport,
   genReactModularImports,
   genReactTypeImports,
   genStyleModuleImport,
-} from "../../utils/React";
+} from "../../utils/React/index.js";
 import {
   genDeconstructedPropsInit,
   genConstInit,
   genStringLiteral,
   genStringLiteralVar,
-} from "../../utils/Javascript";
-import { GenReactButtonProps, KVBase } from "../../interfaces/misc";
+} from "../../utils/Javascript/index.js";
+import type { GenReactButtonProps, KVBase } from "../../interfaces/misc.js";
 
 const ButtonProps: KVBase[] = [
   { key: "startDecoration", value: "ReactNode", optional: true },

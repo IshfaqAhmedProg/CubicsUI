@@ -1,1 +1,1 @@
-export { genPropsTypes } from "./genPropsTypes";
+export { genPropsTypes } from "./genPropsTypes.js";

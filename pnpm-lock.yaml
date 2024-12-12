@@ -29,6 +29,9 @@ importers:
 
   packages/cli:
     dependencies:
+      '@cubicsui/db':
+        specifier: workspace:*
+        version: link:../db
       '@cubicsui/gen':
         specifier: workspace:*
         version: link:../gen
@@ -58,7 +61,21 @@ importers:
         specifier: ^8.16.0
         version: 8.16.0(eslint@9.15.0)(typescript@5.7.2)
 
-  packages/db: {}
+  packages/db:
+    dependencies:
+      lodash:
+        specifier: ^4.17.21
+        version: 4.17.21
+      lowdb:
+        specifier: ^7.0.1
+        version: 7.0.1
+    devDependencies:
+      '@types/lodash':
+        specifier: ^4.17.13
+        version: 4.17.13
+      typescript:
+        specifier: ^5.7.2
+        version: 5.7.2
 
   packages/gen:
     dependencies:
@@ -105,6 +122,9 @@ importers:
       eslint:
         specifier: ^9.15.0
         version: 9.15.0
+      type-fest:
+        specifier: ^4.30.0
+        version: 4.30.0
       typescript:
         specifier: ^5.7.2
         version: 5.7.2
@@ -972,6 +992,10 @@ packages:
   type-check@0.4.0:
     resolution: {integrity: sha512-XleUoc9uwGXqjWwXaUTZAmzMcFZ5858QA2vvx1Ur5xIcixXIP+8LnFDgRplU30us6teqdlskFfu+ae4K79Ooew==}
     engines: {node: '>= 0.8.0'}
+
+  type-fest@4.30.0:
+    resolution: {integrity: sha512-G6zXWS1dLj6eagy6sVhOMQiLtJdxQBHIA9Z6HFUNLOlr6MFOgzV8wvmidtPONfPtEUv0uZsy77XJNzTAfwPDaA==}
+    engines: {node: '>=16'}
 
   typescript-eslint@8.16.0:
     resolution: {integrity: sha512-wDkVmlY6O2do4V+lZd0GtRfbtXbeD0q9WygwXXSJnC1xorE8eqyC2L1tJimqpSeFrOzRlYtWnUp/uzgHQOgfBQ==}
@@ -1932,6 +1956,8 @@ snapshots:
   type-check@0.4.0:
     dependencies:
       prelude-ls: 1.2.1
+
+  type-fest@4.30.0: {}
 
   typescript-eslint@8.16.0(eslint@9.15.0)(typescript@5.7.2):
     dependencies:

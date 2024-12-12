@@ -3,5 +3,5 @@ export {
   genReactModularImports,
   genReactTypeImports,
   genStyleModuleImport,
-} from "./genImportExport";
-export { default as genForwardRef } from "./genForwardRef";
+} from "./genImportExport.js";
+export { default as genForwardRef } from "./genForwardRef.js";

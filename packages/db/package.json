@@ -1,10 +1,17 @@
 {
   "name": "@cubicsui/db",
   "version": "1.0.0",
-  "description": "The database containing all the component definitions",
+  "description": "The database that holds all the constants required to generate components",
   "private": false,
   "publishConfig": {
     "access": "public"
+  },
+  "type": "module",
+  "exports": "./dist/main.js",
+  "scripts": {
+    "lint": "eslint",
+    "build": "pnpm lint && tsc",
+    "clean": "rimraf node_modules .turbo dist"
   },
   "keywords": [
     "db",
@@ -17,5 +24,13 @@
     "email": "studiocubics7@gmail.com",
     "url": "https://studio-cubics.vercel.app"
   },
-  "license": "MIT"
+  "license": "MIT",
+  "dependencies": {
+    "lodash": "^4.17.21",
+    "lowdb": "^7.0.1"
+  },
+  "devDependencies": {
+    "@types/lodash": "^4.17.13",
+    "typescript": "^5.7.2"
+  }
 }

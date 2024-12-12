@@ -3,10 +3,11 @@
   "version": "1.0.2",
   "description": "The main generator that builds the components, hooks and styles, based on what you need",
   "private": false,
+  "type": "module",
   "publishConfig": {
     "access": "public"
   },
-  "main": "dist/main.js",
+  "exports": "./dist/main.js",
   "scripts": {
     "lint": "eslint",
     "build": "tsc",

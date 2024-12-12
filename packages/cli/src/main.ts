@@ -1,6 +1,6 @@
 import { program } from "commander";
-import init from "./commands/init";
-import create from "./commands/create";
+import init from "./commands/init.js";
+import create from "./commands/create.js";
 
 program
   .command("init")

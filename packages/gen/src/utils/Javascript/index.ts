@@ -1,2 +1,5 @@
-export { genConstInit, genDeconstructedPropsInit } from "./genConstInit";
-export { genStringLiteralVar, genStringLiteral } from "./genStringLiteralVar";
+export { genConstInit, genDeconstructedPropsInit } from "./genConstInit.js";
+export {
+  genStringLiteralVar,
+  genStringLiteral,
+} from "./genStringLiteralVar.js";

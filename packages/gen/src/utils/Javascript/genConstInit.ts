@@ -1,4 +1,4 @@
-import { KVBase } from "../../interfaces/misc";
+import type { KVBase } from "../../interfaces/misc.js";
 
 export function genConstInit(name: string, initialValue: string) {
   return `const ${name} = ${initialValue}`;

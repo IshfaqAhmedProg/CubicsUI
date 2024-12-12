@@ -3,33 +3,42 @@ import { writeFile } from "fs/promises";
 import * as prettier from "prettier";
 import path from "path";
 import { genReactButton } from "@cubicsui/gen";
-import { initialiseLibraryPackage } from "../constants/libraryPackagesManifest";
-import { LibraryInterface } from "../interfaces/Library";
+import generatePackageJson from "./generatePackageJson.js";
+import { LibraryGeneratorProps } from "../interfaces/LibraryGenerator.js";
 
 /**
  * This function is responsible to generate all the components under packages/library/
  *
- * The components will be divided based on frameworks React, Svelte, Next
+ * The components will be divided based on target environments React, Svelte, Next
  *
  * The generated folder structure for each component:-
- * library/[framework]/[component]
- * -src
- *    -index.ts
- *    -index.css
- * -eslintrc.json
- * -package.json
- * -tsconfig.ts
- *
- * Each folder created for the component will contain its own package.json file with name of the format
- * @cubicsui/[framework]-[component]
- * This will allow users not using the cli to install a singular component using eg:-
- * npm i @cubicsui/react-button
+ * @filetree
+ * ```
+ * packages/library/[env]/[component]
+ * |── src/
+ * |   |── index.ts
+ * |   |── index.css
+ * |── eslintrc.json
+ * |── package.json
+ * |── tsconfig.ts
+ * ```
+ * Each folder created for the component will contain its own package.json file with project name of the format
+ * @name
+ * ```
+ * `@cubicsui/[framework]-[component]`
+ * ```
+ * Thus non-CLI users can install individual components using
+ * @example```
+ * `npm i @cubicsui/react-button`
+ * ```
  *
  */
-
-export default async function generateLibrary(lib: LibraryInterface) {
+export default async function generateLibrary({
+  targetEnv,
+  ...component
+}: LibraryGeneratorProps) {
   const cmp = genReactButton({
-    componentName: lib.pkgName,
+    componentName: component.name,
     mode: "typescript",
     styleEngine: "tailwind",
     stylesName: "cssStyles",
@@ -39,7 +48,7 @@ export default async function generateLibrary(lib: LibraryInterface) {
     const rootDir = path.resolve(process.cwd(), "../..");
     const componentDir = path.resolve(
       rootDir,
-      `library/${lib.pkgFramework}/${lib.pkgName}`
+      `library/${targetEnv}/${component.name}`
     );
     const indexPath = path.resolve(
       componentDir,
@@ -57,7 +66,7 @@ export default async function generateLibrary(lib: LibraryInterface) {
     // initialise package.json with libPkgJSONInit
     if (!existsSync(pkgPath)) {
       const prettierPkg = await prettier.format(
-        JSON.stringify(initialiseLibraryPackage(lib)).trim(),
+        JSON.stringify(generatePackageJson({ ...component, targetEnv })).trim(),
         {
           parser: "json",
         }
