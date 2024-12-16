@@ -1,5 +1,5 @@
 import type { Component } from "./component.js";
 
-export type DBSchema = {
+export type ComponentCatalogSchema = {
   components: Component[];
 };

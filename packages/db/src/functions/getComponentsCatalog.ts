@@ -1,14 +1,14 @@
 import { JSONFile } from "lowdb/node";
-import type { DBSchema } from "../interfaces/dbSchema.js";
+import type { ComponentCatalogSchema } from "../interfaces/schemas.js";
 import path from "path";
 import { fileURLToPath } from "url";
-import DB from "../interfaces/DbWithLodash.js";
+import DB from "../classes/DbWithLodash.js";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 export default async function getComponentsCatalog() {
-  const defaultData: DBSchema = {
+  const defaultData: ComponentCatalogSchema = {
     components: [],
   };
   const filePath = path.resolve(
@@ -16,7 +16,7 @@ export default async function getComponentsCatalog() {
     "../constants/components-catalog.json"
   );
 
-  const adapter = new JSONFile<DBSchema>(filePath);
+  const adapter = new JSONFile<ComponentCatalogSchema>(filePath);
 
   const db = new DB(adapter, defaultData);
   await db.read();
