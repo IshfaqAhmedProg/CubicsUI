@@ -15,7 +15,7 @@
       "cache": false
     },
     "jobs": {
-      "outputs": ["library/**"]
+      "outputs": ["../../libraries/**"]
     }
   }
 }

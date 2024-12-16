@@ -45,7 +45,7 @@ export default async function generateLibrary({
     const rootDir = path.resolve(process.cwd(), "../..");
     const componentDir = path.resolve(
       rootDir,
-      `library/${targetEnv}/${component.name}`
+      `libraries/${targetEnv}/${component.name}`
     );
     const indexPath = path.resolve(
       componentDir,
