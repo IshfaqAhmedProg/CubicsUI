@@ -3,7 +3,7 @@ import { genReactButton } from "@cubicsui/gen";
 import * as prettier from "prettier";
 import { writeFile } from "fs/promises";
 import path from "path";
-import loadConfig from "../config/loadConfig.js";
+import loadConfig from "../functions/loadConfig.js";
 
 export default async function create(component: string) {
   try {
@@ -31,7 +31,6 @@ export default async function create(component: string) {
     );
 
     await writeFile(outPath, finalConfigContent);
-
     console.log(`⏳ Building ${component}, please wait...`);
     console.log(`✔ Created ${component} in the project root.`);
   } catch (error) {

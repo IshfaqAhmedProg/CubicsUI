@@ -36,8 +36,7 @@
     "@cubicsui/gen": "workspace:^",
     "commander": "^12.1.0",
     "prettier": "^3.4.1",
-    "tsx": "^4.19.2",
-    "zod": "^3.23.8"
+    "tsx": "^4.19.2"
   },
   "devDependencies": {
     "@cubicsui/configs": "workspace:^",
