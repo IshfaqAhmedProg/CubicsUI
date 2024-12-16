@@ -12,18 +12,17 @@ export const defaultRequiredValues: CUIConfig = {
 };
 
 /**
- * Default configuration template for Typescript
+ * Default configuration template for ESM
  */
-export const defaultConfigTemplateTS = `
+export const configTemplateESM = `
 import { defineConfig } from '@cubicsui/cli/config';
-
 export default defineConfig(${JSON.stringify(defaultRequiredValues)});`;
 
 /**
- * Default configuration template for Javascript
+ * Default configuration template for CJS
  */
-export const defaultConfigTemplateJS = `
-const { defineConfig } = require('@cubicsui/cli/config');
+// export const configTemplateCJS = `
+// const { defineConfig } = require('@cubicsui/cli/config');
 
-module.exports = defineConfig(${JSON.stringify(defaultRequiredValues)});
-`;
+// module.exports = defineConfig(${JSON.stringify(defaultRequiredValues)});
+// `;

@@ -1,5 +1,5 @@
 import { resolve } from "path";
-import { defaultConfigTemplateTS } from "./defaults.js";
+import { configTemplateESM } from "./defaults.js";
 import { register } from "tsx/esm/api";
 import { pathToFileURL } from "url";
 import { CUIConfig } from "./schema.js";
@@ -15,17 +15,16 @@ register();
 export const configFiles: Configs[] = [
   {
     name: "cui.config.js",
-    content: defaultConfigTemplateTS,
+    content: configTemplateESM,
   },
   {
     name: "cui.config.ts",
-    content: defaultConfigTemplateTS,
+    content: configTemplateESM,
   },
 ];
 
 export default async function loadConfig() {
   let module;
-
   for (const configFile of configFiles) {
     try {
       // Resolve absolute path
