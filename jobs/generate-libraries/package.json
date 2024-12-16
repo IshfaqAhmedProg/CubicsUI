@@ -9,7 +9,7 @@
     "lint": "eslint",
     "build": "pnpm lint && tsc",
     "clean": "rimraf node_modules .turbo dist",
-    "gen": "pnpm build && node bin.js"
+    "jobs": "pnpm build && node bin.js"
   },
   "keywords": [
     "job",

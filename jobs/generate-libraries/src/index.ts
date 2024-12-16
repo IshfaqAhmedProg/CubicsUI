@@ -19,7 +19,7 @@ import { execSync } from "child_process";
     execSync("pnpm i");
     console.log("✔ Successfully installed dependencies!");
     console.log("⏳ Building libraries...");
-    execSync("cd ../../.. && pnpm build");
+    execSync("cd ../.. && pnpm build");
     console.log("✔ Successfully built libraries!");
   } catch (error) {
     console.error("✖ Failed to generate libraries.", error);

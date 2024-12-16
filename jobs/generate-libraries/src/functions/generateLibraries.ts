@@ -7,11 +7,9 @@ import generatePackageJson from "./generatePackageJson.js";
 import { LibraryGeneratorProps } from "../interfaces/LibraryGenerator.js";
 
 /**
- * This function is responsible to generate all the components under packages/library/
- *
+ * This function is responsible to generate all the components under the workspace library/
  * The components will be divided based on target environments React, Svelte, Next
- *
- * The generated folder structure for each component:-
+ * The generated folder structure for each component will look something like this:-
  * @filetree
  * ```
  * packages/library/[env]/[component]
@@ -23,11 +21,10 @@ import { LibraryGeneratorProps } from "../interfaces/LibraryGenerator.js";
  * |── tsconfig.ts
  * ```
  * Each folder created for the component will contain its own package.json file with project name of the format
- * @name
- * ```
- * `@cubicsui/[framework]-[component]`
- * ```
- * Thus non-CLI users can install individual components using
+ *
+ * `@cubicsui/[env]-[component]`
+ *
+ * This is created so that non-CLI users can install individual components using
  * @example```
  * `npm i @cubicsui/react-button`
  * ```
