@@ -1,31 +1,24 @@
 import { existsSync, mkdirSync } from "fs";
-import { possibleConfigs } from "./init.js";
 import { genReactButton } from "@cubicsui/gen";
 import * as prettier from "prettier";
 import { writeFile } from "fs/promises";
 import path from "path";
+import loadConfig from "../config/loadConfig.js";
 
 export default async function create(component: string) {
-  const outPath = path.resolve(
-    process.cwd(),
-    `components/${component}/${component}.tsx`
-  );
-  const dirPath = path.dirname(outPath);
-  if (!existsSync(dirPath)) {
-    mkdirSync(dirPath, { recursive: true });
-  }
-
-  const activeConfig = possibleConfigs.find((pc) => existsSync(pc.path));
-  // Check if config  exists
-  if (!activeConfig)
-    throw new Error(
-      `Config file is missing, please initiate your project
-      Run: 
-          npx cui init`
-    );
-  // const cuiConfig = require(activeConfig.path);
-
   try {
+    const config = await loadConfig();
+    console.log("Loaded config:", config);
+
+    const outPath = path.resolve(
+      process.cwd(),
+      `components/${component}/${component}.tsx`
+    );
+    const dirPath = path.dirname(outPath);
+
+    if (!existsSync(dirPath)) {
+      mkdirSync(dirPath, { recursive: true });
+    }
     const componentToGenerate = genReactButton({
       componentName: "button",
       mode: "typescript",

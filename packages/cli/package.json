@@ -12,7 +12,7 @@
     "cui": "bin.js"
   },
   "exports": {
-    "./config": "./config/index.js"
+    "./config": "./dist/config/_index.js"
   },
   "scripts": {
     "build": "eslint && tsc -b",
@@ -36,6 +36,7 @@
     "@cubicsui/gen": "workspace:^",
     "commander": "^12.1.0",
     "prettier": "^3.4.1",
+    "tsx": "^4.19.2",
     "zod": "^3.23.8"
   },
   "devDependencies": {

@@ -1,24 +1,8 @@
-import * as path from "path";
-import * as prettier from "prettier";
-import {
-  defaultConfigTemplateJS,
-  defaultConfigTemplateTS,
-} from "../config/defaults.js";
+import { resolve } from "path";
+import { format } from "prettier";
 import { writeFile } from "fs/promises";
 import { existsSync } from "fs";
-
-export const possibleConfigs = [
-  {
-    name: "cui.config.js",
-    path: path.resolve(process.cwd(), "cui.config.js"),
-    content: defaultConfigTemplateJS,
-  },
-  {
-    name: "cui.config.ts",
-    path: path.resolve(process.cwd(), "cui.config.ts"),
-    content: defaultConfigTemplateTS,
-  },
-];
+import { configFiles } from "../config/loadConfig.js";
 
 /**
  * Builds the config file for cli, the config file determines what kind of component should be created
@@ -26,10 +10,10 @@ export const possibleConfigs = [
  * @`npx cui create <component>`
  */
 export default async function init() {
-  let finalConfig = possibleConfigs[0];
+  let finalConfig = configFiles[0];
 
-  // Check if config already exists
-  if (possibleConfigs.some((pc) => existsSync(pc.path))) {
+  // Check if config already exists in the root
+  if (configFiles.some((cf) => existsSync(resolve(process.cwd(), cf.name)))) {
     console.log(
       `This project seems to be already initialised for @cubicsui/cli.
       If you want to install a new component
@@ -45,21 +29,24 @@ export default async function init() {
   // TODO ask using inquirer
 
   // Check if env is typescript
-  const tsconfig = path.resolve(process.cwd(), "tsconfig.json");
+  const tsconfig = resolve(process.cwd(), "tsconfig.json");
   if (existsSync(tsconfig)) {
     console.log("⏳ tsconfig.json file detected, switching to typescript mode");
-    finalConfig = possibleConfigs[1];
+    finalConfig = configFiles[1];
   }
 
   try {
     console.log("⏳ Finalizing config file, please wait...");
 
     // Format the final config with prettier
-    const finalConfigContent = await prettier.format(
-      finalConfig.content.trim(),
-      { semi: false, parser: "babel-ts" }
+    const finalConfigContent = await format(finalConfig.content.trim(), {
+      semi: false,
+      parser: "babel-ts",
+    });
+    await writeFile(
+      resolve(process.cwd(), finalConfig.name),
+      finalConfigContent
     );
-    await writeFile(finalConfig.path, finalConfigContent);
 
     console.log(`✔ Created ${finalConfig.name} in the project root.`);
   } catch (error) {
