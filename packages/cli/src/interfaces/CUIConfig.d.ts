@@ -1,4 +1,16 @@
 /**
+ * The environment configuration object for the host project
+ */
+export type ConfigEnv =
+  | {
+      library: "react";
+      framework: "next" | "none";
+    }
+  | {
+      library: "svelte";
+      framework: "sveltekit" | "none";
+    };
+/**
  * Comprehensive configuration interface for the CubicsUI CLI.
  *
  * @description
@@ -12,23 +24,21 @@
  * @example
  * // Example of a complete CUI configuration
  * const config: CUIConfig = {
- *   env: 'react',
- *   styleEngine: 'tailwind',
- *   typescript: true,
- *   renderComments: 'important'
+ *  env: { library: "react", framework: "none" },
+ *  styleEngine: "css",
+ *  typescript: false,
+ *  srcFolder: false,
+ *  renderComments: "none",
  * };
  */
-export default interface CUIConfig {
+export type CUIConfig = {
   /**
-   * The generated code for the components depends on which `env` is selected
-   * - `react`(default)
-   * - `next`: When `next.config` file is detected in the project root.
-   * - `svelte`: When `svelte.config` file is detected in the project root
+   * The generated code for the components depends on the `env` object is selected
    * @remarks
    * This will be detected when you run
    * `cui init`
    */
-  env: "react" | "svelte" | "next";
+  env: ConfigEnv;
   /**
    * Controls which flavor of css should be used when generating styles for the components,
    * - `css` (default)
@@ -49,6 +59,14 @@ export default interface CUIConfig {
    */
   typescript: boolean;
   /**
+   * Controls where the component folder should be created
+   *
+   * @remarks
+   * This will be detected when you run
+   * `cui init`
+   */
+  componentDir: boolean;
+  /**
    * Controls the rendering of comments during component generation.
    * - `all` (default): Renders all comments, including detailed and minor explanations.
    * - `none`: Suppresses all comments during component generation.
@@ -56,7 +74,22 @@ export default interface CUIConfig {
    * @default "none"
    */
   renderComments: "none" | "all" | "important";
-}
+  /**
+   * Controls the naming convention for the files of the generated component
+   * - `CapitalCase`(default): File names will be in capital case eg:- TimeCard.tsx
+   * - `camelCase`: File names will be in camel case eg:- timeCard.tsx
+   * - `kebab-case`: Files will be in kebab case eg:- time-card.tsx
+   * - `snake_case`: Files will be in snake case eg:- time_card.tsx
+   * - `UPPERCASE`: Files will be in snake case eg:- TIMECARD.tsx
+   * @default "CapitalCase"
+   */
+  fileNamingConvention:
+    | "CapitalCase"
+    | "camelCase"
+    | "kebab-case"
+    | "snake_case"
+    | "UPPERCASE";
+};
 
 /**
  * Subset of CUIConfig representing configuration parameters that can be automatically
@@ -74,31 +107,13 @@ export default interface CUIConfig {
  */
 export type DetectedConfig = Pick<
   CUIConfig,
-  "env" | "styleEngine" | "typescript"
+  "env" | "styleEngine" | "typescript" | "componentDir"
 >;
-
-/**
- * Defines an array of recognized configuration file names for the CubicsUI configuration system.
- *
- * This constant array contains the standard filenames that the configuration loader will search for when
- * attempting to locate and parse the application's configuration. Currently supports both JavaScript and
- * TypeScript configuration file formats.
- *
- * @remarks
- * - The configuration files are expected to be located in the project's root directory
- * - Supports `.js` and `.ts` extensions for maximum flexibility across different project setups
- *
- * @see {@link ConfigFile} for the type derived from this array
- */
-export const configFiles = ["cui.config.js", "cui.config.ts"] as const;
-
 /**
  * A type that represents the literal string types of valid configuration file names.
  *
- * This type is derived from the `configFiles` constant, allowing precise type checking
- * and autocompletion for configuration file names throughout the application.
+ * Allows precise type checking and autocompletion for configuration file names throughout the application.
  *
  * @typeparam ConfigFile - A union type of the specific configuration file name strings
- *
  */
-export type ConfigFile = (typeof configFiles)[number];
+export type ConfigFile = "cui.config.js" | "cui.config.ts";
