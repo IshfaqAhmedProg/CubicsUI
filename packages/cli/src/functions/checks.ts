@@ -1,58 +1,52 @@
 import { existsSync } from "fs";
-import { resolve } from "path/posix";
-import { configFiles, DetectedConfig } from "../interfaces/CUIConfig.js";
+import type { CUIConfig } from "../interfaces/CUIConfig.js";
+import configFiles from "../constants/configFiles.js";
+import { resolve } from "path";
 
 /**
  * Check which env value suits the best for the host project
- * @param detectedConfig
- * @returns {Promise<DetectedConfig>} The detected config for the host project
+ * @returns {CUIConfig["env"]} The environment detected in the host project
  */
-export async function checkEnv(
-  detectedConfig: DetectedConfig
-): Promise<DetectedConfig> {
-  return detectedConfig;
+export function checkEnv(): CUIConfig["env"] {
+  return {
+    library: "react",
+    framework: "none",
+  };
 }
 
 /**
  * Check if project is using typescript or not by checking if the
  * file `tsconfig.json` exists or not
- * @param {DetectedConfig} detectedConfig
- * @returns {Promise<DetectedConfig>} The detected config for the host project
+ * @returns {boolean} true if tsconfig.json exists
  */
-export async function checkTypescript(
-  detectedConfig: DetectedConfig
-): Promise<DetectedConfig> {
-  const tsconfig = resolve(process.cwd(), "tsconfig.json");
-  if (existsSync(tsconfig)) {
-    console.log(
-      "⚠ tsconfig.json file detected, typescript is set to true in config file!"
-    );
-    detectedConfig.typescript = true;
-  } else detectedConfig.typescript = false;
-  return detectedConfig;
+export function checkTypescript(): boolean {
+  return existsSync(resolve(process.cwd(), "tsconfig.json"));
 }
 
 /**
  * Check the style engine used in the host project
- * @param detectedConfig
- * @returns {Promise<DetectedConfig>} The detected config for the host project
+ * @returns {CUIConfig["styleEngine"]} The detected config for the host project
  */
-export async function checkStyleEngine(
-  detectedConfig: DetectedConfig
-): Promise<DetectedConfig> {
-  return detectedConfig;
+export function checkStyleEngine(): CUIConfig["styleEngine"] {
+  return "css";
+}
+/**
+ * Check if there is a src folder in the project root
+ * @returns {boolean} returns true if src folder exists in the root of the project
+ */
+export function checkIfSrcFolderExists(): boolean {
+  return false;
 }
 /**
  * Check if there is an existing cui.config in the project
  */
-export async function checkIfConfigExists() {
+export function checkIfAlreadyConfigured() {
   if (configFiles.some((cf) => existsSync(resolve(process.cwd(), cf)))) {
-    console.log(
-      `This project seems to be already initialised for @cubicsui/cli.
-      If you want to install a new component
-      Run:
-         npx cui create <component>`
+    console.error(
+      "This project seems to be already initialised for @cubicsui/cli."
     );
+    console.error("If you want to generate a new component run:");
+    console.error("   npx cui create <component>");
     console.error(
       "If you are trying to reinitialise this project then delete the config file(cui.config) before initialising again."
     );

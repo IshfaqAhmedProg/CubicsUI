@@ -1,17 +1,23 @@
 import { DetectedConfig } from "../interfaces/CUIConfig.js";
-import { defaultRequiredValues } from "../constants/config.js";
-import { checkEnv, checkTypescript, checkStyleEngine } from "./checks.js";
+import { configGen } from "../constants/config.js";
+import {
+  checkEnv,
+  checkTypescript,
+  checkStyleEngine,
+  checkIfSrcFolderExists,
+} from "./checks.js";
 
 /**
  * Detects the host projects environment using check functions defined in checks.ts
  * during the initialisation stage
- * @returns {Promise<DetectedConfig>} The detected config for the host project
+ * @returns {DetectedConfig} The detected config for the host project
  */
-export default async function detectConfigForInit(): Promise<DetectedConfig> {
+export default function getDetectedConfig(): DetectedConfig {
   console.log("⏳ Checking project environment, please wait...");
-  let detectedConfig = defaultRequiredValues() as DetectedConfig;
-  detectedConfig = await checkEnv(detectedConfig);
-  detectedConfig = await checkTypescript(detectedConfig);
-  detectedConfig = await checkStyleEngine(detectedConfig);
+  const detectedConfig = configGen() as DetectedConfig;
+  detectedConfig.env = checkEnv();
+  detectedConfig.typescript = checkTypescript();
+  detectedConfig.styleEngine = checkStyleEngine();
+  detectedConfig.componentDir = checkIfSrcFolderExists();
   return detectedConfig;
 }

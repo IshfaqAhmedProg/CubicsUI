@@ -2,9 +2,9 @@ import { resolve } from "path";
 import { format } from "prettier";
 import { writeFile } from "fs/promises";
 import { configTemplateESM } from "../constants/config.js";
-import { configFiles } from "../interfaces/CUIConfig.js";
-import detectConfigForInit from "../functions/detectConfig.js";
-import { checkIfConfigExists } from "../functions/checks.js";
+import configFiles from "../constants/configFiles.js";
+import getDetectedConfig from "../functions/detectConfig.js";
+import { checkIfAlreadyConfigured } from "../functions/checks.js";
 
 /**
  * Initializes the configuration file for the CubicsUI CLI toolkit.
@@ -26,12 +26,20 @@ import { checkIfConfigExists } from "../functions/checks.js";
  * npx cui init
  */
 export default async function init(): Promise<void> {
-  const finalConfig = configFiles[0];
+  // By default use the "cui.config.js" file
+  let finalConfigName = configFiles[0];
   // Step 1. Check if config already exists in the root
-  await checkIfConfigExists();
+  checkIfAlreadyConfigured();
   // Step 2. Detect the necessary values for the config file from the host project automatically or ask the host
-  const detectedConfig = await detectConfigForInit();
+  const detectedConfig = getDetectedConfig();
 
+  // If the detected config is typescript then use "cui.config.ts" instead
+  if (detectedConfig.typescript) {
+    console.log(
+      "⚠ tsconfig.json file detected, typescript is set to true in config file!"
+    );
+    finalConfigName = configFiles[1];
+  }
   // Step 3. Build the config file cui.config based on the detectedConfig
   console.log("⏳ Building config file, please wait...");
   try {
@@ -44,10 +52,13 @@ export default async function init(): Promise<void> {
         parser: "babel-ts",
       }
     );
-    await writeFile(resolve(process.cwd(), finalConfig), finalConfigContent);
-    console.log(`✔ Created ${finalConfig} in the project root.`);
+    await writeFile(
+      resolve(process.cwd(), finalConfigName),
+      finalConfigContent
+    );
+    console.log(`✔ Created ${finalConfigName} in the project root.`);
   } catch (error) {
-    console.error(`✖ Failed to create ${finalConfig}:`, error);
+    console.error(`✖ Failed to create config file:`, error);
     process.exit(1);
   }
 }
