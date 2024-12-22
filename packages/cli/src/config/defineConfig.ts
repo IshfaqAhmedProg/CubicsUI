@@ -8,7 +8,7 @@ import { defaultRequiredValues } from "../constants/config.js";
  */
 export default function defineConfig(config: CUIConfig): CUIConfig {
   // Merging default values with provided config
-  const mergedConfig = { ...defaultRequiredValues, ...config };
+  const mergedConfig = { ...defaultRequiredValues(), ...config };
   // Validating the merged configuration
   return mergedConfig;
 }
