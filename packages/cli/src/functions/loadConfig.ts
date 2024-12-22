@@ -1,7 +1,7 @@
 import { resolve } from "path";
 import { register } from "tsx/esm/api";
 import { pathToFileURL } from "url";
-import type { CUIConfig } from "../interfaces/CUIConfig.js";
+import CUIConfig from "../interfaces/CUIConfig.js";
 import configFiles from "../constants/configFiles.js";
 
 // Register is used to allow importing both ts and js config files and prevent

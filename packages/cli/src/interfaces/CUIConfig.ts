@@ -31,7 +31,8 @@ export type ConfigEnv =
  *  renderComments: "none",
  * };
  */
-export type CUIConfig = {
+
+export default interface CUIConfig {
   /**
    * The generated code for the components depends on the `env` object is selected
    * @remarks
@@ -65,7 +66,7 @@ export type CUIConfig = {
    * This will be detected when you run
    * `cui init`
    */
-  componentDir: boolean;
+  componentsDir?: string;
   /**
    * Controls the rendering of comments during component generation.
    * - `all` (default): Renders all comments, including detailed and minor explanations.
@@ -73,7 +74,7 @@ export type CUIConfig = {
    * - `important`: Renders only necessary or critical comments that provide essential context.
    * @default "none"
    */
-  renderComments: "none" | "all" | "important";
+  renderComments?: "none" | "all" | "important";
   /**
    * Controls the naming convention for the files of the generated component
    * - `CapitalCase`(default): File names will be in capital case eg:- TimeCard.tsx
@@ -89,7 +90,7 @@ export type CUIConfig = {
     | "kebab-case"
     | "snake_case"
     | "UPPERCASE";
-};
+}
 
 /**
  * Subset of CUIConfig representing configuration parameters that can be automatically
@@ -107,7 +108,7 @@ export type CUIConfig = {
  */
 export type DetectedConfig = Pick<
   CUIConfig,
-  "env" | "styleEngine" | "typescript" | "componentDir"
+  "env" | "styleEngine" | "typescript" | "componentsDir"
 >;
 /**
  * A type that represents the literal string types of valid configuration file names.

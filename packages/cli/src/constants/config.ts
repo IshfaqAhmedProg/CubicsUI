@@ -1,4 +1,4 @@
-import type { CUIConfig } from "../interfaces/CUIConfig.js";
+import CUIConfig from "../interfaces/CUIConfig.js";
 import { DetectedConfig } from "../interfaces/CUIConfig.js";
 /**
  * Generates the final configuration of the `cui.config` file.
@@ -8,12 +8,12 @@ import { DetectedConfig } from "../interfaces/CUIConfig.js";
  */
 export const configGen = (detectedConfig?: DetectedConfig): CUIConfig => {
   return {
-    env: detectedConfig?.env ?? { library: "react", framework: "none" },
-    styleEngine: detectedConfig?.styleEngine ?? "css",
-    typescript: detectedConfig?.typescript ?? true,
-    componentDir: detectedConfig?.componentDir ?? false,
-    renderComments: "none",
+    env: { library: "react", framework: "none" },
+    styleEngine: "css",
+    typescript: false,
+    ...detectedConfig,
     fileNamingConvention: "CapitalCase",
+    renderComments: "none",
   };
 };
 

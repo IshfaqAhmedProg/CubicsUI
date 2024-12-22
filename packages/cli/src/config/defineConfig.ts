@@ -1,4 +1,4 @@
-import type { CUIConfig } from "../interfaces/CUIConfig.js";
+import CUIConfig from "../interfaces/CUIConfig.js";
 import { configGen } from "../constants/config.js";
 
 /**

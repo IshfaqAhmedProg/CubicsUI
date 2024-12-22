@@ -1,5 +1,5 @@
 import { existsSync } from "fs";
-import type { CUIConfig } from "../interfaces/CUIConfig.js";
+import CUIConfig from "../interfaces/CUIConfig.js";
 import configFiles from "../constants/configFiles.js";
 import { resolve } from "path";
 
