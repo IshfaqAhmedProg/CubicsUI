@@ -20,8 +20,10 @@
  */
 export default interface CUIConfig {
   /**
-   * The generated code for the components depend on which `env` is selected
-   *
+   * The generated code for the components depends on which `env` is selected
+   * - `react`(default)
+   * - `next`: When `next.config` file is detected in the project root.
+   * - `svelte`: When `svelte.config` file is detected in the project root
    * @remarks
    * This will be detected when you run
    * `cui init`

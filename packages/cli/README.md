@@ -29,8 +29,8 @@ Once you've installed the CLI you can start generating components without having
 
 #### 3. Check which supported style engine is being used.
 - `css`(default)
-- `scss`: When any `.sass` file is detected.
 - `tailwind`: When any `tailwind.config` file is detected in the project root
+- `scss`: When any `.sass` file is detected `tailwind` and `css` takes priority over this.
 
 #### 4. Check if a `src` folder is being used.
 - `false`(default)
