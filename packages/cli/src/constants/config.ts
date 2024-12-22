@@ -2,7 +2,7 @@ import CUIConfig, { DetectedConfig } from "../interfaces/CUIConfig.js";
 /**
  * Default values matching developer specification
  * @param detectedConfig The configuration detected by the cli
- * @returns The default configuration that is used in cui.config
+ * @returns The default required values that is used in `cui.config`
  */
 export const defaultRequiredValues = (
   detectedConfig?: DetectedConfig
