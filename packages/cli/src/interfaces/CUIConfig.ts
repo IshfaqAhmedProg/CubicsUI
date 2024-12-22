@@ -29,10 +29,13 @@ export default interface CUIConfig {
   env: "react" | "svelte" | "next";
   /**
    * Controls which flavor of css should be used when generating styles for the components,
-   *
+   * - `css` (default)
+   * - `tailwind`: If any `tailwind.config` file is detected in the project root
+   * - `scss`: If any `.sass` file is detected anywhere in the project.
    * @remarks
-   * This will be detected when you run
+   * This will be automatically detected when you run
    * `cui init`
+   * @default "css"
    */
   styleEngine: "css" | "scss" | "tailwind";
   /**

@@ -3,7 +3,7 @@ import { format } from "prettier";
 import { writeFile } from "fs/promises";
 import { configTemplateESM } from "../constants/config.js";
 import { configFiles } from "../interfaces/CUIConfig.js";
-import detectConfig from "../functions/detectConfig.js";
+import detectConfigForInit from "../functions/detectConfig.js";
 import { checkIfConfigExists } from "../functions/checks.js";
 
 /**
@@ -30,7 +30,7 @@ export default async function init(): Promise<void> {
   // Step 1. Check if config already exists in the root
   await checkIfConfigExists();
   // Step 2. Detect the necessary values for the config file from the host project automatically or ask the host
-  const detectedConfig = await detectConfig();
+  const detectedConfig = await detectConfigForInit();
 
   // Step 3. Build the config file cui.config based on the detectedConfig
   console.log("⏳ Building config file, please wait...");

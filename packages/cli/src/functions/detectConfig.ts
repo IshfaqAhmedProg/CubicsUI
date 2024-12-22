@@ -4,9 +4,10 @@ import { checkEnv, checkTypescript, checkStyleEngine } from "./checks.js";
 
 /**
  * Detects the host projects environment using check functions defined in checks.ts
+ * during the initialisation stage
  * @returns {Promise<DetectedConfig>} The detected config for the host project
  */
-export default async function detectConfig(): Promise<DetectedConfig> {
+export default async function detectConfigForInit(): Promise<DetectedConfig> {
   console.log("⏳ Checking project environment, please wait...");
   let detectedConfig = defaultRequiredValues() as DetectedConfig;
   detectedConfig = await checkEnv(detectedConfig);
