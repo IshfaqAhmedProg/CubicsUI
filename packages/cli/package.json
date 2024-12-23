@@ -11,9 +11,7 @@
     "@cubicsui/cli": "bin.js",
     "cui": "bin.js"
   },
-  "exports": {
-    "./config": "./dist/config/_index.js"
-  },
+  "exports": "./dist/index.js",
   "scripts": {
     "build": "eslint && tsc -b",
     "lint": "eslint",

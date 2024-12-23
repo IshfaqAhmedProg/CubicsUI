@@ -23,5 +23,5 @@ export const configGen = (detectedConfig?: DetectedConfig): CUIConfig => {
  * @returns The template that will be used to build `cui.config`
  */
 export const configTemplateESM = (detectedConfig: DetectedConfig): string => `
-import { defineConfig } from '@cubicsui/cli/config';
+import { defineConfig } from '@cubicsui/cli';
 export default defineConfig(${JSON.stringify(configGen(detectedConfig))});`;
