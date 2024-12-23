@@ -13,6 +13,7 @@ export const configGen = (detectedConfig?: DetectedConfig): CUIConfig => {
     typescript: false,
     ...detectedConfig,
     fileNamingConvention: "CapitalCase",
+    dirNamingConvention: "CapitalCase",
     renderComments: "none",
   };
 };

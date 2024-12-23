@@ -1,4 +1,13 @@
 /**
+ * The supported naming conventions
+ */
+export type NamingConvention =
+  | "CapitalCase"
+  | "camelCase"
+  | "kebab-case"
+  | "snake_case"
+  | "UPPERCASE";
+/**
  * The environment configuration object for the host project
  */
 export type ConfigEnv =
@@ -84,12 +93,17 @@ export default interface CUIConfig {
    * - `UPPERCASE`: Files will be in snake case eg:- TIMECARD.tsx
    * @default "CapitalCase"
    */
-  fileNamingConvention:
-    | "CapitalCase"
-    | "camelCase"
-    | "kebab-case"
-    | "snake_case"
-    | "UPPERCASE";
+  fileNamingConvention: NamingConvention;
+  /**
+   * Controls the naming convention for the folders that will contain the generated component
+   * - `CapitalCase`(default): File names will be in capital case eg:- TimeCard
+   * - `camelCase`: File names will be in camel case eg:- timeCard
+   * - `kebab-case`: Files will be in kebab case eg:- time-card
+   * - `snake_case`: Files will be in snake case eg:- time_card
+   * - `UPPERCASE`: Files will be in snake case eg:- TIMECARD
+   * @default "CapitalCase"
+   */
+  dirNamingConvention: NamingConvention;
 }
 
 /**
