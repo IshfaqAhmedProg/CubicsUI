@@ -1,5 +1,11 @@
 # @cubicsui/gen
 
+## 1.0.8
+
+### Patch Changes
+
+- Checking if release workflow respects the paths for "\*\*/CHANGELOG.md" on push
+
 ## 1.0.7
 
 ### Patch Changes

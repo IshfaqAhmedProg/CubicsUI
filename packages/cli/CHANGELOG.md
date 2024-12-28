@@ -1,5 +1,14 @@
 # @cubicsui/cli
 
+## 1.2.10
+
+### Patch Changes
+
+- Checking if release workflow respects the paths for "\*\*/CHANGELOG.md" on push
+- Updated dependencies
+  - @cubicsui/db@1.0.6
+  - @cubicsui/gen@1.0.8
+
 ## 1.2.9
 
 ### Patch Changes

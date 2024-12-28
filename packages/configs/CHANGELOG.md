@@ -1,5 +1,11 @@
 # @cubicsui/configs
 
+## 0.0.6
+
+### Patch Changes
+
+- Checking if release workflow respects the paths for "\*\*/CHANGELOG.md" on push
+
 ## 0.0.5
 
 ### Patch Changes

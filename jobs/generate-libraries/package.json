@@ -1,6 +1,6 @@
 {
   "name": "@cubicsui/job_generate-libraries",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "description": "The generator that builds the components for the library based install",
   "private": true,
   "type": "module",

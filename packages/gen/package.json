@@ -1,6 +1,6 @@
 {
   "name": "@cubicsui/gen",
-  "version": "1.0.7",
+  "version": "1.0.8",
   "description": "The main generator that builds the components, hooks and styles, based on what you need",
   "private": false,
   "type": "module",
