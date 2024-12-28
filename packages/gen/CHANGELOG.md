@@ -1,5 +1,11 @@
 # @cubicsui/gen
 
+## 1.0.4
+
+### Patch Changes
+
+- Added npmignore as it was ignoring the dist folders
+
 ## 1.0.3
 
 ### Patch Changes

@@ -1,5 +1,11 @@
 # @cubicsui/db
 
+## 1.0.2
+
+### Patch Changes
+
+- Added npmignore as it was ignoring the dist folders
+
 ## 1.0.1
 
 ### Patch Changes

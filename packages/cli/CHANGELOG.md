@@ -1,5 +1,14 @@
 # @cubicsui/cli
 
+## 1.2.6
+
+### Patch Changes
+
+- Added npmignore as it was ignoring the dist folders
+- Updated dependencies
+  - @cubicsui/db@1.0.2
+  - @cubicsui/gen@1.0.4
+
 ## 1.2.5
 
 ### Patch Changes
