@@ -1,5 +1,5 @@
 import { JSONFile } from "lowdb/node";
-import type { ComponentCatalogSchema } from "../interfaces/schemas.js";
+import type { ComponentCatalogSchema } from "../interfaces/Schemas.js";
 import path from "path";
 import { fileURLToPath } from "url";
 import DB from "../classes/DbWithLodash.js";

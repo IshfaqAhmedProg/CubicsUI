@@ -1,4 +1,4 @@
-import type { LibraryComponent } from "./libraryComponent.js";
+import type { LibraryComponent } from "./LibraryComponent.js";
 
 export type ComponentCatalogSchema = {
   components: LibraryComponent[];
