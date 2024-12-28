@@ -35,6 +35,8 @@ export default async function create(requestedComponent: string) {
     );
     console.log("outPath", outPath);
 
+    console.log("outPath", outPath);
+
     const dirPath = path.dirname(outPath);
 
     if (!existsSync(dirPath)) {
@@ -54,7 +56,10 @@ export default async function create(requestedComponent: string) {
     await writeFile(outPath, finalConfigContent);
     console.log(`⏳ Building ${requestedComponent}, please wait...`);
     console.log(`✔ Created ${requestedComponent} in the project root.`);
+    console.log(`⏳ Building ${requestedComponent}, please wait...`);
+    console.log(`✔ Created ${requestedComponent} in the project root.`);
   } catch (error) {
+    console.error(`✖ Failed to create ${requestedComponent}:`, error);
     console.error(`✖ Failed to create ${requestedComponent}:`, error);
     process.exit(1);
   }
