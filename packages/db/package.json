@@ -1,6 +1,6 @@
 {
   "name": "@cubicsui/db",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "The database that holds all the constants required to generate components",
   "private": false,
   "publishConfig": {

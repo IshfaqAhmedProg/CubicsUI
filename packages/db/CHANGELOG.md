@@ -1,5 +1,11 @@
 # @cubicsui/db
 
+## 1.0.1
+
+### Patch Changes
+
+- Changes across dependecies
+
 ## 1.0.0
 
 ### Major Changes
