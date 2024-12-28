@@ -1,0 +1,28 @@
+{
+  "components": [
+    {
+      "id": "3jdasnsdjkjmlksad",
+      "name": "button",
+      "aliases": ["btn", "Button"],
+      "desc": "This is a button",
+      "categories": ["component", "atomic"],
+      "supportedEnvs": [
+        { "library": "react", "framework": "next" },
+        { "library": "svelte", "framework": "sveltekit" }
+      ],
+      "code": "import{ComponentPropsWithoutRef,forwardRef,ReactNode}from\"react\";import styles from\"./Button.module.scss\";type ButtonProps={startDecoration? :ReactNode;endDecoration? :ReactNode;variant? :\"contained\"|\"outline\"|\"destructive\"|\"ghost\";fullWidth? :boolean}&ComponentPropsWithoutRef<\"button\">;const Button=forwardRef<HTMLButtonElement,ButtonProps>(function Button(props,ref){const{variant=\"contained\",className=\"\",startDecoration,endDecoration,children,fullWidth=false,...buttonProps}=props;const buttonClassName=`${styles.button} ${styles[variant]} ${className}`;return(<button className={buttonClassName} ref={ref} {...buttonProps}> {startDecoration&&(<span className={`${styles.decoration} ${styles.start}`;}> {startDecoration}</span>)}<p className={styles.buttonText;}> {children}</p>{endDecoration&&(<span className={`${styles.decoration} ${styles.end}`;}> {endDecoration}</span>)}</button>)});export default Button;"
+    },
+    {
+      "id": "ojktewflkds244r32",
+      "name": "iconbutton",
+      "aliases": ["ibtn", "IconButton", "iconButton"],
+      "desc": "This is an icon button",
+      "categories": ["component", "atomic"],
+      "supportedEnvs": [
+        { "library": "react", "framework": "next" },
+        { "library": "svelte", "framework": "sveltekit" }
+      ],
+      "code": "import{ComponentPropsWithoutRef,forwardRef,ReactNode}from\"react\";import styles from\"./IconButton.module.scss\";export type IconButtonProps={children:ReactNode;variant? :\"contained\"|\"outline\"|\"destructive\"|\"ghost\"}&ComponentPropsWithoutRef<\"button\">;const IconButton=forwardRef<HTMLButtonElement,IconButtonProps>(function IconButton(props,ref){const{variant=\"contained\",className=\"\",children,...iconButtonProps}=props;return(<button className={`${styles.iconButton} ${;styles[`iconButton_${variant}`]} ${className}`} ref={ref} {...iconButtonProps}> {children}</button>)});export default IconButton;"
+    }
+  ]
+}
