@@ -4,16 +4,37 @@ import * as prettier from "prettier";
 import { writeFile } from "fs/promises";
 import path from "path";
 import loadConfig from "../functions/loadConfig.js";
+import { changeCase, componentsDB } from "@cubicsui/db";
 
-export default async function create(component: string) {
+export default async function create(requestedComponent: string) {
   try {
     const config = await loadConfig();
     console.log("Loaded config:", config);
 
+    const cpdb = await componentsDB();
+
+    const componentFromDB = cpdb.chain
+      .get("components")
+      .find({ name: requestedComponent })
+      .value();
+    const outFileName = changeCase(
+      componentFromDB.name,
+      config.fileNamingConvention
+    );
+    const outDirName = changeCase(
+      componentFromDB.name,
+      config.dirNamingConvention
+    );
+    const componentsDir = config.componentsDir
+      ? `${config.componentsDir}/components`
+      : "components";
+
     const outPath = path.resolve(
       process.cwd(),
-      `components/${component}/${component}.tsx`
+      `${componentsDir}/${outDirName}/${outFileName}.tsx`
     );
+    console.log("outPath", outPath);
+
     const dirPath = path.dirname(outPath);
 
     if (!existsSync(dirPath)) {
@@ -31,10 +52,10 @@ export default async function create(component: string) {
     );
 
     await writeFile(outPath, finalConfigContent);
-    console.log(`⏳ Building ${component}, please wait...`);
-    console.log(`✔ Created ${component} in the project root.`);
+    console.log(`⏳ Building ${requestedComponent}, please wait...`);
+    console.log(`✔ Created ${requestedComponent} in the project root.`);
   } catch (error) {
-    console.error(`✖ Failed to create ${component}:`, error);
+    console.error(`✖ Failed to create ${requestedComponent}:`, error);
     process.exit(1);
   }
 }

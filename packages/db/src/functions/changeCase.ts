@@ -1,25 +1,26 @@
 import { NamingConvention } from "@cubicsui/db";
-import * as _ from "lodash";
+import Case from "case";
+
 export default function changeCase(
   str: string,
   convertToCase: NamingConvention
 ) {
-  const { capitalize, camelCase, kebabCase, snakeCase, upperCase } = _;
+  const { capital, camel, kebab, snake, upper } = Case;
   switch (convertToCase) {
     case "CapitalCase":
-      return capitalize(str);
+      return capital(str);
       break;
     case "UPPERCASE":
-      return upperCase(str);
+      return upper(str);
       break;
     case "snake_case":
-      return snakeCase(str);
+      return snake(str);
       break;
     case "kebab-case":
-      return kebabCase(str);
+      return kebab(str);
       break;
     case "camelCase":
-      return camelCase(str);
+      return camel(str);
       break;
     default:
       return str;

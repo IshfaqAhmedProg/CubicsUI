@@ -13,5 +13,5 @@ import type { ConfigFile } from "@cubicsui/db";
  *
  * @see {@link ConfigFile} for the type derived from this array
  */
-const configFiles: ConfigFile[] = ["cui.config.js", "cui.config.ts"];
+const configFiles: ConfigFile[] = ["cui.config.mjs", "cui.config.ts"];
 export default configFiles;
