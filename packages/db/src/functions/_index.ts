@@ -1,1 +1,1 @@
-export { default as getComponentsCatalog } from "./getComponentsCatalog.js";
+export { default as libraryComponentsDB } from "./libraryComponentsDB.js";

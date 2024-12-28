@@ -1,11 +1,11 @@
-import { getComponentsCatalog } from "@cubicsui/db";
+import { libraryComponentsDB } from "@cubicsui/db";
 import generateLibrary from "./functions/generateLibraries.js";
 import { execSync } from "child_process";
 
 (async function main() {
   try {
     console.log("⏳ Generating libraries...");
-    const catalog = await getComponentsCatalog();
+    const catalog = await libraryComponentsDB();
     const components = catalog.data.components;
     for (let index = 0; index < components.length; index++) {
       const component = components[index];

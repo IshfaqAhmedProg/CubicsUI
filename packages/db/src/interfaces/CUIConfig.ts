@@ -10,7 +10,7 @@ export type NamingConvention =
 /**
  * The environment configuration object for the host project
  */
-export type ConfigEnv =
+export type Environment =
   | {
       library: "react";
       framework: "next" | "none";
@@ -48,7 +48,7 @@ export type CUIConfig = {
    * This will be detected when you run
    * `cui init`
    */
-  env: ConfigEnv;
+  env: Environment;
   /**
    * Controls which flavor of css should be used when generating styles for the components,
    * - `css` (default)
