@@ -1,5 +1,11 @@
 # @cubicsui/job_generate-libraries
 
+## 0.0.4
+
+### Patch Changes
+
+- Added npmignore to @cubicsui/gen as it also wasnt including the dist directory in the published package in npm
+
 ## 0.0.3
 
 ### Patch Changes
