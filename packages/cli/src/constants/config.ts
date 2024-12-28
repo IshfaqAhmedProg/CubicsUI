@@ -1,5 +1,4 @@
-import CUIConfig from "../interfaces/CUIConfig.js";
-import { DetectedConfig } from "../interfaces/CUIConfig.js";
+import { CUIConfig, DetectedConfig } from "@cubicsui/db";
 /**
  * Generates the final configuration of the `cui.config` file.
  * The defaults are also defined over here

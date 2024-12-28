@@ -59,6 +59,9 @@ importers:
 
   packages/cli:
     dependencies:
+      '@cubicsui/db':
+        specifier: workspace:^
+        version: link:../db
       '@cubicsui/gen':
         specifier: workspace:^
         version: link:../gen

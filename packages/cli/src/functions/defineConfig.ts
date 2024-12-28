@@ -1,5 +1,5 @@
 import { configGen } from "../constants/config.js";
-import CUIConfig from "../interfaces/CUIConfig.js";
+import { CUIConfig } from "@cubicsui/db";
 
 /**
  * Define and validate CubicsUI configuration

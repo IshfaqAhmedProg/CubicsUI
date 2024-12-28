@@ -41,7 +41,7 @@ export type ConfigEnv =
  * };
  */
 
-export default interface CUIConfig {
+export type CUIConfig = {
   /**
    * The generated code for the components depends on the `env` object is selected
    * @remarks
@@ -104,7 +104,7 @@ export default interface CUIConfig {
    * @default "CapitalCase"
    */
   dirNamingConvention: NamingConvention;
-}
+};
 
 /**
  * Subset of CUIConfig representing configuration parameters that can be automatically

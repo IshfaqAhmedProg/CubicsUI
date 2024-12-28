@@ -1,4 +1,4 @@
-import { DetectedConfig } from "../interfaces/CUIConfig.js";
+import { DetectedConfig } from "@cubicsui/db";
 import { configGen } from "../constants/config.js";
 import {
   checkEnv,
