@@ -1,5 +1,14 @@
 # @cubicsui/cli
 
+## 1.2.7
+
+### Patch Changes
+
+- Moved npmignore to cli as it wasnt working in the root of the monorepo
+- Updated dependencies
+  - @cubicsui/db@1.0.3
+  - @cubicsui/gen@1.0.5
+
 ## 1.2.6
 
 ### Patch Changes

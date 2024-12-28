@@ -1,5 +1,11 @@
 # @cubicsui/db
 
+## 1.0.3
+
+### Patch Changes
+
+- Moved npmignore to cli as it wasnt working in the root of the monorepo
+
 ## 1.0.2
 
 ### Patch Changes

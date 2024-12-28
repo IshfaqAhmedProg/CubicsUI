@@ -1,6 +1,6 @@
 {
   "name": "@cubicsui/configs",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "This packages contains all the configs for build tools like typescript, eslint etc.",
   "private": true,
   "keywords": [
