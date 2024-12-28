@@ -26,6 +26,7 @@
   },
   "license": "MIT",
   "dependencies": {
+    "case": "^1.6.3",
     "lodash": "^4.17.21",
     "lowdb": "^7.0.1"
   },

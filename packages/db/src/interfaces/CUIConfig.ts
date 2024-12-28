@@ -131,4 +131,4 @@ export type DetectedConfig = Pick<
  *
  * @typeparam ConfigFile - A union type of the specific configuration file name strings
  */
-export type ConfigFile = "cui.config.js" | "cui.config.ts";
+export type ConfigFile = "cui.config.mjs" | "cui.config.ts";
