@@ -1,5 +1,11 @@
 # @cubicsui/gen
 
+## 1.0.7
+
+### Patch Changes
+
+- Added additional files to ignore while publishing
+
 ## 1.0.6
 
 ### Patch Changes

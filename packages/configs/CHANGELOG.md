@@ -1,5 +1,11 @@
 # @cubicsui/configs
 
+## 0.0.5
+
+### Patch Changes
+
+- Added additional files to ignore while publishing
+
 ## 0.0.4
 
 ### Patch Changes

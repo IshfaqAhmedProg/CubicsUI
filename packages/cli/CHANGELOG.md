@@ -1,5 +1,14 @@
 # @cubicsui/cli
 
+## 1.2.9
+
+### Patch Changes
+
+- Added additional files to ignore while publishing
+- Updated dependencies
+  - @cubicsui/db@1.0.5
+  - @cubicsui/gen@1.0.7
+
 ## 1.2.8
 
 ### Patch Changes
