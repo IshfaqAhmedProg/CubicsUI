@@ -1,8 +1,8 @@
-export type ComponentCategory = "components" | "hooks" | "misc";
-export type ComponentTargetEnv = "react" | "svelte" | "next";
-export type ComponentStyleEngine = "css" | "scss" | "tailwind";
+export type LibraryComponentCategory = "components" | "hooks" | "misc";
+export type LibraryComponentTargetEnv = "react" | "svelte" | "next";
+export type LibraryComponentStyleEngine = "css" | "scss" | "tailwind";
 
-export type Component = {
+export type LibraryComponent = {
   /**
    * A unique identifier for the component
    */
@@ -29,17 +29,17 @@ export type Component = {
   /**
    * The components are split into categories to help with organisation
    */
-  category: ComponentCategory;
+  category: LibraryComponentCategory;
   /**
    * Environments that are supported by the component
    */
-  envs: ComponentTargetEnv[];
+  envs: LibraryComponentTargetEnv[];
   /**
    * A package will be created in library for these packages
    */
-  pkgEnv: ComponentTargetEnv[];
+  pkgEnv: LibraryComponentTargetEnv[];
   /**
    * This is the style engine that is associated with the project and its value is derived from cui.config
    */
-  styleEngine?: ComponentStyleEngine;
+  styleEngine?: LibraryComponentStyleEngine;
 };

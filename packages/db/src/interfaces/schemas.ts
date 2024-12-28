@@ -1,5 +1,5 @@
-import type { Component } from "./component.js";
+import type { LibraryComponent } from "./libraryComponent.js";
 
 export type ComponentCatalogSchema = {
-  components: Component[];
+  components: LibraryComponent[];
 };
