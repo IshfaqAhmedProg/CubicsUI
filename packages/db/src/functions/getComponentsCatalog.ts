@@ -13,7 +13,7 @@ export default async function getComponentsCatalog() {
   };
   const filePath = path.resolve(
     __dirname,
-    "../constants/components-catalog.json"
+    "../constants/library-components-catalog.json"
   );
 
   const adapter = new JSONFile<ComponentCatalogSchema>(filePath);

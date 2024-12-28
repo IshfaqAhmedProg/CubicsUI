@@ -7,5 +7,5 @@
     "rootDir": "src"
   },
   "include": ["src"],
-  "files": ["src/constants/components-catalog.json"]
+  "files": ["src/constants/library-components-catalog.json"]
 }
