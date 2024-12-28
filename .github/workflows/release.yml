@@ -8,6 +8,8 @@ on:
         required: false
         type: string
   push:
+    paths:
+      - "**/CHANGELOG.md"
     branches:
       - main
 
