@@ -1,5 +1,5 @@
 {
-  "components": [
+  "libraryComponents": [
     {
       "name": "button",
       "description": "This is a button",

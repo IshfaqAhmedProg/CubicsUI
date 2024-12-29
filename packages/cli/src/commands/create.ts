@@ -1,11 +1,10 @@
 import { existsSync, mkdirSync } from "fs";
-import { genReactButton } from "@cubicsui/gen";
 import * as prettier from "prettier";
 import { writeFile } from "fs/promises";
 import path from "path";
 import loadConfig from "../functions/loadConfig.js";
 import { changeCase, componentsDB } from "@cubicsui/db";
-
+import { genReactButton } from "@cubicsui/gen";
 export default async function create(requestedComponent: string) {
   try {
     const config = await loadConfig();
@@ -33,7 +32,6 @@ export default async function create(requestedComponent: string) {
       process.cwd(),
       `${componentsDir}/${outDirName}/${outFileName}.tsx`
     );
-    console.log("outPath", outPath);
 
     console.log("outPath", outPath);
 
@@ -56,10 +54,7 @@ export default async function create(requestedComponent: string) {
     await writeFile(outPath, finalConfigContent);
     console.log(`⏳ Building ${requestedComponent}, please wait...`);
     console.log(`✔ Created ${requestedComponent} in the project root.`);
-    console.log(`⏳ Building ${requestedComponent}, please wait...`);
-    console.log(`✔ Created ${requestedComponent} in the project root.`);
   } catch (error) {
-    console.error(`✖ Failed to create ${requestedComponent}:`, error);
     console.error(`✖ Failed to create ${requestedComponent}:`, error);
     process.exit(1);
   }

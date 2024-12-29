@@ -13,7 +13,7 @@ export default async function libraryComponentsDB() {
   };
   const filePath = path.resolve(
     __dirname,
-    "../constants/library-components-catalog.json"
+    "../databases/libraryComponentsDB.json"
   );
 
   const adapter = new JSONFile<LibraryComponentsDBSchema>(filePath);

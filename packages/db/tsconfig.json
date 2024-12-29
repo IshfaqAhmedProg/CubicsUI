@@ -7,5 +7,8 @@
     "rootDir": "src"
   },
   "include": ["src"],
-  "files": ["src/constants/library-components-catalog.json"]
+  "files": [
+    "src/databases/componentsDB.json",
+    "src/databases/libraryComponentsDB.json"
+  ]
 }
