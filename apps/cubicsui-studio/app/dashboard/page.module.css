@@ -1,0 +1,22 @@
+.appContainer {
+  display: flex;
+  flex-direction: row;
+  align-items: stretch;
+  height: 100vh;
+  gap: 0.5rem;
+}
+.main {
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  border: 1px solid slategray;
+}
+.sidebar {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  width: 300px;
+  max-height: 100%;
+  overflow: auto;
+  border: 1px solid slategray;
+}

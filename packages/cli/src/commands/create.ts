@@ -4,7 +4,6 @@ import { writeFile } from "fs/promises";
 import path from "path";
 import loadConfig from "../functions/loadConfig.js";
 import { changeCase, componentsDB } from "@cubicsui/db";
-import { genReactButton } from "@cubicsui/gen";
 export default async function create(requestedComponent: string) {
   try {
     const config = await loadConfig();
@@ -40,14 +39,9 @@ export default async function create(requestedComponent: string) {
     if (!existsSync(dirPath)) {
       mkdirSync(dirPath, { recursive: true });
     }
-    const componentToGenerate = genReactButton({
-      componentName: "button",
-      mode: "typescript",
-      styleEngine: "css",
-      stylesName: "cssStyles",
-    });
+
     const finalConfigContent = await prettier.format(
-      componentToGenerate.trim(),
+      componentFromDB.code.trim(),
       { parser: "babel-ts" }
     );
 
