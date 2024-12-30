@@ -35,7 +35,7 @@ export function checkStyleEngine(): CUIConfig["styleEngine"] {
  * @returns {boolean} returns true if src folder exists in the root of the project
  */
 export function checkIfSrcFolderExists(): boolean {
-  return false;
+  return existsSync(resolve(process.cwd(), "src"));
 }
 /**
  * Check if there is an existing cui.config in the project

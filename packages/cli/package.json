@@ -31,15 +31,17 @@
   },
   "license": "MIT",
   "dependencies": {
-    "@cubicsui/gen": "workspace:^",
     "@cubicsui/db": "workspace:^",
+    "@cubicsui/gen": "workspace:^",
     "commander": "^12.1.0",
+    "js-beautify": "^1.15.1",
     "prettier": "^3.4.1",
     "tsx": "^4.19.2"
   },
   "devDependencies": {
     "@cubicsui/configs": "workspace:^",
     "@eslint/js": "^9.16.0",
+    "@types/js-beautify": "^1.14.3",
     "@types/node": "^22.10.1",
     "eslint": "^9.15.0",
     "typescript": "^5.7.2",
