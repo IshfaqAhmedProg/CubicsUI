@@ -1,7 +1,8 @@
-import { useDB } from "@/configs/db";
+// import { useDB } from "@/configs/db";
 import Link from "next/link";
 export default async function ListPage() {
-  const results = (await useDB()).chain.get("components").value();
+  // const results = (await useDB()).chain.get("components").value();
+  const results = [{ id: "dsjad", name: "djsakd" }];
   return (
     <ol>
       {results.length == 0 ? (

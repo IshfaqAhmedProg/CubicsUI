@@ -4,7 +4,7 @@ import * as prettier from "prettier";
 import path from "path";
 import { genReactButton } from "@cubicsui/gen";
 import generatePackageJson from "./generatePackageJson.js";
-import { LibraryGeneratorProps } from "../interfaces/LibraryGenerator.js";
+import { LibraryGeneratorProps } from "../types/LibraryGenerator.js";
 
 /**
  * This function is responsible to generate all the components under the workspace library/

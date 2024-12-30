@@ -29,9 +29,6 @@ importers:
 
   apps/cubicsui-studio:
     dependencies:
-      '@cubicsui/db':
-        specifier: workspace:^
-        version: link:../../packages/db
       next:
         specifier: 15.1.3
         version: 15.1.3(react-dom@19.0.0(react@19.0.0))(react@19.0.0)
@@ -72,9 +69,6 @@ importers:
       '@cubicsui/configs':
         specifier: workspace:^
         version: link:../../packages/configs
-      '@cubicsui/db':
-        specifier: workspace:^
-        version: link:../../packages/db
       '@cubicsui/gen':
         specifier: workspace:^
         version: link:../../packages/gen
@@ -99,9 +93,6 @@ importers:
 
   packages/cli:
     dependencies:
-      '@cubicsui/db':
-        specifier: workspace:^
-        version: link:../db
       '@cubicsui/gen':
         specifier: workspace:^
         version: link:../gen

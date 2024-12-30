@@ -1,4 +1,4 @@
-import { NamingConvention } from "@cubicsui/db";
+import { NamingConvention } from "../interfaces/CUIConfig.js";
 import Case from "case";
 
 export default function changeCase(

@@ -1,7 +1,7 @@
 import { existsSync } from "fs";
-import { CUIConfig } from "@cubicsui/db";
 import configFiles from "../constants/configFiles.js";
 import { resolve } from "path";
+import { CUIConfig } from "../types/CUIConfig.js";
 
 /**
  * Check which env value suits the best for the host project

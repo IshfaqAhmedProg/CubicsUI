@@ -1,8 +1,8 @@
-"use server";
+// "use server";
 
-import { componentsDB } from "@cubicsui/db";
+// import { componentsDB } from "@cubicsui/db";
 
-export async function useDB() {
-  const cpdb = await componentsDB();
-  return cpdb;
-}
+// export async function useDB() {
+//   const cpdb = await componentsDB();
+//   return cpdb;
+// }
