@@ -31,7 +31,9 @@
   },
   "license": "MIT",
   "dependencies": {
+    "@cubicsui/db": "workspace:^",
     "@cubicsui/gen": "workspace:^",
+    "case": "^1.6.3",
     "commander": "^12.1.0",
     "js-beautify": "^1.15.1",
     "prettier": "^3.4.1",

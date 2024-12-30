@@ -1,0 +1,23 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mongodb"
+  url      = env("DATABASE_URL")
+}
+
+type ComponentsSupportedEnvs {
+  framework String
+  library   String
+}
+
+model components {
+  id            String                    @id @default(auto()) @map("_id") @db.ObjectId
+  aliases       String[]
+  categories    String[]
+  code          String
+  desc          String
+  name          String
+  supportedEnvs ComponentsSupportedEnvs[]
+}

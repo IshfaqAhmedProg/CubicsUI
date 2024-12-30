@@ -1,4 +1,4 @@
-import { NamingConvention } from "../interfaces/CUIConfig.js";
+import { NamingConvention } from "../types/CUIConfig.js";
 import Case from "case";
 
 export default function changeCase(
