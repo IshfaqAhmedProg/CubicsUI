@@ -1,12 +1,11 @@
 "use server";
-
 import db from "@/configs/db";
 
-export async function create(formdata: FormData) {
+export async function createComponentAction(formdata: FormData) {
   const name = formdata.get("name");
   const code = formdata.get("code");
   if (typeof name == "string" && typeof code == "string") {
-    const component = await db.components.create({
+    await db.components.create({
       data: {
         name,
         aliases: [],

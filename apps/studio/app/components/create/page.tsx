@@ -1,7 +1,7 @@
 import Form from "next/form";
 import styles from "./page.module.css";
 import SubmitButton from "@/library/components/Form/SubmitButton";
-import { create } from "@/actions/components";
+import { createComponentAction } from "./actions";
 
 export default function CreatePage() {
   const formElements = [
@@ -15,7 +15,7 @@ export default function CreatePage() {
 
   return (
     <Form
-      action={create}
+      action={createComponentAction}
       className={styles.form}
     >
       {formElements.map((fe) => {

@@ -5,12 +5,8 @@ import styles from "./page.module.css";
 export default function Sidebar() {
   const sidebarLinks = [
     {
-      label: "Create New Component",
-      href: "/dashboard/create",
-    },
-    {
-      label: "List all components",
-      href: "/dashboard/list",
+      label: "Components",
+      href: "/components",
     },
   ];
   return (

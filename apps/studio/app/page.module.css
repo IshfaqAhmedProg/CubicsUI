@@ -1,22 +1,30 @@
-.appContainer {
+.sidebarContainer {
   display: flex;
   flex-direction: row;
   align-items: stretch;
+  gap: var(--sp-1);
+
   height: 100vh;
-  gap: 0.5rem;
 }
 .main {
   width: 100%;
   height: 100%;
+  padding: var(--sp-2);
+
+  border-radius: var(--br);
+
   overflow: auto;
-  border: 1px solid slategray;
 }
 .sidebar {
   display: flex;
   flex-direction: column;
-  gap: 0.5rem;
+  gap: var(--sp-1);
+
   width: 300px;
+  padding: var(--sp-2);
   max-height: 100%;
+
+  border-radius: var(--br);
+  background-color: var(--overlay);
   overflow: auto;
-  border: 1px solid slategray;
 }
