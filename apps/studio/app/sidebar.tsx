@@ -1,6 +1,7 @@
 import Link from "next/link";
 import React from "react";
 import styles from "./page.module.scss";
+import Flex from "@/library/ui/Layout/Flex";
 
 export default function Sidebar() {
   const sidebarLinks = [
@@ -8,9 +9,18 @@ export default function Sidebar() {
       label: "Components",
       href: "/components",
     },
+    {
+      label: "Settings",
+      href: "/settings",
+    },
   ];
   return (
-    <nav className={styles.sidebar}>
+    <Flex
+      as="nav"
+      column
+      gap="var(--sp-1)"
+      className={styles.sidebar}
+    >
       {sidebarLinks.map((sl) => {
         return (
           <Link
@@ -21,6 +31,6 @@ export default function Sidebar() {
           </Link>
         );
       })}
-    </nav>
+    </Flex>
   );
 }

@@ -1,4 +1,9 @@
+import Typography from "@/library/ui/Typography";
 
 export default async function Home() {
-  return <div>This is Home</div>;
+  return (
+    <div>
+      <Typography as="h1">This is Home</Typography>
+    </div>
+  );
 }

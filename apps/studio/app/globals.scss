@@ -1,3 +1,5 @@
+@use "../library/mixins/responsive" as r;
+
 :root {
   /* Color Pallete */
   /* gray */
@@ -39,8 +41,9 @@
 
   /* Base colors */
   --background: var(--gray-100);
-  --foreground: var(--gray-0);
+  --foreground: var(--gray-25);
   --primary: var(--blue-100);
+  --secondary: var(--blue-50);
   --success: var(--green-100);
   --danger: var(--red-100);
   --warning: var(--orange-100);
@@ -55,6 +58,7 @@
   --text-faint: color-mix(in srgb, var(--text) 50%, transparent);
 
   --primary-faint: color-mix(in hsl, var(--primary) 20%, transparent);
+  --secondary-faint: color-mix(in hsl, var(--secondary) 20%, transparent);
   --border-color: color-mix(in hsl, var(--foreground) 20%, transparent);
   --shadow-color: color-mix(in hsl, var(--foreground) 30%, transparent);
 
@@ -72,6 +76,27 @@
   --shadow: 0 0 10px var(--shadow-color);
   --transition-tf: cubic-bezier(0.785, 0.135, 0.15, 0.86);
   --header-height: 4rem;
+
+  /* Typography */
+  --fs-h1: 1.5rem;
+  --fs-h2: 1.25rem;
+  --fs-h3: 1rem;
+  --fs-p: 0.875rem;
+  @include r.mq-md {
+    --fs-h1: 2.75rem;
+  }
+  @include r.mq-lg {
+    --fs-h1: 3.125rem;
+  }
+  @include r.mq-md {
+    --fs-h2: 1.5rem;
+  }
+  @include r.mq-md {
+    --fs-h3: 1.125rem;
+  }
+  @include r.mq-lg {
+    --fs-p: 1rem;
+  }
 }
 
 @media (prefers-color-scheme: dark) {
@@ -95,10 +120,55 @@ body {
   padding: 0;
   margin: 0;
 }
-
+h1,
+h2,
+h3 {
+  font-family: var(--font-h);
+  margin: 0;
+  padding: 0;
+}
+h1 {
+  font-size: var(--fs-h1);
+  font-weight: 300;
+  line-height: calc(var(--fs-h1) * 1.42857);
+}
+h2 {
+  font-size: var(--fs-h2);
+  line-height: calc(var(--fs-h2) * 1.42857);
+}
+h3 {
+  font-size: var(--fs-h3);
+  line-height: calc(var(--fs-h3) * 1.42857);
+}
+p {
+  font-size: var(--fs-p);
+  line-height: calc(var(--fs-p) * 1.42857);
+  margin: 0;
+  padding: 0;
+}
 a {
   color: inherit;
   text-decoration: none;
+}
+// Scrollbar styles
+::-webkit-scrollbar {
+  width: var(--sp-1);
+  height: var(--sp-1);
+}
+::-webkit-scrollbar-track {
+  -webkit-box-shadow: inset var(--shadow);
+  -webkit-border-radius: var(--br);
+  border-radius: var(--br);
+}
+::-webkit-scrollbar-thumb {
+  -webkit-border-radius: 10px;
+  border-radius: var(--br);
+  background: var(--gray-75);
+  -webkit-box-shadow: var(--shadow);
+}
+
+::-webkit-scrollbar-thumb:window-inactive {
+  background: var(--gray-50);
 }
 
 @media (prefers-color-scheme: dark) {
