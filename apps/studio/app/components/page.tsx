@@ -1,6 +1,6 @@
 import db from "@/configs/db";
 import Link from "next/link";
-import styles from "./page.module.css";
+import styles from "./page.module.scss";
 
 export default async function ListPage() {
   const results = await db.components.findMany({ take: 10 });

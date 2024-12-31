@@ -1,6 +1,6 @@
 import { notFound } from "next/navigation";
 import db from "@/configs/db";
-import styles from "./page.module.css";
+import styles from "./page.module.scss";
 export default async function ComponentDetailsPage({
   params,
 }: {

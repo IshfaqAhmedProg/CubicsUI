@@ -1,5 +1,5 @@
 import Form from "next/form";
-import styles from "./page.module.css";
+import styles from "./page.module.scss";
 import SubmitButton from "@/library/components/Form/SubmitButton";
 import { createComponentAction } from "./actions";
 

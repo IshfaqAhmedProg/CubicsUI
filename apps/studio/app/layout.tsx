@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
 import Sidebar from "./sidebar";
-import styles from "./page.module.css";
+import styles from "./page.module.scss";
 import fiDark from "@/public/webfi-dark.svg";
 import fiLight from "@/public/webfi-light.svg";
 
