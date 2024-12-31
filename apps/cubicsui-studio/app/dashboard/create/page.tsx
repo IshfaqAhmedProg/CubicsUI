@@ -1,6 +1,6 @@
 import Form from "next/form";
 import styles from "./page.module.css";
-import SubmitButton from "@/components/Form/SubmitButton";
+import SubmitButton from "@/library/components/Form/SubmitButton";
 import { create } from "@/actions/components";
 
 export default function CreatePage() {
