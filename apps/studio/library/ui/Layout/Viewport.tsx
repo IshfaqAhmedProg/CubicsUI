@@ -6,7 +6,10 @@ export default function Viewport(props: StackProps) {
 
   return (
     <Stack
-      width={"calc(100vw - 13rem)"}
+      // Subtracting the sidebar's width
+      width={"calc(100vw - var(--sidebar-width))"}
+      height={"100vh"}
+      overflow={"auto"}
       {...rest}
     >
       {children}

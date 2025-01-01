@@ -7,7 +7,7 @@ export default function Header() {
     <Stack
       component={Paper}
       direction={"row"}
-      height={"3.5em"}
+      minHeight={"3.5rem"}
       alignItems={"center"}
       borderRadius={0}
     >

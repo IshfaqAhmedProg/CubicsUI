@@ -21,7 +21,7 @@ export default function Sidebar({ brand }: SidebarProps) {
   return (
     <Stack
       component={Paper}
-      width={"13rem"}
+      width={"var(--sidebar-width)"}
       borderRadius={0}
       px={3}
       gap={3}
