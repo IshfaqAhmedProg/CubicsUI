@@ -1,4 +1,4 @@
-import type { ConfigFile } from "@cubicsui/db";
+import { ConfigFile } from "../types/CUIConfig.js";
 
 /**
  * Defines an array of recognized configuration file names for the CubicsUI configuration system.

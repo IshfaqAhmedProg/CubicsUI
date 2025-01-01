@@ -6,9 +6,5 @@
     "outDir": "dist",
     "rootDir": "src"
   },
-  "include": ["src"],
-  "files": [
-    "src/databases/componentsDB.json",
-    "src/databases/libraryComponentsDB.json"
-  ]
+  "include": ["src"]
 }

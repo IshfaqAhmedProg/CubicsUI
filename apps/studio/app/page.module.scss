@@ -1,0 +1,17 @@
+.main {
+  width: 100%;
+  height: 100%;
+
+  border-radius: var(--br);
+
+  overflow: auto;
+}
+.sidebar {
+  width: 300px;
+  padding: var(--sp-2);
+  max-height: 100%;
+
+  border-radius: var(--br);
+  background-color: var(--overlay);
+  overflow: auto;
+}

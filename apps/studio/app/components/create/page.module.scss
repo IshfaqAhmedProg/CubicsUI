@@ -1,0 +1,20 @@
+.form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  height: 100%;
+}
+.inputField {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+.inputField > input {
+  width: 35ch;
+}
+.inputField > textarea {
+  width: 35ch;
+  min-height: 6.25rem;
+}

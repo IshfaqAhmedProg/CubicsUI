@@ -1,8 +1,8 @@
 import { resolve } from "path";
 import { register } from "tsx/esm/api";
 import { pathToFileURL } from "url";
-import { CUIConfig } from "@cubicsui/db";
 import configFiles from "../constants/configFiles.js";
+import { CUIConfig } from "../types/CUIConfig.js";
 
 // Register is used to allow importing both ts and js config files and prevent
 // TypeError [ERR_UNKNOWN_FILE_EXTENSION]: Unknown file extension ".ts"

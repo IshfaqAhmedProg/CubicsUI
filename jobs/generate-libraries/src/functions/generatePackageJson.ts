@@ -1,5 +1,5 @@
 import type { PackageJson } from "type-fest";
-import { LibraryGeneratorProps } from "../interfaces/LibraryGenerator.js";
+import { LibraryGeneratorProps } from "../types/LibraryGenerator.js";
 
 export const devDependencies = {
   tsup: "^8.3.5",

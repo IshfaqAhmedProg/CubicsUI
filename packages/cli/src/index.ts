@@ -1,1 +1,2 @@
-export { default as defineConfig } from "./functions/defineConfig.js";
+export * from "./types/_index.js";
+export * from "./functions/_index.js";

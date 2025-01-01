@@ -1,0 +1,27 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  // TODO change to postgresql
+  provider = "mongodb"
+  url      = env("DATABASE_URL")
+}
+
+type ComponentsSupportedEnvs {
+  framework String
+  library   String
+}
+
+// TODO rename to metadata
+model components {
+  id            String                    @id @default(auto()) @map("_id") @db.ObjectId
+  aliases       String[]
+  categories    String[]
+  // TODO remove code from "components" to the new table called "codeblocks" 
+  code          String
+  desc          String
+  name          String
+  supportedEnvs ComponentsSupportedEnvs[]
+  // TODO add createdAt,modifiedAt
+}

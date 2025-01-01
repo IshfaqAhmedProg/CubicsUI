@@ -2,20 +2,19 @@ import { existsSync, mkdirSync } from "fs";
 import * as prettier from "prettier";
 import { writeFile } from "fs/promises";
 import path from "path";
+import db from "../configs/prismaClient.js";
+import changeCase from "../functions/changeCase.js";
 import loadConfig from "../functions/loadConfig.js";
-import { changeCase, componentsDB } from "@cubicsui/db";
-import { genReactButton } from "@cubicsui/gen";
 export default async function create(requestedComponent: string) {
   try {
     const config = await loadConfig();
-    console.log("Loaded config:", config);
+    console.log("Loaded config:", config, requestedComponent);
 
-    const cpdb = await componentsDB();
+    const componentFromDB = await db.components.findFirst({
+      where: { name: requestedComponent },
+    });
+    if (!componentFromDB) throw new Error("Component not found in database");
 
-    const componentFromDB = cpdb.chain
-      .get("components")
-      .find({ name: requestedComponent })
-      .value();
     const outFileName = changeCase(
       componentFromDB.name,
       config.fileNamingConvention
@@ -40,14 +39,9 @@ export default async function create(requestedComponent: string) {
     if (!existsSync(dirPath)) {
       mkdirSync(dirPath, { recursive: true });
     }
-    const componentToGenerate = genReactButton({
-      componentName: "button",
-      mode: "typescript",
-      styleEngine: "css",
-      stylesName: "cssStyles",
-    });
+
     const finalConfigContent = await prettier.format(
-      componentToGenerate.trim(),
+      componentFromDB.code.trim(),
       { parser: "babel-ts" }
     );
 
@@ -55,6 +49,7 @@ export default async function create(requestedComponent: string) {
     console.log(`⏳ Building ${requestedComponent}, please wait...`);
     console.log(`✔ Created ${requestedComponent} in the project root.`);
   } catch (error) {
+    // console.log(error);
     console.error(`✖ Failed to create ${requestedComponent}:`, error);
     process.exit(1);
   }
