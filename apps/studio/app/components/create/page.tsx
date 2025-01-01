@@ -1,5 +1,4 @@
 import Form from "next/form";
-import styles from "./page.module.scss";
 import SubmitButton from "@/library/ui/Form/SubmitButton";
 import { createComponentAction } from "./actions";
 
@@ -14,16 +13,10 @@ export default function CreatePage() {
   ];
 
   return (
-    <Form
-      action={createComponentAction}
-      className={styles.form}
-    >
+    <Form action={createComponentAction}>
       {formElements.map((fe) => {
         return (
-          <div
-            key={fe.id}
-            className={styles.inputField}
-          >
+          <div key={fe.id}>
             <label htmlFor={fe.id}>{fe.label}</label>
             {fe.id == "code" ? (
               <textarea

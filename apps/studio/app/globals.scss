@@ -1,164 +1,180 @@
-@use "../library/mixins/responsive" as r;
+// @use "../library/mixins/responsive" as r;
 
-:root {
-  /* Color Pallete */
-  /* gray */
-  --gray-100: rgb(255, 255, 255);
-  --gray-75: rgb(191, 191, 191);
-  --gray-50: rgb(128, 128, 128);
-  --gray-25: rgb(64, 64, 64);
-  --gray-0: rgb(23, 23, 23);
+// :root {
+//   /* Color Pallete */
+//   /* gray */
+//   --gray-100: rgb(255, 255, 255);
+//   --gray-75: rgb(191, 191, 191);
+//   --gray-50: rgb(128, 128, 128);
+//   --gray-25: rgb(64, 64, 64);
+//   --gray-0: rgb(23, 23, 23);
 
-  /* reds */
-  --red-100: rgb(255, 105, 92);
-  --red-75: rgb(255, 128, 128);
-  --red-50: rgb(255, 163, 163);
-  --red-25: rgb(255, 198, 198);
+//   /* reds */
+//   --red-100: rgb(255, 105, 92);
+//   --red-75: rgb(255, 128, 128);
+//   --red-50: rgb(255, 163, 163);
+//   --red-25: rgb(255, 198, 198);
 
-  /* greens */
-  --green-100: rgb(0, 255, 128);
-  --green-75: rgb(64, 255, 160);
-  --green-50: rgb(128, 255, 192);
-  --green-25: rgb(192, 255, 224);
+//   /* greens */
+//   --green-100: rgb(0, 255, 128);
+//   --green-75: rgb(64, 255, 160);
+//   --green-50: rgb(128, 255, 192);
+//   --green-25: rgb(192, 255, 224);
 
-  /* blues */
-  --blue-100: rgb(68, 68, 255);
-  --blue-75: rgb(110, 110, 255);
-  --blue-50: rgb(151, 151, 255);
-  --blue-25: rgb(193, 193, 255);
+//   /* blues */
+//   --blue-100: rgb(68, 68, 255);
+//   --blue-75: rgb(110, 110, 255);
+//   --blue-50: rgb(151, 151, 255);
+//   --blue-25: rgb(193, 193, 255);
 
-  /* yellows */
-  --yellow-100: rgb(220, 255, 66);
-  --yellow-75: rgb(229, 255, 112);
-  --yellow-50: rgb(236, 255, 153);
-  --yellow-25: rgb(244, 255, 194);
+//   /* yellows */
+//   --yellow-100: rgb(220, 255, 66);
+//   --yellow-75: rgb(229, 255, 112);
+//   --yellow-50: rgb(236, 255, 153);
+//   --yellow-25: rgb(244, 255, 194);
 
-  /* oranges */
-  --orange-100: rgb(255, 173, 66);
-  --orange-75: rgb(255, 193, 112);
-  --orange-50: rgb(255, 211, 153);
-  --orange-25: rgb(255, 228, 194);
+//   /* oranges */
+//   --orange-100: rgb(255, 173, 66);
+//   --orange-75: rgb(255, 193, 112);
+//   --orange-50: rgb(255, 211, 153);
+//   --orange-25: rgb(255, 228, 194);
 
-  /* Base colors */
-  --background: var(--gray-100);
-  --foreground: var(--gray-25);
-  --primary: var(--blue-100);
-  --secondary: var(--blue-50);
-  --success: var(--green-100);
-  --danger: var(--red-100);
-  --warning: var(--orange-100);
+//   /* Base colors */
+//   --background: var(--gray-100);
+//   --foreground: var(--gray-25);
+//   --primary: var(--blue-100);
+//   --secondary: var(--blue-50);
+//   --success: var(--green-100);
+//   --danger: var(--red-100);
+//   --warning: var(--orange-100);
 
-  /* Derived colors */
+//   /* Derived colors */
 
-  /*This will be used for any surface that needs to be separated from the background*/
-  --overlay: color-mix(in hsl, var(--background) 90%, var(--gray-50));
+//   /*This will be used for any surface that needs to be separated from the background*/
+//   --overlay: color-mix(in hsl, var(--background) 90%, var(--gray-50));
 
-  --text: var(--foreground);
-  --text-hl: var(--primary);
-  --text-faint: color-mix(in srgb, var(--text) 50%, transparent);
+//   --text: var(--foreground);
+//   --text-hl: var(--primary);
+//   --text-faint: color-mix(in srgb, var(--text) 50%, transparent);
 
-  --primary-faint: color-mix(in hsl, var(--primary) 20%, transparent);
-  --secondary-faint: color-mix(in hsl, var(--secondary) 20%, transparent);
-  --border-color: color-mix(in hsl, var(--foreground) 20%, transparent);
-  --shadow-color: color-mix(in hsl, var(--foreground) 30%, transparent);
+//   --primary-faint: color-mix(in hsl, var(--primary) 20%, transparent);
+//   --secondary-faint: color-mix(in hsl, var(--secondary) 20%, transparent);
+//   --border-color: color-mix(in hsl, var(--foreground) 20%, transparent);
+//   --shadow-color: color-mix(in hsl, var(--foreground) 30%, transparent);
 
-  /* Spacings */
-  --sp-1: 8px;
-  --sp-2: 12px;
-  --sp-3: 16px;
-  --sp-4: 24px;
-  --sp-5: 32px;
-  --sp-6: 48px;
+//   /* Spacings */
+//   --sp-1: 8px;
+//   --sp-2: 12px;
+//   --sp-3: 16px;
+//   --sp-4: 24px;
+//   --sp-5: 32px;
+//   --sp-6: 48px;
 
-  /* Utilities */
-  --br: 0.5em;
-  --border: 1px solid var(--border-color);
-  --shadow: 0 0 10px var(--shadow-color);
-  --transition-tf: cubic-bezier(0.785, 0.135, 0.15, 0.86);
-  --header-height: 4rem;
+//   /* Utilities */
+//   --br: 0.5em;
+//   --border: 1px solid var(--border-color);
+//   --shadow: 0 0 10px var(--shadow-color);
+//   --transition-tf: cubic-bezier(0.785, 0.135, 0.15, 0.86);
+//   --header-height: 4rem;
 
-  /* Typography */
-  --fs-h1: 1.5rem;
-  --fs-h2: 1.25rem;
-  --fs-h3: 1rem;
-  --fs-h4: 0.875rem;
-  --fs-p: 0.875rem;
-  @include r.mq-md {
-    --fs-h1: 2.75rem;
-  }
-  @include r.mq-lg {
-    --fs-h1: 3.125rem;
-  }
-  @include r.mq-md {
-    --fs-h2: 1.5rem;
-  }
-  @include r.mq-md {
-    --fs-h3: 1.125rem;
-  }
-  @include r.mq-md {
-    --fs-h4: 1rem;
-  }
-  @include r.mq-lg {
-    --fs-p: 0.75rem;
-  }
-}
+//   /* Typography */
+//   --fs-h1: 1.5rem;
+//   --fs-h2: 1.25rem;
+//   --fs-h3: 1rem;
+//   --fs-h4: 0.875rem;
+//   --fs-p: 0.875rem;
+//   @include r.mq-md {
+//     --fs-h1: 2.75rem;
+//   }
+//   @include r.mq-lg {
+//     --fs-h1: 3.125rem;
+//   }
+//   @include r.mq-md {
+//     --fs-h2: 1.5rem;
+//   }
+//   @include r.mq-md {
+//     --fs-h3: 1.125rem;
+//   }
+//   @include r.mq-md {
+//     --fs-h4: 1rem;
+//   }
+//   @include r.mq-lg {
+//     --fs-p: 0.75rem;
+//   }
+// }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    /* Base colors */
-    --background: var(--gray-0);
-    --foreground: var(--gray-100);
-  }
-}
+// @media (prefers-color-scheme: dark) {
+//   :root {
+//     /* Base colors */
+//     --background: var(--gray-0);
+//     --foreground: var(--gray-100);
+//   }
+// }
 
-body {
-  color: var(--text);
-  background: var(--background);
-  font-family: var(--font-family), Arial, Helvetica, sans-serif;
+body,
+html {
+  // color: var(--text);
+  // background: var(--background);
+  font-family: var(--font-p), Arial, Helvetica, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
-
-* {
-  box-sizing: border-box;
-  padding: 0;
-  margin: 0;
-}
+body,
 h1,
 h2,
-h3 {
-  font-family: var(--font-h);
-  margin: 0;
-  padding: 0;
-}
-h1 {
-  font-size: var(--fs-h1);
-  font-weight: 300;
-  line-height: calc(var(--fs-h1) * 1.42857);
-}
-h2 {
-  font-size: var(--fs-h2);
-  line-height: calc(var(--fs-h2) * 1.42857);
-}
-h3 {
-  font-size: var(--fs-h3);
-  line-height: calc(var(--fs-h3) * 1.42857);
-}
-h4 {
-  font-size: var(--fs-h4);
-  line-height: calc(var(--fs-h4) * 1.42857);
-}
+h3,
+h4,
 p {
-  font-size: var(--fs-p);
-  line-height: calc(var(--fs-p) * 1.42857);
   margin: 0;
   padding: 0;
 }
+* {
+  scrollbar-width: thin;
+  scrollbar-color: gray;
+}
+// * {
+//   box-sizing: border-box;
+//   padding: 0;
+//   margin: 0;
+// }
+// h1,
+// h2,
+// h3 {
+//   font-family: var(--font-h);
+//   margin: 0;
+//   padding: 0;
+// }
+// h1 {
+//   font-size: var(--fs-h1);
+//   font-weight: 300;
+//   line-height: calc(var(--fs-h1) * 1.42857);
+// }
+// h2 {
+//   font-size: var(--fs-h2);
+//   line-height: calc(var(--fs-h2) * 1.42857);
+// }
+// h3 {
+//   font-size: var(--fs-h3);
+//   line-height: calc(var(--fs-h3) * 1.42857);
+// }
+// h4 {
+//   font-size: var(--fs-h4);
+//   line-height: calc(var(--fs-h4) * 1.42857);
+// }
+// p {
+//   font-size: var(--fs-p);
+//   line-height: calc(var(--fs-p) * 1.42857);
+//   margin: 0;
+//   padding: 0;
+// }
 a {
-  color: inherit;
+  color: currentColor;
   text-decoration: none;
 }
-
+.linkIcon {
+  display: flex;
+  align-items: center;
+}
 // Scrollbar styles
 ::-webkit-scrollbar {
   width: var(--sp-1);
