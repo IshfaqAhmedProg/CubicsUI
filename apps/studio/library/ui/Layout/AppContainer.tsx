@@ -2,7 +2,7 @@ import { Stack, StackProps } from "@mui/material";
 import Cursor from "../Navigation/Cursor/Cursor";
 import Sidebar from "./Sidebar";
 import Viewport from "./Viewport";
-import { LogoHorizontal } from "@/library/ui/Brand/Logos";
+import { LogoHorizontal, LogoHorizontalText } from "@/library/ui/Brand/Logos";
 import Header from "../Navigation/Header";
 
 export default function AppContainer(props: StackProps) {
@@ -16,11 +16,15 @@ export default function AppContainer(props: StackProps) {
       {...rest}
     >
       <Cursor />
-      <Sidebar brand={<LogoHorizontal sx={{ width: "100%" }} />} />
-      <Viewport>
+      <Sidebar
+        brand={
+          <LogoHorizontal sx={{ width: "100%", color: "text.disabled" }} />
+        }
+      />
+      <Stack maxWidth={"100%"}>
         <Header />
-        {children}
-      </Viewport>
+        <Viewport>{children}</Viewport>
+      </Stack>
     </Stack>
   );
 }

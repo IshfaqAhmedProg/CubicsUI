@@ -7,9 +7,10 @@ export default function Header() {
     <Stack
       component={Paper}
       direction={"row"}
-      minHeight={"3.5rem"}
+      minHeight={"var(--header-height)"}
       alignItems={"center"}
       borderRadius={0}
+      sx={{ transition: "all 0.3s var(--transition-tf)" }}
     >
       <TitleCrumbs />
     </Stack>

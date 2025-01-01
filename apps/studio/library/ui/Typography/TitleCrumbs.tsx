@@ -24,7 +24,7 @@ export default function TitleCrumbs() {
           className="linkIcon"
           href={"/"}
         >
-          <HomeRounded color="disabled" />
+          <HomeRounded />
         </Link>
       )}
       {paths.map((path: string, i: number) => {

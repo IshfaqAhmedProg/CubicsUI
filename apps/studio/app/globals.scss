@@ -111,7 +111,9 @@
 //   }
 // }
 :root {
+  --header-height: 3.5rem;
   --sidebar-width: 13rem;
+  --transition-tf: cubic-bezier(0.785, 0.135, 0.15, 0.86);
 }
 
 body,
@@ -173,6 +175,10 @@ p {
 a {
   color: currentColor;
   text-decoration: none;
+  transition: color 0.3s var(--transition-tf);
+  &:hover {
+    color: var(--palette-text-primary);
+  }
 }
 .linkIcon {
   display: flex;

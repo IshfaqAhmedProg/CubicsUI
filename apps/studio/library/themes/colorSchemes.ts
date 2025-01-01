@@ -22,6 +22,7 @@ export const colorSchemeLight: ColorSystemOptions = {
     ...schemeCommons,
     divider: "rgba(0,0,0,0.2)",
     background: {
+      default: "rgb(255,250,250)",
       paper: "rgba(242,242,242,0.6)",
     },
     text: {

@@ -6,10 +6,13 @@ export default function Viewport(props: StackProps) {
 
   return (
     <Stack
-      // Subtracting the sidebar's width
       width={"calc(100vw - var(--sidebar-width))"}
-      height={"100vh"}
+      height={"calc(100vh - var(--header-height))"}
+      pt={2}
+      pl={2}
+      boxSizing={"border-box"}
       overflow={"auto"}
+      sx={{ transition: "all 0.3s var(--transition-tf)" }}
       {...rest}
     >
       {children}

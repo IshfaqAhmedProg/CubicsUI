@@ -1,6 +1,6 @@
 "use client";
 
-import { createTheme, Shadows, ThemeOptions } from "@mui/material/styles";
+import { createTheme } from "@mui/material/styles";
 import { colorSchemeDark, colorSchemeLight } from "./colorSchemes";
 import components from "./muiComponents";
 
