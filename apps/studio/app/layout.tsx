@@ -7,6 +7,7 @@ import fiDark from "@/public/webfi-dark.svg";
 import fiLight from "@/public/webfi-light.svg";
 import Flex from "@/library/ui/Layout/Flex";
 import Cursor from "@/library/ui/Cursor/Cursor";
+import IconProvider from "@/library/ui/IconProvider";
 
 const inter = Inter({
   variable: "--font-family",
@@ -38,15 +39,16 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${inter.variable}`}>
-        <Flex
-          align="stretch"
-          gap="var(--sp-1)"
-          style={{ height: "100vh", position: "relative" }}
-        >
-          <Cursor />
-          <Sidebar />
-          <main className={styles.main}>{children}</main>
-        </Flex>
+        <IconProvider>
+          <Flex
+            align="stretch"
+            style={{ height: "100vh", position: "relative" }}
+          >
+            <Cursor />
+            <Sidebar />
+            <main className={styles.main}>{children}</main>
+          </Flex>
+        </IconProvider>
       </body>
     </html>
   );

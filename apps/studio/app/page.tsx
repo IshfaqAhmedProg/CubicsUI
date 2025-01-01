@@ -1,4 +1,4 @@
-import Typography from "@/library/ui/Typography";
+import Typography from "@/library/ui/Typography/Typography";
 
 export default async function Home() {
   return (

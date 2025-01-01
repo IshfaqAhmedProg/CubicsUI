@@ -9,13 +9,16 @@
   },
   "dependencies": {
     "@cubicsui/db": "workspace:^",
+    "lodash": "^4.17.21",
     "next": "15.1.3",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
+    "react-icons": "^5.4.0",
     "sass": "^1.83.0"
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3",
+    "@types/lodash": "^4.17.13",
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",

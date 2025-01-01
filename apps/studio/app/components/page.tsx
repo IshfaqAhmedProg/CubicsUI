@@ -15,7 +15,6 @@ export default async function ComponentsPage() {
         justify="space-between"
         align="center"
       >
-        <h2>Components</h2>
         <Link href={"/components/create"}>Create New</Link>
       </Flex>
       <ol>

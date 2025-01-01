@@ -21,6 +21,7 @@ export default function Flex(props: FlexProps & ComponentProps<"div">) {
   const Component = as;
   return (
     <Component
+      {...rest}
       style={{
         display: "flex",
         flexDirection: column ? "column" : undefined,
@@ -29,7 +30,6 @@ export default function Flex(props: FlexProps & ComponentProps<"div">) {
         gap,
         ...style,
       }}
-      {...rest}
     >
       {children}
     </Component>
