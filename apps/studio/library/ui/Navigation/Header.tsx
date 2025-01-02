@@ -10,7 +10,6 @@ export default function Header() {
       minHeight={"var(--header-height)"}
       alignItems={"center"}
       borderRadius={0}
-      sx={{ transition: "all 0.3s var(--transition-tf)" }}
     >
       <SidebarToggle />
       <TitleCrumbs />

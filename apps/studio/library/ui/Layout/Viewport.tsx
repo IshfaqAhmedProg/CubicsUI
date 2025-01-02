@@ -13,7 +13,7 @@ export default function Viewport(props: StackProps) {
       pl={2}
       boxSizing={"border-box"}
       overflow={"auto"}
-      sx={{ transition: "all 0.3s var(--transition-tf)" }}
+      // sx={{ transition: "all 0.3s var(--transition-tf)" }}
       {...rest}
     >
       {children}

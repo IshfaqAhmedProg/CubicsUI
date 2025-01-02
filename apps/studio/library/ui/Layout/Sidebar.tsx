@@ -1,24 +1,16 @@
 "use client";
-import {
-  Divider,
-  List,
-  ListItem,
-  ListItemButton,
-  Paper,
-  Stack,
-  Tooltip,
-} from "@mui/material";
+import { List, ListItem, ListItemButton, Paper, Stack } from "@mui/material";
 import { ReactNode } from "react";
 import ThemeSwitch from "../Inputs/ThemeSwitch";
 import Link from "next/link";
 import {
-  ArticleRounded,
   LibraryBooksRounded,
   PublishRounded,
   ViewModuleRounded,
 } from "@mui/icons-material";
 import { LogoHorizontal } from "../Brand/Logos";
 import { useAppContainer } from "./AppContainer";
+import Tooltip from "../Navigation/Tooltip";
 
 export type SidebarProps = {
   brand?: ReactNode;
@@ -51,7 +43,7 @@ export default function Sidebar() {
       component={Paper}
       width={"var(--sidebar-width)"}
       borderRadius={0}
-      sx={{ transition: "all 0.3s var(--transition-tf)" }}
+      sx={{ transition: "width 0.3s var(--transition-tf)" }}
       boxSizing={"border-box"}
       pt={4}
       gap={3}
@@ -61,14 +53,13 @@ export default function Sidebar() {
         sx={{
           width: "100%",
           color: open ? "text.secondary" : "text.primary",
-          transition: "color 0.3s var(--transition-tf)",
         }}
       />
 
       <List
         sx={{
           mt: open ? 4 : 1,
-          transition: "inherit",
+          transition: "margin-top 0.3s var(--transition-tf)",
           p: 0,
           flexGrow: 1,
           overflow: "hidden auto",
@@ -82,6 +73,8 @@ export default function Sidebar() {
               disablePadding
             >
               <Tooltip
+                renderTooltip={!open}
+                sx={{ display: open ? "none" : "block" }}
                 title={sl.label}
                 placement="right"
               >

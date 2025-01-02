@@ -41,7 +41,7 @@ export function LogoHorizontal(props: { shorten?: boolean } & StackProps) {
   const commonSx: SxProps = {
     flexGrow: 0,
     flexShrink: 0,
-    transition: "all 0.3s var(--transition-tf)",
+    transition: "flex-basis 0.3s var(--transition-tf)",
   };
   return (
     <Stack
