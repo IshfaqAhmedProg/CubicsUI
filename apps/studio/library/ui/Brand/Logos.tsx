@@ -50,6 +50,7 @@ export function LogoHorizontal(props: { shorten?: boolean } & StackProps) {
       justifyContent={"center"}
       width={width}
       color={color}
+      gap={1}
       {...rest}
     >
       <LogoHorizontalFavicon

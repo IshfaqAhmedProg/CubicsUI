@@ -12,7 +12,7 @@ const muiTheme = createTheme({
   },
   components,
   spacing: 4,
-  shape: { borderRadius: 10 },
+  shape: { borderRadius: 6 },
   typography: {
     fontFamily: ["var(--font-p)", "var(--font-h)"].join(","),
   },

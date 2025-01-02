@@ -1,7 +1,14 @@
 "use client";
 import { usePathname } from "next/navigation";
 import { capitalize } from "lodash";
-import { Breadcrumbs, Paper, Stack, Typography } from "@mui/material";
+import {
+  Breadcrumbs,
+  Button,
+  IconButton,
+  Paper,
+  Stack,
+  Typography,
+} from "@mui/material";
 import { ChevronRightRounded, HomeRounded } from "@mui/icons-material";
 import Link from "next/link";
 
@@ -14,18 +21,20 @@ export default function TitleCrumbs() {
       maxItems={3}
       separator={<ChevronRightRounded color="disabled" />}
       sx={{
-        color: "text.disabled",
+        color: "text.secondary",
         overflow: "auto hidden",
         fontFamily: "var(--font-h)",
       }}
     >
       {pathname !== "/" && (
-        <Link
+        <IconButton
+          color="inherit"
+          component={Link}
           className="linkIcon"
           href={"/"}
         >
           <HomeRounded />
-        </Link>
+        </IconButton>
       )}
       {paths.map((path: string, i: number) => {
         const fp = capitalize(path);
@@ -35,6 +44,7 @@ export default function TitleCrumbs() {
         return (
           <Typography
             key={i}
+            color={isPathActivePath ? "text.primary" : undefined}
             fontWeight={isPathActivePath ? "bold" : "normal"}
             fontFamily={"inherit"}
           >

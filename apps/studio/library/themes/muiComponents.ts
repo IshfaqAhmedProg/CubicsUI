@@ -18,7 +18,6 @@ const components:
         fontSize: "1em",
         textTransform: "none",
         fontWeight: "bold",
-        padding: "",
       },
     },
   },
@@ -32,12 +31,14 @@ const components:
   },
   MuiListItem: { defaultProps: { disablePadding: true } },
   MuiListItemButton: {
+    defaultProps: { disableGutters: true },
     styleOverrides: {
       root: {
         transition: "all 0.3s var(--transition-tf)",
         borderRadius: "var(--shape-borderRadius)",
         fontFamily: "var(--font-h)",
         gap: "0.5rem",
+        paddingInline: "0.5rem",
       },
     },
   },

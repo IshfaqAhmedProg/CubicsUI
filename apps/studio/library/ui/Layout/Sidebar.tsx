@@ -1,25 +1,34 @@
 "use client";
 import {
+  Divider,
   List,
   ListItem,
   ListItemButton,
   Paper,
-  Stack
+  Stack,
+  Tooltip,
 } from "@mui/material";
-import { ReactNode, useEffect, useState } from "react";
+import { ReactNode } from "react";
 import ThemeSwitch from "../Inputs/ThemeSwitch";
 import Link from "next/link";
 import {
-  MenuOpenRounded,
+  ArticleRounded,
+  LibraryBooksRounded,
   PublishRounded,
   ViewModuleRounded,
 } from "@mui/icons-material";
 import { LogoHorizontal } from "../Brand/Logos";
+import { useAppContainer } from "./AppContainer";
 
 export type SidebarProps = {
   brand?: ReactNode;
 };
 const sidebarLinks = [
+  {
+    label: "Libraries",
+    href: "/libraries",
+    icon: <LibraryBooksRounded />,
+  },
   {
     label: "Components",
     href: "/components",
@@ -32,65 +41,59 @@ const sidebarLinks = [
   },
 ];
 
-export default function Sidebar({ brand }: SidebarProps) {
-  const [open, setOpen] = useState(true);
+export default function Sidebar() {
+  const {
+    sidebarControls: { open },
+  } = useAppContainer();
 
-  useEffect(() => {
-    if (typeof window == "undefined") return;
-    if (!open) {
-      document.body.style.setProperty("--sidebar-width", "3rem");
-    } else {
-      document.body.style.setProperty("--sidebar-width", "13rem");
-    }
-  }, [open]);
   return (
     <Stack
       component={Paper}
       width={"var(--sidebar-width)"}
       borderRadius={0}
       sx={{ transition: "all 0.3s var(--transition-tf)" }}
+      boxSizing={"border-box"}
+      pt={4}
       gap={3}
     >
-      <Stack
-        mt={5}
-        gap={"inherit"}
-        alignItems={"center"}
+      <LogoHorizontal
+        shorten={!open}
+        sx={{
+          width: "100%",
+          color: open ? "text.secondary" : "text.primary",
+          transition: "color 0.3s var(--transition-tf)",
+        }}
+      />
+
+      <List
+        sx={{
+          mt: open ? 4 : 1,
+          transition: "inherit",
+          p: 0,
+          flexGrow: 1,
+          overflow: "hidden auto",
+          color: "text.secondary",
+        }}
       >
-        <LogoHorizontal
-          shorten={!open}
-          sx={{
-            width: "100%",
-            color: open ? "text.disabled" : "text.primary",
-            transition: "color 0.3s var(--transition-tf)",
-          }}
-        />
-      </Stack>
-      <List sx={{ p: 0, flexGrow: 1, overflow: "hidden auto" }}>
-        <ListItem>
-          <ListItemButton
-            onClick={() => setOpen(!open)}
-            sx={{ justifyContent: open ? "flex-end" : "flex-start" }}
-          >
-            <MenuOpenRounded
-              color="disabled"
-              sx={{ rotate: !open ? "180deg" : "0" }}
-            />
-          </ListItemButton>
-        </ListItem>
         {sidebarLinks.map((sl, i) => {
           return (
             <ListItem
               key={i}
               disablePadding
             >
-              <ListItemButton
-                LinkComponent={Link}
-                href={sl.href}
-                sx={{ fontWeight: "bold" }}
+              <Tooltip
+                title={sl.label}
+                placement="right"
               >
-                {sl.icon}
-                {sl.label}
-              </ListItemButton>
+                <ListItemButton
+                  LinkComponent={Link}
+                  href={sl.href}
+                  sx={{ fontWeight: "bold" }}
+                >
+                  {sl.icon}
+                  {open && sl.label}
+                </ListItemButton>
+              </Tooltip>
             </ListItem>
           );
         })}

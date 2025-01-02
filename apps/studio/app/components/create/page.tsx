@@ -1,6 +1,9 @@
 import Form from "next/form";
 import SubmitButton from "@/library/ui/Form/SubmitButton";
-import { createComponentAction } from "./actions";
+async function nothing() {
+  "use server";
+  console.log("nothing happened");
+}
 
 export default function CreatePage() {
   const formElements = [
@@ -13,7 +16,10 @@ export default function CreatePage() {
   ];
 
   return (
-    <Form action={createComponentAction}>
+    <Form
+      action={nothing}
+      // action={createComponentAction}
+    >
       {formElements.map((fe) => {
         return (
           <div key={fe.id}>

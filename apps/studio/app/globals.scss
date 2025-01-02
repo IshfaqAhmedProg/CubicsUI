@@ -134,11 +134,11 @@ p {
   padding: 0;
 }
 * {
+  box-sizing: border-box;
   scrollbar-width: thin;
   scrollbar-color: gray;
 }
 // * {
-//   box-sizing: border-box;
 //   padding: 0;
 //   margin: 0;
 // }
@@ -173,17 +173,14 @@ p {
 //   padding: 0;
 // }
 a {
-  color: currentColor;
+  color: inherit;
   text-decoration: none;
   transition: color 0.3s var(--transition-tf);
   &:hover {
     color: var(--palette-text-primary);
   }
 }
-.linkIcon {
-  display: flex;
-  align-items: center;
-}
+
 // Scrollbar styles
 ::-webkit-scrollbar {
   width: var(--sp-1);

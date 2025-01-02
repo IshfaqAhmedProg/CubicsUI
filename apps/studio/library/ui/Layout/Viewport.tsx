@@ -6,7 +6,8 @@ export default function Viewport(props: StackProps) {
 
   return (
     <Stack
-      width={"calc(100vw - var(--sidebar-width))"}
+      id={"viewport"}
+      width={"100%"}
       height={"calc(100vh - var(--header-height))"}
       pt={2}
       pl={2}
