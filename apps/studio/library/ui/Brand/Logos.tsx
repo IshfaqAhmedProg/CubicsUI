@@ -1,5 +1,11 @@
 "use client";
-import { createSvgIcon, Stack, StackProps } from "@mui/material";
+import {
+  createSvgIcon,
+  Stack,
+  StackProps,
+  SxProps,
+  Theme,
+} from "@mui/material";
 
 export const LogoHorizontalText = createSvgIcon(
   <svg
@@ -29,9 +35,14 @@ export const LogoHorizontalFavicon = createSvgIcon(
   </svg>,
   "LogoHorizontalFavicon"
 );
-export function LogoHorizontal(props: StackProps) {
-  const { children, color, width, ...rest } = props;
+export function LogoHorizontal(props: { shorten?: boolean } & StackProps) {
+  const { shorten, children, color, width, ...rest } = props;
 
+  const commonSx: SxProps = {
+    flexGrow: 0,
+    flexShrink: 0,
+    transition: "all 0.3s var(--transition-tf)",
+  };
   return (
     <Stack
       direction={"row"}
@@ -41,8 +52,19 @@ export function LogoHorizontal(props: StackProps) {
       color={color}
       {...rest}
     >
-      <LogoHorizontalFavicon sx={{ flex: "0 0 13%" }} />
-      <LogoHorizontalText sx={{ flex: "0 0 70%" }} />
+      <LogoHorizontalFavicon
+        sx={{
+          ...commonSx,
+          flexBasis: shorten ? "100%" : "13%",
+        }}
+      />
+      <LogoHorizontalText
+        sx={{
+          ...commonSx,
+          flexBasis: shorten ? "0%" : "60%",
+          opacity: shorten ? 0 : 1,
+        }}
+      />
     </Stack>
   );
 }

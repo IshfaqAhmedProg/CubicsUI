@@ -16,11 +16,7 @@ export default function AppContainer(props: StackProps) {
       {...rest}
     >
       <Cursor />
-      <Sidebar
-        brand={
-          <LogoHorizontal sx={{ width: "100%", color: "text.disabled" }} />
-        }
-      />
+      <Sidebar />
       <Stack maxWidth={"100%"}>
         <Header />
         <Viewport>{children}</Viewport>

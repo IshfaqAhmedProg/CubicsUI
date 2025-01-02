@@ -1,11 +1,10 @@
 "use client";
 import {
-  IconButton,
   List,
   ListItem,
   ListItemButton,
   Paper,
-  Stack,
+  Stack
 } from "@mui/material";
 import { ReactNode, useEffect, useState } from "react";
 import ThemeSwitch from "../Inputs/ThemeSwitch";
@@ -15,6 +14,7 @@ import {
   PublishRounded,
   ViewModuleRounded,
 } from "@mui/icons-material";
+import { LogoHorizontal } from "../Brand/Logos";
 
 export type SidebarProps = {
   brand?: ReactNode;
@@ -37,7 +37,7 @@ export default function Sidebar({ brand }: SidebarProps) {
 
   useEffect(() => {
     if (typeof window == "undefined") return;
-    if (open) {
+    if (!open) {
       document.body.style.setProperty("--sidebar-width", "3rem");
     } else {
       document.body.style.setProperty("--sidebar-width", "13rem");
@@ -51,27 +51,32 @@ export default function Sidebar({ brand }: SidebarProps) {
       sx={{ transition: "all 0.3s var(--transition-tf)" }}
       gap={3}
     >
-      {brand && (
-        <Stack
-          mt={5}
-          gap={"inherit"}
-          alignItems={"center"}
-        >
-          {brand}
-        </Stack>
-      )}
-      <Stack alignItems={"flex-end"}>
-        <IconButton
-          onClick={() => setOpen(!open)}
-          sx={{ flexGrow: 0 }}
-        >
-          <MenuOpenRounded
-            color="disabled"
-            sx={{ rotate: open ? "180deg" : "0" }}
-          />
-        </IconButton>
+      <Stack
+        mt={5}
+        gap={"inherit"}
+        alignItems={"center"}
+      >
+        <LogoHorizontal
+          shorten={!open}
+          sx={{
+            width: "100%",
+            color: open ? "text.disabled" : "text.primary",
+            transition: "color 0.3s var(--transition-tf)",
+          }}
+        />
       </Stack>
-      <List sx={{ flexGrow: 1, overflow: "hidden auto" }}>
+      <List sx={{ p: 0, flexGrow: 1, overflow: "hidden auto" }}>
+        <ListItem>
+          <ListItemButton
+            onClick={() => setOpen(!open)}
+            sx={{ justifyContent: open ? "flex-end" : "flex-start" }}
+          >
+            <MenuOpenRounded
+              color="disabled"
+              sx={{ rotate: !open ? "180deg" : "0" }}
+            />
+          </ListItemButton>
+        </ListItem>
         {sidebarLinks.map((sl, i) => {
           return (
             <ListItem
