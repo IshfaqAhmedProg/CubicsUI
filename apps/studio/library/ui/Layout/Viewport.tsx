@@ -1,4 +1,4 @@
-import { Stack, StackProps } from "@mui/material";
+import { Paper, Stack, StackProps } from "@mui/material";
 import React from "react";
 
 export default function Viewport(props: StackProps) {
@@ -6,11 +6,13 @@ export default function Viewport(props: StackProps) {
 
   return (
     <Stack
+      component={Paper}
       id={"viewport"}
       height={"calc(100vh - var(--header-height))"}
+      mt={2}
+      ml={2}
       pt={2}
       pl={2}
-      boxSizing={"border-box"}
       overflow={"auto"}
       {...rest}
     >

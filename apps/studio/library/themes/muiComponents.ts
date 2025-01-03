@@ -51,5 +51,8 @@ const components:
       },
     },
   },
+  MuiTooltip: {
+    defaultProps: { arrow: true },
+  },
 };
 export default components;

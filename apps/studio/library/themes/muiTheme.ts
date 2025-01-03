@@ -1,7 +1,7 @@
 "use client";
 
 import { createTheme } from "@mui/material/styles";
-import { colorSchemeDark, colorSchemeLight } from "./colorSchemes";
+import { colorSchemeDark, colorSchemeLight } from "./muiColorSchemes";
 import components from "./muiComponents";
 
 const muiTheme = createTheme({
