@@ -3,25 +3,65 @@ generator client {
 }
 
 datasource db {
-  // TODO change to postgresql
   provider = "mongodb"
   url      = env("DATABASE_URL")
 }
 
-type ComponentsSupportedEnvs {
-  framework String
-  library   String
+model Library {
+  id          String      @id @default(auto()) @map("_id") @db.ObjectId
+  configs     ConfigFiles
+  buildConfig String
+  createdAt   DateTime    @default(now())
+  modifiedAt  DateTime    @updatedAt
+  components  Component[]
+
+  @@map("libraries")
 }
 
-// TODO rename to metadata
-model components {
-  id            String                    @id @default(auto()) @map("_id") @db.ObjectId
-  aliases       String[]
-  categories    String[]
-  // TODO remove code from "components" to the new table called "codeblocks" 
-  code          String
-  desc          String
-  name          String
-  supportedEnvs ComponentsSupportedEnvs[]
-  // TODO add createdAt,modifiedAt
+model Component {
+  id         String                 @id @default(auto()) @map("_id") @db.ObjectId
+  cbId       String                 @db.ObjectId
+  name       String
+  aliases    String[]
+  desc       String
+  envs       ComponentSupportedEnvs
+  deps       Dependencies
+  tags       String[]
+  createdAt  DateTime               @default(now())
+  modifiedAt DateTime               @updatedAt
+
+  libId String  @db.ObjectId
+  lib   Library @relation(fields: [libId], references: [id])
+
+  @@map("components")
+}
+
+model CodeBlock {
+  id   String @id @default(auto()) @map("_id") @db.ObjectId
+  code String
+
+  @@map("codeblocks")
+}
+
+type ComponentSupportedEnvs {
+  library   NameWithVersion
+  framework NameWithVersion?
+}
+
+type NameWithVersion {
+  name    String
+  version String
+}
+
+type Dependencies {
+  external String[]
+  modules  String[]
+}
+
+type ConfigFiles {
+  packageJson    String
+  tsconfig       String?
+  tailwindConfig String?
+  nextConfig     String?
+  additional     Json?
 }
