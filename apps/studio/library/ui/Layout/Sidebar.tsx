@@ -1,5 +1,13 @@
 "use client";
-import { List, ListItem, ListItemButton, Paper, Stack } from "@mui/material";
+import {
+  List,
+  ListItem,
+  ListItemButton,
+  Paper,
+  Stack,
+  SxProps,
+  Tooltip,
+} from "@mui/material";
 import { ReactNode } from "react";
 import ThemeSwitch from "../Inputs/ThemeSwitch";
 import Link from "next/link";
@@ -10,33 +18,37 @@ import {
 } from "@mui/icons-material";
 import { LogoHorizontal } from "../Brand/Logos";
 import { useAppContainer } from "./AppContainer";
-import Tooltip from "../Navigation/Tooltip";
 
 export type SidebarProps = {
   brand?: ReactNode;
 };
-const sidebarLinks = [
-  {
-    label: "Libraries",
-    href: "/libraries",
-    icon: <LibraryBooksRounded />,
-  },
-  {
-    label: "Components",
-    href: "/components",
-    icon: <ViewModuleRounded />,
-  },
-  {
-    label: "Publish",
-    href: "/publish",
-    icon: <PublishRounded />,
-  },
-];
 
 export default function Sidebar() {
   const {
     sidebarControls: { open },
   } = useAppContainer();
+
+  const iconCommonSx: SxProps = {
+    fontSize: open ? "1em" : "1.5em",
+  };
+
+  const sidebarLinks = [
+    {
+      label: "Libraries",
+      href: "/libraries",
+      icon: <LibraryBooksRounded sx={iconCommonSx} />,
+    },
+    {
+      label: "Components",
+      href: "/components",
+      icon: <ViewModuleRounded sx={iconCommonSx} />,
+    },
+    {
+      label: "Publish",
+      href: "/publish",
+      icon: <PublishRounded sx={iconCommonSx} />,
+    },
+  ];
 
   return (
     <Stack
@@ -73,9 +85,7 @@ export default function Sidebar() {
               disablePadding
             >
               <Tooltip
-                renderTooltip={!open}
-                sx={{ display: open ? "none" : "block" }}
-                title={sl.label}
+                title={open ? "" : sl.label}
                 placement="right"
               >
                 <ListItemButton

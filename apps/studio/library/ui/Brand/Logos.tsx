@@ -35,10 +35,12 @@ export const LogoHorizontalFavicon = createSvgIcon(
   </svg>,
   "LogoHorizontalFavicon"
 );
+
 export function LogoHorizontal(props: { shorten?: boolean } & StackProps) {
   const { shorten, children, color, width, ...rest } = props;
 
   const commonSx: SxProps = {
+    fontSize: "1.5rem",
     flexGrow: 0,
     flexShrink: 0,
     transition: "flex-basis 0.3s var(--transition-tf)",

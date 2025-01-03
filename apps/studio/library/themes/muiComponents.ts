@@ -44,5 +44,12 @@ const components:
     },
   },
   MuiPaper: { defaultProps: { elevation: 0 } },
+  MuiSvgIcon: {
+    styleOverrides: {
+      root: {
+        transition: "font-size 0.3s var(--transition-tf)",
+      },
+    },
+  },
 };
 export default components;
