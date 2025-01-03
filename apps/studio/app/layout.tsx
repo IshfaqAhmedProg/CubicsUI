@@ -8,7 +8,7 @@ import AppContainer from "@/library/ui/Layout/AppContainer";
 
 const outfit = Outfit({
   variable: "--font-h",
-  weight: ["300", "400", "500", "700"],
+  weight: ["500"],
   subsets: ["latin"],
   display: "swap",
 });
@@ -48,9 +48,7 @@ export default function RootLayout({
     >
       <body className={`${outfit.variable} ${titiliumWeb.variable}`}>
         <Providers>
-          <AppContainer>
-            <main>{children}</main>
-          </AppContainer>
+          <AppContainer>{children}</AppContainer>
         </Providers>
       </body>
     </html>

@@ -71,8 +71,11 @@ export default function Sidebar() {
       <List
         sx={{
           mt: open ? 4 : 1,
-          transition: "margin-top 0.3s var(--transition-tf)",
+          transitionProperty: "margin-top, padding-inline",
+          transitionDuration: "0.3s",
+          transitionTimingFunction: "var(--transition-tf)",
           p: 0,
+          px: open ? 2 : 0,
           flexGrow: 1,
           overflow: "hidden auto",
           color: "text.secondary",

@@ -15,7 +15,7 @@ export default function SidebarToggle() {
     if (!open) {
       document.body.style.setProperty("--sidebar-width", "3rem");
     } else {
-      document.body.style.setProperty("--sidebar-width", "13rem");
+      document.body.style.setProperty("--sidebar-width", "18rem");
     }
   }, [open]);
   return (

@@ -37,35 +37,31 @@ export const LogoHorizontalFavicon = createSvgIcon(
 );
 
 export function LogoHorizontal(props: { shorten?: boolean } & StackProps) {
-  const { shorten, children, color, width, ...rest } = props;
+  const { shorten, children, ...rest } = props;
 
   const commonSx: SxProps = {
     fontSize: "1.5rem",
     flexGrow: 0,
     flexShrink: 0,
-    transition: "flex-basis 0.3s var(--transition-tf)",
+    transition: "width 0.3s var(--transition-tf)",
   };
   return (
     <Stack
       direction={"row"}
       alignItems={"center"}
       justifyContent={"center"}
-      width={width}
-      color={color}
-      gap={1}
       {...rest}
     >
       <LogoHorizontalFavicon
         sx={{
           ...commonSx,
-          flexBasis: shorten ? "100%" : "13%",
+          width: shorten ? "100%" : "13%",
         }}
       />
       <LogoHorizontalText
         sx={{
           ...commonSx,
-          flexBasis: shorten ? "0%" : "60%",
-          opacity: shorten ? 0 : 1,
+          width: shorten ? "0%" : "60%",
         }}
       />
     </Stack>

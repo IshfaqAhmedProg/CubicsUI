@@ -16,7 +16,7 @@ const components:
       root: {
         fontSize: "1em",
         textTransform: "none",
-        fontWeight: "bold",
+        fontWeight: "bolder",
       },
     },
   },
