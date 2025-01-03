@@ -36,7 +36,10 @@ export default function AppContainer({
       >
         <Cursor />
         <Sidebar />
-        <Stack width={"100%"}>
+        <Stack
+          overflow={"hidden"}
+          width={"100%"}
+        >
           <Header />
           <Viewport>{children}</Viewport>
         </Stack>
