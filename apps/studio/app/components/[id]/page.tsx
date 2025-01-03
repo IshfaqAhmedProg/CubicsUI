@@ -1,6 +1,5 @@
 import { notFound } from "next/navigation";
 import db from "@/configs/db";
-import styles from "./page.module.scss";
 export default async function ComponentDetailsPage({
   params,
 }: {
@@ -12,7 +11,7 @@ export default async function ComponentDetailsPage({
   if (!id || !cmp) return notFound();
 
   return (
-    <div className={styles.detailsContainer}>
+    <div>
       {(Object.keys(cmp) as (keyof typeof cmp)[]).map((k) => {
         return (
           <div key={k}>

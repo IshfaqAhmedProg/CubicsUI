@@ -1,7 +1,9 @@
 import Form from "next/form";
-import styles from "./page.module.scss";
 import SubmitButton from "@/library/ui/Form/SubmitButton";
-import { createComponentAction } from "./actions";
+async function nothing() {
+  "use server";
+  console.log("nothing happened");
+}
 
 export default function CreatePage() {
   const formElements = [
@@ -15,15 +17,12 @@ export default function CreatePage() {
 
   return (
     <Form
-      action={createComponentAction}
-      className={styles.form}
+      action={nothing}
+      // action={createComponentAction}
     >
       {formElements.map((fe) => {
         return (
-          <div
-            key={fe.id}
-            className={styles.inputField}
-          >
+          <div key={fe.id}>
             <label htmlFor={fe.id}>{fe.label}</label>
             {fe.id == "code" ? (
               <textarea

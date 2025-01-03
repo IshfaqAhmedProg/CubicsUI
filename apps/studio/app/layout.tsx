@@ -1,17 +1,22 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import { Outfit, Titillium_Web } from "next/font/google";
 import "./globals.scss";
-import Sidebar from "./sidebar";
-import styles from "./page.module.scss";
 import fiDark from "@/public/webfi-dark.svg";
 import fiLight from "@/public/webfi-light.svg";
-import Flex from "@/library/ui/Layout/Flex";
-import Cursor from "@/library/ui/Cursor/Cursor";
-import IconProvider from "@/library/ui/IconProvider";
+import Providers from "./providers";
+import AppContainer from "@/library/ui/Layout/AppContainer";
 
-const inter = Inter({
-  variable: "--font-family",
+const outfit = Outfit({
+  variable: "--font-h",
+  weight: ["300", "400", "500", "700"],
   subsets: ["latin"],
+  display: "swap",
+});
+const titiliumWeb = Titillium_Web({
+  variable: "--font-p",
+  weight: ["300", "400", "600", "700"],
+  subsets: ["latin"],
+  display: "swap",
 });
 
 export const metadata: Metadata = {
@@ -37,18 +42,16 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body className={`${inter.variable}`}>
-        <IconProvider>
-          <Flex
-            align="stretch"
-            style={{ height: "100vh", position: "relative" }}
-          >
-            <Cursor />
-            <Sidebar />
-            <main className={styles.main}>{children}</main>
-          </Flex>
-        </IconProvider>
+    <html
+      lang="en"
+      suppressHydrationWarning
+    >
+      <body className={`${outfit.variable} ${titiliumWeb.variable}`}>
+        <Providers>
+          <AppContainer>
+            <main>{children}</main>
+          </AppContainer>
+        </Providers>
       </body>
     </html>
   );

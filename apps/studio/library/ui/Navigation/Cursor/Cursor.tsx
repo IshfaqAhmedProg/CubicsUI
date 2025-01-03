@@ -1,15 +1,24 @@
 "use client";
 import useMousePosition from "@/library/hooks/useMousePosition";
 import styles from "./Cursor.module.scss";
+/**
+ * Converts a number from one range to another
+ * @param number Number to convert
+ * @param fromMin 
+ * @param fromMax 
+ * @param toMin 
+ * @param toMax 
+ * @returns 
+ */
 function scale(
   number: number,
-  inMin: number,
-  inMax: number,
-  outMin: number,
-  outMax: number
+  fromMin: number,
+  fromMax: number,
+  toMin: number,
+  toMax: number
 ) {
   const result =
-    ((number - inMin) * (outMax - outMin)) / (inMax - inMin) + outMin;
+    ((number - fromMin) * (toMax - toMin)) / (fromMax - fromMin) + toMin;
   return result;
 }
 function calculateScale(value: number, mouseSpeed: number) {

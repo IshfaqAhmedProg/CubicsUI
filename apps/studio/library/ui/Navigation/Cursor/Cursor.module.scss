@@ -11,11 +11,13 @@
 .cursor {
   background: radial-gradient(
     41.94% 82.95% at 50% 50%,
-    color-mix(in srgb, var(--primary-faint) 55%, transparent) 0%,
-    color-mix(in srgb, var(--secondary-faint) 55%, transparent) 100%
+    color-mix(in srgb, var(--palette-primary-main) 30%, transparent) 0%,
+    color-mix(in srgb, var(--palette-secondary-main) 30%, transparent) 100%
   );
   filter: blur(90px);
   position: absolute;
-  transition: width 0.2s ease-out, height 0.2s ease-out;
+  transition:
+    width 0.2s ease-out,
+    height 0.2s ease-out;
   translate: -50% -50%;
 }
