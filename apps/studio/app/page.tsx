@@ -1,5 +1,6 @@
 import { AddRounded, LibraryBooksRounded } from "@mui/icons-material";
 import { Button, Stack, Typography } from "@mui/material";
+import Link from "next/link";
 
 export default async function Home() {
   return (
@@ -24,6 +25,8 @@ export default async function Home() {
         variant="contained"
         endIcon={<LibraryBooksRounded />}
         startIcon={<AddRounded />}
+        LinkComponent={Link}
+        href="/libraries/create"
       >
         Create Library
       </Button>

@@ -3,25 +3,76 @@ generator client {
 }
 
 datasource db {
-  // TODO change to postgresql
   provider = "mongodb"
   url      = env("DATABASE_URL")
 }
 
-type ComponentsSupportedEnvs {
-  framework String
-  library   String
+model configurations {
+  id   String @id @default(auto()) @map("_id") @db.ObjectId
+  name String
+  data String
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  libId String    @db.ObjectId
+  lib   libraries @relation(fields: [libId], references: [id])
 }
 
-// TODO rename to metadata
+model libraries {
+  id          String   @id @default(auto()) @map("_id") @db.ObjectId
+  /// A unique name following npm package naming convention
+  name        String   @unique
+  /// Object containing package.json file data
+  pkgJson     Json
+  /// Object containing tsup configuration that will be used in the packaging step *Defaults to default tsup configuration
+  buildConfig Json?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  configs    configurations[]
+  components components[]
+}
+
 model components {
-  id            String                    @id @default(auto()) @map("_id") @db.ObjectId
-  aliases       String[]
-  categories    String[]
-  // TODO remove code from "components" to the new table called "codeblocks" 
-  code          String
-  desc          String
-  name          String
-  supportedEnvs ComponentsSupportedEnvs[]
-  // TODO add createdAt,modifiedAt
+  id      String       @id @default(auto()) @map("_id") @db.ObjectId
+  /// Id of the codeblock associated with the component
+  cbId    String       @db.ObjectId
+  /// A unique name following npm package naming convention
+  name    String       @unique
+  /// The path of the file relative to "components" directory
+  outPath String
+  /// A short description of what the component does
+  desc    String
+  /// The environments that can support the component
+  envs    TargetEnvs[]
+  /// Dependencies of the component
+  deps    Dependencies
+  /// To allow better searching
+  tags    String[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  libId String    @db.ObjectId
+  lib   libraries @relation(fields: [libId], references: [id])
+}
+
+model codeblocks {
+  id   String @id @default(auto()) @map("_id") @db.ObjectId
+  code String
+}
+
+type TargetEnvs {
+  /// Libraries like react, svelte etc.
+  library   String
+  /// frameworks like nextjs, sveltekit etc.
+  framework String?
+}
+
+type Dependencies {
+  /// Third party dependencies
+  ext String[]
+  /// Local modules
+  lcl String[]
 }

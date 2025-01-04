@@ -18,14 +18,17 @@
     "@mui/material-nextjs": "^6.3.0",
     "lodash": "^4.17.21",
     "next": "15.1.3",
+    "package-json-validator": "^0.7.3",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
-    "sass": "^1.83.0"
+    "sass": "^1.83.0",
+    "zod": "^3.24.1"
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3",
     "@types/lodash": "^4.17.13",
     "@types/node": "^20",
+    "@types/package-json-validator": "^0.6.1",
     "@types/react": "^19",
     "@types/react-dom": "^19",
     "eslint": "^9",

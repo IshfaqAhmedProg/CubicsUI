@@ -6,6 +6,8 @@
     "lint": "turbo lint",
     "clean": "turbo clean",
     "jobs": "turbo jobs",
+    "db:push": "turbo db:push",
+    "db:generate": "turbo db:generate",
     "format": "prettier --write \"**/*.{ts,tsx,md}\"",
     "changeset": "changeset && changeset version",
     "release": "turbo build --filter=@cubicsui/* && changeset publish",
