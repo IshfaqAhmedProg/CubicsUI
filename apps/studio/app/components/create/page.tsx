@@ -1,45 +1,19 @@
-import Form from "next/form";
-import SubmitButton from "@/library/ui/Form/SubmitButton";
-async function nothing() {
-  "use server";
-  console.log("nothing happened");
-}
+import db from "@/configs/db";
+import CreateComponentForm from "./form";
+import { notFound } from "next/navigation";
 
-export default function CreatePage() {
-  const formElements = [
-    { label: "Component Name", id: "name" },
-    { label: "Aliases", id: "aliases" },
-    { label: "Description", id: "desc" },
-    { label: "Categories", id: "categories" },
-    { label: "Supported Environments", id: "supportedEnvs" },
-    { label: "Component Code", id: "code" },
-  ];
+type SearchParams = Promise<{ libraryId: string }>;
 
-  return (
-    <Form
-      action={nothing}
-      // action={createComponentAction}
-    >
-      {formElements.map((fe) => {
-        return (
-          <div key={fe.id}>
-            <label htmlFor={fe.id}>{fe.label}</label>
-            {fe.id == "code" ? (
-              <textarea
-                id={fe.id}
-                name={fe.id}
-              />
-            ) : (
-              <input
-                type="text"
-                name={fe.id}
-                id={fe.id}
-              />
-            )}
-          </div>
-        );
-      })}
-      <SubmitButton>Submit</SubmitButton>
-    </Form>
-  );
+export default async function CreatePage({
+  searchParams,
+}: {
+  searchParams: SearchParams;
+}) {
+  const { libraryId } = await searchParams;
+
+  const library = await db.libraries.findFirst({ where: { id: libraryId } });
+
+  if (!library || !libraryId) return notFound();
+
+  return <CreateComponentForm library={library} />;
 }

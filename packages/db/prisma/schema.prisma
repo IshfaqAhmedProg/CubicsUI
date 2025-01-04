@@ -7,61 +7,72 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model Library {
-  id          String      @id @default(auto()) @map("_id") @db.ObjectId
-  configs     ConfigFiles
-  buildConfig String
-  createdAt   DateTime    @default(now())
-  modifiedAt  DateTime    @updatedAt
-  components  Component[]
+model configurations {
+  id   String @id @default(auto()) @map("_id") @db.ObjectId
+  name String
+  data String
 
-  @@map("libraries")
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  libId String    @db.ObjectId
+  lib   libraries @relation(fields: [libId], references: [id])
 }
 
-model Component {
-  id         String                 @id @default(auto()) @map("_id") @db.ObjectId
-  cbId       String                 @db.ObjectId
-  name       String
-  aliases    String[]
-  desc       String
-  envs       ComponentSupportedEnvs
-  deps       Dependencies
-  tags       String[]
-  createdAt  DateTime               @default(now())
-  modifiedAt DateTime               @updatedAt
+model libraries {
+  id          String   @id @default(auto()) @map("_id") @db.ObjectId
+  /// A unique name following npm package naming convention
+  name        String   @unique
+  /// Object containing package.json file data
+  pkgJson     Json
+  /// Object containing tsup configuration that will be used in the packaging step *Defaults to default tsup configuration
+  buildConfig Json?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
 
-  libId String  @db.ObjectId
-  lib   Library @relation(fields: [libId], references: [id])
-
-  @@map("components")
+  configs    configurations[]
+  components components[]
 }
 
-model CodeBlock {
+model components {
+  id      String       @id @default(auto()) @map("_id") @db.ObjectId
+  /// Id of the codeblock associated with the component
+  cbId    String       @db.ObjectId
+  /// A unique name following npm package naming convention
+  name    String       @unique
+  /// The path of the file relative to "components" directory
+  outPath String
+  /// A short description of what the component does
+  desc    String
+  /// The environments that can support the component
+  envs    TargetEnvs[]
+  /// Dependencies of the component
+  deps    Dependencies
+  /// To allow better searching
+  tags    String[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  libId String    @db.ObjectId
+  lib   libraries @relation(fields: [libId], references: [id])
+}
+
+model codeblocks {
   id   String @id @default(auto()) @map("_id") @db.ObjectId
   code String
-
-  @@map("codeblocks")
 }
 
-type ComponentSupportedEnvs {
-  library   NameWithVersion
-  framework NameWithVersion?
-}
-
-type NameWithVersion {
-  name    String
-  version String
+type TargetEnvs {
+  /// Libraries like react, svelte etc.
+  library   String
+  /// frameworks like nextjs, sveltekit etc.
+  framework String?
 }
 
 type Dependencies {
-  external String[]
-  modules  String[]
-}
-
-type ConfigFiles {
-  packageJson    String
-  tsconfig       String?
-  tailwindConfig String?
-  nextConfig     String?
-  additional     Json?
+  /// Third party dependencies
+  ext String[]
+  /// Local modules
+  lcl String[]
 }
