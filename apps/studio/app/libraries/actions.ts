@@ -2,7 +2,7 @@
 
 import { redirect } from "next/navigation";
 import { libraryCreationSchema } from "./schema";
-import db from "@/configs/db";
+import db from "@/db";
 import { revalidatePath } from "next/cache";
 
 export async function createLibraryAction(prevState: any, formdata: FormData) {

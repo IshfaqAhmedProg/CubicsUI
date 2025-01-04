@@ -1,4 +1,4 @@
-import db from "@/configs/db";
+import db from "@/db";
 import CreateComponentForm from "./form";
 import { notFound } from "next/navigation";
 
