@@ -94,7 +94,6 @@ export default function Sidebar() {
                 <ListItemButton
                   LinkComponent={Link}
                   href={sl.href}
-                  sx={{ fontWeight: "bold" }}
                 >
                   {sl.icon}
                   {open && sl.label}

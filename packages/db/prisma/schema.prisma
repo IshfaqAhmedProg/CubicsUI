@@ -19,25 +19,40 @@ model configurations {
   lib   libraries @relation(fields: [libId], references: [id])
 }
 
+enum JavascriptFlavor {
+  Vanilla
+  Typescript
+}
+
 model libraries {
-  id          String   @id @default(auto()) @map("_id") @db.ObjectId
+  /// Id of the library
+  id          String           @id @default(auto()) @map("_id") @db.ObjectId
   /// A unique name following npm package naming convention
-  name        String   @unique
+  name        String           @unique
+  /// Language used to define the library
+  flavor      JavascriptFlavor
   /// Object containing package.json file data
   pkgJson     Json
   /// Object containing tsup configuration that will be used in the packaging step *Defaults to default tsup configuration
   buildConfig Json?
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 
   configs    configurations[]
   components components[]
 }
 
 model components {
-  id      String       @id @default(auto()) @map("_id") @db.ObjectId
+  /// Id of the library the component belongs 
+  libId String    @db.ObjectId
+  lib   libraries @relation(fields: [libId], references: [id])
+
   /// Id of the codeblock associated with the component
-  cbId    String       @db.ObjectId
+  cbId String @db.ObjectId
+
+  /// Id of the component
+  id      String       @id @default(auto()) @map("_id") @db.ObjectId
   /// A unique name following npm package naming convention
   name    String       @unique
   /// The path of the file relative to "components" directory
@@ -53,14 +68,14 @@ model components {
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
-
-  libId String    @db.ObjectId
-  lib   libraries @relation(fields: [libId], references: [id])
 }
 
 model codeblocks {
   id   String @id @default(auto()) @map("_id") @db.ObjectId
   code String
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 }
 
 type TargetEnvs {

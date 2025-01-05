@@ -18,9 +18,11 @@ export async function createLibraryAction(prevState: any, formdata: FormData) {
   const buildConfig =
     typeof buildConfigFD == "string" ? JSON.parse(buildConfigFD) : undefined;
 
+  console.log({ pkgJson });
   // Validate inputs
   const validatedInputs = libraryCreationSchema.safeParse({
     name: formdata.get("name"),
+    flavor: formdata.get("flavor"),
     pkgJson,
     buildConfig,
   });

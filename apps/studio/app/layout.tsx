@@ -8,7 +8,7 @@ import AppContainer from "@/library/ui/Layout/AppContainer";
 
 const outfit = Outfit({
   variable: "--font-h",
-  weight: ["500"],
+  weight: ["300", "500"],
   subsets: ["latin"],
   display: "swap",
 });

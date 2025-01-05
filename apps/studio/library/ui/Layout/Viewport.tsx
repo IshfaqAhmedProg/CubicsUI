@@ -9,9 +9,8 @@ export default function Viewport(props: StackProps) {
       id={"viewport"}
       height={"calc(100vh - var(--header-height))"}
       mt={2}
-      ml={2}
+      mx={2}
       pt={2}
-      pl={2}
       overflow={"auto"}
       {...rest}
     >
