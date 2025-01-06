@@ -19,7 +19,7 @@ export default function TitleCrumbs() {
   return (
     <Breadcrumbs
       maxItems={3}
-      separator={<ChevronRightRounded color="disabled" />}
+      separator={<ChevronRightRounded />}
       sx={{
         color: "text.secondary",
         overflow: "auto hidden",
@@ -44,7 +44,6 @@ export default function TitleCrumbs() {
         return (
           <Typography
             key={i}
-            color={isPathActivePath ? "text.primary" : undefined}
             fontWeight={isPathActivePath ? "bold" : "normal"}
             fontFamily={"inherit"}
           >
