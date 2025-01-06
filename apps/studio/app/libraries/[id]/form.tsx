@@ -8,6 +8,7 @@ import {
   FormLabel,
   Stack,
   TextField,
+  Typography,
 } from "@mui/material";
 import { useActionState, useState } from "react";
 import { createLibraryAction } from "../actions";
@@ -15,6 +16,7 @@ import CodeEditor from "@/library/ui/Inputs/CodeEditor";
 import Spinner from "@/library/ui/Navigation/Spinner/Spinner";
 import { ExpandMoreRounded } from "@mui/icons-material";
 import { samplePkgJson } from "@/library/constants/sampleCodeBlocks";
+import { libraries } from "@cubicsui/db";
 
 const initialState = {
   errors: {},
@@ -26,11 +28,8 @@ const files: { name: string; language: string; value: string }[] = [
     value: samplePkgJson,
   },
 ];
-export default function CreateLibraryForm() {
-  const [state, formAction, pending] = useActionState(
-    createLibraryAction,
-    initialState
-  );
+export default function CreateLibraryForm({ library }: { library: libraries }) {
+  const [state, formAction, pending] = useActionState(() => {}, undefined);
 
   const [pkgJsonData, setPkgJsonData] = useState<string>(files[0].value);
   return (
@@ -48,15 +47,9 @@ export default function CreateLibraryForm() {
           {pending ? <Spinner /> : "Save"}
         </Button>
       </Stack>
-      <TextField
-        label="Library Name"
-        required
-        id="name"
-        name="name"
-      />
       <Accordion defaultExpanded>
         <AccordionSummary expandIcon={<ExpandMoreRounded />}>
-          <FormLabel htmlFor="pkgJson">package.json *</FormLabel>
+          <Typography fontFamily={"var(--font-h)"}>Configurations</Typography>
         </AccordionSummary>
         <AccordionDetails>
           <CodeEditor
@@ -76,7 +69,7 @@ export default function CreateLibraryForm() {
         </AccordionDetails>
       </Accordion>
 
-      {state?.errors ? JSON.stringify(state?.errors) : ""}
+      {/* {state?.errors ? JSON.stringify(state?.errors) : ""} */}
     </Stack>
   );
 }

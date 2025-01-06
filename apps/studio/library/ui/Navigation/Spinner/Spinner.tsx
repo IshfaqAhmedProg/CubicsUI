@@ -2,21 +2,22 @@ import { CSSProperties } from "react";
 import styles from "./Spinner.module.scss";
 
 interface LoadingIconProps {
-  width?: number;
-  height?: number;
+  size?: number;
   fill?: CSSProperties["fill"];
+  /** Needs `position: relative` on the container to work */
+  centered?: boolean;
 }
 
 export default function Spinner({
-  width = 24,
-  height = 24,
+  size = 16,
   fill = "var(--palette-primary-contrastText)",
+  centered = false,
 }: LoadingIconProps) {
   return (
-    <div className={styles.container}>
+    <div className={`${styles.container} ${centered ? styles.centered : ""}`}>
       <svg
-        width={width}
-        height={height}
+        width={size}
+        height={size}
         viewBox="0 0 24 24"
         xmlns="http://www.w3.org/2000/svg"
       >

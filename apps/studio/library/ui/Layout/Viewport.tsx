@@ -8,6 +8,7 @@ export default function Viewport(props: StackProps) {
       component={"main"}
       id={"viewport"}
       height={"calc(100vh - var(--header-height))"}
+      position={"relative"}
       mt={2}
       mx={2}
       pt={2}

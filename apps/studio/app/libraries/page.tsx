@@ -1,19 +1,18 @@
-import db from "@/db";
-import { Button, Stack } from "@mui/material";
-import Link from "next/link";
-import { AddRounded } from "@mui/icons-material";
+import { Stack } from "@mui/material";
 import LibrariesList from "./list";
 import CreateLibraryButton from "./create";
+import { Suspense } from "react";
+import Spinner from "@/library/ui/Navigation/Spinner/Spinner";
 
 export default async function LibrariesPage() {
-  const results = await db.libraries.findMany({ take: 10 });
-
   return (
     <Stack>
       <Stack alignItems={"flex-end"}>
         <CreateLibraryButton />
       </Stack>
-      <LibrariesList results={results} />
+      <Suspense fallback={<Spinner />}>
+        <LibrariesList />
+      </Suspense>
     </Stack>
   );
 }

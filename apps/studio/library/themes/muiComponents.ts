@@ -17,6 +17,14 @@ const components:
       },
     },
   },
+  MuiAccordionSummary: {
+    styleOverrides: {
+      content: { "&.Mui-expanded": { margin: "unset" } },
+      root: {
+        padding: "calc(0 * var(--spacing)) calc(4 * var(--spacing))",
+      },
+    },
+  },
   MuiBreadcrumbs: {
     styleOverrides: {
       ol: {
@@ -29,7 +37,6 @@ const components:
     styleOverrides: {
       root: {
         fontSize: "1em",
-        fontFamily: "var(--font-h)",
         textTransform: "none",
         fontWeight: "bolder",
       },
@@ -38,15 +45,31 @@ const components:
   MuiDialog: {
     styleOverrides: {
       paper: {
+        backgroundImage: "unset",
         backgroundColor: "var(--palette-background-default)",
         boxShadow: "none",
       },
     },
   },
+  MuiDialogActions: {
+    styleOverrides: { root: { padding: "calc(5 * var(--spacing))" } },
+  },
+  MuiDialogContent: { styleOverrides: { root: { padding: "unset" } } },
   MuiDialogTitle: {
     styleOverrides: {
       root: {
         fontFamily: "var(--font-h)",
+      },
+    },
+  },
+  MuiFormLabel: {
+    styleOverrides: {
+      root: {
+        fontSize: "0.875rem",
+        "& > a": {
+          fontWeight: "bold",
+          textDecoration: "underline",
+        },
       },
     },
   },
@@ -67,13 +90,18 @@ const components:
     styleOverrides: {
       root: {
         borderRadius: "var(--shape-borderRadius)",
-        fontFamily: "var(--font-h)",
-        gap: "0.5rem",
-        paddingInline: "0.5rem",
+        gap: "calc(2 * var(--spacing))",
+        paddingInline: "calc(2 * var(--spacing))",
       },
     },
   },
   MuiPaper: { defaultProps: { elevation: 0 } },
+  MuiPopover: {
+    styleOverrides: {
+      paper: { backgroundColor: "var(--palette-background-default)" },
+    },
+  },
+  MuiSelect: { defaultProps: { size: "small" } },
   MuiSvgIcon: {
     styleOverrides: {
       root: {

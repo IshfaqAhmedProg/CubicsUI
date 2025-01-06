@@ -1,5 +1,3 @@
-"use client";
-import { Prisma } from "@cubicsui/db";
 import {
   Button,
   List,
@@ -8,13 +6,11 @@ import {
   ListItemText,
 } from "@mui/material";
 import Link from "next/link";
-import { deleteLibraryAction } from "./actions";
+import db from "@/db";
 
-export default function LibrariesList({
-  results,
-}: {
-  results: Prisma.$librariesPayload["scalars"][];
-}) {
+export default async function LibrariesList() {
+  const results = await db.libraries.findMany({ take: 10 });
+
   console.log(results);
   return (
     <List>
@@ -25,9 +21,7 @@ export default function LibrariesList({
       ) : (
         results.map((r, i) => (
           <ListItem key={r.id}>
-            <Button onClick={async () => await deleteLibraryAction(r.id)}>
-              Delete
-            </Button>
+            <Button>Delete</Button>
             <ListItemButton
               LinkComponent={Link}
               href={`/libraries/${r.id}`}

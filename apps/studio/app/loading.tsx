@@ -1,5 +1,11 @@
+import Spinner from "@/library/ui/Navigation/Spinner/Spinner";
 import React from "react";
 
 export default function loading() {
-  return <div>loading...</div>;
+  return (
+    <Spinner
+      size={24}
+      centered
+    />
+  );
 }

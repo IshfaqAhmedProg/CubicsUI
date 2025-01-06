@@ -3,12 +3,13 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  // position: absolute;
-  // top: 50%;
-  // left: 50%;
-  // translate: -50% -50%;
 }
-
+.centered {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  translate: -50% -50%;
+}
 .spinner {
   animation: spinner_animation 1.6s linear infinite;
   animation-delay: -1.6s;

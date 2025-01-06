@@ -1,42 +1,60 @@
 "use server";
 
-import { redirect } from "next/navigation";
 import { createLibrarySchema } from "./schema";
 import db from "@/db";
 import { revalidatePath } from "next/cache";
+import { libraries, Prisma } from "@cubicsui/db";
+import { z } from "zod";
+import { redirect } from "next/navigation";
 
-export async function createLibraryAction(prevState: any, formdata: FormData) {
-  // // Getting input values from formData
-  // const [pkgJsonFD, buildConfigFD] = [
-  //   formdata.get("pkgJson"),
-  //   formdata.get("buildConfig"),
-  // ];
+export type FormActionReturnType = {
+  errors?: {
+    [x: string]: string | undefined;
+    [x: number]: string | undefined;
+    [x: symbol]: string | undefined;
+  };
+  status?: "success" | "error";
+};
 
-  // // Parsing the input values
-  // const pkgJson =
-  //   typeof pkgJsonFD == "string" ? JSON.parse(pkgJsonFD) : undefined;
-  // const buildConfig =
-  //   typeof buildConfigFD == "string" ? JSON.parse(buildConfigFD) : undefined;
+export type ActionReturnType<T> = Promise<T | void>;
 
-  // console.log({ pkgJson });
-  // Validate inputs
-  const validatedInputs = createLibrarySchema.safeParse({
-    name: formdata.get("name"),
-    lang: formdata.get("lang"),
-  });
-
-  if (!validatedInputs.success) {
-    console.log(validatedInputs.error);
-    return { errors: validatedInputs.error.flatten().fieldErrors };
+export async function createLibraryAction(
+  prevState: any,
+  formdata: FormData
+): ActionReturnType<FormActionReturnType> {
+  let errors: FormActionReturnType["errors"] = {};
+  let payload: libraries;
+  try {
+    // Validate inputs
+    const validatedInputs = createLibrarySchema.parse({
+      name: formdata.get("name"),
+      lang: formdata.get("lang"),
+    });
+    // Create the library in the db
+    payload = await db.libraries.create({
+      data: validatedInputs,
+    });
+  } catch (err) {
+    if (
+      err instanceof Prisma.PrismaClientKnownRequestError &&
+      err.code === "P2002"
+    ) {
+      errors.name =
+        "A library with the same name exists in the database! Please choose another name.";
+    } else if (err instanceof z.ZodError) {
+      const fieldErrors = err.flatten().fieldErrors;
+      Object.keys(fieldErrors).forEach((field) => {
+        errors[field] = fieldErrors[field]?.join("\n");
+      });
+    } else {
+      console.error("Unexpected error:", err);
+    }
+    return { status: "error", errors };
   }
-  // Create the libary in the db
-  const libraryFromDB = await db.libraries.create({
-    data: validatedInputs.data,
-  });
-
-  console.log("lib from db:", libraryFromDB);
-  redirect(`/library/${libraryFromDB.id}`);
+  console.log("lib from db:", payload);
+  redirect(`/libraries/${payload.id}`);
 }
+
 export async function deleteLibraryAction(id: string) {
   try {
     await db.libraries.delete({
