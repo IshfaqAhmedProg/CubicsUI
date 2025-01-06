@@ -53,7 +53,7 @@ export default function Sidebar() {
   return (
     <Stack
       component={Paper}
-      width={"var(--sidebar-width)"}
+      width={open ? "var(--sidebar-open)" : "var(--sidebar-closed)"}
       borderRadius={0}
       sx={{ transition: "width 0.3s var(--transition-tf)" }}
       boxSizing={"border-box"}

@@ -4,7 +4,7 @@ import Cursor from "../Navigation/Cursor/Cursor";
 import Sidebar from "./Sidebar";
 import Viewport from "./Viewport";
 import Header from "../Navigation/Header";
-import { createContext, ReactNode, useContext } from "react";
+import { createContext, ReactNode, useContext, useState } from "react";
 import useDisclosure from "@/library/hooks/useDisclosure";
 
 export type AppContainerValue = {
@@ -27,7 +27,11 @@ export default function AppContainer({
   const sidebarControls = useDisclosure(true);
 
   return (
-    <AppContainerContext.Provider value={{ sidebarControls }}>
+    <AppContainerContext.Provider
+      value={{
+        sidebarControls,
+      }}
+    >
       <Stack
         direction={"row"}
         height={"100vh"}
