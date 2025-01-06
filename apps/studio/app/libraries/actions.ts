@@ -1,30 +1,28 @@
 "use server";
 
 import { redirect } from "next/navigation";
-import { libraryCreationSchema } from "./schema";
+import { createLibrarySchema } from "./schema";
 import db from "@/db";
 import { revalidatePath } from "next/cache";
 
 export async function createLibraryAction(prevState: any, formdata: FormData) {
-  // Getting input values from formData
-  const [pkgJsonFD, buildConfigFD] = [
-    formdata.get("pkgJson"),
-    formdata.get("buildConfig"),
-  ];
+  // // Getting input values from formData
+  // const [pkgJsonFD, buildConfigFD] = [
+  //   formdata.get("pkgJson"),
+  //   formdata.get("buildConfig"),
+  // ];
 
-  // Parsing the input values
-  const pkgJson =
-    typeof pkgJsonFD == "string" ? JSON.parse(pkgJsonFD) : undefined;
-  const buildConfig =
-    typeof buildConfigFD == "string" ? JSON.parse(buildConfigFD) : undefined;
+  // // Parsing the input values
+  // const pkgJson =
+  //   typeof pkgJsonFD == "string" ? JSON.parse(pkgJsonFD) : undefined;
+  // const buildConfig =
+  //   typeof buildConfigFD == "string" ? JSON.parse(buildConfigFD) : undefined;
 
-  console.log({ pkgJson });
+  // console.log({ pkgJson });
   // Validate inputs
-  const validatedInputs = libraryCreationSchema.safeParse({
+  const validatedInputs = createLibrarySchema.safeParse({
     name: formdata.get("name"),
-    flavor: formdata.get("flavor"),
-    pkgJson,
-    buildConfig,
+    lang: formdata.get("lang"),
   });
 
   if (!validatedInputs.success) {
@@ -37,7 +35,7 @@ export async function createLibraryAction(prevState: any, formdata: FormData) {
   });
 
   console.log("lib from db:", libraryFromDB);
-  redirect(`/components/create?libraryId=${libraryFromDB.id}`);
+  redirect(`/library/${libraryFromDB.id}`);
 }
 export async function deleteLibraryAction(id: string) {
   try {

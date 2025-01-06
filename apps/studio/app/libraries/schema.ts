@@ -1,14 +1,25 @@
 import { npmPackageNameRegex } from "@/library/functions/packageNaming";
 import { z } from "zod";
-import validatePackageJson from "@/library/functions/validatePackageJson";
 
-export const libraryCreationSchema = z.object({
+export const createLibrarySchema = z.object({
   name: z.string().regex(npmPackageNameRegex, {
     message: "Name should follow npm package naming conventions",
   }),
-  flavor: z.enum(["Vanilla", "Typescript"]),
-  pkgJson: z.record(z.string(), z.any()).refine(validatePackageJson, {
-    message: "The package.json data seems to be invalid!",
+  lang: z.enum(["Javascript", "Typescript"]),
+});
+export const createConfigurationSchema = z.object({
+  name: z.string(),
+  data: z.string(),
+});
+export const createPackageJsonSchema = z.object({
+  name: z.enum(["package.json"], {
+    message: "Name should always be package.json",
   }),
-  buildConfig: z.record(z.string(), z.any()).optional(),
+  data: z.string(),
+});
+export const createTsconfigSchema = z.object({
+  name: z.enum(["tsconfig.json"], {
+    message: "Name should always be tsconfig.json",
+  }),
+  data: z.string(),
 });

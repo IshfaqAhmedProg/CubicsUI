@@ -12,35 +12,31 @@ model configurations {
   name String
   data String
 
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  created DateTime @default(now())
+  updated DateTime @updatedAt
 
   libId String    @db.ObjectId
   lib   libraries @relation(fields: [libId], references: [id])
 }
 
-enum JavascriptFlavor {
-  Vanilla
+enum Language {
+  Javascript
   Typescript
 }
 
 model libraries {
   /// Id of the library
-  id          String           @id @default(auto()) @map("_id") @db.ObjectId
+  id   String   @id @default(auto()) @map("_id") @db.ObjectId
   /// A unique name following npm package naming convention
-  name        String           @unique
+  name String   @unique
   /// Language used to define the library
-  flavor      JavascriptFlavor
-  /// Object containing package.json file data
-  pkgJson     Json
-  /// Object containing tsup configuration that will be used in the packaging step *Defaults to default tsup configuration
-  buildConfig Json?
+  lang Language
 
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  created DateTime @default(now())
+  updated DateTime @updatedAt
 
-  configs    configurations[]
-  components components[]
+  configurations configurations[]
+  components     components[]
 }
 
 model components {
@@ -66,16 +62,16 @@ model components {
   /// To allow better searching
   tags    String[]
 
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  created DateTime @default(now())
+  updated DateTime @updatedAt
 }
 
 model codeblocks {
   id   String @id @default(auto()) @map("_id") @db.ObjectId
   code String
 
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  created DateTime @default(now())
+  updated DateTime @updatedAt
 }
 
 type TargetEnvs {
