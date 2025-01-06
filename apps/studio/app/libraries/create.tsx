@@ -6,10 +6,10 @@ import {
   ButtonProps,
   Dialog,
   DialogActions,
-  DialogContent,
-  DialogContentText,
-  DialogProps,
+  DialogContent, DialogProps,
   DialogTitle,
+  Stack,
+  TextField
 } from "@mui/material";
 import { createLibraryAction } from "./actions";
 import { useActionState } from "react";
@@ -64,13 +64,24 @@ export function CreateLibraryDialog(
     >
       <DialogTitle>Create Library</DialogTitle>
       <DialogContent>
-        <DialogContentText>
-          To create a library, please enter the name of the libary.
-        </DialogContentText>
+        <Stack>
+          <TextField
+            label="Library Name"
+            required
+            id="name"
+            name="name"
+          />
+        </Stack>
       </DialogContent>
       <DialogActions>
-        <Button onClick={_handleClose}>Cancel</Button>
-        <Button type="submit">Subscribe</Button>
+        <Button
+          onClick={_handleClose}
+          color="error"
+          variant="text"
+        >
+          Cancel
+        </Button>
+        <Button type="submit">Proceed</Button>
       </DialogActions>
     </Dialog>
   );

@@ -25,7 +25,7 @@ const components:
     },
   },
   MuiButton: {
-    defaultProps: { size: "small" },
+    defaultProps: { size: "small", variant: "contained" },
     styleOverrides: {
       root: {
         fontSize: "1em",
