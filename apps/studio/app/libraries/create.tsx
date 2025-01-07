@@ -26,16 +26,12 @@ import Link from "next/link";
 import { npmPackageNamingLink } from "@/library/constants/externalLinks";
 import supportedLangs from "@/library/constants/supportedLangs";
 import Spinner from "@/library/ui/Navigation/Spinner/Spinner";
-
-export interface CreateLibaryButtonProps extends ButtonProps {
-  buttonText?: string;
-  dialogProps?: DialogProps;
-}
+import { ButtonedDialogProps } from "@/library/types/Dialog";
 
 /**
  * Button that when clicked opens a dialog to create a library.
  */
-export default function CreateLibraryButton(props: CreateLibaryButtonProps) {
+export default function CreateLibraryButton(props: ButtonedDialogProps) {
   const { open, handleClose, handleOpen } = useDisclosure();
   const { dialogProps, buttonText, ...rest } = props;
   return (
