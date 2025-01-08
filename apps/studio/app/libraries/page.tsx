@@ -10,7 +10,14 @@ export default async function LibrariesPage() {
       <Stack alignItems={"flex-end"}>
         <CreateLibraryButton />
       </Stack>
-      <Suspense fallback={<Spinner />}>
+      <Suspense
+        fallback={
+          <Spinner
+            centered
+            size={24}
+          />
+        }
+      >
         <LibrariesList />
       </Suspense>
     </Stack>

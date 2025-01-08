@@ -19,9 +19,25 @@ const components:
   },
   MuiAccordionSummary: {
     styleOverrides: {
-      content: { "&.Mui-expanded": { margin: "unset" } },
+      content: {
+        "&.Mui-expanded": {
+          margin: "unset",
+          "& > .MuiTypography-root": { color: "var(--palette-text-secondary)" },
+        },
+      },
       root: {
         padding: "calc(0 * var(--spacing)) calc(4 * var(--spacing))",
+        "&.Mui-expanded": {
+          minHeight: "3rem",
+        },
+      },
+    },
+  },
+  MuiAccordionDetails: {
+    styleOverrides: {
+      root: {
+        padding:
+          "calc(1 * var(--spacing)) calc(4 * var(--spacing)) calc(4 * var(--spacing))",
       },
     },
   },
@@ -54,7 +70,9 @@ const components:
   MuiDialogActions: {
     styleOverrides: { root: { padding: "calc(5 * var(--spacing))" } },
   },
-  MuiDialogContent: { styleOverrides: { root: { padding: "unset" } } },
+  MuiDialogContent: {
+    styleOverrides: { root: { padding: "unset", maxWidth: "unset" } },
+  },
   MuiDialogTitle: {
     styleOverrides: {
       root: {

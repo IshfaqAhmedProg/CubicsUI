@@ -33,7 +33,7 @@ import { ButtonedDialogProps } from "@/library/types/Dialog";
  */
 export default function CreateLibraryButton(props: ButtonedDialogProps) {
   const { open, handleClose, handleOpen } = useDisclosure();
-  const { dialogProps, buttonText, ...rest } = props;
+  const { dialogProps, children, ...rest } = props;
   return (
     <>
       <Button
@@ -41,7 +41,7 @@ export default function CreateLibraryButton(props: ButtonedDialogProps) {
         startIcon={<AddRounded />}
         {...rest}
       >
-        {buttonText ?? "Create Library"}
+        {children ?? "Create Library"}
       </Button>
       <CreateLibraryDialog
         handleClose={handleClose}

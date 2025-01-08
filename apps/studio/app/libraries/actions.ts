@@ -6,17 +6,10 @@ import { revalidatePath } from "next/cache";
 import { libraries, Prisma } from "@cubicsui/db";
 import { z } from "zod";
 import { redirect } from "next/navigation";
-
-export type FormActionReturnType = {
-  errors?: {
-    [x: string]: string | undefined;
-    [x: number]: string | undefined;
-    [x: symbol]: string | undefined;
-  };
-  status?: "success" | "error";
-};
-
-export type ActionReturnType<T> = Promise<T | void>;
+import {
+  ActionReturnType,
+  FormActionReturnType,
+} from "@/library/types/ActionReturnTypes";
 
 export async function createLibraryAction(
   prevState: any,
@@ -35,6 +28,7 @@ export async function createLibraryAction(
       data: validatedInputs,
     });
   } catch (err) {
+    console.error(err);
     if (
       err instanceof Prisma.PrismaClientKnownRequestError &&
       err.code === "P2002"
@@ -46,8 +40,6 @@ export async function createLibraryAction(
       Object.keys(fieldErrors).forEach((field) => {
         errors[field] = fieldErrors[field]?.join("\n");
       });
-    } else {
-      console.error("Unexpected error:", err);
     }
     return { status: "error", errors };
   }
