@@ -31,6 +31,8 @@ model libraries {
   name String   @unique
   /// Language used to define the library
   lang Language
+  /// A short description of what the library does
+  desc String?
 
   created DateTime @default(now())
   updated DateTime @updatedAt
