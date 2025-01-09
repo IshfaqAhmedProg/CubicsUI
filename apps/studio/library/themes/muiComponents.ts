@@ -77,6 +77,12 @@ const components:
     styleOverrides: {
       root: {
         fontFamily: "var(--font-h)",
+        "& > span": {
+          color: "var(--palette-primary-main)",
+          "&.error": {
+            color: "var(--palette-error-main)",
+          },
+        },
       },
     },
   },

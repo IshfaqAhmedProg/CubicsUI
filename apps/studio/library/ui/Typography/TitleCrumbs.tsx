@@ -1,21 +1,13 @@
 "use client";
 import { usePathname } from "next/navigation";
 import { capitalize } from "lodash";
-import {
-  Breadcrumbs,
-  Button,
-  IconButton,
-  Paper,
-  Stack,
-  Typography,
-} from "@mui/material";
+import { Breadcrumbs, IconButton, Typography } from "@mui/material";
 import { ChevronRightRounded, HomeRounded } from "@mui/icons-material";
 import Link from "next/link";
 
 export default function TitleCrumbs() {
   const pathname = usePathname();
   const paths = pathname.split("/").filter((p) => p);
-
   return (
     <Breadcrumbs
       maxItems={3}

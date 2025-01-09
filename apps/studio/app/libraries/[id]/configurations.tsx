@@ -3,6 +3,9 @@
 import useDisclosure from "@/library/hooks/useDisclosure";
 import { ButtonedDialogProps } from "@/library/types/Dialog";
 import {
+  Accordion,
+  AccordionDetails,
+  AccordionSummary,
   Button,
   Dialog,
   DialogActions,
@@ -11,25 +14,26 @@ import {
   DialogTitle,
   FormLabel,
   Stack,
-  TextField, Typography
+  TextField,
+  Typography,
 } from "@mui/material";
 import { useActionState, useEffect } from "react";
 import { createConfigsAction } from "./actions";
 import Spinner from "@/library/ui/Navigation/Spinner/Spinner";
 import CodeEditor from "@/library/ui/Inputs/CodeEditor";
-import { LibraryWithConfigurations } from "@/library/types/Library";
 import { configurationSuggestions } from "./suggestions";
 import HiddenInput from "@/library/ui/Inputs/HiddenInput";
 import { Suggestion } from "@/library/types/Suggestions";
+import { AddRounded, ExpandMoreRounded } from "@mui/icons-material";
+import { useLibrary } from "./providers";
 
 /**
  * Component that renders the suggested configurations that a user might need
  */
-export function SuggestedConfigs({
-  library,
-}: {
-  library: LibraryWithConfigurations;
-}) {
+export function SuggestedConfigs() {
+  const { library, configurations } = useLibrary();
+  const suggestions = configurationSuggestions(library, configurations);
+  if (suggestions.length == 0) return <></>;
   return (
     <Stack
       id={"configurations-suggestions"}
@@ -43,10 +47,9 @@ export function SuggestedConfigs({
       >
         Suggested
       </Typography>
-      {configurationSuggestions(library).map((sug) => (
+      {suggestions.map((sug) => (
         <AddConfigButton
           key={sug.title}
-          library={library}
           variant="outlined"
           startIcon={sug.icon}
           name={sug.itemName}
@@ -66,11 +69,10 @@ export function SuggestedConfigs({
 export default function AddConfigButton(
   props: ButtonedDialogProps & {
     suggestion?: Suggestion;
-    library: LibraryWithConfigurations;
   }
 ) {
   const { open, handleClose, handleOpen } = useDisclosure();
-  const { dialogProps, children, library, suggestion, ...rest } = props;
+  const { dialogProps, children, suggestion, ...rest } = props;
   return (
     <>
       <Button
@@ -80,7 +82,6 @@ export default function AddConfigButton(
         {children ?? "Add Config"}
       </Button>
       <CreateConfigDialog
-        library={library}
         suggestion={suggestion}
         handleClose={handleClose}
         {...dialogProps}
@@ -96,12 +97,12 @@ export default function AddConfigButton(
 export function CreateConfigDialog(
   props: {
     handleClose: () => void;
-    library: LibraryWithConfigurations;
     suggestion?: Suggestion;
   } & DialogProps
 ) {
-  const { handleClose: _handleClose, library, suggestion, ...rest } = props;
+  const { handleClose: _handleClose, suggestion, ...rest } = props;
   const [state, formAction, pending] = useActionState(createConfigsAction, {});
+  const { library, configurations } = useLibrary();
 
   /**
    * Hijacking the handleClose function to prevent the dialog from closing when the user clicks outside the dialog or presses the escape key.
@@ -183,5 +184,53 @@ export function CreateConfigDialog(
         </Button>
       </DialogActions>
     </Dialog>
+  );
+}
+
+/**
+ * Accordion container for configurations of a library
+ */
+export function LibraryConfigurations() {
+  const { configurations } = useLibrary();
+
+  return (
+    <Accordion defaultExpanded>
+      <AccordionSummary expandIcon={<ExpandMoreRounded />}>
+        <Typography fontFamily={"var(--font-h)"}>Configurations</Typography>
+      </AccordionSummary>
+      <AccordionDetails>
+        <Stack id={"configurations-container"}>
+          <Stack
+            id={"configurations-controls"}
+            direction={"row"}
+            justifyContent={"space-between"}
+          >
+            <SuggestedConfigs />
+            <AddConfigButton
+              variant="text"
+              startIcon={<AddRounded />}
+            >
+              Add New
+            </AddConfigButton>
+          </Stack>
+
+          <Stack
+            direction={"row"}
+            alignItems={"flex-start"}
+            justifyContent={"flex-start"}
+            mt={4}
+          >
+            {configurations.map((c) => (
+              <Button
+                key={c.id}
+                variant="outlined"
+              >
+                {c.name}
+              </Button>
+            ))}
+          </Stack>
+        </Stack>
+      </AccordionDetails>
+    </Accordion>
   );
 }

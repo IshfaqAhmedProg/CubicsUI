@@ -1,16 +1,10 @@
-import {
-  Accordion,
-  AccordionDetails,
-  AccordionSummary,
-  Button,
-  Stack,
-  Typography,
-} from "@mui/material";
-import { AddRounded, ExpandMoreRounded } from "@mui/icons-material";
-import AddConfigButton, { SuggestedConfigs } from "./configurations";
+import { Stack } from "@mui/material";
+import { LibraryConfigurations } from "./configurations";
 import db from "@/db";
 import { notFound } from "next/navigation";
-import LibraryDetails, { DeleteLibraryButton } from "./details";
+import LibraryDetails from "./details";
+import LibraryProvider from "./providers";
+import DeleteLibraryButton from "./delete";
 
 export default async function CreateLibraryForm({
   params,
@@ -26,50 +20,18 @@ export default async function CreateLibraryForm({
   if (!id || !library) return notFound();
 
   return (
-    <Stack
-      component={"form"}
-      gap={3}
+    <LibraryProvider
+      library={library}
+      configurations={library.configurations}
     >
-      <LibraryDetails library={library} />
-      <Accordion defaultExpanded>
-        <AccordionSummary expandIcon={<ExpandMoreRounded />}>
-          <Typography fontFamily={"var(--font-h)"}>Configurations</Typography>
-        </AccordionSummary>
-        <AccordionDetails>
-          <Stack id={"configurations-container"}>
-            <Stack
-              id={"configurations-controls"}
-              alignItems={"flex-end"}
-            >
-              <AddConfigButton
-                library={library}
-                variant="text"
-                startIcon={<AddRounded />}
-              >
-                Add New
-              </AddConfigButton>
-            </Stack>
-            <SuggestedConfigs library={library} />
-
-            <Stack
-              direction={"row"}
-              alignItems={"flex-start"}
-              justifyContent={"flex-start"}
-              mt={4}
-            >
-              {library.configurations.map((c) => (
-                <Button
-                  key={c.id}
-                  variant="outlined"
-                >
-                  {c.name}
-                </Button>
-              ))}
-            </Stack>
-          </Stack>
-        </AccordionDetails>
-      </Accordion>
-      <DeleteLibraryButton library={library} />
-    </Stack>
+      <Stack
+        component={"form"}
+        gap={3}
+      >
+        <LibraryDetails />
+        <LibraryConfigurations />
+        <DeleteLibraryButton />
+      </Stack>
+    </LibraryProvider>
   );
 }

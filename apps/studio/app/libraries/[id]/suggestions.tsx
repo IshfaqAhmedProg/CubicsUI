@@ -2,11 +2,15 @@ import {
   samplePkgJson,
   sampleTsconfig,
 } from "@/library/constants/sampleCodeBlocks";
-import { LibraryWithConfigurations } from "@/library/types/Library";
+import { Library, LibraryWithConfigurations } from "@/library/types/Library";
 import { Suggestion } from "@/library/types/Suggestions";
 import { NodeJSLogo, TypescriptLogo } from "@/library/ui/Brand/Logos";
+import { configurations } from "@cubicsui/db";
 
-export function configurationSuggestions(library: LibraryWithConfigurations) {
+export function configurationSuggestions(
+  library: Library,
+  configurations: configurations[]
+) {
   const pkgJson: Suggestion = {
     itemName: "package.json",
     title: "Add a package.json",
@@ -22,11 +26,11 @@ export function configurationSuggestions(library: LibraryWithConfigurations) {
     sample: sampleTsconfig,
   };
   let suggestions: Suggestion[] = [];
-  if (!library?.configurations.some((cfg) => cfg.name == "package.json"))
+  if (!configurations.some((cfg) => cfg.name == "package.json"))
     suggestions.push(pkgJson);
 
   if (library?.lang == "Typescript") {
-    if (!library?.configurations.some((cfg) => cfg.name == "tsconfig.json"))
+    if (!configurations.some((cfg) => cfg.name == "tsconfig.json"))
       suggestions.push(tsconfig);
   }
   return suggestions;
