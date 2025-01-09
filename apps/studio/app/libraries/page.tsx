@@ -6,7 +6,7 @@ import Spinner from "@/library/ui/Navigation/Spinner/Spinner";
 
 export default async function LibrariesPage() {
   return (
-    <Stack>
+    <Stack gap={3}>
       <Stack alignItems={"flex-end"}>
         <CreateLibraryButton />
       </Stack>

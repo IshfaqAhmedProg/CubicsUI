@@ -80,6 +80,14 @@ const components:
       },
     },
   },
+  MuiFormControlLabel: {
+    styleOverrides: {
+      root: {
+        marginLeft: "unset",
+        marginRight: "unset",
+      },
+    },
+  },
   MuiFormLabel: {
     styleOverrides: {
       root: {

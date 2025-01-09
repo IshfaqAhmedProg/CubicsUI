@@ -49,3 +49,19 @@ export async function createConfigsAction(
   console.log("created config:", payload);
   redirect(`/libraries/${libId}`);
 }
+
+export async function deleteLibrary(
+  prevState: any,
+  formdata: FormData
+): ActionReturnType<FormActionReturnType> {
+  try {
+    const id = formdata.get("libId");
+    if (!id || typeof id !== "string")
+      throw new Error("libId is not defined or of the wrong type");
+    await db.libraries.delete({ where: { id } });
+  } catch (error) {
+    console.error(error);
+    if (error instanceof Error) return { errors: { Form: error.message } };
+  }
+  redirect("/libraries");
+}

@@ -11,9 +11,7 @@ import {
   DialogTitle,
   FormLabel,
   Stack,
-  TextField,
-  Tooltip,
-  Typography,
+  TextField, Typography
 } from "@mui/material";
 import { useActionState, useEffect } from "react";
 import { createConfigsAction } from "./actions";
@@ -127,7 +125,7 @@ export function CreateConfigDialog(
       fullWidth
     >
       <DialogTitle>
-        Create {suggestion ? suggestion.itemName : "Configuration"}
+        Add {suggestion ? suggestion.itemName : "Configuration"}
       </DialogTitle>
       <DialogContent>
         <Stack
@@ -181,7 +179,7 @@ export function CreateConfigDialog(
           disabled={pending}
           endIcon={pending ? <Spinner /> : undefined}
         >
-          Create
+          Add
         </Button>
       </DialogActions>
     </Dialog>

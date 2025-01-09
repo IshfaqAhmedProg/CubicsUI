@@ -10,6 +10,7 @@ import { AddRounded, ExpandMoreRounded } from "@mui/icons-material";
 import AddConfigButton, { SuggestedConfigs } from "./configurations";
 import db from "@/db";
 import { notFound } from "next/navigation";
+import LibraryDetails, { DeleteLibraryButton } from "./details";
 
 export default async function CreateLibraryForm({
   params,
@@ -21,7 +22,6 @@ export default async function CreateLibraryForm({
     where: { id },
     include: { configurations: true },
   });
-  console.log("library", library);
 
   if (!id || !library) return notFound();
 
@@ -30,14 +30,7 @@ export default async function CreateLibraryForm({
       component={"form"}
       gap={3}
     >
-      <Stack alignItems={"flex-end"}>
-        <Button
-          type="submit"
-          variant="contained"
-        >
-          Save
-        </Button>
-      </Stack>
+      <LibraryDetails library={library} />
       <Accordion defaultExpanded>
         <AccordionSummary expandIcon={<ExpandMoreRounded />}>
           <Typography fontFamily={"var(--font-h)"}>Configurations</Typography>
@@ -76,6 +69,7 @@ export default async function CreateLibraryForm({
           </Stack>
         </AccordionDetails>
       </Accordion>
+      <DeleteLibraryButton library={library} />
     </Stack>
   );
 }

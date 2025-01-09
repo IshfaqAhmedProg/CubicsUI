@@ -1,36 +1,25 @@
-import {
-  Button,
-  List,
-  ListItem,
-  ListItemButton,
-  ListItemText,
-} from "@mui/material";
-import Link from "next/link";
+import { Stack, Typography } from "@mui/material";
 import db from "@/db";
+import LibraryCard from "@/library/ui/Layout/Cards/LibraryCard";
+import Link from "next/link";
 
 export default async function LibrariesList() {
   const results = await db.libraries.findMany({ take: 10 });
 
-  console.log(results);
   return (
-    <List>
+    <Stack gap={2}>
       {results.length == 0 ? (
-        <ListItem>
-          <ListItemText>No libraries found!</ListItemText>
-        </ListItem>
+        <Typography>No libraries found!</Typography>
       ) : (
-        results.map((r, i) => (
-          <ListItem key={r.id}>
-            <Button>Delete</Button>
-            <ListItemButton
-              LinkComponent={Link}
-              href={`/libraries/${r.id}`}
-            >
-              {r.name}
-            </ListItemButton>
-          </ListItem>
+        results.map((r) => (
+          <LibraryCard
+            LinkComponent={Link}
+            href={`/libraries/${r.id}`}
+            key={r.id}
+            library={r}
+          />
         ))
       )}
-    </List>
+    </Stack>
   );
 }
