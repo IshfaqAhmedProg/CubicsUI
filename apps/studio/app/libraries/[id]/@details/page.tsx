@@ -84,7 +84,7 @@ export default function LibraryDetailsPage() {
         defaultValue={library.desc}
         name="desc"
         multiline
-        minRows={4}
+        minRows={2}
         disabled={pending}
       />
       <Button

@@ -17,7 +17,10 @@ export default async function LibraryConfigurationsPage({
   const configurations = await db.configurations.findMany({ where: { libId } });
 
   return (
-    <>
+    <Stack
+      id={"components-container"}
+      gap={2}
+    >
       <ConfigurationSuggestions configurations={configurations} />
       <Stack
         direction={"row"}
@@ -50,6 +53,6 @@ export default async function LibraryConfigurationsPage({
           );
         })}
       </Stack>
-    </>
+    </Stack>
   );
 }

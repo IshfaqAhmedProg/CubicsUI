@@ -21,15 +21,15 @@ export const colorSchemeLight: ColorSystemOptions = {
     divider: "rgba(0,0,0,0.2)",
     background: {
       default: "rgb(255,250,250)",
-      paper: "rgba(242,242,242,0.6)",
+      paper: "rgba(235,235,235,0.6)",
     },
     text: {
-      primary: "rgb(23,23,23)",
-      secondary: "rgb(23,23,23,0.8)",
-      disabled: "rgba(23,23,23,0.5)",
+      primary: "rgb(35,35,35)",
+      secondary: "rgb(35,35,35,0.8)",
+      disabled: "rgba(35,35,35,0.5)",
     },
     Skeleton: {
-      bg: "rgba(242,242,242,0.6)",
+      bg: "rgba(235,235,235,0.6)",
     },
   },
 };

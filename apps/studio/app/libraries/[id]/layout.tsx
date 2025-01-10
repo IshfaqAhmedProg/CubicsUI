@@ -9,6 +9,7 @@ interface LibraryLayoutProps {
   children: ReactNode;
   details: ReactNode;
   configurations: ReactNode;
+  components: ReactNode;
   params: Promise<{ id: string }>;
 }
 
@@ -16,6 +17,7 @@ export default async function LibraryLayout({
   children,
   details,
   configurations,
+  components,
   params,
 }: LibraryLayoutProps) {
   const id = (await params).id;
@@ -34,7 +36,10 @@ export default async function LibraryLayout({
       <Stack gap={3}>
         {children}
         {details}
+
         {configurations}
+
+        {components}
         <DeleteLibraryButton />
       </Stack>
     </LibraryProvider>
