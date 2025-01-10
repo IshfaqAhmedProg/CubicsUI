@@ -16,7 +16,7 @@ model configurations {
   updated DateTime @updatedAt
 
   libId String    @db.ObjectId
-  lib   libraries @relation(fields: [libId], references: [id])
+  lib   libraries @relation(fields: [libId], references: [id], onDelete: Cascade, onUpdate: Cascade)
 }
 
 enum Language {
