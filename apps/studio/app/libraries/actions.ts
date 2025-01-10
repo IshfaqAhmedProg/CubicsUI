@@ -2,7 +2,6 @@
 
 import { createLibrarySchema } from "./schema";
 import db from "@/db";
-import { revalidatePath } from "next/cache";
 import { libraries, Prisma } from "@cubicsui/db";
 import { z } from "zod";
 import { redirect } from "next/navigation";

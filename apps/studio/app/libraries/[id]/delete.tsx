@@ -10,7 +10,7 @@ import {
   Typography,
 } from "@mui/material";
 import { useActionState } from "react";
-import { deleteLibrary } from "./actions";
+import { deleteLibraryAction } from "./actions";
 import Spinner from "@/library/ui/Navigation/Spinner/Spinner";
 import HiddenInput from "@/library/ui/Inputs/HiddenInput";
 import { useLibrary } from "./providers";
@@ -18,7 +18,7 @@ import { useLibrary } from "./providers";
 export default function DeleteLibraryButton(props: ButtonedDialogProps) {
   const { open, handleClose, handleOpen } = useDisclosure();
   const { dialogProps, children, ...rest } = props;
-  const [state, action, pending] = useActionState(deleteLibrary, {});
+  const [state, action, pending] = useActionState(deleteLibraryAction, {});
   const { library } = useLibrary();
 
   return (

@@ -13,7 +13,9 @@ export type CodeEditorProps = {
 export default function CodeEditor(props: CodeEditorProps) {
   const { mode } = useColorScheme();
   const { boxProps, name, id, height = "50vh", textareaProps, ...rest } = props;
-  const [editorData, setEditorData] = useState<string | undefined>();
+  const [editorData, setEditorData] = useState<string | undefined>(
+    props.defaultValue
+  );
   return (
     <Box
       component={Paper}

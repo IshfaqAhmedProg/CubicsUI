@@ -13,36 +13,33 @@ import {
   DialogProps,
   DialogTitle,
   FormLabel,
-  IconButton,
   Paper,
   Stack,
   TextField,
   Typography,
 } from "@mui/material";
-import { useActionState, useEffect } from "react";
-import { createConfigsAction } from "./actions";
+import { useActionState } from "react";
+import { configsAction } from "./actions";
 import Spinner from "@/library/ui/Navigation/Spinner/Spinner";
 import CodeEditor from "@/library/ui/Inputs/CodeEditor";
 import { knownConfigurations, SuggestedConfigs } from "./suggestions";
 import HiddenInput from "@/library/ui/Inputs/HiddenInput";
 import { Suggestion } from "@/library/types/Suggestions";
-import {
-  AddRounded,
-  DeleteRounded,
-  ExpandMoreRounded,
-} from "@mui/icons-material";
+import { AddRounded, ExpandMoreRounded } from "@mui/icons-material";
 import { useLibrary } from "./providers";
+import { configurations } from "@cubicsui/db";
 
 /**
  * Button which opens a dialog to create a `configuration`.
  */
 export default function ConfigurationButton(
   props: ButtonedDialogProps & {
+    configuration?: configurations;
     suggestion?: Suggestion;
   }
 ) {
   const { open, handleClose, handleOpen } = useDisclosure();
-  const { dialogProps, children, suggestion, ...rest } = props;
+  const { dialogProps, children, configuration, suggestion, ...rest } = props;
   return (
     <>
       <Button
@@ -53,6 +50,7 @@ export default function ConfigurationButton(
       </Button>
       <ConfigurationDialog
         suggestion={suggestion}
+        configuration={configuration}
         handleClose={handleClose}
         {...dialogProps}
         open={open}
@@ -61,18 +59,25 @@ export default function ConfigurationButton(
   );
 }
 
+export interface ConfigurationDialogProps extends DialogProps {
+  handleClose: () => void;
+  configuration?: configurations;
+  suggestion?: Suggestion;
+}
+
 /**
  * Dialog to create a configuration, consists of a form containing inputs for the configuration name and data.
  */
-export function ConfigurationDialog(
-  props: {
-    handleClose: () => void;
-    suggestion?: Suggestion;
-  } & DialogProps
-) {
-  const { handleClose: _handleClose, suggestion, ...rest } = props;
-  const [state, formAction, pending] = useActionState(createConfigsAction, {});
+export function ConfigurationDialog(props: ConfigurationDialogProps) {
+  const {
+    handleClose: _handleClose,
+    suggestion,
+    configuration,
+    ...rest
+  } = props;
+  const [state, formAction, pending] = useActionState(configsAction, {});
   const { library } = useLibrary();
+  console.log({ formState: state });
 
   /**
    * Hijacking the handleClose function to prevent the dialog from closing when the user clicks outside the dialog or presses the escape key.
@@ -81,22 +86,20 @@ export function ConfigurationDialog(
     if (reason === "backdropClick" || reason === "escapeKeyDown") return;
     _handleClose();
   }
-  console.log("Current form state:", state);
 
-  useEffect(() => {
-    if (state?.status == "success") {
-      _handleClose();
-    }
-  }, [state]);
   return (
     <Dialog
       onClose={handleClose}
       {...rest}
-      PaperProps={{ component: "form", action: formAction }}
+      PaperProps={{
+        component: "form",
+        action: formAction,
+      }}
       fullWidth
     >
       <DialogTitle>
-        Add {suggestion ? suggestion.itemName : "Configuration"}
+        {configuration ? "Edit" : "Add"}{" "}
+        {suggestion ? suggestion.itemName : "Configuration"}
       </DialogTitle>
       <DialogContent>
         <Stack
@@ -108,6 +111,12 @@ export function ConfigurationDialog(
             name="libId"
             value={library.id}
           />
+          {configuration && (
+            <HiddenInput
+              name="configId"
+              value={configuration.id}
+            />
+          )}
           {suggestion ? (
             <HiddenInput
               name="name"
@@ -117,6 +126,7 @@ export function ConfigurationDialog(
             <TextField
               id="name"
               name="name"
+              defaultValue={configuration?.name}
               error={Boolean(state?.errors?.name)}
               disabled={pending}
               helperText={state?.errors?.name}
@@ -132,16 +142,28 @@ export function ConfigurationDialog(
             name="data"
             language="json"
             defaultValue={
-              suggestion?.sample ?? "Enter your configuration details here"
+              configuration?.data ??
+              suggestion?.sample ??
+              "Enter your configuration details here"
             }
           />
         </Stack>
       </DialogContent>
       <DialogActions>
+        {configuration && (
+          <Button
+            color="error"
+            variant="text"
+            type="button"
+          >
+            Delete
+          </Button>
+        )}
         <Button
           disabled={pending}
           onClick={_handleClose}
           variant="text"
+          type="button"
         >
           Cancel
         </Button>
@@ -150,7 +172,7 @@ export function ConfigurationDialog(
           disabled={pending}
           endIcon={pending ? <Spinner /> : undefined}
         >
-          Add
+          {configuration ? "Update" : "Add"}
         </Button>
       </DialogActions>
     </Dialog>
@@ -161,7 +183,7 @@ export function ConfigurationDialog(
  * Accordion container for configurations of a library
  */
 export function LibraryConfigurations() {
-  const { library, configurations } = useLibrary();
+  const { configurations } = useLibrary();
 
   return (
     <Accordion defaultExpanded>
@@ -191,9 +213,10 @@ export function LibraryConfigurations() {
             </ConfigurationButton>
             {configurations.map((c) => {
               return (
-                <Button
+                <ConfigurationButton
                   key={c.id}
                   variant="outlined"
+                  configuration={c}
                   startIcon={
                     Object.values(knownConfigurations).find(
                       (kc) => kc.itemName == c.name
@@ -201,7 +224,7 @@ export function LibraryConfigurations() {
                   }
                 >
                   {c.name}
-                </Button>
+                </ConfigurationButton>
               );
             })}
           </Stack>

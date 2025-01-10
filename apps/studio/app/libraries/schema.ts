@@ -15,3 +15,6 @@ export const createConfigSchema = z.object({
 export const updateLibrarySchema = createLibrarySchema.extend({
   desc: z.string().optional(),
 });
+export const updateConfigSchema = createConfigSchema.extend({
+  libId: z.string().optional(),
+});

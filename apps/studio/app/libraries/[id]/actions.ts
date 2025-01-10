@@ -8,31 +8,55 @@ import {
 import { configurations, libraries, Prisma } from "@cubicsui/db";
 import { redirect } from "next/navigation";
 import { z } from "zod";
-import { createConfigSchema, updateLibrarySchema } from "../schema";
+import {
+  createConfigSchema,
+  updateConfigSchema,
+  updateLibrarySchema,
+} from "../schema";
 import { revalidatePath } from "next/cache";
 
-export async function createConfigsAction(
+export async function configsAction(
   prevState: any,
   formdata: FormData
 ): ActionReturnType<FormActionReturnType> {
   let errors: FormActionReturnType["errors"] = {};
   let payload: configurations;
   let libId: any;
+
   try {
     // Validate inputs
     libId = formdata.get("libId");
     if (!libId || typeof libId !== "string")
       throw new Error("Library id is not defined");
 
-    const validatedInputs = createConfigSchema.parse({
-      name: formdata.get("name"),
-      data: formdata.get("data"),
-      libId: formdata.get("libId"),
-    });
-    // Create the library in the db
-    payload = await db.configurations.create({
-      data: validatedInputs,
-    });
+    const configId = formdata.get("configId");
+    if (!configId) {
+      // Create the config
+      const validatedInputs = createConfigSchema.parse({
+        name: formdata.get("name"),
+        data: formdata.get("data"),
+        libId: formdata.get("libId"),
+      });
+      // Create the library in the db
+      payload = await db.configurations.create({
+        data: validatedInputs,
+      });
+      console.log("created config:", payload);
+    } else if (typeof configId == "string") {
+      // Update the config
+
+      const validatedInputs = updateConfigSchema.parse({
+        name: formdata.get("name"),
+        data: formdata.get("data"),
+      });
+      payload = await db.configurations.update({
+        where: { id: configId },
+        data: validatedInputs,
+      });
+      console.log("updated config:", payload);
+      revalidatePath(`/libraries/${libId}`);
+      return { status: "success" };
+    }
   } catch (err) {
     console.error(err);
     if (err instanceof z.ZodError) {
@@ -43,11 +67,10 @@ export async function createConfigsAction(
     }
     return { status: "error", errors };
   }
-  console.log("created config:", payload);
   redirect(`/libraries/${libId}`);
 }
 
-export async function updateLibrary(
+export async function updateLibraryAction(
   prevState: any,
   formdata: FormData
 ): ActionReturnType<FormActionReturnType> {
@@ -86,7 +109,7 @@ export async function updateLibrary(
   }
 }
 
-export async function deleteLibrary(
+export async function deleteLibraryAction(
   prevState: any,
   formdata: FormData
 ): ActionReturnType<FormActionReturnType> {

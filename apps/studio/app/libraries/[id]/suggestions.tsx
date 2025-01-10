@@ -65,10 +65,10 @@ export function SuggestedConfigs() {
       {suggestions.map((sug) => (
         <ConfigurationButton
           key={sug.title}
+          suggestion={sug}
           variant="outlined"
           startIcon={sug.icon}
           name={sug.itemName}
-          suggestion={sug}
           title={sug.desc}
         >
           {sug.title}

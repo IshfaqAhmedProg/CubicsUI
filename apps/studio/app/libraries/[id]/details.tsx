@@ -16,14 +16,14 @@ import {
 } from "@mui/material";
 import { useLibrary } from "./providers";
 import supportedLangs from "@/library/constants/supportedLangs";
-import { updateLibrary } from "./actions";
+import { updateLibraryAction } from "./actions";
 import { useActionState } from "react";
 import Spinner from "@/library/ui/Navigation/Spinner/Spinner";
 import HiddenInput from "@/library/ui/Inputs/HiddenInput";
 
 export default function LibraryDetails() {
   const { library } = useLibrary();
-  const [state, formAction, pending] = useActionState(updateLibrary, {});
+  const [state, formAction, pending] = useActionState(updateLibraryAction, {});
   return (
     <Accordion defaultExpanded>
       <AccordionSummary expandIcon={<ExpandMoreRounded />}>
