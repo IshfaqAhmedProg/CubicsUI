@@ -1,11 +1,5 @@
-import Spinner from "@/library/ui/Navigation/Spinner/Spinner";
-import React from "react";
+import { Skeleton } from "@mui/material";
 
 export default function LibraryDetailsLoading() {
-  return (
-    <Spinner
-      centered
-      size={24}
-    />
-  );
+  return <Skeleton height={210} />;
 }

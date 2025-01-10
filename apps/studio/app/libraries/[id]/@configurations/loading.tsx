@@ -1,5 +1,5 @@
-import React from "react";
+import { Skeleton } from "@mui/material";
 
 export default function ConfigurationsLoading() {
-  return <div>loading configurations...</div>;
+  return <Skeleton height={100} />;
 }

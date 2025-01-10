@@ -2,19 +2,21 @@
 import useDisclosure from "@/library/hooks/useDisclosure";
 import { AddRounded } from "@mui/icons-material";
 import {
-  Button, Dialog,
+  Button,
+  Dialog,
   DialogActions,
   DialogContent,
   DialogProps,
   DialogTitle,
-  FormControl, FormLabel,
+  FormControl,
+  FormLabel,
   InputLabel,
   ListItemText,
   MenuItem,
   Select,
   Stack,
   TextField,
-  Typography
+  Typography,
 } from "@mui/material";
 import { createLibraryAction } from "./actions";
 import { useActionState } from "react";
@@ -109,6 +111,7 @@ export function CreateLibraryDialog({
               hiddenLabel
               required
               disabled={pending}
+              fullWidth
             >
               <InputLabel id="lang-label">Language</InputLabel>
               <Select
@@ -129,6 +132,7 @@ export function CreateLibraryDialog({
                         direction={"row"}
                         alignItems={"center"}
                         gap={2}
+                        height={"100%"}
                       >
                         <Logo fontSize="small" />
                         <ListItemText primary={name} />
@@ -141,6 +145,7 @@ export function CreateLibraryDialog({
             <Typography
               color="textSecondary"
               variant="body2"
+              minWidth={"35ch"}
             >
               Select the language of the package.
               <br />* More coming soon!

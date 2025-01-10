@@ -41,6 +41,7 @@ const components:
   MuiAccordionDetails: {
     styleOverrides: {
       root: {
+        position: "relative",
         padding:
           "calc(1 * var(--spacing)) calc(4 * var(--spacing)) calc(4 * var(--spacing))",
       },
@@ -76,7 +77,9 @@ const components:
     styleOverrides: { root: { padding: "calc(5 * var(--spacing))" } },
   },
   MuiDialogContent: {
-    styleOverrides: { root: { padding: "unset", maxWidth: "unset" } },
+    styleOverrides: {
+      root: { padding: "unset", maxWidth: "unset" },
+    },
   },
   MuiDialogTitle: {
     styleOverrides: {
@@ -146,6 +149,9 @@ const components:
         minHeight: "unset",
       },
     },
+  },
+  MuiSkeleton: {
+    defaultProps: { animation: "wave", variant: "rounded" },
   },
   MuiSvgIcon: {
     styleOverrides: {

@@ -1,9 +1,9 @@
 import { ExpandMoreRounded } from "@mui/icons-material";
 import {
-    Accordion,
-    AccordionSummary,
-    Typography,
-    AccordionDetails,
+  Accordion,
+  AccordionSummary,
+  Typography,
+  AccordionDetails
 } from "@mui/material";
 import { ReactNode } from "react";
 

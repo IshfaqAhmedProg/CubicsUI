@@ -28,6 +28,9 @@ export const colorSchemeLight: ColorSystemOptions = {
       secondary: "rgb(23,23,23,0.8)",
       disabled: "rgba(23,23,23,0.5)",
     },
+    Skeleton: {
+      bg: "rgba(242,242,242,0.6)",
+    },
   },
 };
 export const colorSchemeDark: ColorSystemOptions = {
@@ -41,6 +44,9 @@ export const colorSchemeDark: ColorSystemOptions = {
       primary: "rgb(240,240,240)",
       secondary: "rgb(240,240,240,0.5)",
       disabled: "rgba(240,240,240,0.2)",
+    },
+    Skeleton: {
+      bg: "rgba(23,23,23,0.6)",
     },
   },
 };
