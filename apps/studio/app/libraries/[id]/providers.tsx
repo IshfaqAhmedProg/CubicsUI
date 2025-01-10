@@ -1,12 +1,10 @@
 "use client";
 
-import { Library, LibraryWithConfigurations } from "@/library/types/Library";
-import { configurations } from "@cubicsui/db";
-import { createContext, ReactNode, useContext, useState } from "react";
+import { Library } from "@/library/types/Library";
+import { createContext, ReactNode, useContext } from "react";
 
 export interface LibraryContextProps {
   library: Library;
-  configurations: configurations[];
 }
 export interface LibraryProviderProps extends LibraryContextProps {
   children: ReactNode;
@@ -22,10 +20,9 @@ export function useLibrary() {
 export default function LibraryProvider({
   children,
   library,
-  configurations,
 }: LibraryProviderProps) {
   return (
-    <LibraryContext.Provider value={{ library, configurations }}>
+    <LibraryContext.Provider value={{ library }}>
       {children}
     </LibraryContext.Provider>
   );

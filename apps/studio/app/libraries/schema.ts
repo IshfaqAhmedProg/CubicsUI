@@ -2,9 +2,11 @@ import { npmPackageNameRegex } from "@/library/functions/packageNaming";
 import { z } from "zod";
 
 export const createLibrarySchema = z.object({
-  name: z.string().regex(npmPackageNameRegex, {
-    message: "Name should follow npm package naming conventions",
-  }),
+  name: z
+    .string({ message: "Name should always be string" })
+    .regex(npmPackageNameRegex, {
+      message: "Name should follow npm package naming conventions",
+    }),
   lang: z.enum(["Javascript", "Typescript"]),
 });
 export const createConfigSchema = z.object({

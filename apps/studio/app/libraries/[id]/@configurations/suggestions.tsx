@@ -4,34 +4,24 @@ import {
   samplePkgJson,
   sampleTsconfig,
 } from "@/library/constants/sampleCodeBlocks";
-import { Library } from "@/library/types/Library";
 import { Suggestion } from "@/library/types/Suggestions";
-import { NodeJSLogo, TypescriptLogo } from "@/library/ui/Brand/Logos";
 import { configurations } from "@cubicsui/db";
 import { Paper, Stack, Typography } from "@mui/material";
-import { useLibrary } from "./providers";
-import ConfigurationButton from "./configurations";
+import { useLibrary } from "../providers";
+import ConfigurationButton from "./button";
+import { knownConfigurations } from "../../../../library/constants/knownConfigurations";
 
-export const knownConfigurations = {
-  packageJson: {
-    itemName: "package.json",
-    title: "Add a package.json",
-    icon: <NodeJSLogo />,
-    desc: "A package.json file helps CubicsUI assess third-party dependencies used in the library.",
-  },
-  tsconfigJson: {
-    itemName: "tsconfig.json",
-    title: "Add a tsconfig.json",
-    icon: <TypescriptLogo />,
-    desc: "A tsconfig file helps CubicsUI assess import aliases and other typescript configurations.",
-  },
-};
+interface ConfigurationSuggestionsProps {
+  configurations: configurations[];
+}
 
 /**
  * Component that renders the suggested configurations that a user might need
  */
-export function SuggestedConfigs() {
-  const { library, configurations } = useLibrary();
+export function ConfigurationSuggestions({
+  configurations,
+}: ConfigurationSuggestionsProps) {
+  const { library } = useLibrary();
   let suggestions: Suggestion[] = [];
   if (!configurations.some((cfg) => cfg.name == "package.json"))
     suggestions.push({

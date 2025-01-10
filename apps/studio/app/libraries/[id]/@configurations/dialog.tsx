@@ -1,11 +1,6 @@
 "use client";
 
-import useDisclosure from "@/library/hooks/useDisclosure";
-import { ButtonedDialogProps } from "@/library/types/Dialog";
 import {
-  Accordion,
-  AccordionDetails,
-  AccordionSummary,
   Button,
   Dialog,
   DialogActions,
@@ -13,51 +8,17 @@ import {
   DialogProps,
   DialogTitle,
   FormLabel,
-  Paper,
   Stack,
   TextField,
-  Typography,
 } from "@mui/material";
 import { useActionState } from "react";
-import { configsAction } from "./actions";
 import Spinner from "@/library/ui/Navigation/Spinner/Spinner";
 import CodeEditor from "@/library/ui/Inputs/CodeEditor";
-import { knownConfigurations, SuggestedConfigs } from "./suggestions";
 import HiddenInput from "@/library/ui/Inputs/HiddenInput";
 import { Suggestion } from "@/library/types/Suggestions";
-import { AddRounded, ExpandMoreRounded } from "@mui/icons-material";
-import { useLibrary } from "./providers";
 import { configurations } from "@cubicsui/db";
-
-/**
- * Button which opens a dialog to create a `configuration`.
- */
-export default function ConfigurationButton(
-  props: ButtonedDialogProps & {
-    configuration?: configurations;
-    suggestion?: Suggestion;
-  }
-) {
-  const { open, handleClose, handleOpen } = useDisclosure();
-  const { dialogProps, children, configuration, suggestion, ...rest } = props;
-  return (
-    <>
-      <Button
-        onClick={handleOpen}
-        {...rest}
-      >
-        {children ?? "Add Config"}
-      </Button>
-      <ConfigurationDialog
-        suggestion={suggestion}
-        configuration={configuration}
-        handleClose={handleClose}
-        {...dialogProps}
-        open={open}
-      />
-    </>
-  );
-}
+import { useLibrary } from "../providers";
+import { configsAction } from "./actions";
 
 export interface ConfigurationDialogProps extends DialogProps {
   handleClose: () => void;
@@ -176,60 +137,5 @@ export function ConfigurationDialog(props: ConfigurationDialogProps) {
         </Button>
       </DialogActions>
     </Dialog>
-  );
-}
-
-/**
- * Accordion container for configurations of a library
- */
-export function LibraryConfigurations() {
-  const { configurations } = useLibrary();
-
-  return (
-    <Accordion defaultExpanded>
-      <AccordionSummary expandIcon={<ExpandMoreRounded />}>
-        <Typography>Configurations</Typography>
-      </AccordionSummary>
-      <AccordionDetails>
-        <Stack
-          id={"configurations-container"}
-          gap={2}
-        >
-          <SuggestedConfigs />
-
-          <Stack
-            direction={"row"}
-            alignItems={"flex-start"}
-            justifyContent={"flex-start"}
-            gap={2}
-            p={2}
-            component={Paper}
-          >
-            <ConfigurationButton
-              variant="text"
-              startIcon={<AddRounded />}
-            >
-              Add New
-            </ConfigurationButton>
-            {configurations.map((c) => {
-              return (
-                <ConfigurationButton
-                  key={c.id}
-                  variant="outlined"
-                  configuration={c}
-                  startIcon={
-                    Object.values(knownConfigurations).find(
-                      (kc) => kc.itemName == c.name
-                    )?.icon
-                  }
-                >
-                  {c.name}
-                </ConfigurationButton>
-              );
-            })}
-          </Stack>
-        </Stack>
-      </AccordionDetails>
-    </Accordion>
   );
 }
