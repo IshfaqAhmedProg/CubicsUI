@@ -20,9 +20,14 @@ const components:
   MuiAccordionSummary: {
     styleOverrides: {
       content: {
+        "& > .MuiTypography-root": {
+          fontFamily: "var(--font-h)",
+        },
         "&.Mui-expanded": {
           margin: "unset",
-          "& > .MuiTypography-root": { color: "var(--palette-text-secondary)" },
+          "& > .MuiTypography-root": {
+            color: "var(--palette-text-secondary)",
+          },
         },
       },
       root: {
@@ -133,7 +138,15 @@ const components:
       paper: { backgroundColor: "var(--palette-background-default)" },
     },
   },
-  MuiSelect: { defaultProps: { size: "small" } },
+  MuiSelect: {
+    defaultProps: { size: "small" },
+    styleOverrides: {
+      select: {
+        height: "1.4375rem",
+        minHeight: "unset",
+      },
+    },
+  },
   MuiSvgIcon: {
     styleOverrides: {
       root: {

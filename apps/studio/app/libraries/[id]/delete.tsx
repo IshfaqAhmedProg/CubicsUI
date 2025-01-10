@@ -49,8 +49,8 @@ export default function DeleteLibraryButton(props: ButtonedDialogProps) {
             px={6}
             color={"textSecondary"}
           >
-            Are you sure you want to delete {library.name}, this action is
-            irreversible.
+            Are you sure you want to delete {library.name} and all the
+            configurations and components, this action is irreversible.
           </Typography>
         </DialogContent>
         <DialogActions>

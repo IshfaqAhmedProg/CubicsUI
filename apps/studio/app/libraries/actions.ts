@@ -46,20 +46,3 @@ export async function createLibraryAction(
   console.log("lib from db:", payload);
   redirect(`/libraries/${payload.id}`);
 }
-
-export async function deleteLibrariesAction(formdata: FormData) {
-  try {
-    const ids = formdata.getAll("librariesIds");
-    if (!ids || ids.length == 0) throw new Error("No ids selected");
-    console.log(ids);
-    // await db.libraries.delete({
-    //   where: {
-    //     id,
-    //   },
-    // });
-    console.log("Succesfully deleted!");
-    // revalidatePath("/libraries", "page");
-  } catch (error) {
-    console.error("Delete failed!", error);
-  }
-}

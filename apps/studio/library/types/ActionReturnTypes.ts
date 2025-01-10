@@ -4,6 +4,7 @@ export type FormActionReturnType = {
     [x: number]: string | undefined;
     [x: symbol]: string | undefined;
   };
+  payload?: any;
   status?: "success" | "error";
 };
 

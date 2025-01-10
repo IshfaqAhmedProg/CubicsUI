@@ -24,10 +24,7 @@ export default async function CreateLibraryForm({
       library={library}
       configurations={library.configurations}
     >
-      <Stack
-        component={"form"}
-        gap={3}
-      >
+      <Stack gap={3}>
         <LibraryDetails />
         <LibraryConfigurations />
         <DeleteLibraryButton />
