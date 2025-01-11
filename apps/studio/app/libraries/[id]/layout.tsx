@@ -1,9 +1,16 @@
-import { Stack, Typography } from "@mui/material";
+import {
+  Accordion,
+  AccordionDetails,
+  AccordionSummary,
+  Stack,
+  Typography,
+} from "@mui/material";
 import { ReactNode } from "react";
 import { notFound } from "next/navigation";
 import db from "@/db";
 import LibraryProvider from "./providers";
 import DeleteLibraryButton from "./delete";
+import { ExpandMoreRounded } from "@mui/icons-material";
 
 interface LibraryLayoutProps {
   children: ReactNode;
@@ -35,11 +42,34 @@ export default async function LibraryLayout({
     <LibraryProvider library={library}>
       <Stack gap={3}>
         {children}
-        {details}
 
-        {configurations}
+        <Accordion defaultExpanded>
+          <AccordionSummary expandIcon={<ExpandMoreRounded />}>
+            <Typography>Details</Typography>
+          </AccordionSummary>
+          <AccordionDetails>{details}</AccordionDetails>
+        </Accordion>
 
-        {components}
+        <Accordion defaultExpanded>
+          <AccordionSummary expandIcon={<ExpandMoreRounded />}>
+            <Typography>Configurations</Typography>
+          </AccordionSummary>
+          <AccordionDetails>
+            <Stack
+              id={"configurations-container"}
+              gap={2}
+            >
+              {configurations}
+            </Stack>
+          </AccordionDetails>
+        </Accordion>
+
+        <Accordion expanded>
+          <AccordionSummary>
+            <Typography>Components</Typography>
+          </AccordionSummary>
+          <AccordionDetails>{components}</AccordionDetails>
+        </Accordion>
         <DeleteLibraryButton />
       </Stack>
     </LibraryProvider>
