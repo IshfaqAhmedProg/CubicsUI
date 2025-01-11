@@ -60,7 +60,6 @@ export default function LibraryCard({
           <Tooltip title={`Created on ${formattedDates.created}`}>
             <Typography
               variant="body2"
-              color="textSecondary"
               display={"flex"}
               alignItems={"center"}
               gap={1}
@@ -73,7 +72,6 @@ export default function LibraryCard({
           <Tooltip title={`Modified on ${formattedDates.updated}`}>
             <Typography
               variant="body2"
-              color="textSecondary"
               display={"flex"}
               alignItems={"center"}
               gap={1}

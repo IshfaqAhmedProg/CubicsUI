@@ -143,7 +143,6 @@ export function CreateLibraryDialog({
               </Select>
             </FormControl>
             <Typography
-              color="textSecondary"
               variant="body2"
               minWidth={"35ch"}
             >

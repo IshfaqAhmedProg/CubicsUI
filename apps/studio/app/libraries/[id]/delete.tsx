@@ -47,7 +47,6 @@ export default function DeleteLibraryButton(props: ButtonedDialogProps) {
           <Typography
             variant="body2"
             px={6}
-            color={"textSecondary"}
           >
             Are you sure you want to delete {library.name} and all the
             configurations and components, this action is irreversible.

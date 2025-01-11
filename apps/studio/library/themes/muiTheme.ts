@@ -15,6 +15,7 @@ const muiTheme = createTheme({
   shape: { borderRadius: 6 },
   typography: {
     fontFamily: ["var(--font-p)", "var(--font-h)"].join(","),
+    body2: { color: "var(--palette-text-secondary)" },
   },
 });
 

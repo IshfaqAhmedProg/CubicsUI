@@ -46,12 +46,7 @@ export function ConfigurationSuggestions({
       gap={2}
       p={2}
     >
-      <Typography
-        variant="body2"
-        color="textSecondary"
-      >
-        Suggested
-      </Typography>
+      <Typography variant="body2">Suggested</Typography>
       {suggestions.map((sug) => (
         <ConfigurationButton
           key={sug.title}
