@@ -43,12 +43,8 @@ model libraries {
 
 model components {
   /// Id of the library the component belongs 
-  libId String    @db.ObjectId
-  lib   libraries @relation(fields: [libId], references: [id])
-
-  /// Id of the codeblock associated with the component
-  cbId String @db.ObjectId
-
+  libId   String       @db.ObjectId
+  lib     libraries    @relation(fields: [libId], references: [id], onDelete: Cascade, onUpdate: Cascade)
   /// Id of the component
   id      String       @id @default(auto()) @map("_id") @db.ObjectId
   /// A unique name following npm package naming convention
@@ -66,14 +62,19 @@ model components {
 
   created DateTime @default(now())
   updated DateTime @updatedAt
+
+  /// Id of the codeblock associated with the component
+  cbId       String     @db.ObjectId
+  codeblocks codeblocks @relation(fields: [cbId], references: [id], onDelete: Cascade, onUpdate: Cascade)
 }
 
 model codeblocks {
   id   String @id @default(auto()) @map("_id") @db.ObjectId
   code String
 
-  created DateTime @default(now())
-  updated DateTime @updatedAt
+  created    DateTime     @default(now())
+  updated    DateTime     @updatedAt
+  components components[]
 }
 
 type TargetEnvs {
