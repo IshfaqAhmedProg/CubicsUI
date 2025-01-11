@@ -1,6 +1,7 @@
 import db from "@/db";
 import { AddRounded } from "@mui/icons-material";
 import { Button, Paper, Stack, Typography } from "@mui/material";
+import Link from "next/link";
 import { notFound } from "next/navigation";
 import React from "react";
 
@@ -25,10 +26,14 @@ export default async function LibraryComponentsPage({
           alignItems={"center"}
           gap={3}
         >
-          <Typography variant="body2">
-            Start by creating a new component
-          </Typography>
-          <Button startIcon={<AddRounded />}>Create Component</Button>
+          <Typography variant="body2">Start by creating a component</Typography>
+          <Button
+            startIcon={<AddRounded />}
+            LinkComponent={Link}
+            href={`/components/create?libId=${libId}`}
+          >
+            Create Component
+          </Button>
         </Stack>
       ) : (
         components.map((c) => {

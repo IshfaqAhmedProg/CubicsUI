@@ -5,17 +5,18 @@ import {
   ActionReturnType,
   FormActionReturnType,
 } from "@/library/types/ActionReturnTypes";
-import { libraries, Prisma } from "@cubicsui/db";
+import { Prisma } from "@cubicsui/db";
 import { revalidatePath } from "next/cache";
 import { z } from "zod";
 import { updateLibrarySchema } from "../../schema";
+import { Library } from "@/library/types/Library";
 
 export async function updateLibraryAction(
   prevState: any,
   formdata: FormData
 ): ActionReturnType<FormActionReturnType> {
   let errors: FormActionReturnType["errors"] = {};
-  let payload: libraries;
+  let payload: Library;
   try {
     const libId = formdata.get("libId");
     if (!libId || typeof libId !== "string")

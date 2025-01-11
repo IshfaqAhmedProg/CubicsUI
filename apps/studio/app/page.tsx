@@ -1,6 +1,4 @@
-import { AddRounded, LibraryBooksRounded } from "@mui/icons-material";
-import { Button, Stack, Typography } from "@mui/material";
-import Link from "next/link";
+import { Stack, Typography } from "@mui/material";
 import CreateLibraryButton from "./libraries/create";
 
 export default async function Home() {

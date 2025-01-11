@@ -1,25 +1,41 @@
 "use server";
 
+import {
+  ActionReturnType,
+  FormActionReturnType,
+} from "@/library/types/ActionReturnTypes";
 import { componentCreationSchema } from "./schema";
+import { components, Prisma } from "@cubicsui/db";
+import { z } from "zod";
 
 export async function createComponentAction(
   prevState: any,
   formdata: FormData
-) {
-  const validatedFields = componentCreationSchema.safeParse({
-    libId: formdata.get("libId"),
-    name: formdata.get("name"),
-    outPath: formdata.get("outPath"),
-    desc: formdata.get("desc"),
-    // envs: formdata.getAll("envs"),
-    // deps: {
-    //   ext: formdata.getAll("deps.ext"),
-    //   lcl: formdata.getAll("deps.lcl"),
-    // },
-    // tags: formdata.getAll("tags"),
-  });
-  if (!validatedFields.success) {
-    return { errors: validatedFields.error.flatten().fieldErrors };
+): ActionReturnType<FormActionReturnType> {
+  let errors: FormActionReturnType["errors"] = {};
+  let payload: components;
+  try {
+    const validatedFields = componentCreationSchema.parse({
+      libId: formdata.get("libId"),
+      name: formdata.get("name"),
+      outPath: formdata.get("outPath"),
+      desc: formdata.get("desc"),
+    });
+
+    console.log(validatedFields);
+  } catch (err) {
+    if (
+      err instanceof Prisma.PrismaClientKnownRequestError &&
+      err.code === "P2002"
+    ) {
+      errors.name =
+        "A library with the same name exists in the database! Please choose another name.";
+    } else if (err instanceof z.ZodError) {
+      const fieldErrors = err.flatten().fieldErrors;
+      Object.keys(fieldErrors).forEach((field) => {
+        errors[field] = fieldErrors[field]?.join("\n");
+      });
+    }
+    return { status: "error", errors };
   }
-  console.log(validatedFields);
 }

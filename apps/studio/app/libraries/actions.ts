@@ -2,20 +2,21 @@
 
 import { createLibrarySchema } from "./schema";
 import db from "@/db";
-import { libraries, Prisma } from "@cubicsui/db";
+import { Prisma } from "@cubicsui/db";
 import { z } from "zod";
 import { redirect } from "next/navigation";
 import {
   ActionReturnType,
   FormActionReturnType,
 } from "@/library/types/ActionReturnTypes";
+import { Library } from "@/library/types/Library";
 
 export async function createLibraryAction(
   prevState: any,
   formdata: FormData
 ): ActionReturnType<FormActionReturnType> {
   let errors: FormActionReturnType["errors"] = {};
-  let payload: libraries;
+  let payload: Library;
   try {
     // Validate inputs
     const validatedInputs = createLibrarySchema.parse({

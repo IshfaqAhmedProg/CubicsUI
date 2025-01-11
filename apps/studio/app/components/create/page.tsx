@@ -2,18 +2,18 @@ import db from "@/db";
 import CreateComponentForm from "./form";
 import { notFound } from "next/navigation";
 
-type SearchParams = Promise<{ libraryId: string }>;
+type SearchParams = Promise<{ libId: string }>;
 
 export default async function CreatePage({
   searchParams,
 }: {
   searchParams: SearchParams;
 }) {
-  const { libraryId } = await searchParams;
+  const { libId } = await searchParams;
 
-  const library = await db.libraries.findFirst({ where: { id: libraryId } });
+  const library = await db.libraries.findFirst({ where: { id: libId } });
 
-  if (!library || !libraryId) return notFound();
+  if (!library || !libId) return notFound();
 
   return <CreateComponentForm library={library} />;
 }
