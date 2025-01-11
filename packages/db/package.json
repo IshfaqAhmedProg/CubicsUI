@@ -28,12 +28,12 @@
   },
   "license": "MIT",
   "dependencies": {
-    "@prisma/client": "^6.1.0",
+    "@prisma/client": "^6.2.1",
     "case": "^1.6.3"
   },
   "devDependencies": {
     "@cubicsui/configs": "workspace:^",
-    "prisma": "^6.1.0",
+    "prisma": "^6.2.1",
     "typescript": "^5.7.2"
   }
 }
