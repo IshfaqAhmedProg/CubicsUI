@@ -64,8 +64,8 @@ model components {
   updated DateTime @updatedAt
 
   /// Id of the codeblock associated with the component
-  cbId       String     @db.ObjectId
-  codeblocks codeblocks @relation(fields: [cbId], references: [id], onDelete: Cascade, onUpdate: Cascade)
+  cbId      String     @db.ObjectId
+  codeblock codeblocks @relation(fields: [cbId], references: [id], onDelete: Cascade, onUpdate: Cascade)
 }
 
 model codeblocks {
