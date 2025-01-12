@@ -63,25 +63,27 @@ model components {
   created DateTime @default(now())
   updated DateTime @updatedAt
 
-  /// Id of the codeblock associated with the component
-  cbId      String     @db.ObjectId
-  codeblock codeblocks @relation(fields: [cbId], references: [id], onDelete: Cascade, onUpdate: Cascade)
+  /// codeblocks associated with the component
+  codeblock codeblocks?
 }
 
 model codeblocks {
   id   String @id @default(auto()) @map("_id") @db.ObjectId
   code String
 
-  created    DateTime     @default(now())
-  updated    DateTime     @updatedAt
-  components components[]
+  created DateTime @default(now())
+  updated DateTime @updatedAt
+
+  // component id of the component where this codeblock belongs
+  component   components @relation(fields: [componentId], references: [id])
+  componentId String     @unique @db.ObjectId
 }
 
 type TargetEnvs {
   /// Libraries like react, svelte etc.
-  library   String
+  lib String
   /// frameworks like nextjs, sveltekit etc.
-  framework String?
+  fw  String
 }
 
 type Dependencies {
