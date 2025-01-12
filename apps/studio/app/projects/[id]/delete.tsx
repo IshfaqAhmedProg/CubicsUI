@@ -10,16 +10,16 @@ import {
   Typography,
 } from "@mui/material";
 import { useActionState } from "react";
-import { deleteLibraryAction } from "./actions";
+import { deleteProjectAction } from "./actions";
 import Spinner from "@/library/ui/Navigation/Spinner/Spinner";
 import HiddenInput from "@/library/ui/Inputs/HiddenInput";
-import { useLibrary } from "./providers";
+import { useProject } from "./providers";
 
-export default function DeleteLibraryButton(props: ButtonedDialogProps) {
+export default function DeleteProjectButton(props: ButtonedDialogProps) {
   const { open, handleClose, handleOpen } = useDisclosure();
   const { dialogProps, children, ...rest } = props;
-  const [state, action, pending] = useActionState(deleteLibraryAction, {});
-  const { library } = useLibrary();
+  const [state, action, pending] = useActionState(deleteProjectAction, {});
+  const { project } = useProject();
 
   return (
     <>
@@ -29,7 +29,7 @@ export default function DeleteLibraryButton(props: ButtonedDialogProps) {
         color="error"
         {...rest}
       >
-        Delete {library.name}
+        Delete {project.name}
       </Button>
       <Dialog
         onClose={handleClose}
@@ -37,18 +37,18 @@ export default function DeleteLibraryButton(props: ButtonedDialogProps) {
         PaperProps={{ component: "form", action }}
       >
         <DialogTitle>
-          Delete <span className="error">{library.name}</span> ?
+          Delete <span className="error">{project.name}</span> ?
         </DialogTitle>
         <DialogContent>
           <HiddenInput
-            name="libId"
-            value={library.id}
+            name="prId"
+            value={project.id}
           />
           <Typography
             variant="body2"
             px={6}
           >
-            Are you sure you want to delete {library.name} and all the
+            Are you sure you want to delete {project.name} and all the
             configurations and components, this action is irreversible.
           </Typography>
         </DialogContent>

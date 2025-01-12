@@ -2,7 +2,7 @@
 
 import supportedLanguageWithIcons from "@/library/constants/supportedLangs";
 import formatDate from "@/library/functions/formatDate";
-import { Library } from "@/library/types/Library";
+import { Project } from "@/library/types/Library";
 import {
   CalendarTodayRounded,
   UpdateRounded,
@@ -17,19 +17,21 @@ import {
   useTheme,
 } from "@mui/material";
 
-export default function LibraryCard({
-  library,
+export default function ProjectCard({
+  project,
   ...rest
 }: {
-  library: Partial<Library>;
+  project: Partial<Project>;
 } & ButtonProps) {
   const theme = useTheme();
-  const supportedLang = supportedLanguageWithIcons.find((sl) => sl.name == library.lang);
+  const supportedLang = supportedLanguageWithIcons.find(
+    (sl) => sl.name == project.lang
+  );
 
   const LangLogo = supportedLang ? supportedLang.Logo : WarningRounded;
   const formattedDates = {
-    created: formatDate(library.created),
-    updated: formatDate(library.updated),
+    created: formatDate(project.created),
+    updated: formatDate(project.updated),
   };
 
   return (
@@ -53,7 +55,7 @@ export default function LibraryCard({
           fontWeight={"bold"}
           color="textPrimary"
         >
-          {library.name}
+          {project.name}
         </Typography>
 
         {formattedDates.created == formattedDates.updated ? (

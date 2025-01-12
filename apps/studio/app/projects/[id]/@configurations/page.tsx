@@ -6,15 +6,15 @@ import { notFound } from "next/navigation";
 import db from "@/db";
 import ConfigurationButton from "./button";
 
-export default async function LibraryConfigurationsPage({
+export default async function ProjectConfigurationsPage({
   params,
 }: {
   params: Promise<{ id: string }>;
 }) {
-  const libId = (await params).id;
-  if (!libId) return notFound();
+  const prId = (await params).id;
+  if (!prId) return notFound();
 
-  const configurations = await db.configurations.findMany({ where: { libId } });
+  const configurations = await db.configurations.findMany({ where: { prId } });
 
   return (
     <Stack

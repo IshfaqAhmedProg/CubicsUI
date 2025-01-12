@@ -16,7 +16,7 @@ export async function createComponentAction(
   let payload: components;
   try {
     const validatedFields = componentCreationSchema.parse({
-      libId: formdata.get("libId"),
+      prId: formdata.get("prId"),
       name: formdata.get("name"),
       outPath: formdata.get("outPath"),
       desc: formdata.get("desc"),

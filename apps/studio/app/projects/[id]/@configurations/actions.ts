@@ -17,13 +17,13 @@ export async function configsAction(
 ): ActionReturnType<FormActionReturnType> {
   let errors: FormActionReturnType["errors"] = {};
   let payload: configurations;
-  let libId: any;
+  let prId: any;
 
   try {
     // Validate inputs
-    libId = formdata.get("libId");
-    if (!libId || typeof libId !== "string")
-      throw new Error("Library id is not defined");
+    prId = formdata.get("prId");
+    if (!prId || typeof prId !== "string")
+      throw new Error("Project id is not defined");
 
     const configId = formdata.get("configId");
     if (!configId) {
@@ -31,7 +31,7 @@ export async function configsAction(
       const validatedInputs = createConfigSchema.parse({
         name: formdata.get("name"),
         data: formdata.get("data"),
-        libId: formdata.get("libId"),
+        prId: formdata.get("prId"),
       });
       payload = await db.configurations.create({
         data: validatedInputs,
@@ -48,7 +48,7 @@ export async function configsAction(
         data: validatedInputs,
       });
       console.log("updated config:", payload);
-      revalidatePath(`/libraries/${libId}`);
+      revalidatePath(`/projects/${prId}`);
       return { status: "success" };
     } else throw new Error("Updating failed as configId is not a string");
   } catch (err) {
@@ -61,5 +61,5 @@ export async function configsAction(
     }
     return { status: "error", errors };
   }
-  redirect(`/libraries/${libId}`);
+  redirect(`/projects/${prId}`);
 }

@@ -8,11 +8,11 @@ import {
 import { ReactNode } from "react";
 import { notFound } from "next/navigation";
 import db from "@/db";
-import LibraryProvider from "./providers";
-import DeleteLibraryButton from "./delete";
+import ProjectProvider from "./providers";
+import DeleteProjectButton from "./delete";
 import { ExpandMoreRounded } from "@mui/icons-material";
 
-interface LibraryLayoutProps {
+interface ProjectLayoutProps {
   children: ReactNode;
   details: ReactNode;
   configurations: ReactNode;
@@ -20,26 +20,26 @@ interface LibraryLayoutProps {
   params: Promise<{ id: string }>;
 }
 
-export default async function LibraryLayout({
+export default async function ProjectLayout({
   children,
   details,
   configurations,
   components,
   params,
-}: LibraryLayoutProps) {
+}: ProjectLayoutProps) {
   const id = (await params).id;
   if (!id) return notFound();
 
-  const library = await db.libraries.findFirst({ where: { id } });
-  if (!library)
+  const project = await db.projects.findFirst({ where: { id } });
+  if (!project)
     return (
       <Typography color="error">
-        Library with id:{id} does not exist in the database
+        Project with id:{id} does not exist in the database
       </Typography>
     );
 
   return (
-    <LibraryProvider library={library}>
+    <ProjectProvider project={project}>
       <Stack gap={3}>
         {children}
 
@@ -70,8 +70,8 @@ export default async function LibraryLayout({
             </Stack>
           </AccordionDetails>
         </Accordion>
-        <DeleteLibraryButton />
+        <DeleteProjectButton />
       </Stack>
-    </LibraryProvider>
+    </ProjectProvider>
   );
 }

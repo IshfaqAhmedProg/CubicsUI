@@ -5,15 +5,15 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import React from "react";
 
-export default async function LibraryComponentsPage({
+export default async function ProjectComponentsPage({
   params,
 }: {
   params: Promise<{ id: string }>;
 }) {
-  const libId = (await params).id;
-  if (!libId) return notFound();
+  const prId = (await params).id;
+  if (!prId) return notFound();
 
-  const components = await db.components.findMany({ where: { libId } });
+  const components = await db.components.findMany({ where: { prId } });
 
   return (
     <Stack
@@ -30,7 +30,7 @@ export default async function LibraryComponentsPage({
           <Button
             startIcon={<AddRounded />}
             LinkComponent={Link}
-            href={`/components/create?libId=${libId}`}
+            href={`/components/create?prId=${prId}`}
           >
             Build Component
           </Button>

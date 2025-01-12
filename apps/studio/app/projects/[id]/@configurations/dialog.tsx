@@ -17,7 +17,7 @@ import CodeEditor from "@/library/ui/Inputs/CodeEditor";
 import HiddenInput from "@/library/ui/Inputs/HiddenInput";
 import { Suggestion } from "@/library/types/Suggestions";
 import { configurations } from "@cubicsui/db";
-import { useLibrary } from "../providers";
+import { useProject } from "../providers";
 import { configsAction } from "./actions";
 
 export interface ConfigurationDialogProps extends DialogProps {
@@ -37,7 +37,7 @@ export function ConfigurationDialog(props: ConfigurationDialogProps) {
     ...rest
   } = props;
   const [state, formAction, pending] = useActionState(configsAction, {});
-  const { library } = useLibrary();
+  const { project } = useProject();
   console.log({ formState: state });
 
   /**
@@ -69,8 +69,8 @@ export function ConfigurationDialog(props: ConfigurationDialogProps) {
           mt={3}
         >
           <HiddenInput
-            name="libId"
-            value={library.id}
+            name="prId"
+            value={project.id}
           />
           {configuration && (
             <HiddenInput

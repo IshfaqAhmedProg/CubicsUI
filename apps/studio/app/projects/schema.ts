@@ -1,22 +1,23 @@
 import { npmPackageNameRegex } from "@/library/functions/packageNaming";
 import { z } from "zod";
 
-export const createLibrarySchema = z.object({
+export const createProjectSchema = z.object({
   name: z
     .string({ message: "Name should always be string" })
     .regex(npmPackageNameRegex, {
       message: "Name should follow npm package naming conventions",
     }),
-  lang: z.enum(["Javascript", "Typescript"]),
+  lang: z.enum(["typescript", "javascript"]),
+  styleEngine: z.enum(["css", "scss", "tailwindcss"]),
 });
 export const createConfigSchema = z.object({
   name: z.string({ message: "Please enter a name for the configuration." }),
   data: z.string({ message: "The configuration should be text." }),
-  libId: z.string(),
+  prId: z.string(),
 });
-export const updateLibrarySchema = createLibrarySchema.extend({
+export const updateProjectSchema = createProjectSchema.extend({
   desc: z.string().optional(),
 });
 export const updateConfigSchema = createConfigSchema.extend({
-  libId: z.string().optional(),
+  prId: z.string().optional(),
 });

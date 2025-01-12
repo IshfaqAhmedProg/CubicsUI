@@ -8,28 +8,24 @@ import {
   DialogContent,
   DialogProps,
   DialogTitle,
-  FormControl,
   FormLabel,
-  InputLabel,
-  ListItemText,
-  MenuItem,
-  Select,
   Stack,
   TextField,
   Typography,
 } from "@mui/material";
-import { createLibraryAction } from "./actions";
+import { createProjectAction } from "./actions";
 import { useActionState } from "react";
 import Link from "next/link";
 import { npmPackageNamingLink } from "@/library/constants/externalLinks";
-import supportedLanguageWithIcons from "@/library/constants/supportedLangs";
 import Spinner from "@/library/ui/Navigation/Spinner/Spinner";
 import { ButtonedDialogProps } from "@/library/types/Dialog";
+import ProjectLanguageInput from "@/library/ui/Inputs/ProjectLanguageInput";
+import ProjectStyleEngineInput from "@/library/ui/Inputs/ProjectStyleEngineInput";
 
 /**
- * Button that when clicked opens a dialog to create a library.
+ * Button that when clicked opens a dialog to create a project.
  */
-export default function CreateLibraryButton(props: ButtonedDialogProps) {
+export default function CreateProjectButton(props: ButtonedDialogProps) {
   const { open, handleClose, handleOpen } = useDisclosure();
   const { dialogProps, children, ...rest } = props;
   return (
@@ -39,9 +35,9 @@ export default function CreateLibraryButton(props: ButtonedDialogProps) {
         startIcon={<AddRounded />}
         {...rest}
       >
-        {children ?? "Create Library"}
+        {children ?? "Create Project"}
       </Button>
-      <CreateLibraryDialog
+      <CreateProjectDialog
         handleClose={handleClose}
         {...dialogProps}
         open={open}
@@ -51,13 +47,13 @@ export default function CreateLibraryButton(props: ButtonedDialogProps) {
 }
 
 /**
- * Dialog to create a library, consists of a form containing inputs for the library name and the language.
+ * Dialog to create a project, consists of a form containing inputs for the project name and the language.
  */
-export function CreateLibraryDialog({
+export function CreateProjectDialog({
   handleClose: _handleClose,
   ...rest
 }: { handleClose: () => void } & DialogProps) {
-  const [state, formAction, pending] = useActionState(createLibraryAction, {});
+  const [state, formAction, pending] = useActionState(createProjectAction, {});
 
   /**
    * Hijacking the handleClose function to prevent the dialog from closing when the user clicks outside the dialog or presses the escape key.
@@ -73,7 +69,7 @@ export function CreateLibraryDialog({
       {...rest}
       PaperProps={{ component: "form", action: formAction }}
     >
-      <DialogTitle>Create Library</DialogTitle>
+      <DialogTitle>Create Project</DialogTitle>
       <DialogContent>
         <Stack
           px={6}
@@ -83,8 +79,7 @@ export function CreateLibraryDialog({
             htmlFor="name"
             sx={{ maxWidth: "45ch" }}
           >
-            Enter the name of the library you want to create, the library name
-            should follow{" "}
+            Enter the name for your new project, the project name should follow{" "}
             <Link
               href={npmPackageNamingLink}
               target="_blank"
@@ -95,7 +90,7 @@ export function CreateLibraryDialog({
           </FormLabel>
           <TextField
             disabled={pending}
-            label="Library Name"
+            label="Project Name"
             error={Boolean(state?.errors?.name)}
             helperText={state?.errors?.name}
             required
@@ -107,48 +102,30 @@ export function CreateLibraryDialog({
             justifyContent={"space-between"}
             gap={3}
           >
-            <FormControl
+            <Typography variant="body2">
+              Select the language you will be using to define the components.
+            </Typography>
+            <ProjectLanguageInput
               hiddenLabel
               required
               disabled={pending}
               fullWidth
-            >
-              <InputLabel id="lang-label">Language</InputLabel>
-              <Select
-                labelId="lang-label"
-                id="lang"
-                defaultValue={"Javascript"}
-                name="lang"
-                label="Language"
-              >
-                {supportedLanguageWithIcons.map((lang) => {
-                  const { name, Logo } = lang;
-                  return (
-                    <MenuItem
-                      value={name}
-                      key={name}
-                    >
-                      <Stack
-                        direction={"row"}
-                        alignItems={"center"}
-                        gap={2}
-                        height={"100%"}
-                      >
-                        <Logo fontSize="small" />
-                        <ListItemText primary={name} />
-                      </Stack>
-                    </MenuItem>
-                  );
-                })}
-              </Select>
-            </FormControl>
-            <Typography
-              variant="body2"
-              minWidth={"35ch"}
-            >
-              Select the language of the package.
-              <br />* More coming soon!
+            />
+          </Stack>
+          <Stack
+            direction={"row"}
+            justifyContent={"space-between"}
+            gap={3}
+          >
+            <Typography variant="body2">
+              Select the style engine you will use to style your components.
             </Typography>
+            <ProjectStyleEngineInput
+              hiddenLabel
+              required
+              disabled={pending}
+              fullWidth
+            />
           </Stack>
         </Stack>
       </DialogContent>

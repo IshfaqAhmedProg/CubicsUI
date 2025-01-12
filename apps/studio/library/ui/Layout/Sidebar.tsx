@@ -34,8 +34,8 @@ export default function Sidebar() {
 
   const sidebarLinks = [
     {
-      label: "Libraries",
-      href: "/libraries",
+      label: "Projects",
+      href: "/projects",
       icon: <LibraryBooksRounded sx={iconCommonSx} />,
     },
     {

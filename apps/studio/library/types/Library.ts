@@ -1,7 +1,7 @@
-import { configurations, libraries } from "@cubicsui/db";
+import { configurations, projects } from "@cubicsui/db";
 
-export type Library = libraries;
+export type Project = projects;
 
-export type LibraryWithConfigurations = libraries & {
+export type ProjectWithConfigurations = projects & {
   configurations: configurations[];
 };

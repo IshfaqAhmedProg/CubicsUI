@@ -1,32 +1,37 @@
 "use server";
 
-import { createLibrarySchema } from "./schema";
 import db from "@/db";
-import { Prisma } from "@cubicsui/db";
-import { z } from "zod";
-import { redirect } from "next/navigation";
 import {
   ActionReturnType,
   FormActionReturnType,
 } from "@/library/types/ActionReturnTypes";
-import { Library } from "@/library/types/Library";
+import { Prisma } from "@cubicsui/db";
+import { revalidatePath } from "next/cache";
+import { z } from "zod";
+import { updateProjectSchema } from "../../schema";
+import { Project } from "@/library/types/Library";
 
-export async function createLibraryAction(
+export async function updateProjectAction(
   prevState: any,
   formdata: FormData
 ): ActionReturnType<FormActionReturnType> {
   let errors: FormActionReturnType["errors"] = {};
-  let payload: Library;
+  let payload: Project;
   try {
-    // Validate inputs
-    const validatedInputs = createLibrarySchema.parse({
+    const prId = formdata.get("prId");
+    if (!prId || typeof prId !== "string")
+      throw new Error("Project id is not defined or the wrong type");
+
+    const validatedInputs = updateProjectSchema.parse({
       name: formdata.get("name"),
       lang: formdata.get("lang"),
+      desc: formdata.get("desc"),
     });
-    // Create the library in the db
-    payload = await db.libraries.create({
+    payload = await db.projects.update({
+      where: { id: prId },
       data: validatedInputs,
     });
+    revalidatePath(`/projects/${prId}`);
   } catch (err) {
     console.error(err);
     if (
@@ -34,7 +39,7 @@ export async function createLibraryAction(
       err.code === "P2002"
     ) {
       errors.name =
-        "A library with the same name exists in the database! Please choose another name.";
+        "A project with the same name exists in the database! Please choose another name.";
     } else if (err instanceof z.ZodError) {
       const fieldErrors = err.flatten().fieldErrors;
       Object.keys(fieldErrors).forEach((field) => {
@@ -43,6 +48,4 @@ export async function createLibraryAction(
     }
     return { status: "error", errors };
   }
-  console.log("lib from db:", payload);
-  redirect(`/libraries/${payload.id}`);
 }

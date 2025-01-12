@@ -7,7 +7,7 @@ import {
 import { Suggestion } from "@/library/types/Suggestions";
 import { configurations } from "@cubicsui/db";
 import { Paper, Stack, Typography } from "@mui/material";
-import { useLibrary } from "../providers";
+import { useProject } from "../providers";
 import ConfigurationButton from "./button";
 import { knownConfigurations } from "../../../../library/constants/knownConfigurations";
 
@@ -21,15 +21,15 @@ interface ConfigurationSuggestionsProps {
 export function ConfigurationSuggestions({
   configurations,
 }: ConfigurationSuggestionsProps) {
-  const { library } = useLibrary();
+  const { project } = useProject();
   let suggestions: Suggestion[] = [];
   if (!configurations.some((cfg) => cfg.name == "package.json"))
     suggestions.push({
       ...knownConfigurations.packageJson,
-      sample: samplePkgJson(library),
+      sample: samplePkgJson(project),
     });
 
-  if (library?.lang == "Typescript") {
+  if (project?.lang == "typescript") {
     if (!configurations.some((cfg) => cfg.name == "tsconfig.json"))
       suggestions.push({
         ...knownConfigurations.tsconfigJson,

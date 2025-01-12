@@ -2,7 +2,7 @@ import { npmPackageNameRegex } from "@/library/functions/packageNaming";
 import { z } from "zod";
 
 export const componentCreationSchema = z.object({
-  libId: z.string(),
+  prId: z.string(),
   name: z.string().regex(npmPackageNameRegex, {
     message: "Name should follow npm package naming conventions",
   }),

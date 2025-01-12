@@ -1,5 +1,5 @@
 import { Stack, Typography } from "@mui/material";
-import CreateLibraryButton from "./libraries/create";
+import CreateProjectButton from "./projects/create";
 
 export default async function Home() {
   return (
@@ -17,9 +17,9 @@ export default async function Home() {
       </Typography>
 
       <Typography color="textSecondary">
-        Start your journey by creating your first library
+        Start your journey by creating your first project
       </Typography>
-      <CreateLibraryButton />
+      <CreateProjectButton />
     </Stack>
   );
 }

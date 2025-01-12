@@ -7,32 +7,19 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model configurations {
-  id   String @id @default(auto()) @map("_id") @db.ObjectId
-  name String
-  data String
-
-  created DateTime @default(now())
-  updated DateTime @updatedAt
-
-  libId String    @db.ObjectId
-  lib   libraries @relation(fields: [libId], references: [id], onDelete: Cascade, onUpdate: Cascade)
-}
-
-enum Language {
-  javascript
-  typescript
-}
-
-model libraries {
+model projects {
   /// Id of the library
-  id   String   @id @default(auto()) @map("_id") @db.ObjectId
+  id          String       @id @default(auto()) @map("_id") @db.ObjectId
   /// A unique name following npm package naming convention
-  name String   @unique
+  name        String       @unique
   /// Language used to define the library
-  lang Language
+  lang        Language
+  /// Style engine used to style the library
+  styleEngine StyleEngine
+  /// The environments that can support the component
+  envs        TargetEnvs[]
   /// A short description of what the library does
-  desc String?
+  desc        String?
 
   created DateTime @default(now())
   updated DateTime @updatedAt
@@ -41,49 +28,66 @@ model libraries {
   components     components[]
 }
 
+model configurations {
+  id   String @id @default(auto()) @map("_id") @db.ObjectId
+  name String
+  data String
+
+  created DateTime @default(now())
+  updated DateTime @updatedAt
+
+  prId    String   @db.ObjectId
+  project projects @relation(fields: [prId], references: [id], onDelete: Cascade, onUpdate: Cascade)
+}
+
 model components {
   /// Id of the library the component belongs 
-  libId   String       @db.ObjectId
-  lib     libraries    @relation(fields: [libId], references: [id], onDelete: Cascade, onUpdate: Cascade)
+  prId    String   @db.ObjectId
+  project projects @relation(fields: [prId], references: [id], onDelete: Cascade, onUpdate: Cascade)
   /// Id of the component
-  id      String       @id @default(auto()) @map("_id") @db.ObjectId
+  id      String   @id @default(auto()) @map("_id") @db.ObjectId
   /// A unique name following npm package naming convention
-  name    String       @unique
+  name    String   @unique
   /// The path of the file relative to "components" directory
   outPath String
   /// A short description of what the component does
   desc    String
-  /// The environments that can support the component
-  envs    TargetEnvs[]
+
   /// Dependencies of the component
-  deps    Dependencies
+  deps Dependencies
   /// To allow better searching
-  tags    String[]
+  tags String[]
 
   created DateTime @default(now())
   updated DateTime @updatedAt
 
-  /// codeblocks associated with the component
-  codeblock codeblocks?
+  /// codeblocks associated with the component 1:1
+  codeblocks codeblocks?
 }
 
 model codeblocks {
-  id   String @id @default(auto()) @map("_id") @db.ObjectId
-  code String
+  id     String  @id @default(auto()) @map("_id") @db.ObjectId
+  script String
+  styles String?
 
   created DateTime @default(now())
   updated DateTime @updatedAt
 
-  // component id of the component where this codeblock belongs
-  component   components @relation(fields: [componentId], references: [id])
-  componentId String     @unique @db.ObjectId
+  cmpId     String     @unique @db.ObjectId
+  component components @relation(fields: [cmpId], references: [id], onDelete: Cascade, onUpdate: Cascade)
+}
+
+enum StyleEngine {
+  css
+  scss
+  tailwindcss
 }
 
 type TargetEnvs {
   /// Libraries like react, svelte etc.
   lib String
   /// frameworks like nextjs, sveltekit etc.
-  fw  String
+  fw  String?
 }
 
 type Dependencies {
@@ -91,4 +95,9 @@ type Dependencies {
   ext String[]
   /// Local modules
   lcl String[]
+}
+
+enum Language {
+  javascript
+  typescript
 }

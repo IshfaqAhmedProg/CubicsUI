@@ -2,11 +2,11 @@
 import { Button, Paper, Stack, TextField } from "@mui/material";
 import { useActionState, useState } from "react";
 import { createComponentAction } from "../actions";
-import { Library } from "@/library/types/Library";
+import { Project } from "@/library/types/Library";
 import HiddenInput from "@/library/ui/Inputs/HiddenInput";
 import CodeEditor from "@/library/ui/Inputs/CodeEditor";
 
-export default function CreateComponentForm({ library }: { library: Library }) {
+export default function CreateComponentForm({ project }: { project: Project }) {
   const [state, formAction, pending] = useActionState(
     createComponentAction,
     {}
@@ -26,17 +26,24 @@ export default function CreateComponentForm({ library }: { library: Library }) {
         gap={3}
       >
         <HiddenInput
-          value={library.id}
-          name="libId"
+          value={project.id}
+          name="prId"
         />
-        <TextField
-          label="Component Name"
-          name="name"
-        />
-        <TextField
-          label="Output Path"
-          name="outPath"
-        />
+        <Stack
+          gap={3}
+          direction={"row"}
+        >
+          <TextField
+            label="Component Name"
+            name="name"
+            fullWidth
+          />
+          <TextField
+            label="Output Path"
+            name="outPath"
+            fullWidth
+          />
+        </Stack>
         <TextField
           label="Component Description"
           name="desc"
@@ -46,9 +53,9 @@ export default function CreateComponentForm({ library }: { library: Library }) {
         <CodeEditor
           name="code"
           editorData={code}
-          path=""
+          path="file.tsx"
           setEditorData={(v) => setCode(v)}
-          language={library.lang.toLowerCase()}
+          language={project.lang.toLowerCase()}
         />
         <Button
           disabled={pending}

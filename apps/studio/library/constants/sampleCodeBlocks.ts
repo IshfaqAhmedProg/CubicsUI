@@ -1,9 +1,9 @@
-import { Library } from "../types/Library";
+import { Project } from "../types/Library";
 
-export const samplePkgJson = (library?: Library) => `{
-  "name": "${library?.name ?? "libraryName"}",
+export const samplePkgJson = (project?: Project) => `{
+  "name": "${project?.name ?? "projectName"}",
   "version": "1.0.0",
-  "description": "${library?.desc ?? ""}",
+  "description": "${project?.desc ?? ""}",
   "author": "",
   "license": "MIT",
   "dependencies": {},
