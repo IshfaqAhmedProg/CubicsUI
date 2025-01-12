@@ -22,7 +22,7 @@ import { createLibraryAction } from "./actions";
 import { useActionState } from "react";
 import Link from "next/link";
 import { npmPackageNamingLink } from "@/library/constants/externalLinks";
-import supportedLangs from "@/library/constants/supportedLangs";
+import supportedLanguageWithIcons from "@/library/constants/supportedLangs";
 import Spinner from "@/library/ui/Navigation/Spinner/Spinner";
 import { ButtonedDialogProps } from "@/library/types/Dialog";
 
@@ -121,7 +121,7 @@ export function CreateLibraryDialog({
                 name="lang"
                 label="Language"
               >
-                {supportedLangs.map((lang) => {
+                {supportedLanguageWithIcons.map((lang) => {
                   const { name, Logo } = lang;
                   return (
                     <MenuItem

@@ -20,8 +20,8 @@ model configurations {
 }
 
 enum Language {
-  Javascript
-  Typescript
+  javascript
+  typescript
 }
 
 model libraries {

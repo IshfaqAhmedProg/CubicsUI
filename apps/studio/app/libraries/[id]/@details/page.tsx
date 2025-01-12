@@ -1,17 +1,17 @@
 "use client";
 
-import supportedLangs from "@/library/constants/supportedLangs";
+import supportedLanguageWithIcons from "@/library/constants/supportedLangs";
 import HiddenInput from "@/library/ui/Inputs/HiddenInput";
 import Spinner from "@/library/ui/Navigation/Spinner/Spinner";
 import {
-    Stack,
-    TextField,
-    FormControl,
-    InputLabel,
-    Select,
-    MenuItem,
-    ListItemText,
-    Button,
+  Stack,
+  TextField,
+  FormControl,
+  InputLabel,
+  Select,
+  MenuItem,
+  ListItemText,
+  Button,
 } from "@mui/material";
 import { useLibrary } from "../providers";
 import { useActionState } from "react";
@@ -56,7 +56,7 @@ export default function LibraryDetailsPage() {
             name="lang"
             label="Language"
           >
-            {supportedLangs.map((lang) => {
+            {supportedLanguageWithIcons.map((lang) => {
               const { name, Logo } = lang;
               return (
                 <MenuItem

@@ -1,6 +1,6 @@
 "use client";
 
-import supportedLangs from "@/library/constants/supportedLangs";
+import supportedLanguageWithIcons from "@/library/constants/supportedLangs";
 import formatDate from "@/library/functions/formatDate";
 import { Library } from "@/library/types/Library";
 import {
@@ -24,7 +24,7 @@ export default function LibraryCard({
   library: Partial<Library>;
 } & ButtonProps) {
   const theme = useTheme();
-  const supportedLang = supportedLangs.find((sl) => sl.name == library.lang);
+  const supportedLang = supportedLanguageWithIcons.find((sl) => sl.name == library.lang);
 
   const LangLogo = supportedLang ? supportedLang.Logo : WarningRounded;
   const formattedDates = {
