@@ -20,6 +20,7 @@ export async function createComponentAction(
       name: formdata.get("name"),
       outPath: formdata.get("outPath"),
       desc: formdata.get("desc"),
+      code: formdata.get("code"),
     });
 
     console.log(validatedFields);
@@ -29,7 +30,7 @@ export async function createComponentAction(
       err.code === "P2002"
     ) {
       errors.name =
-        "A library with the same name exists in the database! Please choose another name.";
+        "A component with the same name exists in the database! Please choose another name.";
     } else if (err instanceof z.ZodError) {
       const fieldErrors = err.flatten().fieldErrors;
       Object.keys(fieldErrors).forEach((field) => {

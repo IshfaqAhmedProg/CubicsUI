@@ -1,4 +1,3 @@
-"use server";
 import { npmPackageNameRegex } from "@/library/functions/packageNaming";
 import { z } from "zod";
 
@@ -10,6 +9,7 @@ export const componentCreationSchema = z.object({
   // TODO refine outpath so that it only has relative paths or filenames
   outPath: z.string(),
   desc: z.string(),
+  code: z.string(),
   // envs: z.array(
   //   z.object({
   //     library: z.string(),

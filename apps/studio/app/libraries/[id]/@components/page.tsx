@@ -32,7 +32,7 @@ export default async function LibraryComponentsPage({
             LinkComponent={Link}
             href={`/components/create?libId=${libId}`}
           >
-            Create Component
+            Build Component
           </Button>
         </Stack>
       ) : (

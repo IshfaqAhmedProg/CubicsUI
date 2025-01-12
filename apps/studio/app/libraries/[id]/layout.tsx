@@ -50,6 +50,13 @@ export default async function LibraryLayout({
           <AccordionDetails>{details}</AccordionDetails>
         </Accordion>
 
+        <Accordion expanded>
+          <AccordionSummary>
+            <Typography>Components</Typography>
+          </AccordionSummary>
+          <AccordionDetails>{components}</AccordionDetails>
+        </Accordion>
+
         <Accordion defaultExpanded>
           <AccordionSummary expandIcon={<ExpandMoreRounded />}>
             <Typography>Configurations</Typography>
@@ -62,13 +69,6 @@ export default async function LibraryLayout({
               {configurations}
             </Stack>
           </AccordionDetails>
-        </Accordion>
-
-        <Accordion expanded>
-          <AccordionSummary>
-            <Typography>Components</Typography>
-          </AccordionSummary>
-          <AccordionDetails>{components}</AccordionDetails>
         </Accordion>
         <DeleteLibraryButton />
       </Stack>
