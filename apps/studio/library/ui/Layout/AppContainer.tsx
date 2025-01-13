@@ -24,7 +24,7 @@ export default function AppContainer({
   children,
   ...rest
 }: { children: Readonly<ReactNode> } & StackProps) {
-  const sidebarControls = useDisclosure(true);
+  const sidebarControls = useDisclosure(false);
 
   return (
     <AppContainerContext.Provider

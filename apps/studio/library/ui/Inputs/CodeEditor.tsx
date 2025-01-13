@@ -1,4 +1,4 @@
-import { Editor, EditorProps } from "@monaco-editor/react";
+import { Editor, EditorProps, Monaco } from "@monaco-editor/react";
 import { Box, BoxProps, Paper, useColorScheme } from "@mui/material";
 import React, {
   ComponentProps,
@@ -6,6 +6,37 @@ import React, {
   SetStateAction,
   useState,
 } from "react";
+
+export function onMountHandler(editor: any, monaco: Monaco) {
+  monaco.languages.typescript.typescriptDefaults.setCompilerOptions({
+    target: monaco.languages.typescript.ScriptTarget.Latest,
+    allowNonTsExtensions: true,
+    moduleResolution: monaco.languages.typescript.ModuleResolutionKind.NodeJs,
+    module: monaco.languages.typescript.ModuleKind.CommonJS,
+    noEmit: true,
+    esModuleInterop: true,
+    jsx: monaco.languages.typescript.JsxEmit.React,
+    reactNamespace: "React",
+    allowJs: true,
+    typeRoots: ["node_modules/@types"],
+  });
+
+  monaco.languages.typescript.typescriptDefaults.setDiagnosticsOptions({
+    noSemanticValidation: false,
+    noSyntaxValidation: false,
+    diagnosticCodesToIgnore: [
+      // suppress import errors
+      2307,
+      // suppress "Cannot find name 'React'." errors
+      2304,
+    ],
+  });
+
+  monaco.languages.typescript.typescriptDefaults.addExtraLib(
+    "<<react-definition-file>>",
+    `file:///node_modules/@react/types/index.d.ts`
+  );
+}
 
 export type CodeEditorProps = {
   name?: string;

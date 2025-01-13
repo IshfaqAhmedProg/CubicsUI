@@ -21,16 +21,19 @@ export default function ProjectStyleEngineInput({
 }: ProjectStyleEngineInputProps) {
   return (
     <FormControl {...rest}>
-      <InputLabel id="styleEngine-label">Style Engine</InputLabel>
+      <InputLabel id="styleEng-label">Style Engine</InputLabel>
       <Select
-        labelId="styleEngine-label"
-        id="styleEngine"
-        defaultValue={project?.styleEngine ?? styleEnginesWithLogos[0].name}
-        name="styleEngine"
+        labelId="styleEng-label"
+        id="styleEng"
+        defaultValue={project?.styleEng ?? styleEnginesWithLogos[0].name}
+        name="styleEng"
         label="Style Engine"
       >
         {styleEnginesWithLogos.map((lang) => {
           const { name, Logo } = lang;
+          const formattedName = ["css", "scss"].includes(name)
+            ? name.toUpperCase()
+            : capitalize(name);
           return (
             <MenuItem
               value={name}
@@ -43,7 +46,7 @@ export default function ProjectStyleEngineInput({
                 height={"100%"}
               >
                 <Logo fontSize="small" />
-                <ListItemText primary={capitalize(name)} />
+                <ListItemText primary={formattedName} />
               </Stack>
             </MenuItem>
           );

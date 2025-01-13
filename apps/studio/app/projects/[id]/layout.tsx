@@ -11,6 +11,7 @@ import db from "@/db";
 import ProjectProvider from "./providers";
 import DeleteProjectButton from "./delete";
 import { ExpandMoreRounded } from "@mui/icons-material";
+import CollapsibleSection from "@/library/ui/Layout/CollapsibleSection";
 
 interface ProjectLayoutProps {
   children: ReactNode;
@@ -43,33 +44,28 @@ export default async function ProjectLayout({
       <Stack gap={3}>
         {children}
 
-        <Accordion defaultExpanded>
-          <AccordionSummary expandIcon={<ExpandMoreRounded />}>
-            <Typography>Details</Typography>
-          </AccordionSummary>
-          <AccordionDetails>{details}</AccordionDetails>
-        </Accordion>
+        <CollapsibleSection
+          title={"Details"}
+          defaultExpanded
+          expandIcon={<ExpandMoreRounded />}
+        >
+          {details}
+        </CollapsibleSection>
 
-        <Accordion expanded>
-          <AccordionSummary>
-            <Typography>Components</Typography>
-          </AccordionSummary>
-          <AccordionDetails>{components}</AccordionDetails>
-        </Accordion>
+        <CollapsibleSection
+          title="Components"
+          expanded
+        >
+          {components}
+        </CollapsibleSection>
 
-        <Accordion defaultExpanded>
-          <AccordionSummary expandIcon={<ExpandMoreRounded />}>
-            <Typography>Configurations</Typography>
-          </AccordionSummary>
-          <AccordionDetails>
-            <Stack
-              id={"configurations-container"}
-              gap={2}
-            >
-              {configurations}
-            </Stack>
-          </AccordionDetails>
-        </Accordion>
+        <CollapsibleSection
+          title="Configurations"
+          defaultExpanded
+          expandIcon={<ExpandMoreRounded />}
+        >
+          {configurations}
+        </CollapsibleSection>
         <DeleteProjectButton />
       </Stack>
     </ProjectProvider>

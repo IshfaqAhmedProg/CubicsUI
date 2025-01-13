@@ -9,6 +9,8 @@
     "clean": "rimraf node_modules .turbo .next"
   },
   "dependencies": {
+    "@babel/parser": "^7.26.5",
+    "@babel/traverse": "^7.26.5",
     "@cubicsui/db": "workspace:^",
     "@emotion/cache": "^11.14.0",
     "@emotion/react": "^11.14.0",
@@ -27,6 +29,7 @@
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3",
+    "@types/babel__traverse": "^7.20.6",
     "@types/lodash": "^4.17.13",
     "@types/node": "^20",
     "@types/package-json-validator": "^0.6.1",

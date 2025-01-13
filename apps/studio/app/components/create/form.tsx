@@ -1,69 +1,148 @@
 "use client";
-import { Button, Paper, Stack, TextField } from "@mui/material";
+import { Button, FormLabel, Stack, Switch, TextField } from "@mui/material";
 import { useActionState, useState } from "react";
 import { createComponentAction } from "../actions";
-import { Project } from "@/library/types/Library";
 import HiddenInput from "@/library/ui/Inputs/HiddenInput";
-import CodeEditor from "@/library/ui/Inputs/CodeEditor";
+import CodeEditor, { onMountHandler } from "@/library/ui/Inputs/CodeEditor";
+import { useComponentForm } from "./providers";
+import CollapsibleSection from "@/library/ui/Layout/CollapsibleSection";
+import { ExpandMoreRounded } from "@mui/icons-material";
 
-export default function CreateComponentForm({ project }: { project: Project }) {
+export default function CreateComponentForm() {
   const [state, formAction, pending] = useActionState(
     createComponentAction,
     {}
   );
-  const [code, setCode] = useState<string | undefined>();
 
-  // console.log("lib", library);
-  console.log("code", code);
+  const {
+    project,
+    name,
+    setName,
+    outPath,
+    setOutPath,
+    scriptCode,
+    setScriptCode,
+    styleCode,
+    deps,
+    setStyleCode,
+    dependenciesAnalysed,
+    analyseDependencies,
+  } = useComponentForm();
+  const [scriptIncludesStyles, setScriptIncludesStyles] = useState(false);
+
   return (
     <Stack
-      component={Paper}
-      padding={3}
+      component={"form"}
+      action={formAction}
+      gap={3}
     >
-      <Stack
-        component={"form"}
-        action={formAction}
-        gap={3}
+      <HiddenInput
+        value={project.id}
+        name="prId"
+      />
+      <CollapsibleSection
+        title="Details"
+        defaultExpanded
+        expandIcon={<ExpandMoreRounded />}
       >
-        <HiddenInput
-          value={project.id}
-          name="prId"
-        />
-        <Stack
-          gap={3}
-          direction={"row"}
-        >
+        <Stack gap={3}>
+          <Stack
+            direction={"row"}
+            gap={3}
+          >
+            <TextField
+              label="Component Name"
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+              name="name"
+              fullWidth
+            />
+            <TextField
+              label="Output Path"
+              value={outPath}
+              onChange={(e) => setOutPath(e.target.value)}
+              name="outPath"
+              fullWidth
+            />
+          </Stack>
           <TextField
-            label="Component Name"
-            name="name"
-            fullWidth
-          />
-          <TextField
-            label="Output Path"
-            name="outPath"
+            label="Component Description"
+            name="desc"
+            multiline
+            minRows={2}
             fullWidth
           />
         </Stack>
-        <TextField
-          label="Component Description"
-          name="desc"
-          multiline
-          minRows={2}
-        />
-        <CodeEditor
-          name="code"
-          editorData={code}
-          path="file.tsx"
-          setEditorData={(v) => setCode(v)}
-          language={project.lang.toLowerCase()}
-        />
-        <Button
-          disabled={pending}
-          type="submit"
-        >
-          Confirm
-        </Button>
-      </Stack>
+      </CollapsibleSection>
+
+      <CollapsibleSection
+        title="Scripts"
+        expandIcon={<ExpandMoreRounded />}
+      >
+        <Stack gap={3}>
+          <FormLabel htmlFor="scriptCode">
+            Paste the code that defines your component below,
+          </FormLabel>
+          <CodeEditor
+            id="scriptCode"
+            name="scriptCode"
+            editorData={scriptCode}
+            path={outPath}
+            setEditorData={(v) => setScriptCode(v)}
+            language={project.lang.toLowerCase()}
+            onMount={onMountHandler}
+          />
+          <CollapsibleSection
+            expandIcon={<ExpandMoreRounded />}
+            defaultExpanded
+            title="Dependencies"
+          >
+            <Button onClick={analyseDependencies}>Analyse Dependencies</Button>
+            <Stack>{JSON.stringify(deps)}</Stack>
+          </CollapsibleSection>
+          <Stack
+            direction={"row"}
+            gap={3}
+            alignItems={"center"}
+          >
+            <FormLabel htmlFor="scriptIncludesStyles">
+              Does the component include styles?
+            </FormLabel>
+            <Switch
+              id="scriptIncludesStyles"
+              checked={scriptIncludesStyles}
+              onChange={() => setScriptIncludesStyles(!scriptIncludesStyles)}
+              inputProps={{ "aria-label": "controlled" }}
+            />
+          </Stack>
+          <CollapsibleSection
+            title="Styles"
+            expanded={scriptIncludesStyles}
+            disabled={!scriptIncludesStyles}
+          >
+            {scriptIncludesStyles && (
+              <Stack gap={2}>
+                <FormLabel>
+                  Paste the style definitions for the component defined above,
+                </FormLabel>
+                <CodeEditor
+                  name="styleCode"
+                  editorData={styleCode}
+                  path={`${name}.module.css`}
+                  setEditorData={(v) => setStyleCode(v)}
+                  language="css"
+                />
+              </Stack>
+            )}
+          </CollapsibleSection>
+        </Stack>
+      </CollapsibleSection>
+      <Button
+        disabled={pending}
+        type="submit"
+      >
+        Confirm
+      </Button>
     </Stack>
   );
 }

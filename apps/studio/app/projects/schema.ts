@@ -8,7 +8,7 @@ export const createProjectSchema = z.object({
       message: "Name should follow npm package naming conventions",
     }),
   lang: z.enum(["typescript", "javascript"]),
-  styleEngine: z.enum(["css", "scss", "tailwindcss"]),
+  styleEng: z.enum(["css", "scss", "tailwindcss"]),
 });
 export const createConfigSchema = z.object({
   name: z.string({ message: "Please enter a name for the configuration." }),

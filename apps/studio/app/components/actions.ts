@@ -22,8 +22,6 @@ export async function createComponentAction(
       desc: formdata.get("desc"),
       code: formdata.get("code"),
     });
-
-    console.log(validatedFields);
   } catch (err) {
     if (
       err instanceof Prisma.PrismaClientKnownRequestError &&

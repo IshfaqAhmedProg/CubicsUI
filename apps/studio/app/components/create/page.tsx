@@ -1,6 +1,7 @@
 import db from "@/db";
 import CreateComponentForm from "./form";
 import { notFound } from "next/navigation";
+import ComponentFormProvider from "./providers";
 
 type SearchParams = Promise<{ prId: string }>;
 
@@ -15,5 +16,9 @@ export default async function CreatePage({
 
   if (!project || !prId) return notFound();
 
-  return <CreateComponentForm project={project} />;
+  return (
+    <ComponentFormProvider project={project}>
+      <CreateComponentForm />
+    </ComponentFormProvider>
+  );
 }

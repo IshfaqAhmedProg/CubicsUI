@@ -1,9 +1,16 @@
-import { Dependencies, TargetEnvs } from "@cubicsui/db";
-import React, { createContext, ReactNode, useContext, useState } from "react";
+"use client";
 
-interface ComponentFormContextProps {}
+import { analyzeCodeDependencies } from "@/library/functions/dependencyAnalyser";
+import { Dependencies, projects } from "@cubicsui/db";
+import { createContext, ReactNode, useContext, useState } from "react";
+
+interface ComponentFormContextProps
+  extends ReturnType<typeof useComponentFormStates> {
+  project: projects;
+}
 interface ComponentFormProviderProps {
   children: ReactNode;
+  project: projects;
 }
 
 export const ComponentFormContext =
@@ -18,20 +25,53 @@ export function useComponentForm() {
 
 export default function ComponentFormProvider({
   children,
+  project,
 }: ComponentFormProviderProps) {
+  const componentFormState = useComponentFormStates();
+  // { "@/*": ["./*"] }
+  return (
+    <ComponentFormContext.Provider value={{ ...componentFormState, project }}>
+      {children}
+    </ComponentFormContext.Provider>
+  );
+}
+function useComponentFormStates() {
   const [name, setName] = useState("");
   const [desc, setDesc] = useState("");
   const [outPath, setOutPath] = useState("");
   const [tags, setTags] = useState([]);
-  const [targetEnvs, setTargetEnvs] = useState<TargetEnvs>({
-    lib: "",
-    fw: "",
-  });
   const [deps, setDeps] = useState<Dependencies>({ ext: [], lcl: [] });
+  const [scriptCode, setScriptCode] = useState<string | undefined>();
+  const [styleCode, setStyleCode] = useState<string | undefined>();
 
-  return (
-    <ComponentFormContext.Provider value={{}}>
-      {children}
-    </ComponentFormContext.Provider>
-  );
+  const [dependenciesAnalysed, setDependenciesAnalysed] = useState(false);
+
+  function analyseDependencies() {
+    const newDeps = analyzeCodeDependencies(scriptCode, { "@/*": ["./*"] });
+    if (newDeps.ext.length !== 0 || newDeps.lcl.length !== 0) {
+      setDependenciesAnalysed(true);
+      setDeps(newDeps);
+    }
+    console.log("newDeps", newDeps);
+  }
+
+  return {
+    name,
+    desc,
+    outPath,
+    tags,
+    deps,
+    scriptCode,
+    styleCode,
+    dependenciesAnalysed,
+    setName,
+    setDesc,
+    setOutPath,
+    setTags,
+    setDeps,
+    setScriptCode,
+    setStyleCode,
+    setDependenciesAnalysed,
+    analyseDependencies,
+  };
 }

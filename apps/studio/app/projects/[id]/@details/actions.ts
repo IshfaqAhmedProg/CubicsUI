@@ -26,6 +26,7 @@ export async function updateProjectAction(
       name: formdata.get("name"),
       lang: formdata.get("lang"),
       desc: formdata.get("desc"),
+      styleEngine: formdata.get("styleEngine"),
     });
     payload = await db.projects.update({
       where: { id: prId },

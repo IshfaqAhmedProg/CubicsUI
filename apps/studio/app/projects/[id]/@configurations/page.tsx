@@ -18,7 +18,7 @@ export default async function ProjectConfigurationsPage({
 
   return (
     <Stack
-      id={"components-container"}
+      id={"configurations-container"}
       gap={2}
     >
       <Typography variant="body2">
