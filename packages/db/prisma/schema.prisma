@@ -9,17 +9,17 @@ datasource db {
 
 model projects {
   /// Id of the library
-  id          String       @id @default(auto()) @map("_id") @db.ObjectId
+  id       String       @id @default(auto()) @map("_id") @db.ObjectId
   /// A unique name following npm package naming convention
-  name        String       @unique
+  name     String       @unique
   /// Language used to define the library
-  lang        Language
+  lang     Language
   /// Style engine used to style the library
-  styleEngine StyleEngine
+  styleEng StyleEngine
   /// The environments that can support the component
-  envs        TargetEnvs[]
+  envs     TargetEnvs[]
   /// A short description of what the library does
-  desc        String?
+  desc     String?
 
   created DateTime @default(now())
   updated DateTime @updatedAt
@@ -90,11 +90,18 @@ type TargetEnvs {
   fw  String?
 }
 
+type Dependency {
+  /// Name of the dependency
+  name String
+  /// Version of the dependency
+  ver  String
+}
+
 type Dependencies {
   /// Third party dependencies
-  ext String[]
+  ext Dependency[]
   /// Local modules
-  lcl String[]
+  lcl Dependency[]
 }
 
 enum Language {
