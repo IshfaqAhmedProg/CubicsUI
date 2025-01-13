@@ -20,6 +20,8 @@ model projects {
   envs     TargetEnvs[]
   /// A short description of what the library does
   desc     String?
+  /// Directories of the project to help user select directory when creating a component
+  dirs     String[]
 
   created DateTime @default(now())
   updated DateTime @updatedAt
@@ -48,8 +50,10 @@ model components {
   id      String   @id @default(auto()) @map("_id") @db.ObjectId
   /// A unique name following npm package naming convention
   name    String   @unique
-  /// The path of the file relative to "components" directory
-  outPath String
+  /// The path of the directory relative to "components" directory
+  outDir  String
+  /// The output file name
+  outFile String
   /// A short description of what the component does
   desc    String
 
