@@ -25,13 +25,13 @@ export default async function ProjectComponentsPage({
           alignItems={"center"}
           gap={3}
         >
-          <Typography variant="body2">Start by creating a component</Typography>
+          <Typography variant="body2">Start by adding a component</Typography>
           <Button
             startIcon={<AddRounded />}
             LinkComponent={Link}
             href={`/components/create?prId=${prId}`}
           >
-            Build Component
+            Add Component to library
           </Button>
         </Stack>
       ) : (
