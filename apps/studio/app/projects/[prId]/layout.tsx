@@ -18,7 +18,7 @@ interface ProjectLayoutProps {
   details: ReactNode;
   configurations: ReactNode;
   components: ReactNode;
-  params: Promise<{ id: string }>;
+  params: Promise<{ prId: string }>;
 }
 
 export default async function ProjectLayout({
@@ -28,7 +28,7 @@ export default async function ProjectLayout({
   components,
   params,
 }: ProjectLayoutProps) {
-  const id = (await params).id;
+  const id = (await params).prId;
   if (!id) return notFound();
 
   const project = await db.projects.findFirst({ where: { id } });

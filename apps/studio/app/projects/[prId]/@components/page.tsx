@@ -3,14 +3,13 @@ import { AddRounded } from "@mui/icons-material";
 import { Button, Paper, Stack, Typography } from "@mui/material";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import React from "react";
 
 export default async function ProjectComponentsPage({
   params,
 }: {
-  params: Promise<{ id: string }>;
+  params: Promise<{ prId: string }>;
 }) {
-  const prId = (await params).id;
+  const prId = (await params).prId;
   if (!prId) return notFound();
 
   const components = await db.components.findMany({ where: { prId } });
