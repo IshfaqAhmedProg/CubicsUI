@@ -100,7 +100,7 @@ type Dependency {
   /// Version of the dependency
   ver  String
   /// Type of the dependency
-  type String
+  type String?
 }
 
 type Dependencies {
