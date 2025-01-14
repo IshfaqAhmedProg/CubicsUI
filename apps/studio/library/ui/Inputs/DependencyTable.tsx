@@ -41,8 +41,13 @@ export default function DependencyTable({
   }
   function addExtDeps() {
     let ext = [...deps.ext];
-    ext.push({ name: "", ver: "" });
+    ext.push({ name: "", ver: "", type: "" });
     setDeps({ ...deps, ext });
+  }
+  function addLclDeps() {
+    let lcl = [...deps.lcl];
+    lcl.push({ name: "", ver: "", type: "" });
+    setDeps({ ...deps, lcl });
   }
   function removeExtDeps(index: number) {
     let ext = [...deps.ext];
@@ -52,11 +57,6 @@ export default function DependencyTable({
   function removeLclDeps(index: number) {
     let lcl = [...deps.lcl];
     lcl.splice(index, 1);
-    setDeps({ ...deps, lcl });
-  }
-  function addLclDeps() {
-    let lcl = [...deps.lcl];
-    lcl.push({ name: "", ver: "" });
     setDeps({ ...deps, lcl });
   }
   return (

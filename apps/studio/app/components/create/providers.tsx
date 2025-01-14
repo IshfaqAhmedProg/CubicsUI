@@ -43,13 +43,11 @@ export function useComponentFormStates() {
   const [deps, setDeps] = useState<Dependencies>({ ext: [], lcl: [] });
   const [scriptCode, setScriptCode] = useState<string | undefined>();
   const [styleCode, setStyleCode] = useState<string | undefined>();
-
-  const [dependenciesAnalysed, setDependenciesAnalysed] = useState(false);
+  const [scriptIncludesStyles, setScriptIncludesStyles] = useState(false);
 
   function analyseDependencies() {
     const newDeps = analyzeCodeDependencies(scriptCode, { "@/*": ["./*"] });
     if (newDeps.ext.length !== 0 || newDeps.lcl.length !== 0) {
-      setDependenciesAnalysed(true);
       setDeps(newDeps);
     }
     console.log("newDeps", newDeps);
@@ -63,7 +61,7 @@ export function useComponentFormStates() {
     deps,
     scriptCode,
     styleCode,
-    dependenciesAnalysed,
+    scriptIncludesStyles,
     setName,
     setDesc,
     setOutPath,
@@ -71,7 +69,7 @@ export function useComponentFormStates() {
     setDeps,
     setScriptCode,
     setStyleCode,
-    setDependenciesAnalysed,
+    setScriptIncludesStyles,
     analyseDependencies,
   };
 }

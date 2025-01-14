@@ -27,10 +27,10 @@ export default function CreateComponentForm() {
     setStyleCode,
     deps,
     setDeps,
-    dependenciesAnalysed,
+    scriptIncludesStyles,
+    setScriptIncludesStyles,
     analyseDependencies,
   } = useComponentForm();
-  const [scriptIncludesStyles, setScriptIncludesStyles] = useState(false);
   console.log({ deps });
   return (
     <Stack

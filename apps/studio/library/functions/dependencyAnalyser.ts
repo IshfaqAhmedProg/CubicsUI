@@ -81,6 +81,7 @@ function createDependency(name: string, isExternal: boolean): Dependency {
   return {
     name,
     ver: isExternal ? "@latest" : "",
+    type: isExternal ? "normal" : "",
   };
 }
 
