@@ -7,7 +7,8 @@ import CodeEditor, { onMountHandler } from "@/library/ui/Inputs/CodeEditor";
 import { useComponentForm } from "./providers";
 import CollapsibleSection from "@/library/ui/Layout/CollapsibleSection";
 import { ExpandMoreRounded } from "@mui/icons-material";
-import DependencyTable from "@/library/ui/Inputs/DependencyTable";
+import DependencyTable from "@/library/ui/Inputs/DependencyTable/DependencyTable";
+import isValidFilename from "@/library/functions/isValidFileName";
 
 export default function CreateComponentForm() {
   const [state, formAction, pending] = useActionState(
@@ -19,19 +20,18 @@ export default function CreateComponentForm() {
     project,
     name,
     setName,
-    outPath,
-    setOutPath,
+    outFile,
+    setOutFile,
+    outDir,
+    setOutDir,
     scriptCode,
     setScriptCode,
     styleCode,
     setStyleCode,
-    deps,
-    setDeps,
     scriptIncludesStyles,
     setScriptIncludesStyles,
     analyseDependencies,
   } = useComponentForm();
-  console.log({ deps });
   return (
     <Stack
       component={"form"}
@@ -48,21 +48,29 @@ export default function CreateComponentForm() {
         expandIcon={<ExpandMoreRounded />}
       >
         <Stack gap={3}>
+          <TextField
+            label="Component Name"
+            value={name}
+            onChange={(e) => setName(e.target.value)}
+            name="name"
+            fullWidth
+          />
           <Stack
             direction={"row"}
             gap={3}
           >
             <TextField
-              label="Component Name"
-              value={name}
-              onChange={(e) => setName(e.target.value)}
-              name="name"
+              label="Output Directory"
+              value={outDir}
+              onChange={(e) => setOutDir(e.target.value)}
+              name="outPath"
               fullWidth
             />
             <TextField
-              label="Output Path"
-              value={outPath}
-              onChange={(e) => setOutPath(e.target.value)}
+              label="Output File Name"
+              value={outFile}
+              error={!isValidFilename(outFile)}
+              onChange={(e) => setOutFile(e.target.value)}
               name="outPath"
               fullWidth
             />
@@ -79,7 +87,7 @@ export default function CreateComponentForm() {
 
       <CollapsibleSection
         title="Scripts"
-        expandIcon={<ExpandMoreRounded />}
+        expanded
       >
         <Stack gap={3}>
           <FormLabel htmlFor="scriptCode">
@@ -89,7 +97,7 @@ export default function CreateComponentForm() {
             id="scriptCode"
             name="scriptCode"
             editorData={scriptCode}
-            path={outPath}
+            path={outFile}
             setEditorData={(v) => setScriptCode(v)}
             language={project.lang.toLowerCase()}
             onMount={onMountHandler}
@@ -103,10 +111,7 @@ export default function CreateComponentForm() {
               <Button onClick={analyseDependencies}>
                 Analyse Dependencies from script
               </Button>
-              <DependencyTable
-                deps={deps}
-                setDeps={setDeps}
-              />
+              <DependencyTable />
             </Stack>
           </CollapsibleSection>
           <Stack

@@ -81,7 +81,7 @@ function createDependency(name: string, isExternal: boolean): Dependency {
   return {
     name,
     ver: isExternal ? "@latest" : "",
-    type: isExternal ? "normal" : "",
+    type: isExternal ? "normal" : null,
   };
 }
 
@@ -93,20 +93,6 @@ function createDependency(name: string, isExternal: boolean): Dependency {
  * @param code - The source code to analyze
  * @param paths - TypeScript path mappings from tsconfig
  * @returns Object containing external and local dependencies
- *
- * @example
- * ```typescript
- * const paths = { "@/*": ["./src/*"] };
- * const code = `
- *   import { Button } from "@mui/material";
- *   import MyComponent from "@/components/Button";
- * `;
- * const deps = analyzeCodeDependencies(code, paths);
- * // deps = {
- * //   ext: [{ name: "@mui/material", ver: "*" }],
- * //   lcl: [{ name: "./src/components/Button", ver: "" }]
- * // }
- * ```
  */
 export function analyzeCodeDependencies(
   code: string | undefined,

@@ -1,5 +1,6 @@
 "use client";
 
+import { sampleTsComponentReact } from "@/library/constants/sampleCodeBlocks";
 import { analyzeCodeDependencies } from "@/library/functions/dependencyAnalyser";
 import { Dependencies, projects } from "@cubicsui/db";
 import { createContext, ReactNode, useContext, useState } from "react";
@@ -35,13 +36,16 @@ export default function ComponentFormProvider({
     </ComponentFormContext.Provider>
   );
 }
-export function useComponentFormStates() {
-  const [name, setName] = useState("");
+function useComponentFormStates() {
+  const [name, setName] = useState("Accordion");
   const [desc, setDesc] = useState("");
-  const [outPath, setOutPath] = useState("");
+  const [outFile, setOutFile] = useState("Accordion.tsx");
+  const [outDir, setOutDir] = useState("");
   const [tags, setTags] = useState([]);
   const [deps, setDeps] = useState<Dependencies>({ ext: [], lcl: [] });
-  const [scriptCode, setScriptCode] = useState<string | undefined>();
+  const [scriptCode, setScriptCode] = useState<string | undefined>(
+    sampleTsComponentReact
+  );
   const [styleCode, setStyleCode] = useState<string | undefined>();
   const [scriptIncludesStyles, setScriptIncludesStyles] = useState(false);
 
@@ -56,7 +60,8 @@ export function useComponentFormStates() {
   return {
     name,
     desc,
-    outPath,
+    outFile,
+    outDir,
     tags,
     deps,
     scriptCode,
@@ -64,7 +69,8 @@ export function useComponentFormStates() {
     scriptIncludesStyles,
     setName,
     setDesc,
-    setOutPath,
+    setOutFile,
+    setOutDir,
     setTags,
     setDeps,
     setScriptCode,

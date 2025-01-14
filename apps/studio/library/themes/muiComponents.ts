@@ -47,6 +47,15 @@ const components:
       },
     },
   },
+  MuiAutocomplete: {
+    styleOverrides: {
+      listbox: { background: "var(--palette-background-default)" },
+      popper: {
+        background: "var(--palette-background-default)",
+        borderRadius: "var(--shape-borderRadius)",
+      },
+    },
+  },
   MuiBreadcrumbs: {
     styleOverrides: {
       ol: {
@@ -136,6 +145,7 @@ const components:
     },
   },
   MuiPaper: { defaultProps: { elevation: 0 } },
+
   MuiPopover: {
     styleOverrides: {
       paper: { backgroundColor: "var(--palette-background-default)" },
