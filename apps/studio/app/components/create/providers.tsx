@@ -35,7 +35,7 @@ export default function ComponentFormProvider({
     </ComponentFormContext.Provider>
   );
 }
-function useComponentFormStates() {
+export function useComponentFormStates() {
   const [name, setName] = useState("");
   const [desc, setDesc] = useState("");
   const [outPath, setOutPath] = useState("");

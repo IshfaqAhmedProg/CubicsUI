@@ -7,6 +7,7 @@ import CodeEditor, { onMountHandler } from "@/library/ui/Inputs/CodeEditor";
 import { useComponentForm } from "./providers";
 import CollapsibleSection from "@/library/ui/Layout/CollapsibleSection";
 import { ExpandMoreRounded } from "@mui/icons-material";
+import DependencyTable from "@/library/ui/Inputs/DependencyTable";
 
 export default function CreateComponentForm() {
   const [state, formAction, pending] = useActionState(
@@ -23,13 +24,14 @@ export default function CreateComponentForm() {
     scriptCode,
     setScriptCode,
     styleCode,
-    deps,
     setStyleCode,
+    deps,
+    setDeps,
     dependenciesAnalysed,
     analyseDependencies,
   } = useComponentForm();
   const [scriptIncludesStyles, setScriptIncludesStyles] = useState(false);
-
+  console.log({ deps });
   return (
     <Stack
       component={"form"}
@@ -97,8 +99,15 @@ export default function CreateComponentForm() {
             defaultExpanded
             title="Dependencies"
           >
-            <Button onClick={analyseDependencies}>Analyse Dependencies</Button>
-            <Stack>{JSON.stringify(deps)}</Stack>
+            <Stack gap={3}>
+              <Button onClick={analyseDependencies}>
+                Analyse Dependencies from script
+              </Button>
+              <DependencyTable
+                deps={deps}
+                setDeps={setDeps}
+              />
+            </Stack>
           </CollapsibleSection>
           <Stack
             direction={"row"}
