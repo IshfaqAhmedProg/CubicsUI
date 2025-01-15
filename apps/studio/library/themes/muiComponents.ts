@@ -170,6 +170,14 @@ const components:
       },
     },
   },
+  MuiTab: {
+    styleOverrides: {
+      root: {
+        textTransform: "unset",
+        fontFamily: "var(--font-h)",
+      },
+    },
+  },
   MuiTextField: {
     defaultProps: {
       size: "small",
