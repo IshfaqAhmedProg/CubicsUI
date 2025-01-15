@@ -19,39 +19,17 @@ export const sampleTsconfig = `{
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],
   "exclude": ["node_modules"]
 }`;
-export const sampleTsComponentReact = `import { useState } from "react";
-import styles from "./Accordion.module.scss";
+export const sampleTsComponentReact = `import { ComponentProps } from "react";
+import styles from "./Button.module.scss";
 
-type AllowedDataTypes = {
-  id: string;
-  summary: string;
-  definition: string;
-} & {
-  [key: string]: any;
-};
-
-interface Props {
-  data: AllowedDataTypes[];
+interface Props extends ComponentProps<"button"> {
+  variant?: "contained" | "outline" | "text"
 }
 
-export default function Accordion({ data }: Props) {
-  // console.log(data);
-  const [active, setActive] = useState(data[0].id);
+export default function Button({ variant = "text", children, className, ...rest }: Props) {
   return (
-    <div className={styles.accordion}>
-      {data.map((value) => (
-        <div
-          key={value.id}
-          className={\`\${styles.accordionItem} \${
-            active == value.id ? styles.active : ""
-          }\`}
-          onClick={() => setActive(value.id)}
-        >
-          <div className={styles.summary}>{value.summary}</div>
-          <div className={styles.definition}>{value.definition}</div>
-        </div>
-      ))}
-    </div>
+    <button {...rest} className={\`\${styles.button} \${styles[variant]} \${className}\`}>
+      {children}
+    </button>
   );
-}
-`;
+}`;
