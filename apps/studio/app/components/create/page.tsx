@@ -1,5 +1,5 @@
 import db from "@/db";
-import ComponentForm from "./form";
+import CreateComponentForm from "./form";
 import { notFound } from "next/navigation";
 import ComponentFormProvider from "./providers";
 
@@ -18,7 +18,7 @@ export default async function CreatePage({
 
   return (
     <ComponentFormProvider project={project}>
-      <ComponentForm />
+      <CreateComponentForm />
     </ComponentFormProvider>
   );
 }

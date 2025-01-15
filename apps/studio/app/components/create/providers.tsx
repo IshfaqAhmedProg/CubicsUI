@@ -3,7 +3,13 @@
 import { sampleTsComponentReact } from "@/library/constants/sampleCodeBlocks";
 import { analyzeCodeDependencies } from "@/library/functions/dependencyAnalyser";
 import { codeblocks, components, Dependencies, projects } from "@cubicsui/db";
-import { createContext, ReactNode, useContext, useState } from "react";
+import {
+  createContext,
+  ReactNode,
+  useContext,
+  useEffect,
+  useState,
+} from "react";
 
 interface ComponentFormDefaultStateProps {
   project: projects;
@@ -48,10 +54,10 @@ function useComponentFormStates({
   codeblocks,
   component,
 }: ComponentFormDefaultStateProps) {
-  const [name, setName] = useState(component?.name ?? "Accordion");
+  const [name, setName] = useState(component?.name ?? "");
   const [desc, setDesc] = useState(component?.desc ?? "");
-  const [outFile, setOutFile] = useState(component?.outFile ?? "Accordion.tsx");
-  const [outDir, setOutDir] = useState(component?.outDir ?? "Accordion");
+  const [outFile, setOutFile] = useState(component?.outFile ?? "");
+  const [outDir, setOutDir] = useState(component?.outDir ?? "");
   const [tags, setTags] = useState<string[]>(component?.tags ?? []);
   const [deps, setDeps] = useState<Dependencies>(
     component?.deps ?? { ext: [], lcl: [] }
@@ -65,6 +71,13 @@ function useComponentFormStates({
   const [scriptIncludesStyles, setScriptIncludesStyles] = useState(
     !!codeblocks?.styles
   );
+
+  useEffect(() => {
+    if (name) {
+      let extension = project.lang == "typescript" ? ".tsx" : ".jsx";
+      setOutFile(`${name}${extension}`);
+    }
+  }, [name, project]);
 
   function analyseDependencies() {
     const newDeps = analyzeCodeDependencies(scriptCode, { "@/*": ["./*"] });

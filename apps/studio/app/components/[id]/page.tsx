@@ -2,7 +2,7 @@ import { notFound } from "next/navigation";
 import db from "@/db";
 import ComponentFormProvider from "../create/providers";
 import { Typography } from "@mui/material";
-import ComponentForm from "../create/form";
+import CreateComponentForm from "../create/form";
 export default async function ComponentDetailsPage({
   params,
 }: {
@@ -27,7 +27,7 @@ export default async function ComponentDetailsPage({
       project={project}
       codeblocks={codeblocks}
     >
-      <ComponentForm />
+      <CreateComponentForm />
     </ComponentFormProvider>
   );
 }
