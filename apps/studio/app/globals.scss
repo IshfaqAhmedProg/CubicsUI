@@ -60,3 +60,7 @@ a {
     color-scheme: dark;
   }
 }
+.overflow-guard,
+.monaco-editor {
+  border-radius: var(--shape-borderRadius);
+}

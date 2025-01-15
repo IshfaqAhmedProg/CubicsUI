@@ -25,10 +25,12 @@ export function onMountHandler(editor: any, monaco: Monaco) {
     noSemanticValidation: false,
     noSyntaxValidation: false,
     diagnosticCodesToIgnore: [
-      // suppress import errors
+      // Cannot find module 'xxx' or its corresponding type declarations.
       2307,
-      // suppress "Cannot find name 'React'." errors
+      // Cannot find name 'React'.
       2304,
+      // Property 'className' does not exist on type 'Props'
+      2339,
     ],
   });
 
@@ -67,11 +69,8 @@ export default function CodeEditor(props: CodeEditorProps) {
   );
   return (
     <Box
-      component={Paper}
-      overflow={"hidden"}
-      height={height}
-      border={(theme) => `1px solid ${theme.palette.divider}`}
       {...boxProps}
+      height={height}
     >
       <textarea
         id={id}
