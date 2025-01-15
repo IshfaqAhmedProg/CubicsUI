@@ -5,7 +5,7 @@ import {
   AddRounded,
 } from "@mui/icons-material";
 import { Stack, Tooltip, IconButton, TextField, Button } from "@mui/material";
-import { DependencySectionLayout } from "./DependencyTable";
+import { DependencySectionLayout } from "./DependencySection";
 import { ComponentAutocomplete } from "./ComponentAutocomplete";
 import { ExternalDependency } from "@cubicsui/db";
 import { createExternalDependency } from "@/library/functions/dependencyAnalyser";

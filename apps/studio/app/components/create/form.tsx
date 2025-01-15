@@ -1,84 +1,22 @@
 "use client";
 import {
-  Autocomplete,
-  AutocompleteInputChangeReason,
   Button,
-  Chip,
   FormLabel,
   Stack,
   Switch,
   TextField,
   Typography,
 } from "@mui/material";
-import { Fragment, useActionState, useState } from "react";
+import { useActionState } from "react";
 import { createComponentAction } from "../actions";
 import HiddenInput from "@/library/ui/Inputs/HiddenInput";
 import CodeEditor, { onMountHandler } from "@/library/ui/Inputs/CodeEditor";
 import { useComponentForm } from "./providers";
 import CollapsibleSection from "@/library/ui/Layout/CollapsibleSection";
 import { ExpandMoreRounded } from "@mui/icons-material";
-import DependencyTable from "@/library/ui/Inputs/DependencyTable/DependencyTable";
+import DependencySection from "@/library/ui/Inputs/DependencyTable/DependencySection";
 import isValidFilename from "@/library/functions/isValidFileName";
-
-export function TagsAutocomplete() {
-  const { tags, setTags } = useComponentForm();
-  const [inputValue, setInputValue] = useState("");
-
-  function handleInputChange(
-    event: React.SyntheticEvent,
-    value: string,
-    reason: AutocompleteInputChangeReason
-  ) {
-    const options = value.split(" ");
-    if (options.length > 1) {
-      setTags(
-        tags
-          .concat(options)
-          .map((x) => x.trim())
-          .filter((x) => x)
-      );
-      setInputValue("");
-    } else {
-      setInputValue(value);
-    }
-  }
-  return (
-    <Autocomplete
-      multiple
-      options={[]}
-      value={tags}
-      onChange={(event, newValue) => setTags(newValue)}
-      inputValue={inputValue}
-      freeSolo
-      onInputChange={handleInputChange}
-      renderTags={(value: readonly string[], getTagProps) =>
-        value.map((option: string, index: number) => {
-          const { key, ...tagProps } = getTagProps({ index });
-          return (
-            <Fragment key={key}>
-              <HiddenInput
-                name="tags"
-                value={option}
-              />
-              <Chip
-                label={option}
-                {...tagProps}
-              />
-            </Fragment>
-          );
-        })
-      }
-      renderInput={(params) => {
-        return (
-          <TextField
-            {...params}
-            label="Tags"
-          />
-        );
-      }}
-    />
-  );
-}
+import ComponentTagsInput from "@/library/ui/Inputs/ComponentTagsInput";
 
 export default function CreateComponentForm() {
   const [state, formAction, pending] = useActionState(
@@ -100,7 +38,6 @@ export default function CreateComponentForm() {
     setStyleCode,
     scriptIncludesStyles,
     setScriptIncludesStyles,
-    analyseDependencies,
   } = useComponentForm();
   return (
     <Stack
@@ -166,7 +103,7 @@ export default function CreateComponentForm() {
             minRows={2}
             fullWidth
           />
-          <TagsAutocomplete />
+          <ComponentTagsInput />
         </Stack>
       </CollapsibleSection>
 
@@ -187,18 +124,8 @@ export default function CreateComponentForm() {
             language={project.lang.toLowerCase()}
             onMount={onMountHandler}
           />
-          <CollapsibleSection
-            expandIcon={<ExpandMoreRounded />}
-            defaultExpanded
-            title="Dependencies"
-          >
-            <Stack gap={3}>
-              <Button onClick={analyseDependencies}>
-                Analyse Dependencies from script
-              </Button>
-              <DependencyTable />
-            </Stack>
-          </CollapsibleSection>
+
+          <DependencySection />
           <Stack
             direction={"row"}
             gap={3}

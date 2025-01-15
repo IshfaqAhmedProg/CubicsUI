@@ -16,7 +16,7 @@ import {
   FormControl,
   InputLabel,
 } from "@mui/material";
-import { DependencySectionLayout } from "./DependencyTable";
+import { DependencySectionLayout } from "./DependencySection";
 import { createLocalDependency } from "@/library/functions/dependencyAnalyser";
 
 export const externalDependencyTypes = ["normal", "dev", "peer"];
