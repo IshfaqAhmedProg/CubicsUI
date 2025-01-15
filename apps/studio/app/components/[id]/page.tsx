@@ -1,4 +1,3 @@
-import { notFound } from "next/navigation";
 import db from "@/db";
 import ComponentFormProvider from "../create/providers";
 import { Typography } from "@mui/material";

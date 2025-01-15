@@ -7,12 +7,10 @@ import {
 import { Stack, Tooltip, IconButton, TextField, Button } from "@mui/material";
 import { DependencySectionLayout } from "./DependencySection";
 import { ComponentAutocomplete } from "./ComponentAutocomplete";
-import { ExternalDependency } from "@cubicsui/db";
 import { createExternalDependency } from "@/library/functions/dependencyAnalyser";
 
 export default function LocalDependencyTable() {
   const { deps, setDeps } = useComponentForm();
-  console.log(deps);
 
   function shiftFromLclToExt(index: number) {
     let lcl = [...deps.lcl],

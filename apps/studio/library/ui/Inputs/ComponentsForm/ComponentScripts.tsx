@@ -1,10 +1,11 @@
+"use client";
 import { Stack, FormLabel, Switch } from "@mui/material";
 import CollapsibleSection from "@/library/ui/Layout/CollapsibleSection";
 import CodeEditor, { onMountHandler } from "@/library/ui/Inputs/CodeEditor";
 import DependencySection from "../DependencyTable/DependencySection";
 import { useComponentForm } from "@/app/components/create/providers";
 
-export default function Scripts() {
+export default function ComponentScripts() {
   const {
     scriptCode,
     setScriptCode,

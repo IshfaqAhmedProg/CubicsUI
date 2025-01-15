@@ -6,10 +6,12 @@ import { codeblocks, components, Dependencies, projects } from "@cubicsui/db";
 import {
   createContext,
   ReactNode,
+  useActionState,
   useContext,
   useEffect,
   useState,
 } from "react";
+import { createComponentAction } from "../actions";
 
 interface ComponentFormDefaultStateProps {
   project: projects;
@@ -72,6 +74,11 @@ function useComponentFormStates({
     !!codeblocks?.styles
   );
 
+  const [formState, formAction, formPending] = useActionState(
+    createComponentAction,
+    {}
+  );
+
   useEffect(() => {
     if (name) {
       let extension = project.lang == "typescript" ? ".tsx" : ".jsx";
@@ -97,6 +104,8 @@ function useComponentFormStates({
     scriptCode,
     styleCode,
     scriptIncludesStyles,
+    formState,
+    formPending,
     setName,
     setDesc,
     setOutFile,
@@ -107,5 +116,6 @@ function useComponentFormStates({
     setStyleCode,
     setScriptIncludesStyles,
     analyseDependencies,
+    formAction,
   };
 }
