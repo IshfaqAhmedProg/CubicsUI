@@ -80,7 +80,8 @@ export default function ExternalDependencyTable() {
                 id={"depsExtType"}
                 name={"depsExtType"}
                 label={i == 0 ? "Type" : undefined}
-                value={e.type}
+                // Defaulting to "normal" if empty type field from db
+                value={e.type ?? externalDependencyTypes[0]}
                 onChange={(e) => {
                   let extDeps = [...deps.ext];
                   extDeps[i]["type"] = e.target.value;

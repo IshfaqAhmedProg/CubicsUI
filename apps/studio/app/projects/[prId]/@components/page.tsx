@@ -1,8 +1,10 @@
 import db from "@/db";
-import { AddRounded } from "@mui/icons-material";
-import { Button, Paper, Stack, Typography } from "@mui/material";
+import { AddRounded, DeleteForeverRounded } from "@mui/icons-material";
+import { Button, IconButton, Paper, Stack, Typography } from "@mui/material";
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import { deleteComponentAction } from "./actions";
+import ComponentsList from "./list";
 
 export default async function ProjectComponentsPage({
   params,
@@ -20,6 +22,15 @@ export default async function ProjectComponentsPage({
       component={Paper}
       p={2}
     >
+      {components.length !== 0 && (
+        <Button
+          startIcon={<AddRounded />}
+          LinkComponent={Link}
+          href={`/components/create?prId=${prId}`}
+        >
+          Add Component to library
+        </Button>
+      )}
       {components.length == 0 ? (
         <Stack
           alignItems={"center"}
@@ -35,9 +46,7 @@ export default async function ProjectComponentsPage({
           </Button>
         </Stack>
       ) : (
-        components.map((c) => {
-          return <Typography key={c.id}>{c.name}</Typography>;
-        })
+        <ComponentsList components={components} />
       )}
     </Stack>
   );

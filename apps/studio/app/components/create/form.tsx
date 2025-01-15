@@ -18,7 +18,7 @@ import DependencySection from "@/library/ui/Inputs/DependencyTable/DependencySec
 import isValidFilename from "@/library/functions/isValidFileName";
 import ComponentTagsInput from "@/library/ui/Inputs/ComponentTagsInput";
 
-export default function CreateComponentForm() {
+export default function ComponentForm() {
   const [state, formAction, pending] = useActionState(
     createComponentAction,
     {}
@@ -26,6 +26,8 @@ export default function CreateComponentForm() {
 
   const {
     project,
+    codeblocks,
+    component,
     name,
     setName,
     outFile,
@@ -45,6 +47,18 @@ export default function CreateComponentForm() {
       action={formAction}
       gap={3}
     >
+      {codeblocks && (
+        <HiddenInput
+          value={codeblocks.id}
+          name="cbId"
+        />
+      )}
+      {component && (
+        <HiddenInput
+          value={component.id}
+          name="cmpId"
+        />
+      )}
       <HiddenInput
         value={project.id}
         name="prId"
@@ -112,12 +126,12 @@ export default function CreateComponentForm() {
         expanded
       >
         <Stack gap={3}>
-          <FormLabel htmlFor="scriptCode">
+          <FormLabel htmlFor="script">
             Paste the code that defines your component below,
           </FormLabel>
           <CodeEditor
-            id="scriptCode"
-            name="scriptCode"
+            id="script"
+            name="script"
             editorData={scriptCode}
             path={outFile}
             setEditorData={(v) => setScriptCode(v)}
@@ -152,7 +166,7 @@ export default function CreateComponentForm() {
                   Paste the style definitions for the component defined above,
                 </FormLabel>
                 <CodeEditor
-                  name="styleCode"
+                  name="styles"
                   editorData={styleCode}
                   path={`${name}.module.css`}
                   setEditorData={(v) => setStyleCode(v)}

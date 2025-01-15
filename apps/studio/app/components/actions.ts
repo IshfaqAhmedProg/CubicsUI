@@ -6,7 +6,9 @@ import {
 } from "@/library/types/ActionReturnTypes";
 import { components, Prisma } from "@cubicsui/db";
 import { z } from "zod";
-import { componentCreationSchema } from "./schema";
+import { codeblocksCreationSchema, componentCreationSchema } from "./schema";
+import db from "@/db";
+import { redirect } from "next/navigation";
 
 function zipDeps(formdata: FormData) {
   const extNames = formdata.getAll("depsExtName");
@@ -35,11 +37,13 @@ export async function createComponentAction(
 ): ActionReturnType<FormActionReturnType> {
   let errors: FormActionReturnType["errors"] = {};
   let payload: components;
+  let prId = formdata.get("prId");
+  if (!prId) redirect("/projects");
   try {
     const deps = zipDeps(formdata);
     console.log(deps);
-    const validatedFields = componentCreationSchema.parse({
-      prId: formdata.get("prId"),
+    const cmpValidatedFields = componentCreationSchema.parse({
+      prId: prId,
       name: formdata.get("name"),
       outDir: formdata.get("outDir"),
       outFile: formdata.get("outFile"),
@@ -47,7 +51,15 @@ export async function createComponentAction(
       tags: formdata.getAll("tags"),
       deps,
     });
-    console.log(validatedFields);
+    const cbValidatedFields = codeblocksCreationSchema.parse({
+      script: formdata.get("script"),
+      styles: formdata.get("styles"),
+    });
+    const component = await db.components.create({ data: cmpValidatedFields });
+    const codeblocks = await db.codeblocks.create({
+      data: { ...cbValidatedFields, cmpId: component.id },
+    });
+    console.log("Created component and codeblocks");
   } catch (err) {
     if (
       err instanceof Prisma.PrismaClientKnownRequestError &&
@@ -64,4 +76,5 @@ export async function createComponentAction(
     console.log(err);
     return { status: "error", errors };
   }
+  redirect(`/projects/${prId}`);
 }

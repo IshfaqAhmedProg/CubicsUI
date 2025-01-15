@@ -2,16 +2,21 @@
 
 import { sampleTsComponentReact } from "@/library/constants/sampleCodeBlocks";
 import { analyzeCodeDependencies } from "@/library/functions/dependencyAnalyser";
-import { Dependencies, projects } from "@cubicsui/db";
+import { codeblocks, components, Dependencies, projects } from "@cubicsui/db";
 import { createContext, ReactNode, useContext, useState } from "react";
 
-interface ComponentFormContextProps
-  extends ReturnType<typeof useComponentFormStates> {
+interface ComponentFormDefaultStateProps {
   project: projects;
+  component?: components | null;
+  codeblocks?: codeblocks | null;
 }
-interface ComponentFormProviderProps {
+
+interface ComponentFormContextProps
+  extends ReturnType<typeof useComponentFormStates>,
+    ComponentFormDefaultStateProps {}
+
+interface ComponentFormProviderProps extends ComponentFormDefaultStateProps {
   children: ReactNode;
-  project: projects;
 }
 
 export const ComponentFormContext =
@@ -26,28 +31,40 @@ export function useComponentForm() {
 
 export default function ComponentFormProvider({
   children,
-  project,
+  ...defaults
 }: ComponentFormProviderProps) {
-  const componentFormState = useComponentFormStates();
+  const componentFormState = useComponentFormStates(defaults);
   // { "@/*": ["./*"] }
   return (
-    <ComponentFormContext.Provider value={{ ...componentFormState, project }}>
+    <ComponentFormContext.Provider
+      value={{ ...componentFormState, ...defaults }}
+    >
       {children}
     </ComponentFormContext.Provider>
   );
 }
-function useComponentFormStates() {
-  const [name, setName] = useState("Accordion");
-  const [desc, setDesc] = useState("");
-  const [outFile, setOutFile] = useState("Accordion.tsx");
-  const [outDir, setOutDir] = useState("Accordion");
-  const [tags, setTags] = useState<string[]>([]);
-  const [deps, setDeps] = useState<Dependencies>({ ext: [], lcl: [] });
-  const [scriptCode, setScriptCode] = useState<string | undefined>(
-    sampleTsComponentReact
+function useComponentFormStates({
+  project,
+  codeblocks,
+  component,
+}: ComponentFormDefaultStateProps) {
+  const [name, setName] = useState(component?.name ?? "Accordion");
+  const [desc, setDesc] = useState(component?.desc ?? "");
+  const [outFile, setOutFile] = useState(component?.outFile ?? "Accordion.tsx");
+  const [outDir, setOutDir] = useState(component?.outDir ?? "Accordion");
+  const [tags, setTags] = useState<string[]>(component?.tags ?? []);
+  const [deps, setDeps] = useState<Dependencies>(
+    component?.deps ?? { ext: [], lcl: [] }
   );
-  const [styleCode, setStyleCode] = useState<string | undefined>();
-  const [scriptIncludesStyles, setScriptIncludesStyles] = useState(false);
+  const [scriptCode, setScriptCode] = useState<string | undefined>(
+    codeblocks?.script ?? sampleTsComponentReact
+  );
+  const [styleCode, setStyleCode] = useState<string | undefined>(
+    codeblocks?.styles ?? undefined
+  );
+  const [scriptIncludesStyles, setScriptIncludesStyles] = useState(
+    !!codeblocks?.styles
+  );
 
   function analyseDependencies() {
     const newDeps = analyzeCodeDependencies(scriptCode, { "@/*": ["./*"] });

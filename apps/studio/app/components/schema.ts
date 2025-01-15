@@ -28,3 +28,11 @@ export const componentCreationSchema = z.object({
     ),
   }),
 });
+export const codeblocksCreationSchema = z.object({
+  script: z.string({ message: "Script is missing" }),
+  styles: z.string().nullish(),
+});
+export const codeblockUpdateSchema = codeblocksCreationSchema.extend({
+  id: z.string({ message: "Codeblock Id is missing" }),
+  cmpId: z.string({ message: "Component Id is missing" }),
+});

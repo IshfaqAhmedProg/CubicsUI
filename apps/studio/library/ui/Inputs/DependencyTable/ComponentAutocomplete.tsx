@@ -14,7 +14,14 @@ const initialOptions: ComponentAutocompleteOption[] = [
 
 export function ComponentAutocomplete({ index }: { index: number }) {
   const { deps, setDeps } = useComponentForm();
-  const [value, setValue] = useState<ComponentAutocompleteOption | null>(null);
+  const localDepsComponentId = deps.lcl[index].cmpId;
+
+  const initialValue =
+    initialOptions.find((io) => io.id == localDepsComponentId) ?? null;
+
+  const [value, setValue] = useState<ComponentAutocompleteOption | null>(
+    initialValue
+  );
   useEffect(() => {
     if (value) {
       setDeps((prev) => {
@@ -28,7 +35,7 @@ export function ComponentAutocomplete({ index }: { index: number }) {
   return (
     <>
       <HiddenInput
-        value={deps.lcl[index].cmpId}
+        value={localDepsComponentId}
         name="depsLclCmpId"
       />
       <Autocomplete
