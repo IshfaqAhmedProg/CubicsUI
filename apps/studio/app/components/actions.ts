@@ -4,11 +4,10 @@ import {
   ActionReturnType,
   FormActionReturnType,
 } from "@/library/types/ActionReturnTypes";
-import { components, Prisma } from "@cubicsui/db";
+import { Prisma } from "@cubicsui/db";
 import { z } from "zod";
 import { codeblocksCreationSchema, componentCreationSchema } from "./schema";
 import db from "@/db";
-import { redirect } from "next/navigation";
 
 function zipDeps(formdata: FormData) {
   const extNames = formdata.getAll("depsExtName");
@@ -36,12 +35,11 @@ export async function createComponentAction(
   formdata: FormData
 ): ActionReturnType<FormActionReturnType> {
   let errors: FormActionReturnType["errors"] = {};
-  let payload: components;
   let prId = formdata.get("prId");
-  if (!prId) redirect("/projects");
+  if (!prId) return { errors: { Form: "Project Id not found" } };
   try {
     const deps = zipDeps(formdata);
-    console.log(deps);
+    // console.log(deps);
     const cmpValidatedFields = componentCreationSchema.parse({
       prId: prId,
       name: formdata.get("name"),
@@ -60,6 +58,7 @@ export async function createComponentAction(
       data: { ...cbValidatedFields, cmpId: component.id },
     });
     console.log("Created component and codeblocks");
+    return { payload: { ...component, codeblocks }, status: "success" };
   } catch (err) {
     if (
       err instanceof Prisma.PrismaClientKnownRequestError &&
@@ -76,5 +75,4 @@ export async function createComponentAction(
     console.log(err);
     return { status: "error", errors };
   }
-  redirect(`/projects/${prId}`);
 }
