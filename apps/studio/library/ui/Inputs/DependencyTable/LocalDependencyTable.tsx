@@ -7,6 +7,8 @@ import {
 import { Stack, Tooltip, IconButton, TextField, Button } from "@mui/material";
 import { DependencySectionLayout } from "./DependencyTable";
 import { ComponentAutocomplete } from "./ComponentAutocomplete";
+import { ExternalDependency } from "@cubicsui/db";
+import { createExternalDependency } from "@/library/functions/dependencyAnalyser";
 
 export default function LocalDependencyTable() {
   const { deps, setDeps } = useComponentForm();
@@ -15,16 +17,14 @@ export default function LocalDependencyTable() {
   function shiftFromLclToExt(index: number) {
     let lcl = [...deps.lcl],
       ext = [...deps.ext];
-    lcl[index].type = "";
-    lcl[index].ver = "";
-    ext.push(lcl[index]);
+    ext.push(createExternalDependency(lcl[index].name));
     lcl.splice(index, 1);
     setDeps({ lcl, ext });
   }
 
   function addLclDeps() {
     let lcl = [...deps.lcl];
-    lcl.push({ name: "", ver: "", type: "" });
+    lcl.push({ name: "", cmpId: "" });
     setDeps({ ...deps, lcl });
   }
 

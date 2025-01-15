@@ -17,6 +17,7 @@ import {
   InputLabel,
 } from "@mui/material";
 import { DependencySectionLayout } from "./DependencyTable";
+import { createLocalDependency } from "@/library/functions/dependencyAnalyser";
 
 export const externalDependencyTypes = ["normal", "dev", "peer"];
 
@@ -25,9 +26,7 @@ export default function ExternalDependencyTable() {
   function shiftFromExtToLcl(index: number) {
     let lcl = [...deps.lcl],
       ext = [...deps.ext];
-    ext[index].type = null;
-    ext[index].ver = "";
-    lcl.push(ext[index]);
+    lcl.push(createLocalDependency(lcl[index].name));
     ext.splice(index, 1);
     setDeps({ lcl, ext });
   }
@@ -74,6 +73,7 @@ export default function ExternalDependencyTable() {
               }}
             />
             <FormControl sx={{ width: "23ch" }}>
+              {/* Render label only for first element */}
               {i == 0 && <InputLabel id="depsExtType-label">Type</InputLabel>}
               <Select
                 labelId={i == 0 ? "depsExtType-label" : undefined}

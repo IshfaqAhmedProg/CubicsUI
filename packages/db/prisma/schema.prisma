@@ -94,7 +94,7 @@ type TargetEnvs {
   fw  String?
 }
 
-type Dependency {
+type ExternalDependency {
   /// Name of the dependency
   name String
   /// Version of the dependency
@@ -103,11 +103,18 @@ type Dependency {
   type String?
 }
 
+type LocalDependency {
+  /// Name of the dependency
+  name  String
+  /// Id of the component that corresponds to the dependency 
+  cmpId String
+}
+
 type Dependencies {
   /// Third party dependencies
-  ext Dependency[]
+  ext ExternalDependency[]
   /// Local modules
-  lcl Dependency[]
+  lcl LocalDependency[]
 }
 
 enum Language {

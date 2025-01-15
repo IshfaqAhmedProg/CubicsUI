@@ -1,6 +1,16 @@
 "use client";
-import { Button, FormLabel, Stack, Switch, TextField } from "@mui/material";
-import { useActionState, useState } from "react";
+import {
+  Autocomplete,
+  AutocompleteInputChangeReason,
+  Button,
+  Chip,
+  FormLabel,
+  Stack,
+  Switch,
+  TextField,
+  Typography,
+} from "@mui/material";
+import { Fragment, useActionState, useState } from "react";
 import { createComponentAction } from "../actions";
 import HiddenInput from "@/library/ui/Inputs/HiddenInput";
 import CodeEditor, { onMountHandler } from "@/library/ui/Inputs/CodeEditor";
@@ -9,6 +19,66 @@ import CollapsibleSection from "@/library/ui/Layout/CollapsibleSection";
 import { ExpandMoreRounded } from "@mui/icons-material";
 import DependencyTable from "@/library/ui/Inputs/DependencyTable/DependencyTable";
 import isValidFilename from "@/library/functions/isValidFileName";
+
+export function TagsAutocomplete() {
+  const { tags, setTags } = useComponentForm();
+  const [inputValue, setInputValue] = useState("");
+
+  function handleInputChange(
+    event: React.SyntheticEvent,
+    value: string,
+    reason: AutocompleteInputChangeReason
+  ) {
+    const options = value.split(" ");
+    if (options.length > 1) {
+      setTags(
+        tags
+          .concat(options)
+          .map((x) => x.trim())
+          .filter((x) => x)
+      );
+      setInputValue("");
+    } else {
+      setInputValue(value);
+    }
+  }
+  return (
+    <Autocomplete
+      multiple
+      options={[]}
+      value={tags}
+      onChange={(event, newValue) => setTags(newValue)}
+      inputValue={inputValue}
+      freeSolo
+      onInputChange={handleInputChange}
+      renderTags={(value: readonly string[], getTagProps) =>
+        value.map((option: string, index: number) => {
+          const { key, ...tagProps } = getTagProps({ index });
+          return (
+            <Fragment key={key}>
+              <HiddenInput
+                name="tags"
+                value={option}
+              />
+              <Chip
+                label={option}
+                {...tagProps}
+              />
+            </Fragment>
+          );
+        })
+      }
+      renderInput={(params) => {
+        return (
+          <TextField
+            {...params}
+            label="Tags"
+          />
+        );
+      }}
+    />
+  );
+}
 
 export default function CreateComponentForm() {
   const [state, formAction, pending] = useActionState(
@@ -57,21 +127,35 @@ export default function CreateComponentForm() {
           />
           <Stack
             direction={"row"}
-            gap={3}
+            gap={1}
+            alignItems={"center"}
           >
+            <Typography variant="body2">components</Typography>
+            <Typography
+              variant="body2"
+              fontSize={"1.5em"}
+            >
+              /
+            </Typography>
             <TextField
               label="Output Directory"
               value={outDir}
               onChange={(e) => setOutDir(e.target.value)}
-              name="outPath"
+              name="outDir"
               fullWidth
             />
+            <Typography
+              variant="body2"
+              fontSize={"1.5em"}
+            >
+              /
+            </Typography>
             <TextField
               label="Output File Name"
               value={outFile}
               error={!isValidFilename(outFile)}
               onChange={(e) => setOutFile(e.target.value)}
-              name="outPath"
+              name="outFile"
               fullWidth
             />
           </Stack>
@@ -82,6 +166,7 @@ export default function CreateComponentForm() {
             minRows={2}
             fullWidth
           />
+          <TagsAutocomplete />
         </Stack>
       </CollapsibleSection>
 

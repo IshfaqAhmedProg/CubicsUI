@@ -1,6 +1,7 @@
 import { useComponentForm } from "@/app/components/create/providers";
 import { Autocomplete, MenuItem, TextField } from "@mui/material";
 import { useEffect, useState } from "react";
+import HiddenInput from "../HiddenInput";
 
 type ComponentAutocompleteOption = {
   id: string;
@@ -18,37 +19,42 @@ export function ComponentAutocomplete({ index }: { index: number }) {
     if (value) {
       setDeps((prev) => {
         let lcl = [...prev.lcl];
-        lcl[index].ver = value.id;
+        lcl[index].cmpId = value.id;
         return { ...prev, lcl };
       });
     }
   }, [value, index]);
 
   return (
-    <Autocomplete
-      options={initialOptions}
-      value={value}
-      onChange={(e, v) => {
-        setValue(v);
-      }}
-      fullWidth
-      renderInput={(params) => (
-        <TextField
-          label={index == 0 ? "Component or Styles" : undefined}
-          name="depsLclVer"
-          {...params}
-        />
-      )}
-      renderOption={({ key, ...props }, option) => {
-        return (
-          <MenuItem
-            key={key}
-            {...props}
-          >
-            {option.label}
-          </MenuItem>
-        );
-      }}
-    />
+    <>
+      <HiddenInput
+        value={deps.lcl[index].cmpId}
+        name="depsLclCmpId"
+      />
+      <Autocomplete
+        options={initialOptions}
+        value={value}
+        onChange={(e, v) => {
+          setValue(v);
+        }}
+        fullWidth
+        renderInput={(params) => (
+          <TextField
+            label={index == 0 ? "Component or Styles" : undefined}
+            {...params}
+          />
+        )}
+        renderOption={({ key, ...props }, option) => {
+          return (
+            <MenuItem
+              key={key}
+              {...props}
+            >
+              {option.label}
+            </MenuItem>
+          );
+        }}
+      />
+    </>
   );
 }

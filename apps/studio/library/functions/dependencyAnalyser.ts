@@ -1,6 +1,10 @@
 import * as parser from "@babel/parser";
 import traverse from "@babel/traverse";
-import { Dependencies, Dependency } from "@cubicsui/db";
+import {
+  Dependencies,
+  LocalDependency,
+  ExternalDependency,
+} from "@cubicsui/db";
 
 /**
  * TypeScript path mapping configuration from tsconfig.json
@@ -70,18 +74,28 @@ function resolveAliasedPath(importPath: string, paths: TsConfigPaths): string {
 }
 
 /**
- * Creates a new Dependency object
- * External dependencies get '*' as version, local modules get ''
+ * Creates a new Ext Dependency object
  *
  * @param name - The name or path of the dependency
- * @param isExternal - Whether this is an external package
  * @returns A new Dependency object
  */
-function createDependency(name: string, isExternal: boolean): Dependency {
+export function createExternalDependency(name: string): ExternalDependency {
   return {
     name,
-    ver: isExternal ? "@latest" : "",
-    type: isExternal ? "normal" : null,
+    ver: "@latest",
+    type: "normal",
+  };
+}
+/**
+ * Creates a new Ext Dependency object
+ *
+ * @param name - The name or path of the dependency
+ * @returns A new Dependency object
+ */
+export function createLocalDependency(name: string): LocalDependency {
+  return {
+    name,
+    cmpId: "",
   };
 }
 
@@ -123,7 +137,7 @@ export function analyzeCodeDependencies(
           (d) => d.name === packageName
         );
         if (!existingDep) {
-          dependencies.ext.push(createDependency(packageName, true));
+          dependencies.ext.push(createExternalDependency(packageName));
         }
         return;
       }
@@ -141,7 +155,7 @@ export function analyzeCodeDependencies(
           (d) => d.name === resolvedPath
         );
         if (!existingDep) {
-          dependencies.lcl.push(createDependency(resolvedPath, false));
+          dependencies.lcl.push(createLocalDependency(resolvedPath));
         }
       } else {
         const packageName = resolvedPath.split("/")[0];
@@ -149,7 +163,7 @@ export function analyzeCodeDependencies(
           (d) => d.name === packageName
         );
         if (!existingDep) {
-          dependencies.ext.push(createDependency(packageName, true));
+          dependencies.ext.push(createExternalDependency(packageName));
         }
       }
     };

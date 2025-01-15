@@ -40,8 +40,8 @@ function useComponentFormStates() {
   const [name, setName] = useState("Accordion");
   const [desc, setDesc] = useState("");
   const [outFile, setOutFile] = useState("Accordion.tsx");
-  const [outDir, setOutDir] = useState("");
-  const [tags, setTags] = useState([]);
+  const [outDir, setOutDir] = useState("Accordion");
+  const [tags, setTags] = useState<string[]>([]);
   const [deps, setDeps] = useState<Dependencies>({ ext: [], lcl: [] });
   const [scriptCode, setScriptCode] = useState<string | undefined>(
     sampleTsComponentReact
