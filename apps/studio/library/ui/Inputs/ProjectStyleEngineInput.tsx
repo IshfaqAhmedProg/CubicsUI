@@ -1,5 +1,7 @@
+"use client";
+
 import styleEnginesWithLogos from "@/library/constants/styleEngines";
-import { projects } from "@cubicsui/db";
+import { projects, StyleEngine } from "@cubicsui/db";
 import {
   FormControl,
   FormControlProps,
@@ -9,7 +11,7 @@ import {
   Select,
   Stack,
 } from "@mui/material";
-import { capitalize } from "lodash";
+import { useState } from "react";
 
 interface ProjectStyleEngineInputProps extends FormControlProps {
   project?: projects;
@@ -19,21 +21,23 @@ export default function ProjectStyleEngineInput({
   project,
   ...rest
 }: ProjectStyleEngineInputProps) {
+  const [styleEng, setStyleEng] = useState<StyleEngine>(
+    project?.styleEng ?? styleEnginesWithLogos[0].name
+  );
   return (
     <FormControl {...rest}>
       <InputLabel id="styleEng-label">Style Engine</InputLabel>
       <Select
         labelId="styleEng-label"
         id="styleEng"
-        defaultValue={project?.styleEng ?? styleEnginesWithLogos[0].name}
+        value={styleEng}
+        onChange={(v) => setStyleEng(v.target.value as StyleEngine)}
         name="styleEng"
         label="Style Engine"
       >
         {styleEnginesWithLogos.map((lang) => {
           const { name, Logo } = lang;
-          const formattedName = ["css", "scss"].includes(name)
-            ? name.toUpperCase()
-            : capitalize(name);
+
           return (
             <MenuItem
               value={name}
@@ -46,7 +50,7 @@ export default function ProjectStyleEngineInput({
                 height={"100%"}
               >
                 <Logo fontSize="small" />
-                <ListItemText primary={formattedName} />
+                <ListItemText primary={name} />
               </Stack>
             </MenuItem>
           );
