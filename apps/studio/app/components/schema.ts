@@ -3,7 +3,7 @@ import { z } from "zod";
 
 export const componentCreationSchema = z.object({
   prId: z.string({ message: "Project Id is missing" }),
-  name: z.string().min(1, { message: "Name cannot be empty" }),
+  name: z.string().nonempty({ message: "Name cannot be empty" }),
   outDir: z.string(),
   outFile: z
     .string()
@@ -15,10 +15,10 @@ export const componentCreationSchema = z.object({
   deps: z.object({
     ext: z.array(
       z.object({
-        name: z.string().min(1, { message: "Name cannot be empty" }),
+        name: z.string().nonempty({ message: "Name cannot be empty" }),
         ver: z
           .string()
-          .startsWith("@", { message: "Versions should start with @" })
+          .startsWith("@", { message: "Versions should always start with @" })
           .min(2, { message: "Version is too short" }),
         type: z.string().nullable(),
       })
