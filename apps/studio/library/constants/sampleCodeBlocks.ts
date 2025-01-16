@@ -19,17 +19,87 @@ export const sampleTsconfig = `{
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],
   "exclude": ["node_modules"]
 }`;
-export const sampleTsComponentReact = `import { ComponentProps } from "react";
-import styles from "./Button.module.scss";
+export const sampleTsComponentReact = `import { ComponentPropsWithoutRef, ElementType, forwardRef } from "react";
+import styles from "./Avatar.module.scss";
 
-interface Props extends ComponentProps<"button"> {
-  variant?: "contained" | "outline" | "text"
+export type AvatarProps = {
+  displayName: string;
+  image?: string | null;
+  size?: "small" | "medium" | "large";
+  component?: ElementType;
+} & ComponentPropsWithoutRef<"div">;
+
+function getInitials(name: string) {
+  var words = name.split(" ");
+  var initials = "";
+  for (var i = 0; i < words.length; i++) {
+    initials += words[i][0].toUpperCase();
+  }
+  return initials;
 }
+const Avatar = forwardRef<HTMLDivElement, AvatarProps>(
+  function Avatar(props, ref) {
+    const {
+      children,
+      displayName,
+      image,
+      component: Component = "div",
+      size = "medium",
+      className = "",
+      ...divProps
+    } = props;
 
-export default function Button({ variant = "text", children, className, ...rest }: Props) {
-  return (
-    <button {...rest} className={\`\${styles.button} \${styles[variant]} \${className}\`}>
-      {children}
-    </button>
-  );
-}`;
+    return (
+      <Component
+        ref={ref}
+        className={\`\${className} \${styles.container} \${styles[size]}\`}
+        {...divProps}
+      >
+        {image ? (
+          <img src={image} alt={displayName} />
+        ) : (
+          <p>{getInitials(displayName)}</p>
+        )}
+      </Component>
+    );
+  }
+);
+
+export default Avatar;
+`;
+export const sampleSassModule = `
+.container {
+  border-radius: 8px;
+  background-color: slate;
+  padding: 2px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  aspect-ratio: 1 / 1;
+
+  &.small {
+    width: 20px;
+  }
+  &.medium {
+    width: 32px;
+  }
+  &.large {
+    width: 40px;
+  }
+
+  & > img {
+    align-self: center;
+    border-radius: 8px;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+  }
+
+  & > p {
+    font-size: 1rem;
+    // letter-spacing: 3px;
+    color: white;
+    font-weight: bold;
+  }
+}
+`;

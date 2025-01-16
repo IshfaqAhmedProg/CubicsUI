@@ -1,15 +1,16 @@
 "use client";
 
-import { sampleTsComponentReact } from "@/library/constants/sampleCodeBlocks";
+import {
+  sampleSassModule,
+  sampleTsComponentReact,
+} from "@/library/constants/sampleCodeBlocks";
 import { analyzeCodeDependencies } from "@/library/functions/dependencyAnalyser";
 import { codeblocks, components, Dependencies, projects } from "@cubicsui/db";
 import {
   createContext,
   ReactNode,
   useActionState,
-  useContext,
-  useEffect,
-  useState,
+  useContext, useState
 } from "react";
 import { createComponentAction } from "../actions";
 
@@ -68,7 +69,7 @@ function useComponentFormStates({
     codeblocks?.script ?? sampleTsComponentReact
   );
   const [styleCode, setStyleCode] = useState<string | undefined>(
-    codeblocks?.styles ?? undefined
+    codeblocks?.styles ?? sampleSassModule
   );
   const [scriptIncludesStyles, setScriptIncludesStyles] = useState(
     !!codeblocks?.styles
@@ -78,13 +79,6 @@ function useComponentFormStates({
     createComponentAction,
     {}
   );
-
-  useEffect(() => {
-    if (name) {
-      let extension = project.lang == "typescript" ? ".tsx" : ".jsx";
-      setOutFile(`${name}${extension}`);
-    }
-  }, [name, project]);
 
   function analyseDependencies() {
     const newDeps = analyzeCodeDependencies(scriptCode, { "@/*": ["./*"] });
