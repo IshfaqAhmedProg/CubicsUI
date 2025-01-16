@@ -26,7 +26,7 @@ export const componentCreationSchema = z.object({
     lcl: z.array(
       z.object({
         name: z.string().min(1, { message: "Name cannot be empty" }),
-        cmpId: z.string().min(1, { message: "Component Id cannot be empty" }),
+        cmpId: z.string(),
       })
     ),
   }),
