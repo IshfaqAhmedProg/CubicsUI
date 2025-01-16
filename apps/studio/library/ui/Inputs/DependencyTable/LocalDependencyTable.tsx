@@ -6,7 +6,7 @@ import {
 } from "@mui/icons-material";
 import { Stack, Tooltip, IconButton, TextField, Button } from "@mui/material";
 import { DependencySectionLayout } from "./DependencySection";
-import { ComponentAutocomplete } from "./ComponentAutocomplete";
+import LinkLocalDependencyButton from "./LinkLocalDependencyButton";
 import { createExternalDependency } from "@/library/functions/dependencyAnalyser";
 
 export default function LocalDependencyTable() {
@@ -64,12 +64,7 @@ export default function LocalDependencyTable() {
                 setDeps({ ...deps, lcl: lclDeps });
               }}
             />
-            <ComponentAutocomplete index={i} />
-            <Tooltip title={"Create component"}>
-              <IconButton color="primary">
-                <AddRounded />
-              </IconButton>
-            </Tooltip>
+            <LinkLocalDependencyButton index={i} />
           </Stack>
         );
       })}
