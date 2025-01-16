@@ -40,15 +40,17 @@ export async function createComponentAction(
   try {
     const deps = zipDeps(formdata);
     // console.log(deps);
-    const cmpValidatedFields = componentCreationSchema.parse({
+
+    // 2. Validate component fields
+    const cmpValidatedFields = await componentCreationSchema.parseAsync({
       prId: prId,
       name: formdata.get("name"),
-      outDir: formdata.get("outDir"),
-      outFile: formdata.get("outFile"),
+      outPath: formdata.get("outPath"),
       desc: formdata.get("desc"),
       tags: formdata.getAll("tags"),
       deps,
     });
+    // 2. Validate code block fields
     const cbValidatedFields = codeblocksCreationSchema.parse({
       script: formdata.get("script"),
       styles: formdata.get("styles"),
@@ -73,6 +75,12 @@ export async function createComponentAction(
       });
     }
     console.log(err);
-    return { status: "error", errors };
+    return {
+      status: "error",
+      errors: {
+        ...errors,
+        FORM: "Oops an error has occured please check your form!",
+      },
+    };
   }
 }

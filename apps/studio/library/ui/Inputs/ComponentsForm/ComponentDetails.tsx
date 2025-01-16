@@ -1,15 +1,13 @@
 "use client";
 
 import { ExpandMoreRounded } from "@mui/icons-material";
-import { Stack, TextField, Typography } from "@mui/material";
-import React from "react";
+import { FormLabel, Stack, TextField } from "@mui/material";
 import CollapsibleSection from "../../Layout/CollapsibleSection";
 import ComponentTagsInput from "./ComponentTagsInput";
 import { useComponentForm } from "@/app/components/create/providers";
 
 export default function Details() {
-  const { name, setName, outDir, setOutDir, outFile, setOutFile } =
-    useComponentForm();
+  const { name, setName, outPath, setOutPath, formState } = useComponentForm();
   return (
     <CollapsibleSection
       title="Details"
@@ -21,6 +19,8 @@ export default function Details() {
           label="Component Name"
           value={name}
           onChange={(e) => setName(e.target.value)}
+          error={Boolean(formState?.errors?.name)}
+          helperText={formState?.errors?.name}
           name="name"
           fullWidth
         />
@@ -29,31 +29,17 @@ export default function Details() {
           gap={1}
           alignItems={"center"}
         >
-          <Typography variant="body2">components</Typography>
-          <Typography
-            variant="body2"
-            fontSize={"1.5em"}
-          >
-            /
-          </Typography>
+          <FormLabel htmlFor="outPath">
+            Path of the component relative to the current working directory,
+            this tells the CLI where to output your component
+          </FormLabel>
           <TextField
-            label="Output Directory"
-            value={outDir}
-            onChange={(e) => setOutDir(e.target.value)}
-            name="outDir"
-            fullWidth
-          />
-          <Typography
-            variant="body2"
-            fontSize={"1.5em"}
-          >
-            /
-          </Typography>
-          <TextField
-            label="Output File Name"
-            value={outFile}
-            onChange={(e) => setOutFile(e.target.value)}
-            name="outFile"
+            label="Output Path"
+            value={outPath}
+            onChange={(e) => setOutPath(e.target.value)}
+            error={Boolean(formState?.errors?.outPath)}
+            helperText={formState?.errors?.outPath}
+            name="outPath"
             fullWidth
           />
         </Stack>

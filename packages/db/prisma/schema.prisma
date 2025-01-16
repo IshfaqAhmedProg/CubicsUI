@@ -50,10 +50,8 @@ model components {
   id      String   @id @default(auto()) @map("_id") @db.ObjectId
   /// Name of the component that will be used by cli to create the component
   name    String
-  /// The path of the directory relative to "components" directory
-  outDir  String
-  /// The output file name
-  outFile String
+  /// The path of the file relative to current working directory
+  outPath String
   /// A short description of what the component does
   desc    String
 
@@ -67,6 +65,8 @@ model components {
 
   /// codeblocks associated with the component 1:1
   codeblocks codeblocks?
+
+  @@unique([prId, outPath])
 }
 
 model codeblocks {

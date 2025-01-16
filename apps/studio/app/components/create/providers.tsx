@@ -10,7 +10,8 @@ import {
   createContext,
   ReactNode,
   useActionState,
-  useContext, useState
+  useContext,
+  useState,
 } from "react";
 import { createComponentAction } from "../actions";
 
@@ -59,8 +60,7 @@ function useComponentFormStates({
 }: ComponentFormDefaultStateProps) {
   const [name, setName] = useState(component?.name ?? "");
   const [desc, setDesc] = useState(component?.desc ?? "");
-  const [outFile, setOutFile] = useState(component?.outFile ?? "");
-  const [outDir, setOutDir] = useState(component?.outDir ?? "");
+  const [outPath, setOutPath] = useState(component?.outPath ?? "./components/");
   const [tags, setTags] = useState<string[]>(component?.tags ?? []);
   const [deps, setDeps] = useState<Dependencies>(
     component?.deps ?? { ext: [], lcl: [] }
@@ -91,8 +91,7 @@ function useComponentFormStates({
   return {
     name,
     desc,
-    outFile,
-    outDir,
+    outPath,
     tags,
     deps,
     scriptCode,
@@ -102,8 +101,7 @@ function useComponentFormStates({
     formPending,
     setName,
     setDesc,
-    setOutFile,
-    setOutDir,
+    setOutPath,
     setTags,
     setDeps,
     setScriptCode,

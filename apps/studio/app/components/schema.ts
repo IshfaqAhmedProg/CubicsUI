@@ -1,13 +1,12 @@
-import isValidFilename from "@/library/functions/isValidFileName";
+import isValidRelativePath from "@/library/functions/isValidRelativePath";
 import { z } from "zod";
 
 export const componentCreationSchema = z.object({
   prId: z.string({ message: "Project Id is missing" }),
   name: z.string().nonempty({ message: "Name cannot be empty" }),
-  outDir: z.string(),
-  outFile: z
-    .string()
-    .refine((arg) => isValidFilename(arg), { message: "Invalid file name" }),
+  outPath: z.string().refine((path) => isValidRelativePath(path), {
+    message: "Invalid Output path",
+  }),
   desc: z.string(),
   tags: z.array(z.string({ message: "Tag should be string" }), {
     message: "Tags should be array",

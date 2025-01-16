@@ -11,12 +11,17 @@ export default function ComponentScripts() {
     scriptCode,
     setScriptCode,
     setStyleCode,
-    outFile,
+    outPath,
     project,
     styleCode,
     scriptIncludesStyles,
     setScriptIncludesStyles,
   } = useComponentForm();
+
+  const scriptName = () => {
+    const paths = outPath.split("/");
+    return paths[paths.length - 1];
+  };
   return (
     <CollapsibleSection
       title="Scripts"
@@ -30,7 +35,7 @@ export default function ComponentScripts() {
           id="script"
           name="script"
           editorData={scriptCode}
-          path={outFile}
+          path={scriptName()}
           setEditorData={(v) => setScriptCode(v)}
           language={project.lang.toLowerCase()}
           onMount={onMountHandler}
