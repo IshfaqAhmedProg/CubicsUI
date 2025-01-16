@@ -5,9 +5,16 @@ import Details from "@/library/ui/Inputs/ComponentsForm/ComponentDetails";
 import ComponentScripts from "@/library/ui/Inputs/ComponentsForm/ComponentScripts";
 import ComponentStatusBar from "@/library/ui/Inputs/ComponentsForm/ComponentStatusBar";
 import ComponentFormHiddenInputs from "@/library/ui/Inputs/ComponentsForm/ComponentFormHiddenInputs";
+import { useEffect } from "react";
+import { redirect, RedirectType } from "next/navigation";
 
 export default function CreateComponentForm() {
-  const { formAction } = useComponentForm();
+  const { formState, formAction } = useComponentForm();
+  useEffect(() => {
+    if (formState?.status == "success") {
+      redirect(`/components/${formState.payload.id}`, RedirectType.replace);
+    }
+  }, [formState]);
   return (
     <Stack
       component={"form"}
