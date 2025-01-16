@@ -48,8 +48,8 @@ model components {
   project projects @relation(fields: [prId], references: [id], onDelete: Cascade, onUpdate: Cascade)
   /// Id of the component
   id      String   @id @default(auto()) @map("_id") @db.ObjectId
-  /// A unique name following npm package naming convention
-  name    String   @unique
+  /// Name of the component that will be used by cli to create the component
+  name    String
   /// The path of the directory relative to "components" directory
   outDir  String
   /// The output file name
