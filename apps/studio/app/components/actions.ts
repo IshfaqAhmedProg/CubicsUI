@@ -36,13 +36,10 @@ export async function createComponentAction(
 ): ActionReturnType<FormActionReturnType> {
   let errors: FormActionReturnType["errors"] = {};
   let prId = formdata.get("prId");
-  if (!prId) return { errors: { Form: "Project Id not found" } };
+  if (!prId) return { errors: { FORM: "Project Id not found" } };
   try {
     const deps = zipDeps(formdata);
-    // console.log(deps);
-
-    // 2. Validate component fields
-    const cmpValidatedFields = await componentCreationSchema.parseAsync({
+    const cmpValidatedFields = componentCreationSchema.parse({
       prId: prId,
       name: formdata.get("name"),
       outPath: formdata.get("outPath"),
@@ -50,7 +47,7 @@ export async function createComponentAction(
       tags: formdata.getAll("tags"),
       deps,
     });
-    // 2. Validate code block fields
+
     const cbValidatedFields = codeblocksCreationSchema.parse({
       script: formdata.get("script"),
       styles: formdata.get("styles"),
@@ -66,8 +63,7 @@ export async function createComponentAction(
       err instanceof Prisma.PrismaClientKnownRequestError &&
       err.code === "P2002"
     ) {
-      errors.name =
-        "A component with the same name exists in the database! Please choose another name.";
+      errors.FORM = `A component with the same name or output path exists in the project! Please choose another name.`;
     } else if (err instanceof z.ZodError) {
       const fieldErrors = err.flatten().fieldErrors;
       Object.keys(fieldErrors).forEach((field) => {
@@ -78,8 +74,8 @@ export async function createComponentAction(
     return {
       status: "error",
       errors: {
-        ...errors,
         FORM: "Oops an error has occured please check your form!",
+        ...errors,
       },
     };
   }
