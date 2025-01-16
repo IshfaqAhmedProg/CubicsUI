@@ -2,7 +2,7 @@
 
 import supportedLanguageWithIcons from "@/library/constants/supportedLangs";
 import formatDate from "@/library/functions/formatDate";
-import { Project } from "@/library/types/Library";
+import { Project } from "@/library/types/Project";
 import {
   CalendarTodayRounded,
   UpdateRounded,

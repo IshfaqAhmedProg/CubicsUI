@@ -1,6 +1,6 @@
 "use client";
 
-import { Project } from "@/library/types/Library";
+import { Project } from "@/library/types/Project";
 import { createContext, ReactNode, useContext } from "react";
 
 export interface ProjectContextProps {

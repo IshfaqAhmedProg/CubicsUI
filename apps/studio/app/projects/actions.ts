@@ -9,7 +9,7 @@ import {
   ActionReturnType,
   FormActionReturnType,
 } from "@/library/types/ActionReturnTypes";
-import { Project } from "@/library/types/Library";
+import { Project } from "@/library/types/Project";
 
 export async function createProjectAction(
   prevState: any,

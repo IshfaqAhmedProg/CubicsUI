@@ -9,7 +9,7 @@ import { Prisma } from "@cubicsui/db";
 import { revalidatePath } from "next/cache";
 import { z } from "zod";
 import { updateProjectSchema } from "../../schema";
-import { Project } from "@/library/types/Library";
+import { Project } from "@/library/types/Project";
 
 export async function updateProjectAction(
   prevState: any,

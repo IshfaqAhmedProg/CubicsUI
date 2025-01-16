@@ -1,4 +1,4 @@
-import { Project } from "../types/Library";
+import { Project } from "../types/Project";
 
 export const samplePkgJson = (project?: Project) => `{
   "name": "${project?.name ?? "projectName"}",
