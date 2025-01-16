@@ -10,7 +10,7 @@ interface LoadingIconProps {
 
 export default function Spinner({
   size = 16,
-  fill = "var(--palette-primary-contrastText)",
+  fill = "var(--palette-primary-main)",
   centered = false,
 }: LoadingIconProps) {
   return (
