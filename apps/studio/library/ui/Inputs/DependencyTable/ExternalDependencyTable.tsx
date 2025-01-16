@@ -26,7 +26,7 @@ export default function ExternalDependencyTable() {
   function shiftFromExtToLcl(index: number) {
     let lcl = [...deps.lcl],
       ext = [...deps.ext];
-    lcl.push(createLocalDependency(lcl[index].name));
+    lcl.push(createLocalDependency(ext[index].name));
     ext.splice(index, 1);
     setDeps({ lcl, ext });
   }
@@ -54,7 +54,6 @@ export default function ExternalDependencyTable() {
               name="depsExtName"
               placeholder={"Name"}
               value={e.name}
-              fullWidth
               onChange={(e) => {
                 let extDeps = [...deps.ext];
                 extDeps[i]["name"] = e.target.value;
@@ -65,14 +64,14 @@ export default function ExternalDependencyTable() {
               label={i == 0 ? "Version" : undefined}
               name="depsExtVer"
               value={e.ver}
-              sx={{ width: "20ch" }}
+              sx={{ width: "10ch" }}
               onChange={(e) => {
                 let extDeps = [...deps.ext];
                 extDeps[i]["ver"] = e.target.value;
                 setDeps({ ...deps, ext: extDeps });
               }}
             />
-            <FormControl sx={{ width: "23ch" }}>
+            <FormControl sx={{ minWidth: "fit-content" }}>
               {/* Render label only for first element */}
               {i == 0 && <InputLabel id="depsExtType-label">Type</InputLabel>}
               <Select
