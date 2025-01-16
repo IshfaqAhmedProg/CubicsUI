@@ -3,7 +3,7 @@ import { Button, Divider, Paper, Stack, Typography } from "@mui/material";
 import ExternalDependencyTable from "./ExternalDependencyTable";
 import LocalDependencyTable from "./LocalDependencyTable";
 import { ReactNode } from "react";
-import { ExpandMoreRounded } from "@mui/icons-material";
+import { AutoFixHighRounded, ExpandMoreRounded } from "@mui/icons-material";
 import CollapsibleSection from "../../Layout/CollapsibleSection";
 import { useComponentForm } from "@/app/components/create/providers";
 
@@ -35,9 +35,33 @@ export default function DependencySection() {
       title="Dependencies"
     >
       <Stack gap={3}>
-        <Button onClick={analyseDependencies}>
-          Analyse Dependencies from script
-        </Button>
+        <Stack
+          direction={"row"}
+          justifyContent={"space-between"}
+        >
+          <Typography variant="body2">
+            Dependencies are how components are linked with one another and
+            between external packages found in npm registry, you can
+            automatically analyse and add your dependencies.
+            <br />
+            <Typography
+              component={"span"}
+              variant="body2"
+              color="error"
+            >
+              Note* : Make sure all the dependencies are accounted for, and add
+              dependencies that you think are missing below
+            </Typography>
+          </Typography>
+          <Button
+            variant="text"
+            onClick={analyseDependencies}
+            startIcon={<AutoFixHighRounded />}
+            sx={{ minWidth: "max-content", height: "fit-content" }}
+          >
+            Analyse Dependencies
+          </Button>
+        </Stack>
         <Stack
           component={Paper}
           direction={"row"}
