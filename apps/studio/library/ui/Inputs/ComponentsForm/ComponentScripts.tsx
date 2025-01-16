@@ -7,6 +7,7 @@ import { useComponentForm } from "@/app/components/create/providers";
 
 export default function ComponentScripts() {
   const {
+    name,
     scriptCode,
     setScriptCode,
     setStyleCode,
@@ -64,9 +65,9 @@ export default function ComponentScripts() {
               <CodeEditor
                 name="styles"
                 editorData={styleCode}
-                path={`${name}.module.css`}
+                path={`${name}.${project.styleEng}`}
                 setEditorData={(v) => setStyleCode(v)}
-                language="css"
+                language={project.styleEng}
               />
             </Stack>
           )}
