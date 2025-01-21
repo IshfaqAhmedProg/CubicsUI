@@ -35,7 +35,7 @@ export default function LinkLocalDependencyButton({
   index: number;
 }) {
   const { open, handleOpen, handleClose } = useDisclosure();
-  const { deps, setDeps } = useComponentForm();
+  const { deps, setDeps, formPending } = useComponentForm();
   const localDep = deps.lcl[index];
 
   function handleConfirm(value: ComponentLink) {
@@ -58,6 +58,7 @@ export default function LinkLocalDependencyButton({
         sx={{ minWidth: "max-content" }}
         onClick={handleOpen}
         startIcon={localDep.cmpId ? <CheckRounded /> : <LinkRounded />}
+        disabled={formPending}
       >
         {localDep.cmpId ? "Linked" : "Link"}
       </Button>

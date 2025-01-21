@@ -9,7 +9,7 @@ import { useState, Fragment } from "react";
 import HiddenInput from "../HiddenInput";
 
 export default function ComponentTagsInput() {
-  const { tags, setTags } = useComponentForm();
+  const { tags, setTags, formPending } = useComponentForm();
   const [inputValue, setInputValue] = useState("");
 
   function handleInputChange(
@@ -32,6 +32,7 @@ export default function ComponentTagsInput() {
   }
   return (
     <Autocomplete
+      disabled={formPending}
       multiple
       options={[]}
       value={tags}

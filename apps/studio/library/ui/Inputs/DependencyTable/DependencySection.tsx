@@ -26,7 +26,7 @@ export function DependencySectionLayout({
 }
 
 export default function DependencySection() {
-  const { analyseDependencies } = useComponentForm();
+  const { analyseDependencies, formPending } = useComponentForm();
 
   return (
     <CollapsibleSection
@@ -60,6 +60,7 @@ export default function DependencySection() {
             onClick={analyseDependencies}
             startIcon={<AutoFixHighRounded />}
             sx={{ minWidth: "max-content" }}
+            disabled={formPending}
           >
             Analyse Dependencies
           </Button>

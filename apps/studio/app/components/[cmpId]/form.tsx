@@ -1,20 +1,15 @@
 "use client";
 import { Button, Stack } from "@mui/material";
-import { useComponentForm } from "./providers";
 import ComponentDetails from "@/library/ui/Inputs/ComponentsForm/ComponentDetails";
 import ComponentScripts from "@/library/ui/Inputs/ComponentsForm/ComponentScripts";
 import ComponentActionBar from "@/library/ui/Inputs/ComponentsForm/ComponentActionBar";
-import { useEffect } from "react";
-import { redirect, RedirectType } from "next/navigation";
+import { useComponentForm } from "../create/providers";
 import ComponentFormHiddenInputs from "@/library/ui/Inputs/ComponentsForm/ComponentFormHiddenInputs";
+import DeleteComponentButton from "./delete";
 
-export default function CreateComponentForm() {
-  const { formState, formAction, formPending } = useComponentForm();
-  useEffect(() => {
-    if (formState?.status == "success") {
-      redirect(`/components/${formState.payload.id}`, RedirectType.replace);
-    }
-  }, [formState]);
+export default function ComponentForm() {
+  const { formAction, formPending } = useComponentForm();
+
   return (
     <Stack
       component={"form"}
@@ -28,7 +23,7 @@ export default function CreateComponentForm() {
             disabled={formPending}
             type="submit"
           >
-            Create
+            Save
           </Button>
         }
       />
@@ -41,6 +36,7 @@ export default function CreateComponentForm() {
         <ComponentFormHiddenInputs />
         <ComponentDetails />
         <ComponentScripts />
+        <DeleteComponentButton />
       </Stack>
     </Stack>
   );

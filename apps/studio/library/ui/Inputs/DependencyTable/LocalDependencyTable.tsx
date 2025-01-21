@@ -10,7 +10,7 @@ import LinkLocalDependencyButton from "./LinkLocalDependencyButton";
 import { createExternalDependency } from "@/library/functions/dependencyAnalyser";
 
 export default function LocalDependencyTable() {
-  const { deps, setDeps } = useComponentForm();
+  const { deps, setDeps, formPending } = useComponentForm();
 
   function shiftFromLclToExt(index: number) {
     let lcl = [...deps.lcl],
@@ -44,12 +44,18 @@ export default function LocalDependencyTable() {
           >
             <Stack direction={"row"}>
               <Tooltip title={`Shift "${l.name}" to External Dependencies`}>
-                <IconButton onClick={() => shiftFromLclToExt(i)}>
+                <IconButton
+                  disabled={formPending}
+                  onClick={() => shiftFromLclToExt(i)}
+                >
                   <ArrowBackRounded />
                 </IconButton>
               </Tooltip>
               <Tooltip title={`Remove "${l.name}"`}>
-                <IconButton onClick={() => removeLclDeps(i)}>
+                <IconButton
+                  disabled={formPending}
+                  onClick={() => removeLclDeps(i)}
+                >
                   <RemoveCircleOutlineRounded color="error" />
                 </IconButton>
               </Tooltip>
@@ -64,6 +70,7 @@ export default function LocalDependencyTable() {
                 lclDeps[i]["name"] = e.target.value;
                 setDeps({ ...deps, lcl: lclDeps });
               }}
+              disabled={formPending}
             />
             <LinkLocalDependencyButton index={i} />
           </Stack>
@@ -73,6 +80,7 @@ export default function LocalDependencyTable() {
         variant="text"
         startIcon={<AddRounded />}
         onClick={addLclDeps}
+        disabled={formPending}
       >
         Add Missing Local Dependency
       </Button>

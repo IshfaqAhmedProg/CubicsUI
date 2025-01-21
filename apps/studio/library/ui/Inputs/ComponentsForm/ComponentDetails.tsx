@@ -6,8 +6,9 @@ import CollapsibleSection from "../../Layout/CollapsibleSection";
 import ComponentTagsInput from "./ComponentTagsInput";
 import { useComponentForm } from "@/app/components/create/providers";
 
-export default function Details() {
-  const { name, setName, outPath, setOutPath, formState } = useComponentForm();
+export default function ComponentDetails() {
+  const { name, setName, outPath, setOutPath, formState, formPending } =
+    useComponentForm();
   return (
     <CollapsibleSection
       title="Details"
@@ -23,6 +24,7 @@ export default function Details() {
           helperText={formState?.errors?.name}
           name="name"
           fullWidth
+          disabled={formPending}
         />
         <Stack
           direction={"row"}
@@ -41,6 +43,7 @@ export default function Details() {
             helperText={formState?.errors?.outPath}
             name="outPath"
             fullWidth
+            disabled={formPending}
           />
         </Stack>
         <TextField
@@ -49,6 +52,7 @@ export default function Details() {
           multiline
           minRows={2}
           fullWidth
+          disabled={formPending}
         />
         <ComponentTagsInput />
       </Stack>

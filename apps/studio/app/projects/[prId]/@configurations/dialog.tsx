@@ -19,9 +19,11 @@ import { Suggestion } from "@/library/types/Suggestions";
 import { configurations } from "@cubicsui/db";
 import { useProject } from "../providers";
 import { configsAction } from "./actions";
+import useDisclosure from "@/library/hooks/useDisclosure";
 
 export interface ConfigurationDialogProps extends DialogProps {
-  handleClose: () => void;
+  handleClose: ReturnType<typeof useDisclosure>["handleClose"];
+  handleStrictClose: ReturnType<typeof useDisclosure>["handleStrictClose"];
   configuration?: configurations;
   suggestion?: Suggestion;
 }
@@ -32,6 +34,7 @@ export interface ConfigurationDialogProps extends DialogProps {
 export function ConfigurationDialog(props: ConfigurationDialogProps) {
   const {
     handleClose: _handleClose,
+    handleStrictClose,
     suggestion,
     configuration,
     ...rest
@@ -40,17 +43,9 @@ export function ConfigurationDialog(props: ConfigurationDialogProps) {
   const { project } = useProject();
   console.log({ formState: state });
 
-  /**
-   * Hijacking the handleClose function to prevent the dialog from closing when the user clicks outside the dialog or presses the escape key.
-   */
-  function handleClose(event: {}, reason: "backdropClick" | "escapeKeyDown") {
-    if (reason === "backdropClick" || reason === "escapeKeyDown") return;
-    _handleClose();
-  }
-
   return (
     <Dialog
-      onClose={handleClose}
+      onClose={handleStrictClose}
       {...rest}
       PaperProps={{
         component: "form",

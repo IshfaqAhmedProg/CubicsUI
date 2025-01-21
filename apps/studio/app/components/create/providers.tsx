@@ -13,7 +13,7 @@ import {
   useContext,
   useState,
 } from "react";
-import { createComponentAction } from "../actions";
+import { saveComponentAction } from "../actions";
 
 interface ComponentFormDefaultStateProps {
   project: projects;
@@ -76,7 +76,7 @@ function useComponentFormStates({
   );
 
   const [formState, formAction, formPending] = useActionState(
-    createComponentAction,
+    saveComponentAction,
     {}
   );
 

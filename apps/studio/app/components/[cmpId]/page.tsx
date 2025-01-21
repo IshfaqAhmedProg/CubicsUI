@@ -1,13 +1,13 @@
 import db from "@/db";
 import ComponentFormProvider from "../create/providers";
 import { Typography } from "@mui/material";
-import CreateComponentForm from "../create/form";
+import ComponentForm from "./form";
 export default async function ComponentDetailsPage({
   params,
 }: {
-  params: Promise<{ id: string }>;
+  params: Promise<{ cmpId: string }>;
 }) {
-  const id = (await params).id;
+  const id = (await params).cmpId;
   if (!id) return <Typography>No Component Id found</Typography>;
   const component = await db.components.findFirst({ where: { id } });
   if (!component)
@@ -26,7 +26,7 @@ export default async function ComponentDetailsPage({
       project={project}
       codeblocks={codeblocks}
     >
-      <CreateComponentForm />
+      <ComponentForm />
     </ComponentFormProvider>
   );
 }

@@ -1,9 +1,8 @@
 import db from "@/db";
-import { AddRounded, DeleteForeverRounded } from "@mui/icons-material";
-import { Button, IconButton, Paper, Stack, Typography } from "@mui/material";
+import { AddRounded } from "@mui/icons-material";
+import { Button, Paper, Stack, Typography } from "@mui/material";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { deleteComponentAction } from "./actions";
 import ComponentsList from "./list";
 
 export default async function ProjectComponentsPage({

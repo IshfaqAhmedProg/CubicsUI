@@ -26,7 +26,7 @@ import ProjectStyleEngineInput from "@/library/ui/Inputs/ProjectStyleEngineInput
  * Button that when clicked opens a dialog to create a project.
  */
 export default function CreateProjectButton(props: ButtonedDialogProps) {
-  const { open, handleClose, handleOpen } = useDisclosure();
+  const { open, handleClose, handleStrictClose, handleOpen } = useDisclosure();
   const { dialogProps, children, ...rest } = props;
   return (
     <>
@@ -39,6 +39,7 @@ export default function CreateProjectButton(props: ButtonedDialogProps) {
       </Button>
       <CreateProjectDialog
         handleClose={handleClose}
+        handleStrictClose={handleStrictClose}
         {...dialogProps}
         open={open}
       />
@@ -46,26 +47,24 @@ export default function CreateProjectButton(props: ButtonedDialogProps) {
   );
 }
 
+interface CreateProjectDialogProps extends DialogProps {
+  handleClose: ReturnType<typeof useDisclosure>["handleClose"];
+  handleStrictClose: ReturnType<typeof useDisclosure>["handleStrictClose"];
+}
+
 /**
  * Dialog to create a project, consists of a form containing inputs for the project name and the language.
  */
 export function CreateProjectDialog({
-  handleClose: _handleClose,
+  handleClose,
+  handleStrictClose,
   ...rest
-}: { handleClose: () => void } & DialogProps) {
+}: CreateProjectDialogProps) {
   const [state, formAction, pending] = useActionState(createProjectAction, {});
-
-  /**
-   * Hijacking the handleClose function to prevent the dialog from closing when the user clicks outside the dialog or presses the escape key.
-   */
-  function handleClose(event: {}, reason: "backdropClick" | "escapeKeyDown") {
-    if (reason === "backdropClick" || reason === "escapeKeyDown") return;
-    _handleClose();
-  }
 
   return (
     <Dialog
-      onClose={handleClose}
+      onClose={handleStrictClose}
       {...rest}
       PaperProps={{ component: "form", action: formAction }}
     >
@@ -132,7 +131,7 @@ export function CreateProjectDialog({
       <DialogActions>
         <Button
           disabled={pending}
-          onClick={_handleClose}
+          onClick={handleClose}
           variant="text"
         >
           Cancel

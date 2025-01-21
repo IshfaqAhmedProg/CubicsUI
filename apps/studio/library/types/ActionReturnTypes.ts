@@ -1,10 +1,10 @@
-export type FormActionReturnType = {
+export type FormActionReturnType<T = any> = {
   errors?: {
     [x: string]: string | undefined;
     [x: number]: string | undefined;
     [x: symbol]: string | undefined;
   };
-  payload?: any;
+  payload?: T;
   status?: "success" | "error";
 };
 

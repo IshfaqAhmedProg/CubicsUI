@@ -1,8 +1,8 @@
 import isValidRelativePath from "@/library/functions/isValidRelativePath";
 import { z } from "zod";
 
-export const componentCreationSchema = z.object({
-  prId: z.string({ message: "Project Id is missing" }),
+export const componentSchema = z.object({
+  prId: z.string({ message: "Project Id is not string" }),
   name: z.string().nonempty({ message: "Name cannot be empty" }),
   outPath: z.string().refine((path) => isValidRelativePath(path), {
     message: "Invalid Output path",
@@ -30,11 +30,13 @@ export const componentCreationSchema = z.object({
     ),
   }),
 });
-export const codeblocksCreationSchema = z.object({
+
+export const codeblocksSchema = z.object({
+  cmpId: z.string({ message: "Component Id is not string" }),
   script: z.string({ message: "Script is missing" }),
   styles: z.string().nullish(),
 });
-export const codeblockUpdateSchema = codeblocksCreationSchema.extend({
-  id: z.string({ message: "Codeblock Id is missing" }),
-  cmpId: z.string({ message: "Component Id is missing" }),
-});
+export const idSchema = z.record(
+  z.string({ message: "Key should be string" }),
+  z.string({ message: "Id should be string" })
+);

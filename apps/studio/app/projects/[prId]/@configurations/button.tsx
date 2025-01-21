@@ -16,7 +16,7 @@ interface ConfigurationButtonProps extends ButtonedDialogProps {
  * Button which opens a dialog for a configuration.
  */
 export default function ConfigurationButton(props: ConfigurationButtonProps) {
-  const { open, handleClose, handleOpen } = useDisclosure();
+  const { open, handleClose, handleStrictClose, handleOpen } = useDisclosure();
   const { dialogProps, children, configuration, suggestion, ...rest } = props;
   return (
     <>
@@ -30,6 +30,7 @@ export default function ConfigurationButton(props: ConfigurationButtonProps) {
         suggestion={suggestion}
         configuration={configuration}
         handleClose={handleClose}
+        handleStrictClose={handleStrictClose}
         {...dialogProps}
         open={open}
       />

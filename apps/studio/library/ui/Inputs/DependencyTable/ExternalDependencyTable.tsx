@@ -22,7 +22,7 @@ import { createLocalDependency } from "@/library/functions/dependencyAnalyser";
 export const externalDependencyTypes = ["normal", "dev", "peer"];
 
 export default function ExternalDependencyTable() {
-  const { deps, setDeps } = useComponentForm();
+  const { deps, setDeps, formPending } = useComponentForm();
   function shiftFromExtToLcl(index: number) {
     let lcl = [...deps.lcl],
       ext = [...deps.ext];
@@ -61,6 +61,7 @@ export default function ExternalDependencyTable() {
                 extDeps[i]["name"] = e.target.value;
                 setDeps({ ...deps, ext: extDeps });
               }}
+              disabled={formPending}
             />
             <TextField
               label={i == 0 ? "Version" : undefined}
@@ -72,8 +73,12 @@ export default function ExternalDependencyTable() {
                 extDeps[i]["ver"] = e.target.value;
                 setDeps({ ...deps, ext: extDeps });
               }}
+              disabled={formPending}
             />
-            <FormControl fullWidth>
+            <FormControl
+              fullWidth
+              disabled={formPending}
+            >
               {/* Render label only for first element */}
               {i == 0 && <InputLabel id="depsExtType-label">Type</InputLabel>}
               <Select
@@ -107,12 +112,18 @@ export default function ExternalDependencyTable() {
 
             <Stack direction={"row"}>
               <Tooltip title={`Remove "${e.name}"`}>
-                <IconButton onClick={() => removeExtDeps(i)}>
+                <IconButton
+                  disabled={formPending}
+                  onClick={() => removeExtDeps(i)}
+                >
                   <RemoveCircleOutlineRounded color="error" />
                 </IconButton>
               </Tooltip>
               <Tooltip title={`Shift "${e.name}" to Local Dependencies`}>
-                <IconButton onClick={() => shiftFromExtToLcl(i)}>
+                <IconButton
+                  disabled={formPending}
+                  onClick={() => shiftFromExtToLcl(i)}
+                >
                   <ArrowForwardRounded />
                 </IconButton>
               </Tooltip>
