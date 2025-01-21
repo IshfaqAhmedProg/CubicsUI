@@ -20,8 +20,6 @@ model projects {
   envs     TargetEnvs[]
   /// A short description of what the library does
   desc     String?
-  /// Directories of the project to help user select directory when creating a component
-  dirs     String[]
 
   created DateTime @default(now())
   updated DateTime @updatedAt
