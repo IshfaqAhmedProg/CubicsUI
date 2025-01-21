@@ -12,7 +12,7 @@ export default function CreateComponentForm() {
   const { formState, formAction, formPending } = useComponentForm();
   useEffect(() => {
     if (formState?.status == "success") {
-      redirect(`/components/${formState.payload.id}`, RedirectType.replace);
+      redirect(`/components/${formState.payload?.id}`, RedirectType.replace);
     }
   }, [formState]);
   return (
