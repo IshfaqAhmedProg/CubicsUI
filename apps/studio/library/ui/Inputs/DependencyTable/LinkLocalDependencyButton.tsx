@@ -87,7 +87,8 @@ function LinkLocalDependencyDialog({
   const [value, setValue] = useState<ComponentLink | null>(null);
   const [inputValue, setInputValue] = useState("");
 
-  const { deps, project, component } = useComponentForm();
+  const { deps, project, component, setScriptIncludesStyles } =
+    useComponentForm();
 
   const isLinkedCmpStyles = localDep.cmpId === "styles";
   const localDependencies = deps.lcl;
@@ -124,11 +125,15 @@ function LinkLocalDependencyDialog({
                   can link it to the style script of the component
                 </Typography>
                 <Button
-                  onClick={() =>
-                    isLinkedCmpStyles
-                      ? handleConfirm({ name: "", id: "" })
-                      : handleConfirm({ name: "Styles", id: "styles" })
-                  }
+                  onClick={() => {
+                    if (isLinkedCmpStyles) {
+                      handleConfirm({ name: "", id: "" });
+                      setScriptIncludesStyles(false);
+                      return;
+                    }
+                    handleConfirm({ name: "Styles", id: "styles" });
+                    setScriptIncludesStyles(true);
+                  }}
                   startIcon={
                     isLinkedCmpStyles ? <LinkOffRounded /> : <LinkRounded />
                   }
