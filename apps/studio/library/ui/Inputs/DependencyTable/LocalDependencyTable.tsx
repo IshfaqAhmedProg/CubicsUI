@@ -39,6 +39,7 @@ export default function LocalDependencyTable() {
           <Stack
             key={l.name}
             direction={"row"}
+            alignItems={"center"}
             gap={1}
           >
             <Stack direction={"row"}>

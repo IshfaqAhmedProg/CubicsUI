@@ -38,6 +38,8 @@ export default function DependencySection() {
         <Stack
           direction={"row"}
           justifyContent={"space-between"}
+          alignItems={"center"}
+          gap={3}
         >
           <Typography variant="body2">
             Dependencies are how components are linked with one another and
@@ -57,7 +59,7 @@ export default function DependencySection() {
             variant="text"
             onClick={analyseDependencies}
             startIcon={<AutoFixHighRounded />}
-            sx={{ minWidth: "max-content", height: "fit-content" }}
+            sx={{ minWidth: "max-content" }}
           >
             Analyse Dependencies
           </Button>

@@ -29,7 +29,7 @@ function zipDeps(formdata: FormData) {
 
   return { lcl, ext };
 }
-
+// TODO make CRUD instead of whatever the fuck way it is setup right now
 export async function createComponentAction(
   prevState: any,
   formdata: FormData

@@ -1,6 +1,5 @@
 import { useComponentForm } from "@/app/components/create/providers";
 import {
-  Autocomplete,
   Button,
   Dialog,
   DialogActions,
@@ -116,6 +115,7 @@ function LinkLocalDependencyDialog({
               <Stack
                 gap={3}
                 justifyContent={"space-between"}
+                alignItems={"center"}
                 direction={"row"}
               >
                 <Typography variant="body2">

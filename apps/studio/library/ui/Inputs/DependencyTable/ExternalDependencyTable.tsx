@@ -48,12 +48,14 @@ export default function ExternalDependencyTable() {
             key={i}
             direction={"row"}
             gap={1}
+            alignItems={"center"}
           >
             <TextField
               label={i == 0 ? "Name" : undefined}
               name="depsExtName"
               placeholder={"Name"}
               value={e.name}
+              fullWidth
               onChange={(e) => {
                 let extDeps = [...deps.ext];
                 extDeps[i]["name"] = e.target.value;
@@ -64,21 +66,21 @@ export default function ExternalDependencyTable() {
               label={i == 0 ? "Version" : undefined}
               name="depsExtVer"
               value={e.ver}
-              sx={{ width: "10ch" }}
+              fullWidth
               onChange={(e) => {
                 let extDeps = [...deps.ext];
                 extDeps[i]["ver"] = e.target.value;
                 setDeps({ ...deps, ext: extDeps });
               }}
             />
-            <FormControl sx={{ minWidth: "fit-content" }}>
+            <FormControl fullWidth>
               {/* Render label only for first element */}
               {i == 0 && <InputLabel id="depsExtType-label">Type</InputLabel>}
               <Select
                 labelId={i == 0 ? "depsExtType-label" : undefined}
                 id={"depsExtType"}
                 name={"depsExtType"}
-                label={i == 0 ? "Type" : undefined}
+                label={"Type"}
                 // Defaulting to "normal" if empty type field from db
                 value={e.type ?? externalDependencyTypes[0]}
                 onChange={(e) => {
