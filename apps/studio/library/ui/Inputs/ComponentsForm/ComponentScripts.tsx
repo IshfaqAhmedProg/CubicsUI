@@ -42,6 +42,7 @@ export default function ComponentScripts() {
         />
 
         <DependencySection />
+
         <Stack
           direction={"row"}
           gap={3}
@@ -61,11 +62,15 @@ export default function ComponentScripts() {
           title="Styles"
           expanded={scriptIncludesStyles}
           disabled={!scriptIncludesStyles}
+          sx={{ position: "relative" }}
         >
           {scriptIncludesStyles && (
             <Stack gap={2}>
               <FormLabel>
-                Paste the style definitions for the component defined above,
+                Paste the style definitions for the script above, it can be the
+                content of a module file eg:- *.module.css, <br />
+                Or if you are using a global file to maintain styles paste the
+                styles relevant to the component.
               </FormLabel>
               <CodeEditor
                 name="styles"

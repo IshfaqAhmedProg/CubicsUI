@@ -26,7 +26,7 @@ export function DependencySectionLayout({
 }
 
 export default function DependencySection() {
-  const { analyseDependencies, formPending } = useComponentForm();
+  const { analyseDependencies, formState, formPending } = useComponentForm();
 
   return (
     <CollapsibleSection
@@ -49,7 +49,7 @@ export default function DependencySection() {
             <Typography
               component={"span"}
               variant="body2"
-              color="error"
+              color="text.primary"
             >
               Note* : Make sure all the dependencies are accounted for, and add
               dependencies that you think are missing below
@@ -65,6 +65,14 @@ export default function DependencySection() {
             Analyse Dependencies
           </Button>
         </Stack>
+        {formState?.errors?.deps && (
+          <Typography
+            color="error"
+            component={"pre"}
+          >
+            {formState.errors.deps}
+          </Typography>
+        )}
         <Stack
           component={Paper}
           direction={"row"}

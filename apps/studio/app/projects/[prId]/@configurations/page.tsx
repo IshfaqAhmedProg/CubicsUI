@@ -27,7 +27,7 @@ export default async function ProjectConfigurationsPage({
       </Typography>
       <Typography
         variant="body2"
-        color="error"
+        color="text.primary"
       >
         *Note: These configurations are used only when building components in
         CubicsUI studio, they are not reusable blocks of code accessible by the

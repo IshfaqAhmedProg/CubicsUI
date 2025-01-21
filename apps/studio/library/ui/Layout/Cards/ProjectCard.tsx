@@ -62,6 +62,13 @@ export default function ProjectCard({
           alignItems={"center"}
           gap={3}
         >
+          <Typography
+            fontSize={"1.2em"}
+            fontWeight={"bold"}
+            color="textPrimary"
+          >
+            {project.name}
+          </Typography>
           <Stack
             direction={"row"}
             alignItems={"center"}
@@ -70,18 +77,21 @@ export default function ProjectCard({
             borderRadius={1}
             padding={1}
           >
-            {LangLogo && <LangLogo />}
-            {StyleLogo && <StyleLogo />}
+            {LangLogo && <LangLogo fontSize="small" />}
+            {StyleLogo && <StyleLogo fontSize="small" />}
           </Stack>
-          <Typography
-            fontSize={"1.2em"}
-            fontWeight={"bold"}
-            color="textPrimary"
-          >
-            {project.name}
-          </Typography>
         </Stack>
-        <Typography variant="body2">
+        <Typography
+          variant="body2"
+          width={"80%"}
+          sx={{
+            overflow: "hidden",
+            textOverflow: "ellipsis",
+            display: "-webkit-box",
+            WebkitLineClamp: "2",
+            WebkitBoxOrient: "vertical",
+          }}
+        >
           {project.desc ? project.desc : "Project Description"}
         </Typography>
       </Stack>
@@ -92,6 +102,7 @@ export default function ProjectCard({
             display={"flex"}
             alignItems={"center"}
             gap={1}
+            flexShrink={0}
           >
             <CalendarTodayRounded fontSize="inherit" />
             {formattedDates.created}
@@ -104,6 +115,7 @@ export default function ProjectCard({
             display={"flex"}
             alignItems={"center"}
             gap={1}
+            flexShrink={0}
           >
             <UpdateRounded fontSize="inherit" />
             {formattedDates.updated}
