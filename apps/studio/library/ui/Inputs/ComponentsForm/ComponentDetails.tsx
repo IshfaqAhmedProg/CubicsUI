@@ -16,57 +16,46 @@ export default function ComponentDetails() {
       expandIcon={<ExpandMoreRounded />}
     >
       <Stack gap={3}>
-        <Stack
-          direction={"row"}
-          gap={1}
-          alignItems={"center"}
-        >
-          <FormLabel htmlFor="name">
-            This is the name you will be using in the CubicsUI CLI to create the
-            component in whichever project you want to use it.
-            <br />
-            <Typography
-              variant="body2"
-              color="text.primary"
-              overflow={"hidden"}
-              textOverflow={"ellipsis"}
-              maxWidth={"45ch"}
-            >
-              Note* create using &nbsp;&nbsp;
-              <code>{`npx cui create ${name !== "" ? name : "<name>"}`}</code>
-            </Typography>
-          </FormLabel>
-          <TextField
-            label="Component Name"
-            value={name}
-            onChange={(e) => setName(e.target.value)}
-            error={Boolean(formState?.errors?.name)}
-            helperText={formState?.errors?.name}
-            name="name"
-            fullWidth
-            disabled={formPending}
-          />
-        </Stack>
-        <Stack
-          direction={"row"}
-          gap={1}
-          alignItems={"center"}
-        >
-          <FormLabel htmlFor="outPath">
-            Path of the component relative to the current working directory,
-            this tells the CLI where to output your component
-          </FormLabel>
-          <TextField
-            label="Output Path"
-            value={outPath}
-            onChange={(e) => setOutPath(e.target.value)}
-            error={Boolean(formState?.errors?.outPath)}
-            helperText={formState?.errors?.outPath}
-            name="outPath"
-            fullWidth
-            disabled={formPending}
-          />
-        </Stack>
+        <FormLabel htmlFor="name">
+          This is the name you will be using in the CubicsUI CLI to create the
+          component in whichever project you want to use it.
+          <br />
+          <Typography
+            variant="body2"
+            color="text.primary"
+            overflow={"hidden"}
+            textOverflow={"ellipsis"}
+            maxWidth={"45ch"}
+          >
+            Note* create using &nbsp;&nbsp;
+            <code>{`npx cui create ${name !== "" ? name : "<name>"}`}</code>
+          </Typography>
+        </FormLabel>
+        <TextField
+          label="Component Name"
+          value={name}
+          onChange={(e) => setName(e.target.value)}
+          error={Boolean(formState?.errors?.name)}
+          helperText={formState?.errors?.name}
+          name="name"
+          fullWidth
+          disabled={formPending}
+        />
+
+        <FormLabel htmlFor="outPath">
+          Path of the component relative to the current working directory, this
+          tells CubicsUI CLI where to output your component
+        </FormLabel>
+        <TextField
+          label="Output Path"
+          value={outPath}
+          onChange={(e) => setOutPath(e.target.value)}
+          error={Boolean(formState?.errors?.outPath)}
+          helperText={formState?.errors?.outPath}
+          name="outPath"
+          fullWidth
+          disabled={formPending}
+        />
         <TextField
           label="Component Description"
           name="desc"

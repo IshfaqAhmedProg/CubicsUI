@@ -54,7 +54,7 @@ export async function saveComponentAction(
       err instanceof Prisma.PrismaClientKnownRequestError &&
       err.code === "P2002"
     ) {
-      errors.formError = `A component with the same name or output path exists in the project! Please choose another name or outPath.`;
+      errors.formError = `A component with the same name or output path exists in the project! Please choose another name or output path.`;
     } else if (err instanceof z.ZodError) {
       const fieldErrors = err.flatten().fieldErrors;
       Object.keys(fieldErrors).forEach((field) => {

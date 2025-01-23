@@ -1,4 +1,5 @@
 import { useComponentForm } from "@/app/components/create/providers";
+import { ErrorRounded } from "@mui/icons-material";
 import { Stack, Paper, Typography } from "@mui/material";
 import { ReactNode } from "react";
 
@@ -23,8 +24,18 @@ export default function ComponentActionBar({
     >
       <Typography
         color={Boolean(formState?.errors?.formError) ? "error" : "textPrimary"}
+        display={"flex"}
+        alignItems={"center"}
+        gap={2}
       >
-        {formState?.errors?.formError}
+        {formState?.errors?.formError ? (
+          <>
+            <ErrorRounded />
+            {formState.errors.formError}
+          </>
+        ) : (
+          ""
+        )}
       </Typography>
       {actions}
     </Stack>
