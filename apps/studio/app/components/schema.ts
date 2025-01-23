@@ -6,10 +6,10 @@ export const componentSchema = z.object({
   prId: z.string({ message: "Project Id is not string" }),
   name: z
     .string()
+    .nonempty({ message: "Component Name cannot be empty." })
     .regex(isValidCliName, {
-      message: "Names should be short and should not start with '_' or '-'",
-    })
-    .nonempty({ message: "Component Name cannot be empty" }),
+      message: "Names should be short and should not start with '_' or '-'.",
+    }),
   outPath: z.string().refine((path) => isValidRelativePath(path), {
     message: "Invalid Output path",
   }),
