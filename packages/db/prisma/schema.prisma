@@ -64,7 +64,9 @@ model components {
   /// codeblocks associated with the component 1:1
   codeblocks codeblocks?
 
-  @@unique([prId, outPath, name])
+  /// outPath and name should be unique for each component in a project orelse it would clash when creating the component
+  @@unique([prId, outPath])
+  @@unique([prId, name])
 }
 
 model codeblocks {
