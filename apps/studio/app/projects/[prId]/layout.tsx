@@ -1,7 +1,4 @@
-import {
-  Stack,
-  Typography
-} from "@mui/material";
+import { Grid2 as Grid, Stack, Typography } from "@mui/material";
 import { ReactNode } from "react";
 import { notFound } from "next/navigation";
 import db from "@/db";
@@ -38,33 +35,34 @@ export default async function ProjectLayout({
 
   return (
     <ProjectProvider project={project}>
-      <Stack gap={3}>
+      <Grid
+        container
+        spacing={2}
+        height={"100%"}
+      >
         {children}
 
-        <CollapsibleSection
-          title={"Details"}
-          defaultExpanded
-          expandIcon={<ExpandMoreRounded />}
+        <Grid
+          size={6}
+          display={"flex"}
+          flexDirection={"column"}
+          gap={2}
+          height={"100%"}
+          overflow={"hidden auto"}
         >
-          {details}
-        </CollapsibleSection>
+          <CollapsibleSection
+            title={"Details"}
+            defaultExpanded
+            expandIcon={<ExpandMoreRounded />}
+          >
+            {details}
+          </CollapsibleSection>
 
-        <CollapsibleSection
-          title="Components"
-          expanded
-        >
-          {components}
-        </CollapsibleSection>
-
-        <CollapsibleSection
-          title="Configurations"
-          defaultExpanded
-          expandIcon={<ExpandMoreRounded />}
-        >
           {configurations}
-        </CollapsibleSection>
-        <DeleteProjectButton />
-      </Stack>
+          <DeleteProjectButton />
+        </Grid>
+        <Grid size={6}>{components}</Grid>
+      </Grid>
     </ProjectProvider>
   );
 }

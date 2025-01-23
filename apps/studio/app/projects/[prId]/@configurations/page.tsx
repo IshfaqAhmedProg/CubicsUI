@@ -5,6 +5,7 @@ import { knownConfigurations } from "@/library/constants/knownConfigurations";
 import { notFound } from "next/navigation";
 import db from "@/db";
 import ConfigurationButton from "./button";
+import Title from "@/library/ui/Typography/Title";
 
 export default async function ProjectConfigurationsPage({
   params,
@@ -19,8 +20,12 @@ export default async function ProjectConfigurationsPage({
   return (
     <Stack
       id={"configurations-container"}
+      component={Paper}
+      py={3}
+      px={4}
       gap={2}
     >
+      <Title>Configurations</Title>
       <Typography variant="body2">
         Configurations help CubicsUI assess your code block when building
         components to help you define dependencies, path aliases etc. quicker.

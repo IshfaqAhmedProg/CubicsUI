@@ -4,6 +4,7 @@ import { Button, Paper, Stack, Typography } from "@mui/material";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import ComponentsList from "./list";
+import Title from "@/library/ui/Typography/Title";
 
 export default async function ProjectComponentsPage({
   params,
@@ -19,8 +20,11 @@ export default async function ProjectComponentsPage({
     <Stack
       gap={3}
       component={Paper}
-      p={2}
+      py={3}
+      px={4}
+      height={"100%"}
     >
+      <Title>Components</Title>
       {components.length !== 0 && (
         <Button
           startIcon={<AddRounded />}
