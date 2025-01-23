@@ -14,9 +14,9 @@ export async function deleteComponentAction(
     const component = await db.components.delete({ where: { id } });
     console.log("Successfully deleted component with id:", id);
     revalidatePath(`/projects/${component.prId}`);
-    return { status: "success", payload: true };
+    return { status: "success", payload: component };
   } catch (error) {
-    console.error("Failed to delete component with id:", id);
-    return { status: "error", payload: false };
+    console.error("Failed to delete component with id:", id, error);
+    return { status: "error" };
   }
 }

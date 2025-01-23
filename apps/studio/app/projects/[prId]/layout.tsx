@@ -1,9 +1,6 @@
 import {
-  Accordion,
-  AccordionDetails,
-  AccordionSummary,
   Stack,
-  Typography,
+  Typography
 } from "@mui/material";
 import { ReactNode } from "react";
 import { notFound } from "next/navigation";

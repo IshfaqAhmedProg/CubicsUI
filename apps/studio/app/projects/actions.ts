@@ -4,19 +4,17 @@ import { createProjectSchema } from "./schema";
 import db from "@/db";
 import { Prisma } from "@cubicsui/db";
 import { z } from "zod";
-import { redirect } from "next/navigation";
 import {
   ActionReturnType,
   FormActionReturnType,
 } from "@/library/types/ActionReturnTypes";
-import { Project } from "@/library/types/Project";
+import { revalidatePath } from "next/cache";
 
 export async function createProjectAction(
-  prevState: any,
+  prevState: unknown,
   formdata: FormData
 ): ActionReturnType<FormActionReturnType> {
-  let errors: FormActionReturnType["errors"] = {};
-  let payload: Project;
+  const errors: FormActionReturnType["errors"] = {};
   try {
     // Validate inputs
     const validatedInputs = createProjectSchema.parse({
@@ -25,9 +23,12 @@ export async function createProjectAction(
       styleEng: formdata.get("styleEng"),
     });
     // Create the library in the db
-    payload = await db.projects.create({
+    const payload = await db.projects.create({
       data: validatedInputs,
     });
+    console.log("Project from db:", payload);
+    revalidatePath("/projects");
+    return { payload, status: "success" };
   } catch (err) {
     console.error(err);
     if (
@@ -44,6 +45,4 @@ export async function createProjectAction(
     }
     return { status: "error", errors };
   }
-  console.log("lib from db:", payload);
-  redirect(`/projects/${payload.id}`);
 }

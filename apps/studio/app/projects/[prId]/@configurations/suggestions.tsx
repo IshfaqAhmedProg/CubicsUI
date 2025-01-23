@@ -22,7 +22,7 @@ export function ConfigurationSuggestions({
   configurations,
 }: ConfigurationSuggestionsProps) {
   const { project } = useProject();
-  let suggestions: Suggestion[] = [];
+  const suggestions: Suggestion[] = [];
   if (!configurations.some((cfg) => cfg.name == "package.json"))
     suggestions.push({
       ...knownConfigurations.packageJson,

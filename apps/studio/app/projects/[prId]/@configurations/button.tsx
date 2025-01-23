@@ -26,14 +26,16 @@ export default function ConfigurationButton(props: ConfigurationButtonProps) {
       >
         {children ?? "Add Config"}
       </Button>
-      <ConfigurationDialog
-        suggestion={suggestion}
-        configuration={configuration}
-        handleClose={handleClose}
-        handleStrictClose={handleStrictClose}
-        {...dialogProps}
-        open={open}
-      />
+      {open && (
+        <ConfigurationDialog
+          suggestion={suggestion}
+          configuration={configuration}
+          handleClose={handleClose}
+          handleStrictClose={handleStrictClose}
+          {...dialogProps}
+          open={open}
+        />
+      )}
     </>
   );
 }

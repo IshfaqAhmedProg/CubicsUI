@@ -11,14 +11,14 @@ import {
   Stack,
   TextField,
 } from "@mui/material";
-import { useActionState } from "react";
+import { useActionState, useEffect } from "react";
 import Spinner from "@/library/ui/Navigation/Spinner/Spinner";
 import CodeEditor from "@/library/ui/Inputs/CodeEditor";
 import HiddenInput from "@/library/ui/Inputs/HiddenInput";
 import { Suggestion } from "@/library/types/Suggestions";
 import { configurations } from "@cubicsui/db";
 import { useProject } from "../providers";
-import { configsAction } from "./actions";
+import { saveConfigAction } from "./actions";
 import useDisclosure from "@/library/hooks/useDisclosure";
 
 export interface ConfigurationDialogProps extends DialogProps {
@@ -32,16 +32,17 @@ export interface ConfigurationDialogProps extends DialogProps {
  * Dialog to create a configuration, consists of a form containing inputs for the configuration name and data.
  */
 export function ConfigurationDialog(props: ConfigurationDialogProps) {
-  const {
-    handleClose: _handleClose,
-    handleStrictClose,
-    suggestion,
-    configuration,
-    ...rest
-  } = props;
-  const [state, formAction, pending] = useActionState(configsAction, {});
+  const { handleClose, handleStrictClose, suggestion, configuration, ...rest } =
+    props;
+  const [state, formAction, pending] = useActionState(saveConfigAction, {});
   const { project } = useProject();
-  console.log({ formState: state });
+
+  useEffect(() => {
+    if (state?.status === "success") {
+      // TODO add toast notification
+      handleClose();
+    }
+  }, [state]);
 
   return (
     <Dialog
@@ -67,7 +68,7 @@ export function ConfigurationDialog(props: ConfigurationDialogProps) {
             name="prId"
             value={project.id}
           />
-          {configuration && (
+          {configuration?.id && (
             <HiddenInput
               name="configId"
               value={configuration.id}
@@ -111,13 +112,14 @@ export function ConfigurationDialog(props: ConfigurationDialogProps) {
             color="error"
             variant="text"
             type="button"
+            // TODO add delete action
           >
             Delete
           </Button>
         )}
         <Button
           disabled={pending}
-          onClick={_handleClose}
+          onClick={handleClose}
           variant="text"
           type="button"
         >
@@ -128,7 +130,7 @@ export function ConfigurationDialog(props: ConfigurationDialogProps) {
           disabled={pending}
           endIcon={pending ? <Spinner /> : undefined}
         >
-          {configuration ? "Update" : "Add"}
+          {configuration ? "Save" : "Create"}
         </Button>
       </DialogActions>
     </Dialog>

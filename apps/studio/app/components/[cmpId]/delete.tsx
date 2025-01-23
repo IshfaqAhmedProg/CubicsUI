@@ -28,7 +28,9 @@ export default function DeleteComponentButton(props: ButtonedDialogProps) {
     }
   }, [state]);
 
-  if (!component) return null;
+  if (!component) {
+    throw new Error("Component from useComponentForm() not found!");
+  }
 
   return (
     <>
@@ -38,12 +40,13 @@ export default function DeleteComponentButton(props: ButtonedDialogProps) {
         color="error"
         {...rest}
       >
-        Delete {component.name}
+        {children ?? `Delete ${component.name}`}
       </Button>
       <Dialog
         onClose={handleStrictClose}
         open={open}
         PaperProps={{ component: "form", action }}
+        {...dialogProps}
       >
         <DialogTitle>
           Delete <span className="error">{component.name}</span> ?

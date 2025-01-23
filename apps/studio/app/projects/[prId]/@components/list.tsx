@@ -2,7 +2,9 @@
 import { components } from "@cubicsui/db";
 import { useState } from "react";
 import { deleteComponentAction } from "./actions";
-import ComponentCard from "@/library/ui/Layout/Cards/ComponentCard";
+import ComponentCard, {
+  ComponentSkeleton,
+} from "@/library/ui/Layout/Cards/ComponentCard";
 import { DeleteForeverRounded } from "@mui/icons-material";
 import { Button } from "@mui/material";
 
@@ -18,6 +20,8 @@ export default function ComponentsList({
     setLoading(false);
   }
 
+  if (loading)
+    return [...Array(3)].map((_, i) => <ComponentSkeleton key={i} />);
   return components.map((c) => {
     return (
       <ComponentCard

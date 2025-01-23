@@ -7,6 +7,7 @@ import {
   SkeletonProps,
   Typography,
 } from "@mui/material";
+import { useRouter } from "next/navigation";
 import { ReactNode } from "react";
 
 export function ComponentSkeleton(props: SkeletonProps) {
@@ -27,6 +28,7 @@ interface ComponentCardProps {
 }
 export default function ComponentCard(props: ComponentCardProps) {
   const { component, size = "small", action } = props;
+  const router = useRouter();
 
   return (
     <ButtonGroup
@@ -44,6 +46,9 @@ export default function ComponentCard(props: ComponentCardProps) {
           bgcolor: "background.paper",
           borderColor: "divider",
           color: "text.primary",
+        }}
+        onClick={() => {
+          router.push(`/components/${component.id}`);
         }}
       >
         <Typography fontWeight={"bold"}>{component.name}</Typography>

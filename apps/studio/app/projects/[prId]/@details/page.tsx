@@ -1,18 +1,8 @@
 "use client";
 
-import supportedLanguageWithIcons from "@/library/constants/supportedLangs";
 import HiddenInput from "@/library/ui/Inputs/HiddenInput";
 import Spinner from "@/library/ui/Navigation/Spinner/Spinner";
-import {
-  Stack,
-  TextField,
-  FormControl,
-  InputLabel,
-  Select,
-  MenuItem,
-  ListItemText,
-  Button,
-} from "@mui/material";
+import { Stack, TextField, Button } from "@mui/material";
 import { useProject } from "../providers";
 import { useActionState } from "react";
 import { updateProjectAction } from "./actions";
@@ -22,6 +12,9 @@ import ProjectStyleEngineInput from "@/library/ui/Inputs/ProjectStyleEngineInput
 export default function LibraryDetailsPage() {
   const { project } = useProject();
   const [state, formAction, pending] = useActionState(updateProjectAction, {});
+
+  // TODO add toast notification
+  console.log(state?.status);
 
   return (
     <Stack

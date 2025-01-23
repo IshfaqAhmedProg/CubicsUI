@@ -54,7 +54,6 @@ export default function ComponentFormProvider({
   );
 }
 function useComponentFormStates({
-  project,
   codeblocks,
   component,
 }: ComponentFormDefaultStateProps) {

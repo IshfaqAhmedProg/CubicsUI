@@ -16,16 +16,16 @@ export async function zipDeps(formdata: FormData) {
   const lclNames = formdata.getAll("depsLclName");
   const lclCmpIds = formdata.getAll("depsLclCmpId");
 
-  let lcl = lclNames.map((name, i) => {
-      return { name, cmpId: lclCmpIds[i] };
-    }),
-    ext = extNames.map((name, i) => {
-      return {
-        name,
-        ver: extVers[i],
-        type: extTypes[i] != "normal" ? extTypes[i] : null,
-      };
-    });
+  const lcl = lclNames.map((name, i) => {
+    return { name, cmpId: lclCmpIds[i] };
+  });
+  const ext = extNames.map((name, i) => {
+    return {
+      name,
+      ver: extVers[i],
+      type: extTypes[i] != "normal" ? extTypes[i] : null,
+    };
+  });
 
   return { lcl, ext };
 }
@@ -34,11 +34,11 @@ type SaveComponentActionReturnType = {
 } & components;
 
 export async function saveComponentAction(
-  prevState: any,
+  prevState: unknown,
   formdata: FormData
 ): ActionReturnType<FormActionReturnType<SaveComponentActionReturnType>> {
-  let errors: FormActionReturnType["errors"] = {};
-  let prId = formdata.get("prId");
+  const errors: FormActionReturnType["errors"] = {};
+  const prId = formdata.get("prId");
 
   if (!prId || typeof prId !== "string")
     return {
@@ -72,9 +72,8 @@ export async function saveComponentAction(
   }
 }
 export async function saveComponent(prId: string, formdata: FormData) {
-  let cmpId = formdata.get("cmpId");
+  const cmpId = formdata.get("cmpId");
   try {
-    let component: components;
     const deps = await zipDeps(formdata);
     const cmpValidatedFields = componentSchema.parse({
       prId,
@@ -84,7 +83,7 @@ export async function saveComponent(prId: string, formdata: FormData) {
       tags: formdata.getAll("tags"),
       deps,
     });
-    component =
+    const component =
       typeof cmpId == "string"
         ? await db.components.update({
             where: { id: cmpId },
@@ -100,14 +99,13 @@ export async function saveComponent(prId: string, formdata: FormData) {
 }
 export async function saveCodeblock(cmpId: string, formdata: FormData) {
   try {
-    let cbId = formdata.get("cbId");
-    let codeblock: codeblocks;
+    const cbId = formdata.get("cbId");
     const cbValidatedFields = codeblocksSchema.parse({
       cmpId,
       script: formdata.get("script"),
       styles: formdata.get("styles"),
     });
-    codeblock =
+    const codeblock =
       typeof cbId == "string"
         ? await db.codeblocks.update({
             where: { id: cbId },
@@ -122,12 +120,11 @@ export async function saveCodeblock(cmpId: string, formdata: FormData) {
   }
 }
 export async function deleteComponent(
-  prevState: any,
+  prevState: unknown,
   formdata: FormData
 ): ActionReturnType<FormActionReturnType<components>> {
-  let payload: components | null = null;
   const id = formdata.get("cmpId");
   if (!id || typeof id !== "string") throw new Error("Component Id not found!");
-  payload = await db.components.delete({ where: { id } });
+  const payload = await db.components.delete({ where: { id } });
   return { status: "success", payload };
 }

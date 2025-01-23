@@ -9,17 +9,24 @@ import {
   DialogTitle,
   Typography,
 } from "@mui/material";
-import { useActionState } from "react";
+import { useActionState, useEffect } from "react";
 import { deleteProjectAction } from "./actions";
 import Spinner from "@/library/ui/Navigation/Spinner/Spinner";
 import HiddenInput from "@/library/ui/Inputs/HiddenInput";
 import { useProject } from "./providers";
+import { redirect, RedirectType } from "next/navigation";
 
 export default function DeleteProjectButton(props: ButtonedDialogProps) {
   const { open, handleClose, handleOpen } = useDisclosure();
   const { dialogProps, children, ...rest } = props;
   const [state, action, pending] = useActionState(deleteProjectAction, {});
   const { project } = useProject();
+
+  useEffect(() => {
+    if (state?.status == "success") {
+      redirect("/projects", RedirectType.replace);
+    }
+  }, [state]);
 
   return (
     <>
@@ -29,27 +36,36 @@ export default function DeleteProjectButton(props: ButtonedDialogProps) {
         color="error"
         {...rest}
       >
-        Delete {project.name}
+        {children ?? `Delete ${project.name}`}
       </Button>
       <Dialog
         onClose={handleClose}
         open={open}
         PaperProps={{ component: "form", action }}
+        {...dialogProps}
       >
-        <DialogTitle>
-          Delete <span className="error">{project.name}</span> ?
-        </DialogTitle>
+        <DialogTitle>Delete Project?</DialogTitle>
         <DialogContent>
           <HiddenInput
             name="prId"
             value={project.id}
           />
+          {state?.status === "error" && (
+            <Typography color="error">{state.errors?.formError}</Typography>
+          )}
           <Typography
             variant="body2"
             px={6}
           >
-            Are you sure you want to delete {project.name} and all the
-            configurations and components, this action is irreversible.
+            Are you sure you want to delete
+            <Typography
+              component={"span"}
+              fontWeight={"bold"}
+            >
+              &nbsp;&quot;{project.name}&quot;
+            </Typography>{" "}
+            and all its configurations and components, this action is
+            irreversible.
           </Typography>
         </DialogContent>
         <DialogActions>

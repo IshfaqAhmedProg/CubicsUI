@@ -9,14 +9,12 @@ import { Prisma } from "@cubicsui/db";
 import { revalidatePath } from "next/cache";
 import { z } from "zod";
 import { updateProjectSchema } from "../../schema";
-import { Project } from "@/library/types/Project";
 
 export async function updateProjectAction(
-  prevState: any,
+  prevState: unknown,
   formdata: FormData
 ): ActionReturnType<FormActionReturnType> {
-  let errors: FormActionReturnType["errors"] = {};
-  let payload: Project;
+  const errors: FormActionReturnType["errors"] = {};
   try {
     const prId = formdata.get("prId");
     if (!prId || typeof prId !== "string")
@@ -28,11 +26,12 @@ export async function updateProjectAction(
       desc: formdata.get("desc"),
       styleEng: formdata.get("styleEng"),
     });
-    payload = await db.projects.update({
+    const payload = await db.projects.update({
       where: { id: prId },
       data: validatedInputs,
     });
     revalidatePath(`/projects/${prId}`);
+    return { status: "success", payload };
   } catch (err) {
     console.error(err);
     if (
