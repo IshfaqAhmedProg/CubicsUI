@@ -31,7 +31,7 @@ export default async function ProjectComponentsPage({
           LinkComponent={Link}
           href={`/components/create?prId=${prId}`}
         >
-          Add Component to library
+          Add Component to project
         </Button>
       )}
       {components.length == 0 ? (
@@ -45,7 +45,7 @@ export default async function ProjectComponentsPage({
             LinkComponent={Link}
             href={`/components/create?prId=${prId}`}
           >
-            Add Component to library
+            Add Component to project
           </Button>
         </Stack>
       ) : (
