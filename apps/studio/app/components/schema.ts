@@ -1,9 +1,15 @@
+import isValidCliName from "@/library/functions/isValidCliName";
 import isValidRelativePath from "@/library/functions/isValidRelativePath";
 import { z } from "zod";
 
 export const componentSchema = z.object({
   prId: z.string({ message: "Project Id is not string" }),
-  name: z.string().nonempty({ message: "Component Name cannot be empty" }),
+  name: z
+    .string()
+    .regex(isValidCliName, {
+      message: "Names should be short and should not start with '_' or '-'",
+    })
+    .nonempty({ message: "Component Name cannot be empty" }),
   outPath: z.string().refine((path) => isValidRelativePath(path), {
     message: "Invalid Output path",
   }),

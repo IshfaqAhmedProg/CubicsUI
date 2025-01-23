@@ -1,7 +1,7 @@
 "use client";
 
 import { ExpandMoreRounded } from "@mui/icons-material";
-import { FormLabel, Stack, TextField } from "@mui/material";
+import { FormLabel, Stack, TextField, Typography } from "@mui/material";
 import CollapsibleSection from "../../Layout/CollapsibleSection";
 import ComponentTagsInput from "./ComponentTagsInput";
 import { useComponentForm } from "@/app/components/create/providers";
@@ -16,16 +16,37 @@ export default function ComponentDetails() {
       expandIcon={<ExpandMoreRounded />}
     >
       <Stack gap={3}>
-        <TextField
-          label="Component Name"
-          value={name}
-          onChange={(e) => setName(e.target.value)}
-          error={Boolean(formState?.errors?.name)}
-          helperText={formState?.errors?.name}
-          name="name"
-          fullWidth
-          disabled={formPending}
-        />
+        <Stack
+          direction={"row"}
+          gap={1}
+          alignItems={"center"}
+        >
+          <FormLabel htmlFor="name">
+            This is the name you will be using in the CubicsUI CLI to create the
+            component in whichever project you want to use it.
+            <br />
+            <Typography
+              variant="body2"
+              color="text.primary"
+              overflow={"hidden"}
+              textOverflow={"ellipsis"}
+              maxWidth={"45ch"}
+            >
+              Note* create using &nbsp;&nbsp;
+              <code>{`npx cui create ${name !== "" ? name : "<name>"}`}</code>
+            </Typography>
+          </FormLabel>
+          <TextField
+            label="Component Name"
+            value={name}
+            onChange={(e) => setName(e.target.value)}
+            error={Boolean(formState?.errors?.name)}
+            helperText={formState?.errors?.name}
+            name="name"
+            fullWidth
+            disabled={formPending}
+          />
+        </Stack>
         <Stack
           direction={"row"}
           gap={1}

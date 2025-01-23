@@ -41,12 +41,12 @@ a {
 }
 ::-webkit-scrollbar-track {
   -webkit-box-shadow: inset var(--shadow);
-  -webkit-border-radius: var(--br);
-  border-radius: var(--br);
+  -webkit-border-radius: var(--shape-borderRadius);
+  border-radius: var(--shape-borderRadius);
 }
 ::-webkit-scrollbar-thumb {
   -webkit-border-radius: 10px;
-  border-radius: var(--br);
+  border-radius: var(--shape-borderRadius);
   background: var(--gray-75);
   -webkit-box-shadow: var(--shadow);
 }
@@ -63,4 +63,9 @@ a {
 .overflow-guard,
 .monaco-editor {
   border-radius: var(--shape-borderRadius);
+}
+code {
+  background: rgba(var(--palette-background-paperChannel) / 1);
+  border-radius: calc(var(--shape-borderRadius) * 0.5);
+  padding-inline: 0.5em;
 }
