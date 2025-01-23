@@ -1,7 +1,7 @@
 "use client";
 import { Button, Divider, Paper, Stack, Typography } from "@mui/material";
 import { ReactNode } from "react";
-import { AutoFixHighRounded, ExpandMoreRounded } from "@mui/icons-material";
+import { AutoFixHighRounded } from "@mui/icons-material";
 import CollapsibleSection from "../../Layout/CollapsibleSection";
 import { useComponentForm } from "@/app/components/create/providers";
 import ExternalDependencyTable from "../DependencyTable/ExternalDependencyTable";
