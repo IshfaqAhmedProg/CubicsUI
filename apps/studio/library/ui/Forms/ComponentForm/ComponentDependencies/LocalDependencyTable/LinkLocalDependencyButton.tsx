@@ -195,9 +195,13 @@ function LinkLocalDependencyDialog({
                             <CheckRounded />
                           ) : undefined
                         }
-                        disabled={selectedComponent?.id == prc.id}
+                        disabled={
+                          selectedComponent?.id == prc.id ||
+                          localDep.cmpId == prc.id
+                        }
                       >
-                        {selectedComponent?.id == prc.id
+                        {selectedComponent?.id == prc.id ||
+                        localDep.cmpId == prc.id
                           ? "Selected"
                           : "Select"}
                       </Button>
