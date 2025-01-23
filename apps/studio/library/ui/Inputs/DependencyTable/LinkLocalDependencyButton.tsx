@@ -23,6 +23,10 @@ import {
 import HiddenInput from "../HiddenInput";
 import { components, LocalDependency } from "@cubicsui/db";
 import { getProjectComponents } from "./actions";
+import ComponentCard, {
+  ComponentSkeleton,
+} from "../../Layout/Cards/ComponentCard";
+import Spinner from "../../Navigation/Spinner/Spinner";
 
 interface ComponentLink {
   name: string;
@@ -84,21 +88,27 @@ function LinkLocalDependencyDialog({
   handleConfirm: (value: ComponentLink) => void;
   localDep: LocalDependency;
 } & DialogProps) {
-  const [value, setValue] = useState<ComponentLink | null>(null);
+  const [selectedComponent, setSelectedComponent] = useState<components | null>(
+    null
+  );
   const [inputValue, setInputValue] = useState("");
+  const [loading, setLoading] = useState(false);
 
   const { deps, project, component, setScriptIncludesStyles } =
     useComponentForm();
 
-  const isLinkedCmpStyles = localDep.cmpId === "styles";
   const localDependencies = deps.lcl;
 
   const [prComponentList, setPrComponentList] = useState<components[]>([]);
 
+  const isLinkedCmpStyles = localDep.cmpId === "styles";
+
   useEffect(() => {
     const subscribe = async () => {
+      setLoading(true);
       const prCmpList = await getProjectComponents(project.id, component?.id);
       setPrComponentList(prCmpList);
+      setLoading(false);
     };
     subscribe();
   }, [project, component]);
@@ -122,7 +132,7 @@ function LinkLocalDependencyDialog({
               >
                 <Typography variant="body2">
                   If you are using style module files like *.module.css then you
-                  can link it to the style script of the component
+                  can link it to the style definitions of the component
                 </Typography>
                 <Button
                   onClick={() => {
@@ -137,7 +147,7 @@ function LinkLocalDependencyDialog({
                   startIcon={
                     isLinkedCmpStyles ? <LinkOffRounded /> : <LinkRounded />
                   }
-                  variant={isLinkedCmpStyles ? "text" : "contained"}
+                  variant={isLinkedCmpStyles ? "text" : "outlined"}
                   sx={{ minWidth: "max-content" }}
                 >
                   {isLinkedCmpStyles ? "Unlink Styles" : "Link Styles"}
@@ -154,6 +164,7 @@ function LinkLocalDependencyDialog({
               pt={2}
               px={2}
               component={Paper}
+              gap={3}
               minWidth={"22rem"}
             >
               <TextField
@@ -166,25 +177,33 @@ function LinkLocalDependencyDialog({
                   },
                 }}
               />
-              <Stack>
+              <Stack
+                gap={2}
+                height={"12rem"}
+                overflow={"hidden auto"}
+              >
+                {loading &&
+                  [...Array(3)].map((_, i) => <ComponentSkeleton key={i} />)}
                 {prComponentList.map((prc) => (
-                  <Stack
+                  <ComponentCard
                     key={prc.id}
-                    direction={"row"}
-                  >
-                    <Typography>
-                      {prc.name}-{prc.id}
-                    </Typography>
-                    <Button
-                      variant="text"
-                      onClick={() => setValue({ id: prc.id, name: prc.name })}
-                      startIcon={
-                        value?.id == prc.id ? <CheckRounded /> : undefined
-                      }
-                    >
-                      Select
-                    </Button>
-                  </Stack>
+                    component={prc}
+                    action={
+                      <Button
+                        onClick={() => setSelectedComponent(prc)}
+                        startIcon={
+                          selectedComponent?.id == prc.id ? (
+                            <CheckRounded />
+                          ) : undefined
+                        }
+                        disabled={selectedComponent?.id == prc.id}
+                      >
+                        {selectedComponent?.id == prc.id
+                          ? "Selected"
+                          : "Select"}
+                      </Button>
+                    }
+                  />
                 ))}
               </Stack>
             </Stack>
@@ -199,8 +218,10 @@ function LinkLocalDependencyDialog({
           Cancel
         </Button>
         <Button
-          disabled={!value}
-          onClick={() => (!!value ? handleConfirm(value) : undefined)}
+          disabled={!selectedComponent}
+          onClick={() =>
+            !!selectedComponent ? handleConfirm(selectedComponent) : undefined
+          }
         >
           Confirm
         </Button>

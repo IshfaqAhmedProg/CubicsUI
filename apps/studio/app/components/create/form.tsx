@@ -7,6 +7,7 @@ import ComponentActionBar from "@/library/ui/Inputs/ComponentsForm/ComponentActi
 import { useEffect } from "react";
 import { redirect, RedirectType } from "next/navigation";
 import ComponentFormHiddenInputs from "@/library/ui/Inputs/ComponentsForm/ComponentFormHiddenInputs";
+import ComponentDependencies from "@/library/ui/Inputs/ComponentsForm/ComponentDependencies";
 
 export default function CreateComponentForm() {
   const { formState, formAction, formPending } = useComponentForm();
@@ -41,6 +42,7 @@ export default function CreateComponentForm() {
         <ComponentFormHiddenInputs />
         <ComponentDetails />
         <ComponentScripts />
+        <ComponentDependencies />
       </Stack>
     </Stack>
   );

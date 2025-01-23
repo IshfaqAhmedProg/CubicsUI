@@ -6,6 +6,7 @@ import ComponentActionBar from "@/library/ui/Inputs/ComponentsForm/ComponentActi
 import { useComponentForm } from "../create/providers";
 import ComponentFormHiddenInputs from "@/library/ui/Inputs/ComponentsForm/ComponentFormHiddenInputs";
 import DeleteComponentButton from "./delete";
+import ComponentDependencies from "@/library/ui/Inputs/ComponentsForm/ComponentDependencies";
 
 export default function ComponentForm() {
   const { formAction, formPending } = useComponentForm();
@@ -36,6 +37,7 @@ export default function ComponentForm() {
         <ComponentFormHiddenInputs />
         <ComponentDetails />
         <ComponentScripts />
+        <ComponentDependencies />
         <DeleteComponentButton />
       </Stack>
     </Stack>

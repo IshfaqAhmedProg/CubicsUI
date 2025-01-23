@@ -2,7 +2,6 @@
 import { Stack, FormLabel, Switch } from "@mui/material";
 import CollapsibleSection from "@/library/ui/Layout/CollapsibleSection";
 import CodeEditor, { onMountHandler } from "@/library/ui/Inputs/CodeEditor";
-import DependencySection from "../DependencyTable/DependencySection";
 import { useComponentForm } from "@/app/components/create/providers";
 
 export default function ComponentScripts() {
@@ -40,16 +39,13 @@ export default function ComponentScripts() {
           language={project.lang.toLowerCase()}
           onMount={onMountHandler}
         />
-
-        <DependencySection />
-
         <Stack
           direction={"row"}
           gap={3}
           alignItems={"center"}
         >
           <FormLabel htmlFor="scriptIncludesStyles">
-            Does the component include styles?
+            Does the component include styles definitions?
           </FormLabel>
           <Switch
             id="scriptIncludesStyles"
@@ -59,7 +55,7 @@ export default function ComponentScripts() {
           />
         </Stack>
         <CollapsibleSection
-          title="Styles"
+          title="Style Definitions"
           expanded={scriptIncludesStyles}
           disabled={!scriptIncludesStyles}
           sx={{ position: "relative" }}

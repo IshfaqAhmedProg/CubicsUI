@@ -1,11 +1,11 @@
 "use client";
 import { Button, Divider, Paper, Stack, Typography } from "@mui/material";
-import ExternalDependencyTable from "./ExternalDependencyTable";
-import LocalDependencyTable from "./LocalDependencyTable";
 import { ReactNode } from "react";
 import { AutoFixHighRounded, ExpandMoreRounded } from "@mui/icons-material";
 import CollapsibleSection from "../../Layout/CollapsibleSection";
 import { useComponentForm } from "@/app/components/create/providers";
+import ExternalDependencyTable from "../DependencyTable/ExternalDependencyTable";
+import LocalDependencyTable from "../DependencyTable/LocalDependencyTable";
 
 export function DependencySectionLayout({
   children,
@@ -25,13 +25,12 @@ export function DependencySectionLayout({
   );
 }
 
-export default function DependencySection() {
+export default function ComponentDependencies() {
   const { analyseDependencies, formState, formPending } = useComponentForm();
 
   return (
     <CollapsibleSection
-      expandIcon={<ExpandMoreRounded />}
-      defaultExpanded
+      expanded
       title="Dependencies"
     >
       <Stack gap={3}>
@@ -55,16 +54,16 @@ export default function DependencySection() {
               dependencies that you think are missing below
             </Typography>
           </Typography>
-          <Button
-            variant="text"
-            onClick={analyseDependencies}
-            startIcon={<AutoFixHighRounded />}
-            sx={{ minWidth: "max-content" }}
-            disabled={formPending}
-          >
-            Analyse Dependencies
-          </Button>
         </Stack>
+        <Button
+          variant="text"
+          onClick={analyseDependencies}
+          startIcon={<AutoFixHighRounded />}
+          sx={{ minWidth: "max-content" }}
+          disabled={formPending}
+        >
+          Analyse Dependencies
+        </Button>
         {formState?.errors?.deps && (
           <Typography
             color="error"

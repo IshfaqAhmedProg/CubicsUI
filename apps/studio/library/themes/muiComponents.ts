@@ -73,6 +73,12 @@ const components:
       },
     },
   },
+  MuiButtonGroup: {
+    styleOverrides: {
+      firstButton: { borderRight: "1px solid var(--palette-divider)" },
+      middleButton: { borderRight: "1px solid var(--palette-divider)" },
+    },
+  },
   MuiDialog: {
     styleOverrides: {
       paper: {

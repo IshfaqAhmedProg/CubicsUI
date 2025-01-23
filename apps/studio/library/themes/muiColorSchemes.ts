@@ -36,10 +36,11 @@ export const colorSchemeLight: ColorSystemOptions = {
 export const colorSchemeDark: ColorSystemOptions = {
   palette: {
     ...schemeCommons,
-    divider: "rgba(255,255,255,0.2)",
+    divider: "rgba(180,180,180,0.2)",
     background: {
       paper: "rgba(23,23,23,0.6)",
     },
+    common: { onBackground: "rgba(180,180,180,0.2)" },
     text: {
       primary: "rgb(240,240,240)",
       secondary: "rgb(240,240,240,0.5)",
