@@ -4,20 +4,17 @@ import styleEnginesWithLogos from "@/library/constants/styleEngines";
 import supportedLanguageWithIcons from "@/library/constants/supportedLangs";
 import formatDate from "@/library/functions/formatDate";
 import { Project } from "@/library/types/Project";
-import {
-  CalendarTodayRounded,
-  UpdateRounded,
-  WarningRounded,
-} from "@mui/icons-material";
+import { CalendarTodayRounded, UpdateRounded } from "@mui/icons-material";
 import {
   Button,
   ButtonProps,
   Paper,
   Stack,
+  styled,
   Tooltip,
   Typography,
-  useTheme,
 } from "@mui/material";
+import DateText from "../../Typography/DateText";
 
 export default function ProjectCard({
   project,
@@ -25,7 +22,6 @@ export default function ProjectCard({
 }: {
   project: Partial<Project>;
 } & ButtonProps) {
-  const theme = useTheme();
   const supportedLang = supportedLanguageWithIcons.find(
     (sl) => sl.name == project.lang
   );
@@ -35,10 +31,6 @@ export default function ProjectCard({
 
   const LangLogo = supportedLang?.Logo;
   const StyleLogo = supportedStyle?.Logo;
-  const formattedDates = {
-    created: formatDate(project.created),
-    updated: formatDate(project.updated),
-  };
 
   return (
     <Button
@@ -56,10 +48,11 @@ export default function ProjectCard({
       <Stack
         alignItems={"flex-start"}
         gap={2}
+        flexGrow={1}
       >
         <Stack
           direction={"row"}
-          alignItems={"center"}
+          alignItems={"baseline"}
           gap={3}
         >
           <Typography
@@ -72,13 +65,13 @@ export default function ProjectCard({
           <Stack
             direction={"row"}
             alignItems={"center"}
+            component={Paper}
             gap={2}
-            bgcolor={"background.paper"}
-            borderRadius={1}
             padding={1}
+            maxHeight={"2rem"}
           >
-            {LangLogo && <LangLogo fontSize="small" />}
-            {StyleLogo && <StyleLogo fontSize="small" />}
+            {LangLogo && <LangLogo sx={{ fontSize: "inherit" }} />}
+            {StyleLogo && <StyleLogo sx={{ fontSize: "inherit" }} />}
           </Stack>
         </Stack>
         <Typography
@@ -95,33 +88,23 @@ export default function ProjectCard({
           {project.desc ? project.desc : "Project Description"}
         </Typography>
       </Stack>
-      {formattedDates.created == formattedDates.updated ? (
-        <Tooltip title={`Created on ${formattedDates.created}`}>
-          <Typography
-            variant="body2"
-            display={"flex"}
-            alignItems={"center"}
-            gap={1}
-            flexShrink={0}
-          >
-            <CalendarTodayRounded fontSize="inherit" />
-            {formattedDates.created}
-          </Typography>
-        </Tooltip>
-      ) : (
-        <Tooltip title={`Modified on ${formattedDates.updated}`}>
-          <Typography
-            variant="body2"
-            display={"flex"}
-            alignItems={"center"}
-            gap={1}
-            flexShrink={0}
-          >
-            <UpdateRounded fontSize="inherit" />
-            {formattedDates.updated}
-          </Typography>
-        </Tooltip>
-      )}
+      <Stack
+        gap={1}
+        alignSelf={"flex-start"}
+      >
+        <DateText
+          date={project.created}
+          icon={<CalendarTodayRounded fontSize="inherit" />}
+          title={(date) => `Created on ${date}`}
+        />
+        {project.created?.getTime() != project.updated?.getTime() && (
+          <DateText
+            date={project.updated}
+            icon={<UpdateRounded fontSize="inherit" />}
+            title={(date) => `Modified on ${date}`}
+          />
+        )}
+      </Stack>
     </Button>
   );
 }

@@ -74,10 +74,7 @@ export function CreateProjectDialog({
           px={6}
           gap={6}
         >
-          <FormLabel
-            htmlFor="name"
-            sx={{ maxWidth: "45ch" }}
-          >
+          <FormLabel htmlFor="name">
             Enter the name for your new project, the project name should follow{" "}
             <Link
               href={npmPackageNamingLink}
