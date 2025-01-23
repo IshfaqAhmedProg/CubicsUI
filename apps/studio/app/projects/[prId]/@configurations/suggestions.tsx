@@ -7,7 +7,7 @@ import {
 import { Suggestion } from "@/library/types/Suggestions";
 import { configurations } from "@cubicsui/db";
 import { Paper, Stack, Typography } from "@mui/material";
-import { useProject } from "../providers";
+import { useProject } from "../../../../library/contexts/ProjectContext";
 import ConfigurationButton from "./button";
 import { knownConfigurations } from "../../../../library/constants/knownConfigurations";
 

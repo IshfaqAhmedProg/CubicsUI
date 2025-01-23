@@ -1,7 +1,7 @@
 import db from "@/db";
 import CreateComponentForm from "./form";
 import { notFound } from "next/navigation";
-import ComponentFormProvider from "./providers";
+import ComponentFormProvider from "../../../library/contexts/ComponentFormContext";
 
 type SearchParams = Promise<{ prId: string }>;
 

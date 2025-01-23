@@ -3,7 +3,7 @@
 import HiddenInput from "@/library/ui/Inputs/HiddenInput";
 import Spinner from "@/library/ui/Navigation/Spinner/Spinner";
 import { Stack, TextField, Button } from "@mui/material";
-import { useProject } from "../providers";
+import { useProject } from "../../../../library/contexts/ProjectContext";
 import { useActionState } from "react";
 import { updateProjectAction } from "./actions";
 import ProjectLanguageInput from "@/library/ui/Forms/ProjectForm/ProjectLanguageInput";

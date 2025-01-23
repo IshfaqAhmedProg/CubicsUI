@@ -103,3 +103,80 @@ export const sampleSassModule = `
   }
 }
 `;
+export const sampleCssModule = `.container {
+	border-radius: 8px;
+	background-color: slate;
+	padding: 2px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	aspect-ratio: 1;
+}
+
+.small {
+	width: 20px;
+}
+
+.medium {
+	width: 32px;
+}
+
+.large {
+	width: 40px;
+}
+
+.container>img {
+	align-self: center;
+	border-radius: 8px;
+	width: 100%;
+	height: 100%;
+	object-fit: contain;
+}
+
+.container>p {
+	font-size: 1rem;
+	color: white;
+	font-weight: bold;
+}`;
+
+export const sampleJsComponentReact = `import React, { forwardRef } from "react";
+import styles from "./Avatar.module.scss";
+
+function getInitials(name) {
+  var words = name.split(" ");
+  var initials = "";
+  for (var i = 0; i < words.length; i++) {
+    initials += words[i][0].toUpperCase();
+  }
+  return initials;
+}
+
+const Avatar = forwardRef(function Avatar(props, ref) {
+  const {
+    children,
+    displayName,
+    image,
+    component: Component = "div",
+    size = "medium",
+    className = "",
+    ...divProps
+  } = props;
+
+  return (
+    <Component
+      ref={ref}
+      className={\`\${className} \${styles.container} \${styles[size]}\`}
+      {...divProps}
+    >
+      {image ? (
+        <img src={image} alt={displayName} />
+      ) : (
+        <p>{getInitials(displayName)}</p>
+      )}
+    </Component>
+  );
+});
+
+export default Avatar;
+
+`;

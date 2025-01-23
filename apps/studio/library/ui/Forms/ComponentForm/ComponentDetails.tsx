@@ -4,7 +4,7 @@ import { ExpandMoreRounded } from "@mui/icons-material";
 import { FormLabel, Stack, TextField, Typography } from "@mui/material";
 import CollapsibleSection from "../../Layout/CollapsibleSection";
 import ComponentTagsInput from "./ComponentTagsInput";
-import { useComponentForm } from "@/app/components/create/providers";
+import { useComponentForm } from "@/library/contexts/ComponentFormContext";
 
 export default function ComponentDetails() {
   const { name, setName, outPath, setOutPath, formState, formPending } =

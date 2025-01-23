@@ -2,7 +2,7 @@
 import { Stack, FormLabel, Switch } from "@mui/material";
 import CollapsibleSection from "@/library/ui/Layout/CollapsibleSection";
 import CodeEditor, { onMountHandler } from "@/library/ui/Inputs/CodeEditor";
-import { useComponentForm } from "@/app/components/create/providers";
+import { useComponentForm } from "@/library/contexts/ComponentFormContext";
 
 export default function ComponentScripts() {
   const {

@@ -12,9 +12,9 @@ import {
 import { useActionState, useEffect } from "react";
 import Spinner from "@/library/ui/Navigation/Spinner/Spinner";
 import HiddenInput from "@/library/ui/Inputs/HiddenInput";
-import { deleteComponent } from "../actions";
-import { useComponentForm } from "../create/providers";
 import { redirect, RedirectType } from "next/navigation";
+import { deleteComponent } from "@/app/components/actions";
+import { useComponentForm } from "@/library/contexts/ComponentFormContext";
 
 export default function DeleteComponentButton(props: ButtonedDialogProps) {
   const { open, handleStrictClose, handleClose, handleOpen } = useDisclosure();

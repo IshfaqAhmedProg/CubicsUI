@@ -3,9 +3,10 @@ import { Button, Divider, Paper, Stack, Typography } from "@mui/material";
 import { ReactNode } from "react";
 import { AutoFixHighRounded } from "@mui/icons-material";
 import CollapsibleSection from "@/library/ui/Layout/CollapsibleSection";
-import { useComponentForm } from "@/app/components/create/providers";
+import { useComponentForm } from "@/library/contexts/ComponentFormContext";
 import ExternalDependencyTable from "./ExternalDependencyTable";
 import LocalDependencyTable from "./LocalDependencyTable/LocalDependencyTable";
+import { analyzeCodeDependencies } from "@/library/functions/dependencyAnalyser";
 
 export function DependencySectionLayout({
   children,
@@ -26,7 +27,14 @@ export function DependencySectionLayout({
 }
 
 export default function ComponentDependencies() {
-  const { analyseDependencies, formState, formPending } = useComponentForm();
+  const { scriptCode, setDeps, formState, formPending } = useComponentForm();
+
+  function analyseDependencies() {
+    const newDeps = analyzeCodeDependencies(scriptCode, { "@/*": ["./*"] });
+    if (newDeps.ext.length !== 0 || newDeps.lcl.length !== 0) {
+      setDeps(newDeps);
+    }
+  }
 
   return (
     <CollapsibleSection

@@ -17,7 +17,7 @@ import CodeEditor from "@/library/ui/Inputs/CodeEditor";
 import HiddenInput from "@/library/ui/Inputs/HiddenInput";
 import { Suggestion } from "@/library/types/Suggestions";
 import { configurations } from "@cubicsui/db";
-import { useProject } from "../providers";
+import { useProject } from "../../../../library/contexts/ProjectContext";
 import { saveConfigAction } from "./actions";
 import useDisclosure from "@/library/hooks/useDisclosure";
 

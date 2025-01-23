@@ -5,7 +5,7 @@ import {
 import { ReactNode } from "react";
 import { notFound } from "next/navigation";
 import db from "@/db";
-import ProjectProvider from "./providers";
+import ProjectProvider from "../../../library/contexts/ProjectContext";
 import DeleteProjectButton from "./delete";
 import { ExpandMoreRounded } from "@mui/icons-material";
 import CollapsibleSection from "@/library/ui/Layout/CollapsibleSection";

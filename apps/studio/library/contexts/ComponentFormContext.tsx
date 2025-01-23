@@ -1,10 +1,11 @@
 "use client";
 
 import {
+  sampleCssModule,
+  sampleJsComponentReact,
   sampleSassModule,
   sampleTsComponentReact,
 } from "@/library/constants/sampleCodeBlocks";
-import { analyzeCodeDependencies } from "@/library/functions/dependencyAnalyser";
 import { codeblocks, components, Dependencies, projects } from "@cubicsui/db";
 import {
   createContext,
@@ -13,7 +14,7 @@ import {
   useContext,
   useState,
 } from "react";
-import { saveComponentAction } from "../actions";
+import { saveComponentAction } from "@/app/components/actions";
 
 interface ComponentFormDefaultStateProps {
   project: projects;
@@ -29,8 +30,9 @@ interface ComponentFormProviderProps extends ComponentFormDefaultStateProps {
   children: ReactNode;
 }
 
-export const ComponentFormContext =
-  createContext<ComponentFormContextProps | null>(null);
+const ComponentFormContext = createContext<ComponentFormContextProps | null>(
+  null
+);
 
 export function useComponentForm() {
   const c = useContext(ComponentFormContext);
@@ -54,6 +56,7 @@ export default function ComponentFormProvider({
   );
 }
 function useComponentFormStates({
+  project,
   codeblocks,
   component,
 }: ComponentFormDefaultStateProps) {
@@ -64,11 +67,23 @@ function useComponentFormStates({
   const [deps, setDeps] = useState<Dependencies>(
     component?.deps ?? { ext: [], lcl: [] }
   );
+  const initialsScriptCode = codeblocks?.script
+    ? codeblocks.script
+    : project.lang == "typescript"
+      ? sampleTsComponentReact
+      : sampleJsComponentReact;
+
   const [scriptCode, setScriptCode] = useState<string | undefined>(
-    codeblocks?.script ?? sampleTsComponentReact
+    initialsScriptCode
   );
+  const initialStyleCode = codeblocks?.styles
+    ? codeblocks.styles
+    : project.styleEng == "scss"
+      ? sampleSassModule
+      : sampleCssModule;
+
   const [styleCode, setStyleCode] = useState<string | undefined>(
-    codeblocks?.styles ?? sampleSassModule
+    initialStyleCode
   );
   const [scriptIncludesStyles, setScriptIncludesStyles] = useState(
     !!codeblocks?.styles
@@ -78,14 +93,6 @@ function useComponentFormStates({
     saveComponentAction,
     {}
   );
-
-  function analyseDependencies() {
-    const newDeps = analyzeCodeDependencies(scriptCode, { "@/*": ["./*"] });
-    if (newDeps.ext.length !== 0 || newDeps.lcl.length !== 0) {
-      setDeps(newDeps);
-    }
-    console.log("newDeps", newDeps);
-  }
 
   return {
     name,
@@ -106,7 +113,6 @@ function useComponentFormStates({
     setScriptCode,
     setStyleCode,
     setScriptIncludesStyles,
-    analyseDependencies,
     formAction,
   };
 }

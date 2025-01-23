@@ -1,5 +1,5 @@
 import db from "@/db";
-import ComponentFormProvider from "../create/providers";
+import ComponentFormProvider from "../../../library/contexts/ComponentFormContext";
 import { Typography } from "@mui/material";
 import ComponentForm from "./form";
 export default async function ComponentDetailsPage({
