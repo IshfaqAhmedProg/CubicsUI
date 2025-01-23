@@ -7,7 +7,7 @@ import {
 import { Stack, Tooltip, IconButton, TextField, Button } from "@mui/material";
 import LinkLocalDependencyButton from "./LinkLocalDependencyButton";
 import { createExternalDependency } from "@/library/functions/dependencyAnalyser";
-import { DependencySectionLayout } from "../ComponentsForm/ComponentDependencies";
+import { DependencySectionLayout } from "../ComponentDependencies";
 
 export default function LocalDependencyTable() {
   const { deps, setDeps, formPending } = useComponentForm();

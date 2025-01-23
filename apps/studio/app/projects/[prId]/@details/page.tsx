@@ -6,8 +6,8 @@ import { Stack, TextField, Button } from "@mui/material";
 import { useProject } from "../providers";
 import { useActionState } from "react";
 import { updateProjectAction } from "./actions";
-import ProjectLanguageInput from "@/library/ui/Inputs/ProjectLanguageInput";
-import ProjectStyleEngineInput from "@/library/ui/Inputs/ProjectStyleEngineInput";
+import ProjectLanguageInput from "@/library/ui/Forms/ProjectForm/ProjectLanguageInput";
+import ProjectStyleEngineInput from "@/library/ui/Forms/ProjectForm/ProjectStyleEngineInput";
 
 export default function LibraryDetailsPage() {
   const { project } = useProject();

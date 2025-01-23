@@ -6,7 +6,7 @@ import {
   TextField,
 } from "@mui/material";
 import { useState, Fragment } from "react";
-import HiddenInput from "../HiddenInput";
+import HiddenInput from "../../Inputs/HiddenInput";
 
 export default function ComponentTagsInput() {
   const { tags, setTags, formPending } = useComponentForm();

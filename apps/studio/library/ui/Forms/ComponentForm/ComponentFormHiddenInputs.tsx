@@ -1,5 +1,5 @@
 import React from "react";
-import HiddenInput from "../HiddenInput";
+import HiddenInput from "../../Inputs/HiddenInput";
 import { useComponentForm } from "@/app/components/create/providers";
 
 export default function ComponentFormHiddenInputs() {

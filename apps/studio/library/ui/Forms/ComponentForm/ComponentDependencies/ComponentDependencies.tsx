@@ -2,10 +2,10 @@
 import { Button, Divider, Paper, Stack, Typography } from "@mui/material";
 import { ReactNode } from "react";
 import { AutoFixHighRounded } from "@mui/icons-material";
-import CollapsibleSection from "../../Layout/CollapsibleSection";
+import CollapsibleSection from "@/library/ui/Layout/CollapsibleSection";
 import { useComponentForm } from "@/app/components/create/providers";
-import ExternalDependencyTable from "../DependencyTable/ExternalDependencyTable";
-import LocalDependencyTable from "../DependencyTable/LocalDependencyTable";
+import ExternalDependencyTable from "./ExternalDependencyTable";
+import LocalDependencyTable from "./LocalDependencyTable/LocalDependencyTable";
 
 export function DependencySectionLayout({
   children,

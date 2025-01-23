@@ -1,13 +1,13 @@
 "use client";
 import { Button, Stack } from "@mui/material";
 import { useComponentForm } from "./providers";
-import ComponentDetails from "@/library/ui/Inputs/ComponentsForm/ComponentDetails";
-import ComponentScripts from "@/library/ui/Inputs/ComponentsForm/ComponentScripts";
-import ComponentActionBar from "@/library/ui/Inputs/ComponentsForm/ComponentActionBar";
+import ComponentDetails from "@/library/ui/Forms/ComponentForm/ComponentDetails";
+import ComponentScripts from "@/library/ui/Forms/ComponentForm/ComponentScripts";
+import ComponentActionBar from "@/library/ui/Forms/ComponentForm/ComponentActionBar";
 import { useEffect } from "react";
 import { redirect, RedirectType } from "next/navigation";
-import ComponentFormHiddenInputs from "@/library/ui/Inputs/ComponentsForm/ComponentFormHiddenInputs";
-import ComponentDependencies from "@/library/ui/Inputs/ComponentsForm/ComponentDependencies";
+import ComponentFormHiddenInputs from "@/library/ui/Forms/ComponentForm/ComponentFormHiddenInputs";
+import ComponentDependencies from "@/library/ui/Forms/ComponentsForm/ComponentDependencies";
 
 export default function CreateComponentForm() {
   const { formState, formAction, formPending } = useComponentForm();

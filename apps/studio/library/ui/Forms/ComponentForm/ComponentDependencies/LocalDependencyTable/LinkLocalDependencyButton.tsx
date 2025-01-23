@@ -20,13 +20,12 @@ import {
   LinkRounded,
   SearchRounded,
 } from "@mui/icons-material";
-import HiddenInput from "../HiddenInput";
+import HiddenInput from "@/library/ui/Inputs/HiddenInput";
 import { components, LocalDependency } from "@cubicsui/db";
 import { getProjectComponents } from "./actions";
 import ComponentCard, {
   ComponentSkeleton,
-} from "../../Layout/Cards/ComponentCard";
-import Spinner from "../../Navigation/Spinner/Spinner";
+} from "@/library/ui/Layout/Cards/ComponentCard";
 
 interface ComponentLink {
   name: string;

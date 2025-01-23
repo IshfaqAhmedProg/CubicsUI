@@ -19,8 +19,8 @@ import Link from "next/link";
 import { npmPackageNamingLink } from "@/library/constants/externalLinks";
 import Spinner from "@/library/ui/Navigation/Spinner/Spinner";
 import { ButtonedDialogProps } from "@/library/types/Dialog";
-import ProjectLanguageInput from "@/library/ui/Inputs/ProjectLanguageInput";
-import ProjectStyleEngineInput from "@/library/ui/Inputs/ProjectStyleEngineInput";
+import ProjectLanguageInput from "@/library/ui/Forms/ProjectForm/ProjectLanguageInput";
+import ProjectStyleEngineInput from "@/library/ui/Forms/ProjectForm/ProjectStyleEngineInput";
 import { redirect, RedirectType } from "next/navigation";
 
 /**
