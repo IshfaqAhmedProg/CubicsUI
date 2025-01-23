@@ -17,7 +17,7 @@ import {
   InputLabel,
 } from "@mui/material";
 import { createLocalDependency } from "@/library/functions/dependencyAnalyser";
-import { DependencySectionLayout } from "../ComponentDependencies";
+import { DependencySectionLayout } from "./ComponentDependencies";
 
 export const externalDependencyTypes = ["normal", "dev", "peer"];
 
