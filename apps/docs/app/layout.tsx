@@ -3,7 +3,7 @@ import { Banner, Head } from "nextra/components";
 import { getPageMap } from "nextra/page-map";
 import { ReactNode } from "react";
 import "nextra-theme-docs/style.css";
-import "@/public/globals.css";
+import "./globals.css";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
