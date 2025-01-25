@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
+    "dev:studio": "next dev",
     "start": "next start",
     "lint": "next lint",
     "clean": "rimraf node_modules .turbo .next"
