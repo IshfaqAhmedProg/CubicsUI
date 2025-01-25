@@ -18,6 +18,6 @@ export default function getDetectedConfig(): DetectedConfig {
   detectedConfig.env = checkEnv();
   detectedConfig.typescript = checkTypescript();
   detectedConfig.styleEngine = checkStyleEngine();
-  detectedConfig.rootDir = checkIfSrcFolderExists() ? "./src" : undefined;
+  detectedConfig.rootDir = checkIfSrcFolderExists() ? "./src" : ".";
   return detectedConfig;
 }

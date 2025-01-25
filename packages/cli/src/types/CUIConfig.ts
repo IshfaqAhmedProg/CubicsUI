@@ -75,7 +75,7 @@ export type CUIConfig = {
    * This will be detected when you run
    * `cui init`
    */
-  rootDir?: string;
+  rootDir: string;
   /**
    * Controls the rendering of comments during component generation.
    * - `all` (default): Renders all comments, including detailed and minor explanations.

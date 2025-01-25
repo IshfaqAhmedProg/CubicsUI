@@ -4,7 +4,7 @@ import { resolve } from "path";
 import { CUIConfig } from "../types/CUIConfig.js";
 
 /**
- * Check which env value suits the best for the host project
+ * TODO Check which env value suits the best for the host project
  * @returns {CUIConfig["env"]} The environment detected in the host project
  */
 export function checkEnv(): CUIConfig["env"] {
@@ -24,7 +24,7 @@ export function checkTypescript(): boolean {
 }
 
 /**
- * Check the style engine used in the host project
+ * TODO Check the style engine used in the host project
  * @returns {CUIConfig["styleEngine"]} The detected config for the host project
  */
 export function checkStyleEngine(): CUIConfig["styleEngine"] {

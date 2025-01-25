@@ -1,22 +1,23 @@
-import { components } from "@cubicsui/db";
+import { components, CUIConfig } from "@cubicsui/db";
+import { basename, extname } from "path";
 
-interface StyleFileNameProps {
-  fileName?: string;
-  component: components;
-}
 
-export default function createStyleFileName({
-  fileName,
-  component,
-}: StyleFileNameProps) {
-  const styleAsModule = component.deps.lcl.find(
+export default function createStyleFileName(
+  fileName: string,
+  component: components,
+  config: CUIConfig
+) {
+  // Check if the component is using style as a module, style will be a module if any lcl dependency in the
+  // component has a cmpId of styles
+  let styleFileName = component.deps.lcl.find(
     (dep) => dep.cmpId === "styles"
-  );
-  if (styleAsModule) {
-    return styleAsModule.name;
-  } else {
-    const stfn = fileName?.split(".");
-    stfn?.pop();
-    return stfn;
+  )?.name;
+
+  // orelse create a new style file from the component name and adding the extension from user config
+  if (!styleFileName) {
+    styleFileName =
+      basename(fileName, extname(fileName)) + `.module.${config.styleEngine}`;
   }
+
+  return styleFileName;
 }
