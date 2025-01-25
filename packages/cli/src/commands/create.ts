@@ -1,54 +1,54 @@
-import { existsSync, mkdirSync } from "fs";
-import * as prettier from "prettier";
-import { writeFile } from "fs/promises";
-import path from "path";
 import db from "../configs/prismaClient.js";
-import changeCase from "../functions/changeCase.js";
 import loadConfig from "../functions/loadConfig.js";
+import { Prisma } from "@cubicsui/db";
+import path from "path";
+import createStyleFileName from "../functions/styleFileName.js";
 export default async function create(requestedComponent: string) {
   try {
     const config = await loadConfig();
     console.log("Loaded config:", config, requestedComponent);
 
-    const componentFromDB = await db.components.findFirst({
+    const component = await db.components.findFirstOrThrow({
       where: { name: requestedComponent },
+      include: { codeblocks: true },
     });
-    if (!componentFromDB) throw new Error("Component not found in database");
 
-    const outFileName = changeCase(
-      componentFromDB.name,
-      config.fileNamingConvention
-    );
-    const outDirName = changeCase(
-      componentFromDB.name,
-      config.dirNamingConvention
-    );
-    const componentsDir = config.componentsDir
-      ? `${config.componentsDir}/components`
-      : "components";
-
+    if (!component)
+      throw new Error(
+        "Component not found in the database. Please check the component name and try again."
+      );
+    if (!component.codeblocks?.script) {
+      throw new Error(
+        "Component script is missing. Please check the script section of the component and try again."
+      );
+    }
     const outPath = path.resolve(
       process.cwd(),
-      `${componentsDir}/${outDirName}/${outFileName}.tsx`
+      `${config.rootDir}/${component.outPath}`
     );
+    const fileName = outPath.split("/").pop();
 
-    console.log("outPath", outPath);
+    const styleName = createStyleFileName({ fileName, component });
 
-    const dirPath = path.dirname(outPath);
+    console.log(component);
+    console.log({ styleName, fileName, outPath });
 
-    if (!existsSync(dirPath)) {
-      mkdirSync(dirPath, { recursive: true });
-    }
+    // if (!existsSync(outPath)) {
+    //   mkdirSync(outPath, { recursive: true });
+    // }
 
-    const finalConfigContent = await prettier.format(
-      componentFromDB.code.trim(),
-      { parser: "babel-ts" }
-    );
-
-    await writeFile(outPath, finalConfigContent);
     console.log(`⏳ Building ${requestedComponent}, please wait...`);
     console.log(`✔ Created ${requestedComponent} in the project root.`);
   } catch (error) {
+    if (
+      error instanceof Prisma.PrismaClientKnownRequestError &&
+      error.code === "P2025"
+    ) {
+      console.error(
+        `✖ ${requestedComponent} does not exist in the database:`,
+        error.message
+      );
+    }
     // console.log(error);
     console.error(`✖ Failed to create ${requestedComponent}:`, error);
     process.exit(1);

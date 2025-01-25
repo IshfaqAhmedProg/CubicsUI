@@ -53,7 +53,7 @@ export type CUIConfig = {
    * Controls which flavor of css should be used when generating styles for the components,
    * - `css` (default)
    * - `tailwind`: If any `tailwind.config` file is detected in the project root
-   * - `scss`: If any `.sass` file is detected anywhere in the project.
+   * - `scss`: If any `.scss` file is detected anywhere in the project.
    * @remarks
    * This will be automatically detected when you run
    * `cui init`
@@ -69,13 +69,13 @@ export type CUIConfig = {
    */
   typescript: boolean;
   /**
-   * Controls where the component folder should be created
+   * Controls wether the root directory is in src or process.cwd()
    *
    * @remarks
    * This will be detected when you run
    * `cui init`
    */
-  componentsDir?: string;
+  rootDir?: string;
   /**
    * Controls the rendering of comments during component generation.
    * - `all` (default): Renders all comments, including detailed and minor explanations.
@@ -104,6 +104,49 @@ export type CUIConfig = {
    * @default "CapitalCase"
    */
   dirNamingConvention: NamingConvention;
+
+  /**
+   * Database URL configuration object for the host project
+   * Controls which database to connect to and which project the components belong to.
+   * @remarks You can use the `url` property to provide a complete database URL
+   * or use the individual properties to construct the URL
+   * @remarks you can use a public account with read-only access for usersname and password.
+   */
+  databaseConfig:
+    | {
+        /**
+         * The project name to which the components belong
+         */
+        project: string;
+        /**
+         * MongoDB username, environment variable `MONGO_USERNAME`
+         */
+        username: string;
+        /**
+         * MongoDB password, environment variable `MONGO_PASSWORD`
+         */
+        password: string;
+
+        /**
+         * Database domain, environment variable `MONGO_DOMAIN`
+         */
+        domain: string;
+
+        /**
+         * Name of the database, environment variable `MONGO_PORT`
+         */
+        databaseName: string;
+      }
+    | {
+        /**
+         * The project name to which the components belong
+         */
+        project: string;
+        /**
+         * The complete database URL
+         */
+        url: string;
+      };
 };
 
 /**
@@ -122,7 +165,7 @@ export type CUIConfig = {
  */
 export type DetectedConfig = Pick<
   CUIConfig,
-  "env" | "styleEngine" | "typescript" | "componentsDir"
+  "env" | "styleEngine" | "typescript" | "rootDir" | "databaseConfig"
 >;
 /**
  * A type that represents the literal string types of valid configuration file names.

@@ -1,4 +1,4 @@
-import { configGen } from "../constants/config.js";
+import configGen from "./configGen.js";
 import { DetectedConfig } from "../types/CUIConfig.js";
 import {
   checkEnv,
@@ -18,6 +18,6 @@ export default function getDetectedConfig(): DetectedConfig {
   detectedConfig.env = checkEnv();
   detectedConfig.typescript = checkTypescript();
   detectedConfig.styleEngine = checkStyleEngine();
-  detectedConfig.componentsDir = checkIfSrcFolderExists() ? "./src" : undefined;
+  detectedConfig.rootDir = checkIfSrcFolderExists() ? "./src" : undefined;
   return detectedConfig;
 }

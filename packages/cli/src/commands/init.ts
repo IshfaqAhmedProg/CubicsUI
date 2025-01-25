@@ -1,7 +1,7 @@
 import { resolve } from "path";
 import { format } from "prettier";
 import { writeFile } from "fs/promises";
-import { configTemplateESM } from "../constants/config.js";
+import { configTemplateESM } from "../functions/configTemplateESM.js";
 import configFiles from "../constants/configFiles.js";
 import getDetectedConfig from "../functions/detectConfig.js";
 import { checkIfAlreadyConfigured } from "../functions/checks.js";
