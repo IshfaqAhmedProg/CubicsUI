@@ -1,7 +1,7 @@
 import db from "../configs/prismaClient.js";
 import loadConfig from "../functions/loadConfig.js";
 import { Prisma } from "@cubicsui/db";
-import buildComponentTree from "../functions/createComponent.js";
+import buildComponentTree from "../functions/buildComponentTree.js";
 import { ComponentWithCB } from "../types/Components.js";
 
 export default async function create(requestedComponent: string) {

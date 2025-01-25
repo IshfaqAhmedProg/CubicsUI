@@ -6,7 +6,7 @@ import { resolve } from "path";
 import createDirFromPath from "./createDirFromPath.js";
 import { writeFile } from "fs/promises";
 
-export default async function createComponent(
+export default async function buildComponentTree(
   component: ComponentWithCB,
   config: CUIConfig
 ) {
@@ -42,8 +42,8 @@ export default async function createComponent(
         where: { id: dep.cmpId },
         include: { codeblocks: true },
       });
-      // Creating components from dependency
-      await createComponent(localDepComponent, config);
+      // building local dependencies component trees
+      await buildComponentTree(localDepComponent, config);
     }
   }
 }

@@ -119,23 +119,23 @@ export type CUIConfig = {
          */
         project: string;
         /**
-         * MongoDB username, environment variable `MONGO_USERNAME`
+         * MongoDB username, environment variable `CUI_USERNAME`
          */
         username: string;
         /**
-         * MongoDB password, environment variable `MONGO_PASSWORD`
+         * MongoDB password, environment variable `CUI_PASSWORD`
          */
         password: string;
 
         /**
-         * Database domain, environment variable `MONGO_DOMAIN`
+         * Database hostUrl, environment variable `CUI_HOST_URL`
          */
-        domain: string;
+        hostUrl: string;
 
         /**
-         * Name of the database, environment variable `MONGO_PORT`
+         * Name of the database, environment variable `CUI_DB_NAME`
          */
-        databaseName: string;
+        dbName: string;
       }
     | {
         /**
