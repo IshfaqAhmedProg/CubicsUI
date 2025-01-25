@@ -1,5 +1,5 @@
 import supportedLanguageWithIcons from "@/library/constants/supportedLangs";
-import { projects } from "@cubicsui/db";
+import { Language, projects } from "@cubicsui/db";
 import {
   FormControl,
   InputLabel,
@@ -10,6 +10,7 @@ import {
   FormControlProps,
 } from "@mui/material";
 import { capitalize } from "lodash";
+import { useState } from "react";
 
 interface ProjectLanguageInputProps extends FormControlProps {
   project?: projects;
@@ -19,13 +20,18 @@ export default function ProjectLanguageInput({
   project,
   ...rest
 }: ProjectLanguageInputProps) {
+  const [lang, setLang] = useState<Language>(
+    project?.lang ?? supportedLanguageWithIcons[0].name
+  );
+
   return (
     <FormControl {...rest}>
       <InputLabel id="lang-label">Language</InputLabel>
       <Select
         labelId="lang-label"
         id="lang"
-        defaultValue={project?.lang ?? supportedLanguageWithIcons[0].name}
+        value={lang}
+        onChange={(e) => setLang(e.target.value as Language)}
         name="lang"
         label="Language"
       >
