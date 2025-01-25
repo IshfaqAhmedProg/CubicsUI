@@ -14,6 +14,7 @@ model projects {
   name     String       @unique
   /// Language used to define the library
   lang     Language
+  // TODO Change to styleExt instead of style engine it should handle the style file extension
   /// Style engine used to style the library
   styleEng StyleEngine
   /// The environments that can support the component
