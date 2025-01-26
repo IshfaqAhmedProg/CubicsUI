@@ -20,7 +20,7 @@ export async function createProjectAction(
     const validatedInputs = createProjectSchema.parse({
       name: formdata.get("name"),
       lang: formdata.get("lang"),
-      styleEng: formdata.get("styleEng"),
+      styleExt: formdata.get("styleExt"),
     });
     // Create the library in the db
     const payload = await db.projects.create({

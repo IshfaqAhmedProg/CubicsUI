@@ -7,7 +7,7 @@ import { useProject } from "../../../../library/contexts/ProjectContext";
 import { useActionState } from "react";
 import { updateProjectAction } from "./actions";
 import ProjectLanguageInput from "@/library/ui/Forms/ProjectForm/ProjectLanguageInput";
-import ProjectStyleEngineInput from "@/library/ui/Forms/ProjectForm/ProjectStyleEngineInput";
+import ProjectStyleExtInput from "@/library/ui/Forms/ProjectForm/ProjectStyleExtInput";
 
 export default function LibraryDetailsPage() {
   const { project } = useProject();
@@ -43,7 +43,7 @@ export default function LibraryDetailsPage() {
           disabled={pending}
           fullWidth
         />
-        <ProjectStyleEngineInput
+        <ProjectStyleExtInput
           project={project}
           hiddenLabel
           required

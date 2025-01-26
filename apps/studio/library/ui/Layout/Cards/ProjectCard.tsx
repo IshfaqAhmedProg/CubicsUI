@@ -1,19 +1,10 @@
 "use client";
 
-import styleEnginesWithLogos from "@/library/constants/styleEngines";
+import styleExtWithLogos from "@/library/constants/styleEngines";
 import supportedLanguageWithIcons from "@/library/constants/supportedLangs";
-import formatDate from "@/library/functions/formatDate";
 import { Project } from "@/library/types/Project";
 import { CalendarTodayRounded, UpdateRounded } from "@mui/icons-material";
-import {
-  Button,
-  ButtonProps,
-  Paper,
-  Stack,
-  styled,
-  Tooltip,
-  Typography,
-} from "@mui/material";
+import { Button, ButtonProps, Paper, Stack, Typography } from "@mui/material";
 import DateText from "../../Typography/DateText";
 
 export default function ProjectCard({
@@ -25,8 +16,8 @@ export default function ProjectCard({
   const supportedLang = supportedLanguageWithIcons.find(
     (sl) => sl.name == project.lang
   );
-  const supportedStyle = styleEnginesWithLogos.find(
-    (sl) => sl.name == project.styleEng
+  const supportedStyle = styleExtWithLogos.find(
+    (sl) => sl.name == project.styleExt
   );
 
   const LangLogo = supportedLang?.Logo;

@@ -8,18 +8,17 @@ datasource db {
 }
 
 model projects {
-  /// Id of the library
-  id       String       @id @default(auto()) @map("_id") @db.ObjectId
+  /// Id of the project
+  id       String         @id @default(auto()) @map("_id") @db.ObjectId
   /// A unique name following npm package naming convention
-  name     String       @unique
-  /// Language used to define the library
+  name     String         @unique
+  /// Language used to define the project
   lang     Language
-  // TODO Change to styleExt instead of style engine it should handle the style file extension
-  /// Style engine used to style the library
-  styleEng StyleEngine
+  /// Style extension used for style files in the project
+  styleExt StyleExtension
   /// The environments that can support the component
   envs     TargetEnvs[]
-  /// A short description of what the library does
+  /// A short description of the project
   desc     String?
 
   created DateTime @default(now())
@@ -82,10 +81,10 @@ model codeblocks {
   component components @relation(fields: [cmpId], references: [id], onDelete: Cascade, onUpdate: Cascade)
 }
 
-enum StyleEngine {
+enum StyleExtension {
   css
   scss
-  tailwindcss
+  sass
 }
 
 type TargetEnvs {

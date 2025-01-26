@@ -1,18 +1,18 @@
-import { StyleEngine } from "@cubicsui/db";
+import { StyleExtension } from "@cubicsui/db";
 import { SvgIconTypeMap } from "@mui/material";
 import { OverridableComponent } from "@mui/material/OverridableComponent";
 import { CssLogo, SassLogo, TailwindLogo } from "../ui/Brand/Logos";
 
-interface StyleEngineWithLogo {
-  name: StyleEngine;
+interface StyleExtWithLogo {
+  name: StyleExtension;
   Logo: OverridableComponent<SvgIconTypeMap<{}, "svg">> & {
     muiName: string;
   };
 }
 
-const styleEnginesWithLogos: StyleEngineWithLogo[] = [
+const styleExtWithLogos: StyleExtWithLogo[] = [
   { name: "css", Logo: CssLogo },
   { name: "scss", Logo: SassLogo },
-  { name: "tailwindcss", Logo: TailwindLogo },
+  { name: "sass", Logo: SassLogo },
 ];
-export default styleEnginesWithLogos;
+export default styleExtWithLogos;

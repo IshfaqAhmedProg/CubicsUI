@@ -71,9 +71,9 @@ export default function ComponentScripts() {
               <CodeEditor
                 name="styles"
                 editorData={styleCode}
-                path={`${name}.${project.styleEng}`}
+                path={`${name}.${project.styleExt}`}
                 setEditorData={(v) => setStyleCode(v)}
-                language={project.styleEng}
+                language={project.styleExt}
               />
             </Stack>
           )}

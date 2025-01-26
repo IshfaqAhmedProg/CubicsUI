@@ -1,7 +1,7 @@
 "use client";
 
-import styleEnginesWithLogos from "@/library/constants/styleEngines";
-import { projects, StyleEngine } from "@cubicsui/db";
+import styleExtWithLogos from "@/library/constants/styleEngines";
+import { projects, StyleExtension } from "@cubicsui/db";
 import {
   FormControl,
   FormControlProps,
@@ -13,29 +13,29 @@ import {
 } from "@mui/material";
 import { useState } from "react";
 
-interface ProjectStyleEngineInputProps extends FormControlProps {
+interface ProjectStyleExtInputProps extends FormControlProps {
   project?: projects;
 }
 
-export default function ProjectStyleEngineInput({
+export default function ProjectStyleExtInput({
   project,
   ...rest
-}: ProjectStyleEngineInputProps) {
-  const [styleEng, setStyleEng] = useState<StyleEngine>(
-    project?.styleEng ?? styleEnginesWithLogos[0].name
+}: ProjectStyleExtInputProps) {
+  const [styleExt, setStyleExt] = useState<StyleExtension>(
+    project?.styleExt ?? styleExtWithLogos[0].name
   );
   return (
     <FormControl {...rest}>
-      <InputLabel id="styleEng-label">Style Engine</InputLabel>
+      <InputLabel id="styleExt-label">Style Engine</InputLabel>
       <Select
-        labelId="styleEng-label"
-        id="styleEng"
-        value={styleEng}
-        onChange={(v) => setStyleEng(v.target.value as StyleEngine)}
-        name="styleEng"
-        label="Style Engine"
+        labelId="styleExt-label"
+        id="styleExt"
+        value={styleExt}
+        onChange={(v) => setStyleExt(v.target.value as StyleExtension)}
+        name="styleExt"
+        label="Style Extension"
       >
-        {styleEnginesWithLogos.map((lang) => {
+        {styleExtWithLogos.map((lang) => {
           const { name, Logo } = lang;
 
           return (
@@ -50,7 +50,7 @@ export default function ProjectStyleEngineInput({
                 height={"100%"}
               >
                 <Logo fontSize="small" />
-                <ListItemText primary={name} />
+                <ListItemText primary={`.${name}`} />
               </Stack>
             </MenuItem>
           );

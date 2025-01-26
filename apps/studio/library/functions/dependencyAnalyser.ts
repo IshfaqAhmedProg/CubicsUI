@@ -112,19 +112,19 @@ export function analyzeCodeDependencies(
   code: string | undefined,
   paths: TsConfigPaths
 ): Dependencies {
-  if (!code) {
-    return { ext: [], lcl: [] };
-  }
-
   const dependencies: Dependencies = {
     ext: [],
     lcl: [],
   };
+  if (!code) {
+    return dependencies;
+  }
 
   try {
-    // Parse the code into an AST (Abstract Syntax Tree)
+    // Parse the code into an Abstract Syntax Tree
     const ast = parser.parse(code, {
       sourceType: "module",
+      // TODO add more plugins
       plugins: ["typescript", "jsx"],
     });
 
@@ -171,11 +171,11 @@ export function analyzeCodeDependencies(
     // Walk the AST looking for imports and requires
     traverse(ast, {
       // Handle ES module imports
-      ImportDeclaration(path) {
+      ImportDeclaration: (path) => {
         processImport(path.node.source.value);
       },
       // Handle CommonJS require calls
-      CallExpression(path) {
+      CallExpression: (path) => {
         if (
           path.node.callee.type === "Identifier" &&
           path.node.callee.name === "require"

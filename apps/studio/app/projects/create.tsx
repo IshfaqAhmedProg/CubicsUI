@@ -20,7 +20,7 @@ import { npmPackageNamingLink } from "@/library/constants/externalLinks";
 import Spinner from "@/library/ui/Navigation/Spinner/Spinner";
 import { ButtonedDialogProps } from "@/library/types/Dialog";
 import ProjectLanguageInput from "@/library/ui/Forms/ProjectForm/ProjectLanguageInput";
-import ProjectStyleEngineInput from "@/library/ui/Forms/ProjectForm/ProjectStyleEngineInput";
+import ProjectStyleExtInput from "@/library/ui/Forms/ProjectForm/ProjectStyleExtInput";
 import { redirect, RedirectType } from "next/navigation";
 
 /**
@@ -120,9 +120,10 @@ export function CreateProjectDialog({
             gap={3}
           >
             <Typography variant="body2">
-              Select the style engine you will use to style your components.
+              Select the style extension that will be used in the style files of
+              the project.
             </Typography>
-            <ProjectStyleEngineInput
+            <ProjectStyleExtInput
               hiddenLabel
               required
               disabled={pending}
@@ -132,6 +133,9 @@ export function CreateProjectDialog({
         </Stack>
       </DialogContent>
       <DialogActions>
+        {state?.status == "error" && (
+          <Typography color="error">An error has occured</Typography>
+        )}
         <Button
           disabled={pending}
           onClick={handleClose}
