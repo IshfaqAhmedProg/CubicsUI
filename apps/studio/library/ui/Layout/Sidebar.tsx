@@ -3,12 +3,15 @@ import {
   List,
   ListItem,
   ListItemButton,
+  ListItemButtonProps,
   Paper,
   Stack,
+  SvgIconTypeMap,
   SxProps,
   Tooltip,
+  Typography,
 } from "@mui/material";
-import { ReactNode } from "react";
+import { MouseEventHandler } from "react";
 import ThemeSwitch from "../Inputs/ThemeSwitch";
 import Link from "next/link";
 import {
@@ -18,35 +21,78 @@ import {
 } from "@mui/icons-material";
 import { LogoHorizontal } from "../Brand/Logos";
 import { useAppContainer } from "./AppContainer";
+import { OverridableComponent } from "@mui/material/OverridableComponent";
 
-export type SidebarProps = {
-  brand?: ReactNode;
+export type SidebarItemProps = {
+  open: boolean;
+  item: {
+    label: string;
+    icon?: OverridableComponent<SvgIconTypeMap<{}, "svg">> & {
+      muiName: string;
+    };
+    href?: string;
+    onClick?: MouseEventHandler<HTMLDivElement> | undefined;
+  };
 };
+
+export function SidebarItem({ open, item }: SidebarItemProps) {
+  const asLink = item.href && {
+    LinkComponent: Link,
+    href: item.href,
+  };
+  const asButton: ListItemButtonProps = {
+    onClick: item.onClick,
+  };
+  const Icon = item.icon;
+  const iconCommonSx: SxProps = {
+    fontSize: open ? "1em" : "1.5em",
+    color: "text.secondary",
+  };
+  return (
+    <ListItem disablePadding>
+      <Tooltip
+        title={open ? "" : item.label}
+        placement="right"
+      >
+        <ListItemButton
+          {...asLink}
+          {...asButton}
+        >
+          {Icon && <Icon sx={iconCommonSx} />}
+          {open && (
+            <Typography
+              color="text.secondary"
+              minWidth={"max-content"}
+            >
+              {item.label}
+            </Typography>
+          )}
+        </ListItemButton>
+      </Tooltip>
+    </ListItem>
+  );
+}
 
 export default function Sidebar() {
   const {
     sidebarControls: { open },
   } = useAppContainer();
 
-  const iconCommonSx: SxProps = {
-    fontSize: open ? "1em" : "1.5em",
-  };
-
-  const sidebarLinks = [
+  const sidebarItems: SidebarItemProps["item"][] = [
     {
       label: "Projects",
       href: "/projects",
-      icon: <LibraryBooksRounded sx={iconCommonSx} />,
+      icon: LibraryBooksRounded,
     },
     {
       label: "Components",
       href: "/components",
-      icon: <ViewModuleRounded sx={iconCommonSx} />,
+      icon: ViewModuleRounded,
     },
     {
       label: "Publish",
       href: "/publish",
-      icon: <PublishRounded sx={iconCommonSx} />,
+      icon: PublishRounded,
     },
   ];
 
@@ -81,27 +127,13 @@ export default function Sidebar() {
           color: "text.secondary",
         }}
       >
-        {sidebarLinks.map((sl, i) => {
-          return (
-            <ListItem
-              key={i}
-              disablePadding
-            >
-              <Tooltip
-                title={open ? "" : sl.label}
-                placement="right"
-              >
-                <ListItemButton
-                  LinkComponent={Link}
-                  href={sl.href}
-                >
-                  {sl.icon}
-                  {open && sl.label}
-                </ListItemButton>
-              </Tooltip>
-            </ListItem>
-          );
-        })}
+        {sidebarItems.map((sl, i) => (
+          <SidebarItem
+            open={open}
+            item={sl}
+            key={i}
+          />
+        ))}
       </List>
       <ThemeSwitch />
     </Stack>

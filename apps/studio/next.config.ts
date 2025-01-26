@@ -8,6 +8,9 @@ const nextConfig: NextConfig = {
       hmrRefreshes: true,
     },
   },
+  devIndicators: {
+    appIsrStatus: false,
+  },
 };
 
 export default nextConfig;

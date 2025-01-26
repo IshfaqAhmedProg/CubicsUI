@@ -150,7 +150,21 @@ const components:
       },
     },
   },
-  MuiPaper: { defaultProps: { elevation: 0 } },
+  MuiMenu: {
+    styleOverrides: {
+      paper: {
+        // border: "1px solid var(--palette-divider)",
+        backgroundImage: "unset",
+        backgroundColor: "rgba(var(--palette-background-paperChannel) / 0.8)",
+        backdropFilter: "blur(3px)",
+        boxShadow: "none",
+      },
+    },
+  },
+
+  MuiPaper: {
+    defaultProps: { elevation: 0 },
+  },
 
   MuiPopover: {
     styleOverrides: {
