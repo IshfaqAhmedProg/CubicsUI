@@ -130,7 +130,6 @@ export async function deleteComponent(
     if (!id || typeof id !== "string")
       throw new Error("Component Id not found!");
     const payload = await db.components.delete({ where: { id } });
-    revalidatePath(`/projects/${payload.prId}`);
     return { status: "success", payload };
   } catch (error) {
     console.error(error);

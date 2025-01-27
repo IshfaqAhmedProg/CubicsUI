@@ -107,16 +107,6 @@ export function ConfigurationDialog(props: ConfigurationDialogProps) {
         </Stack>
       </DialogContent>
       <DialogActions>
-        {configuration && (
-          <Button
-            color="error"
-            variant="text"
-            type="button"
-            // TODO add delete action
-          >
-            Delete
-          </Button>
-        )}
         <Button
           disabled={pending}
           onClick={handleClose}

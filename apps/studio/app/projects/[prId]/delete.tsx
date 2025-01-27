@@ -10,11 +10,11 @@ import {
   Typography,
 } from "@mui/material";
 import { useActionState, useEffect } from "react";
-import { deleteProjectAction } from "./actions";
 import Spinner from "@/library/ui/Navigation/Spinner/Spinner";
 import HiddenInput from "@/library/ui/Inputs/HiddenInput";
 import { useProject } from "../../../library/contexts/ProjectContext";
 import { redirect, RedirectType } from "next/navigation";
+import { deleteProjectAction } from "../actions";
 
 export default function DeleteProjectButton(props: ButtonedDialogProps) {
   const { open, handleClose, handleOpen } = useDisclosure();

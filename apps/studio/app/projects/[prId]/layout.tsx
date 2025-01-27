@@ -6,6 +6,8 @@ import ProjectProvider from "../../../library/contexts/ProjectContext";
 import DeleteProjectButton from "./delete";
 import { ExpandMoreRounded } from "@mui/icons-material";
 import CollapsibleSection from "@/library/ui/Layout/CollapsibleSection";
+import DeleteWithConfirmation from "@/library/ui/Inputs/DeleteWithConfirmation";
+import { deleteProjectAction } from "../actions";
 
 interface ProjectLayoutProps {
   children: ReactNode;
@@ -59,7 +61,15 @@ export default async function ProjectLayout({
           </CollapsibleSection>
 
           {configurations}
-          <DeleteProjectButton />
+          <DeleteWithConfirmation
+            itemToDelete={project.name}
+            formDatas={[{ name: "prId", value: project.id }]}
+            deleteAction={deleteProjectAction}
+            deleteMessage={`Are you sure you want to delete "${project.name}" and
+                all its configurations and components? This action is
+                irreversible.`}
+            redirectTo="/projects"
+          />
         </Grid>
         <Grid size={6}>{components}</Grid>
       </Grid>

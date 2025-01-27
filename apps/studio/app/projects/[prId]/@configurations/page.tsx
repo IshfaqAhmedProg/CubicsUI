@@ -56,8 +56,8 @@ export default async function ProjectConfigurationsPage({
         {configurations.map((c) => {
           return (
             <ConfigurationButton
+              variant="text"
               key={c.id}
-              variant="outlined"
               configuration={c}
               startIcon={
                 Object.values(knownConfigurations).find(

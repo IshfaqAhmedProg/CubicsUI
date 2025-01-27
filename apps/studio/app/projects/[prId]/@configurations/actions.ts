@@ -8,6 +8,7 @@ import {
 import { z } from "zod";
 import { createConfigSchema as configSchema } from "../../schema";
 import { revalidatePath } from "next/cache";
+import { configurations } from "@cubicsui/db";
 
 export async function saveConfigAction(
   prevState: unknown,
@@ -48,5 +49,21 @@ export async function saveConfigAction(
       });
     }
     return { status: "error", errors };
+  }
+}
+export async function deleteConfigurations(
+  prevState: unknown,
+  formdata: FormData
+): ActionReturnType<FormActionReturnType<configurations>> {
+  const id = formdata.get("cfgId");
+  try {
+    if (!id || typeof id !== "string")
+      throw new Error("Configuration Id not found!");
+    const payload = await db.configurations.delete({ where: { id } });
+    revalidatePath(`/projects/${payload.prId}`);
+    return { status: "success", payload };
+  } catch (error) {
+    console.error(error);
+    return { status: "error" };
   }
 }

@@ -11,7 +11,7 @@ import { components, projects } from "@cubicsui/db";
 interface ComponentListCardProps {
   project: projects;
   componentToExclude?: components | null;
-  componentActions: ComponentCardProps["action"];
+  componentActions: ComponentCardProps["actions"];
 }
 
 /**
@@ -67,7 +67,7 @@ export default function ComponentListCard({
           <ComponentCard
             key={prc.id}
             component={prc}
-            action={componentActions}
+            actions={componentActions}
           />
         ))}
       </Stack>

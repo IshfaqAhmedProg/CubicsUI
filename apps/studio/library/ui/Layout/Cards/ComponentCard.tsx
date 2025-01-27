@@ -24,10 +24,10 @@ export function ComponentSkeleton(props: SkeletonProps) {
 export interface ComponentCardProps {
   component: components;
   size?: "small" | "large";
-  action?: ReactNode | ((component: components) => ReactNode);
+  actions?: ReactNode | ((component: components) => ReactNode);
 }
 export default function ComponentCard(props: ComponentCardProps) {
-  const { component, size = "small", action } = props;
+  const { component, size = "small", actions: action } = props;
   const router = useRouter();
 
   return (

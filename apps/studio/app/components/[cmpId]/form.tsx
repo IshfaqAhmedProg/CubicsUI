@@ -6,10 +6,11 @@ import ComponentActionBar from "@/library/ui/Forms/ComponentForm/ComponentAction
 import { useComponentForm } from "../../../library/contexts/ComponentFormContext";
 import ComponentFormHiddenInputs from "@/library/ui/Forms/ComponentForm/ComponentFormHiddenInputs";
 import ComponentDependencies from "@/library/ui/Forms/ComponentForm/ComponentDependencies/ComponentDependencies";
-import DeleteComponentButton from "@/library/ui/Forms/ComponentForm/DeleteComponentButton";
+import DeleteWithConfirmation from "@/library/ui/Inputs/DeleteWithConfirmation";
+import { deleteComponent } from "../actions";
 
 export default function ComponentForm() {
-  const { formAction, formPending } = useComponentForm();
+  const { formAction, formPending, component } = useComponentForm();
 
   return (
     <Stack
@@ -38,7 +39,16 @@ export default function ComponentForm() {
         <ComponentDetails />
         <ComponentScripts />
         <ComponentDependencies />
-        <DeleteComponentButton />
+        {component && (
+          <DeleteWithConfirmation
+            itemToDelete={component.name}
+            formDatas={[{ name: "cmpId", value: component.id }]}
+            deleteAction={deleteComponent}
+            deleteMessage={`Are you sure you want to delete "${component.name}" and all its scripts? 
+            This action is irreversible.`}
+            redirectTo={`/projects/${component.prId}`}
+          />
+        )}
       </Stack>
     </Stack>
   );
