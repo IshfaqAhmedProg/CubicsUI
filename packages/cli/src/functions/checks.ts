@@ -15,11 +15,21 @@ export function checkEnv(): CUIConfig["env"] {
 }
 
 /**
+ * Check if project is using next js or not by checking if the
+ * file `next.config` exists or not
+ * @returns {boolean} true if the project is using nextJS
+ */
+export function isUsingNextJs(): boolean {
+  return ["js", "ts", "mjs"].some((ext) =>
+    existsSync(resolve(process.cwd(), `next.config.${ext}`))
+  );
+}
+/**
  * Check if project is using typescript or not by checking if the
  * file `tsconfig.json` exists or not
  * @returns {boolean} true if tsconfig.json exists
  */
-export function checkTypescript(): boolean {
+export function isUsingTypescript(): boolean {
   return existsSync(resolve(process.cwd(), "tsconfig.json"));
 }
 

@@ -2,7 +2,7 @@ import configGen from "./configGen.js";
 import { DetectedConfig } from "../types/CUIConfig.js";
 import {
   checkEnv,
-  checkTypescript,
+  isUsingTypescript,
   checkStyleEngine,
   checkIfSrcFolderExists,
 } from "./checks.js";
@@ -16,7 +16,7 @@ export default function getDetectedConfig(): DetectedConfig {
   console.log("⏳ Checking project environment, please wait...");
   const detectedConfig = configGen() as DetectedConfig;
   detectedConfig.env = checkEnv();
-  detectedConfig.typescript = checkTypescript();
+  detectedConfig.typescript = isUsingTypescript();
   detectedConfig.styleEngine = checkStyleEngine();
   detectedConfig.rootDir = checkIfSrcFolderExists() ? "./src" : ".";
   return detectedConfig;
