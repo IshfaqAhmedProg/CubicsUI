@@ -1,20 +1,17 @@
 import { program } from "commander";
 import init from "./commands/init.js";
 import add from "./commands/add.js";
+import { commandDesc } from "./constants/descriptions.js";
 
 program
   .command("init")
   .option("--ts", "Adds typescript as the value of mode in the config file.")
-  .description(
-    `Prepares the project for component generation using CubicsUI by creating a configuration file and cache folder \`.cui\` and modifies existing \`.gitignore\` file to ignore \`.cui\` folder.
-This function is typically invoked via the \`npx cui init\` command.
-    `
-  )
+  .description(commandDesc.init)
   .action(init);
 
 program
   .command("add")
-  .description("Adds a component from the database to your project")
+  .description(commandDesc.add)
   .argument("<component>", "Name of the component")
   .action((component) => add(component));
 
