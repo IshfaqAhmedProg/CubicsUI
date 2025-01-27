@@ -10,15 +10,10 @@ export type NamingConvention =
 /**
  * The environment configuration object for the host project
  */
-export type Environment =
-  | {
-      library: "react";
-      framework: "next" | "none";
-    }
-  | {
-      library: "svelte";
-      framework: "sveltekit" | "none";
-    };
+export type Environment = {
+  library: string;
+  framework?: string;
+};
 /**
  * Comprehensive configuration interface for the CubicsUI CLI.
  *

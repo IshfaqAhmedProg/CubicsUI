@@ -8,6 +8,7 @@ export default async function add(requestedComponent: string) {
   try {
     const config = await loadConfig();
 
+    // TODO use cache .cui/project.json instead
     console.log(
       `⏬ Fetching project: ${config.databaseConfig.project} from database, please wait...`
     );

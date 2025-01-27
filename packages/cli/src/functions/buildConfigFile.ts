@@ -4,11 +4,12 @@ import { writeFile } from "fs/promises";
 import { configTemplateESM } from "../functions/configTemplateESM.js";
 import getDetectedConfig from "../functions/detectConfig.js";
 import getConfigName from "../functions/getConfigName.js";
+import { InitOptions } from "../commands/init.js";
 
-export default async function buildConfigFile() {
+export default async function buildConfigFile(options: InitOptions) {
   //  Detect the necessary values for the config file from the host project automatically or ask the host
-  const detectedConfig = getDetectedConfig();
-  const configFileName = getConfigName(detectedConfig);
+  const detectedConfig = getDetectedConfig(options);
+  const configFileName = getConfigName();
   try {
     // Build the config file cui.config based on the detectedConfig
     console.log("⏳ Finalizing config file, please wait...");

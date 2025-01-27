@@ -1,6 +1,11 @@
 import { checkIfAlreadyConfigured } from "../functions/checks.js";
 import buildConfigFile from "../functions/buildConfigFile.js";
 import buildCacheFolder from "../functions/buildCacheFolder.js";
+import modifyIgnoreFiles from "../functions/modifyIgnoreFiles.js";
+
+export interface InitOptions {
+  typescript?: boolean;
+}
 
 /**
  * Initializes the configuration file and the cache folder ".cui" for the CubicsUI CLI toolkit.
@@ -22,11 +27,13 @@ import buildCacheFolder from "../functions/buildCacheFolder.js";
  * // Typical usage
  * npx cui init
  */
-export default async function init(): Promise<void> {
-  // Step 1. Check if config already exists in the root
+export default async function init(options: InitOptions): Promise<void> {
+  // Check if config already exists in the root
   checkIfAlreadyConfigured();
-  // build the cache folder
+  // Build the cache folder
   await buildCacheFolder();
-  // build the configuration file
-  await buildConfigFile();
+  // Build the configuration file
+  await buildConfigFile(options);
+  // Modify the ignoreFiles like .gitignore
+  await modifyIgnoreFiles();
 }

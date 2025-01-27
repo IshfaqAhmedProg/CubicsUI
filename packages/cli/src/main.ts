@@ -5,14 +5,17 @@ import { commandDesc } from "./constants/descriptions.js";
 
 program
   .command("init")
-  .option("--ts", "Adds typescript as the value of mode in the config file.")
+  .option(
+    "-ts, --typescript",
+    "Adds typescript as the value of mode in the config file."
+  )
   .description(commandDesc.init)
-  .action(init);
+  .action((options) => init(options));
 
 program
   .command("add")
   .description(commandDesc.add)
-  .argument("<component>", "Name of the component")
+  .argument("<componentName>", "Name of the component")
   .action((component) => add(component));
 
 program.parse(process.argv);

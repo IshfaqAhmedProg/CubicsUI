@@ -1,12 +1,11 @@
 import configFiles from "../constants/configFiles.js";
-import { DetectedConfig } from "../types/CUIConfig.js";
-import { isUsingNextJs } from "./checks.js";
+import { isUsingNextJs, isUsingTypescript } from "./checks.js";
 
-export default function getConfigName(detectedConfig: DetectedConfig) {
+export default function getConfigName() {
   // By default use the "cui.config.mjs" file
   let finalConfigName = configFiles[0];
   // If the detected config is typescript then use "cui.config.ts" instead
-  if (detectedConfig.typescript) {
+  if (isUsingTypescript()) {
     console.log("⚠ tsconfig.json file detected");
     finalConfigName = configFiles[1];
   }

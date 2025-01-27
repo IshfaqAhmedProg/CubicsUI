@@ -2,10 +2,9 @@ import { resolve } from "path";
 import { defaultProject } from "../constants/defaults.js";
 import db from "../configs/prismaClient.js";
 import writeFile from "./writeFile.js";
-import { readFile } from "fs/promises";
 
-const cacheDirName = ".cui";
-const filesToIgnore = [cacheDirName];
+export const cacheDirName = ".cui";
+export const filesToIgnore = [cacheDirName];
 export default async function buildCacheFolder() {
   // Initialise
   const prFilePath = resolve(process.cwd(), cacheDirName, "project.json");
@@ -19,27 +18,4 @@ export default async function buildCacheFolder() {
   });
   // Write default project data
   await writeFile(prFilePath, JSON.stringify(prFileContent));
-
-  await handleIgnoreFiles();
-}
-
-/**
- * Writes files to ignore to .gitignore and other ignore files if present
- * @returns void
- */
-async function handleIgnoreFiles() {
-  const ignoreFilePath = resolve(process.cwd(), ".gitignore");
-  const ignoreFileData = await readFile(ignoreFilePath).catch((err) => {
-    if (err.code === "ENOENT") {
-      console.warn(`ignore file not found: ${ignoreFilePath}`);
-    }
-  });
-  const ignoreDataComments = "# cui";
-  const filesToIgnoreString = filesToIgnore.join("\n");
-  const dataToAppend = ignoreDataComments + "\n" + filesToIgnoreString;
-  console.log({ ignoreFilePath, ignoredFiles: filesToIgnore });
-  if (ignoreFileData?.includes(filesToIgnoreString)) {
-    return;
-  }
-  await writeFile(ignoreFilePath, dataToAppend, "a");
 }
