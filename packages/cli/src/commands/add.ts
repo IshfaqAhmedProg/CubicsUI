@@ -4,7 +4,20 @@ import { Prisma } from "@cubicsui/db";
 import buildComponentTree from "../functions/buildComponentTree.js";
 import { ComponentWithCB } from "../types/Components.js";
 
-export default async function add(requestedComponent: string) {
+/**
+ * Adds the requested component from the database to your project, by building the dependency tree
+ * @param requestedComponent The name of the component to build
+ *
+ * @returns {Promise<void>} Resolves when component tree is successfully built
+ *
+ * @throws {Error} Exits the process if project or component in the dependency tree, doesnt exist
+ *
+ * @example
+ * // Typical usage
+ * npx cui add <component>
+ */
+
+export default async function add(requestedComponent: string): Promise<void> {
   try {
     const config = await loadConfig();
 
@@ -29,13 +42,6 @@ export default async function add(requestedComponent: string) {
         name: requestedComponent,
         prId: project.id,
       },
-      // where: {
-      // OR: [
-      // { name: requestedComponent },
-      // { tags: { has: requestedComponent } },
-      // ],
-      // },
-
       include: { codeblocks: true },
     })) as ComponentWithCB;
 
