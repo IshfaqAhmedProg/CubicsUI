@@ -21,10 +21,10 @@ export function ComponentSkeleton(props: SkeletonProps) {
   );
 }
 
-interface ComponentCardProps {
-  component: Partial<components>;
+export interface ComponentCardProps {
+  component: components;
   size?: "small" | "large";
-  action?: ReactNode;
+  action?: ReactNode | ((component: components) => ReactNode);
 }
 export default function ComponentCard(props: ComponentCardProps) {
   const { component, size = "small", action } = props;
@@ -54,7 +54,7 @@ export default function ComponentCard(props: ComponentCardProps) {
         <Typography fontWeight={"bold"}>{component.name}</Typography>
         <Typography variant="body2">{component.outPath}</Typography>
       </Button>
-      {action && action}
+      {action && (typeof action == "function" ? action(component) : action)}
     </ButtonGroup>
   );
 }
