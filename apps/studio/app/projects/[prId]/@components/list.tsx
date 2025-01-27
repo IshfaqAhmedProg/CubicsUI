@@ -1,27 +1,34 @@
 "use client";
 import { components } from "@cubicsui/db";
-import { useState } from "react";
-import { deleteComponentAction } from "./actions";
+import { useActionState, useState } from "react";
 import ComponentCard, {
   ComponentSkeleton,
 } from "@/library/ui/Layout/Cards/ComponentCard";
 import { DeleteForeverRounded } from "@mui/icons-material";
 import { Button } from "@mui/material";
+import { deleteComponent } from "@/app/components/actions";
+import { FormActionReturnType } from "@/library/types/ActionReturnTypes";
+import Spinner from "@/library/ui/Navigation/Spinner/Spinner";
 
 export default function ComponentsList({
   components,
 }: {
   components: components[];
 }) {
+  const [state, setState] = useState<FormActionReturnType<components> | void>(
+    {}
+  );
   const [loading, setLoading] = useState(false);
   async function handleDelete(id: string) {
     setLoading(true);
-    await deleteComponentAction(id);
+    const fd = new FormData();
+    fd.append("cmpId", id);
+    const res = await deleteComponent({}, fd);
+    setState(res);
     setLoading(false);
   }
+  console.log({ state });
 
-  if (loading)
-    return [...Array(3)].map((_, i) => <ComponentSkeleton key={i} />);
   return components.map((c) => {
     return (
       <ComponentCard
@@ -33,7 +40,7 @@ export default function ComponentsList({
             color="error"
             onClick={() => handleDelete(c.id)}
           >
-            <DeleteForeverRounded />
+            {loading ? <Spinner /> : <DeleteForeverRounded />}
           </Button>
         }
       />

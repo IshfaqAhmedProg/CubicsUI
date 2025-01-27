@@ -126,7 +126,14 @@ export async function deleteComponent(
   formdata: FormData
 ): ActionReturnType<FormActionReturnType<components>> {
   const id = formdata.get("cmpId");
-  if (!id || typeof id !== "string") throw new Error("Component Id not found!");
-  const payload = await db.components.delete({ where: { id } });
-  return { status: "success", payload };
+  try {
+    if (!id || typeof id !== "string")
+      throw new Error("Component Id not found!");
+    const payload = await db.components.delete({ where: { id } });
+    revalidatePath(`/projects/${payload.prId}`);
+    return { status: "success", payload };
+  } catch (error) {
+    console.error(error);
+    return { status: "error" };
+  }
 }
