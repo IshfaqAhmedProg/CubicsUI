@@ -6,7 +6,8 @@ import buildCacheFolder from "../functions/buildCacheFolder.js";
  * Initializes the configuration file and the cache folder ".cui" for the CubicsUI CLI toolkit.
  *
  * @description
- * Prepares the project for component generation using CubicsUI by creating a configuration file.
+ * Prepares the project for component generation using CubicsUI by creating a configuration file
+ * and cache folder `.cui` and modifies existing `.gitignore` file to ignore `.cui` folder.
  * This function is typically invoked via the `npx cui init` command.
  *
  * @workflow

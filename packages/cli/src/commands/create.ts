@@ -4,7 +4,7 @@ import { Prisma } from "@cubicsui/db";
 import buildComponentTree from "../functions/buildComponentTree.js";
 import { ComponentWithCB } from "../types/Components.js";
 
-export default async function create(requestedComponent: string) {
+export default async function add(requestedComponent: string) {
   try {
     const config = await loadConfig();
 
