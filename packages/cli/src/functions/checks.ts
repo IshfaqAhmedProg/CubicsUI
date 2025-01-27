@@ -51,7 +51,7 @@ export function checkIfSrcFolderExists(): boolean {
  * Check if there is an existing cui.config in the project
  */
 export function checkIfAlreadyConfigured() {
-  if (configFiles.some((cf) => existsSync(resolve(process.cwd(), cf)))) {
+  if (configFiles.some((cf) => existsSync(resolve(process.cwd(), cf)))&& existsSync(resolve(process.cwd(),".cui"))) {
     console.error(
       "This project seems to be already initialised for @cubicsui/cli."
     );
