@@ -8,6 +8,7 @@ import { codeblocks, components, Prisma } from "@cubicsui/db";
 import { z } from "zod";
 import { codeblocksSchema, componentSchema } from "./schema";
 import db from "@/db";
+import { revalidatePath } from "next/cache";
 
 export async function zipDeps(formdata: FormData) {
   const extNames = formdata.getAll("depsExtName");
@@ -48,6 +49,7 @@ export async function saveComponentAction(
   try {
     const component = await saveComponent(prId, formdata);
     const codeblocks = await saveCodeblock(component.id, formdata);
+    revalidatePath(`/projects/${prId}`);
     return { payload: { ...component, codeblocks }, status: "success" };
   } catch (err) {
     if (
