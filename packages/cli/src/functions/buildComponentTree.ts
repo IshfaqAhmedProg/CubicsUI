@@ -35,15 +35,26 @@ export default async function buildComponentTree(
   const lclDeps = component.deps.lcl;
   console.log(`👀 Analysing ${component.name} dependencies`);
   for (const dep of lclDeps) {
-    if (dep.cmpId == "styles") {
-      await buildStyleModule(outPath, component, config);
-    } else {
-      const localDepComponent = await db().components.findFirstOrThrow({
-        where: { id: dep.cmpId },
-        include: { codeblocks: true },
-      });
-      // building local dependencies component trees
-      await buildComponentTree(localDepComponent, config);
+    switch (dep.cmpId) {
+      case "":
+      case undefined:
+        console.error(
+          `Dependency: ${dep.name}, isnt linked to any component or styles`
+        );
+        break;
+      case "styles":
+        await buildStyleModule(outPath, component, config);
+        break;
+      default:
+        {
+          const localDepComponent = await db().components.findFirstOrThrow({
+            where: { id: dep.cmpId },
+            include: { codeblocks: true },
+          });
+          // building local dependencies component trees
+          await buildComponentTree(localDepComponent, config);
+        }
+        break;
     }
   }
 }
