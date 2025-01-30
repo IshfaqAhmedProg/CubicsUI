@@ -107,41 +107,37 @@ export type CUIConfig = {
    * or use the individual properties to construct the URL
    * @remarks you can use a public account with read-only access for usersname and password.
    */
-  databaseConfig:
-    | {
-        /**
-         * The project name to which the components belong
-         */
-        project: string;
-        /**
-         * MongoDB username, environment variable `CUI_USERNAME`
-         */
-        username: string;
-        /**
-         * MongoDB password, environment variable `CUI_PASSWORD`
-         */
-        password: string;
+  databaseConfig: {
+    /**
+     * The project name to which the components belong
+     */
+    project: string;
+    /**
+     * Can be string or object containing the components that builds the url
+     */
+    db: string | DBUrl;
+  };
+};
 
-        /**
-         * Database hostUrl, environment variable `CUI_HOST_URL`
-         */
-        hostUrl: string;
+export type DBUrl = {
+  /**
+   * MongoDB username, environment variable `CUI_USERNAME`
+   */
+  username: string;
+  /**
+   * MongoDB password, environment variable `CUI_PASSWORD`
+   */
+  password: string;
 
-        /**
-         * Name of the database, environment variable `CUI_DB_NAME`
-         */
-        dbName: string;
-      }
-    | {
-        /**
-         * The project name to which the components belong
-         */
-        project: string;
-        /**
-         * The complete database URL
-         */
-        url: string;
-      };
+  /**
+   * Database hostUrl, environment variable `CUI_HOST_URL`
+   */
+  hostUrl: string;
+
+  /**
+   * Name of the database, environment variable `CUI_DB_NAME`
+   */
+  dbName: string;
 };
 
 /**

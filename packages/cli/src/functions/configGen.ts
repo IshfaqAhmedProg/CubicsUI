@@ -15,7 +15,7 @@ export default function configGen(detectedConfig?: DetectedConfig): CUIConfig {
     databaseConfig: {
       project: "@cubicsui/lib",
       // TODO Instead of string use env variables
-      url: "mongodb+srv://ishfaqahmed:Fm6okdd4FADbgaor@cubicsui.l8bf4.mongodb.net/cubicsuidb?retryWrites=true&w=majority&appName=CubicsUI",
+      db: "mongodb+srv://ishfaqahmed:Fm6okdd4FADbgaor@cubicsui.l8bf4.mongodb.net/cubicsuidb?retryWrites=true&w=majority&appName=CubicsUI",
     },
     fileNamingConvention: "CapitalCase",
     dirNamingConvention: "CapitalCase",

@@ -30,6 +30,7 @@ export default async function newComponent(filepath: string): Promise<void> {
     console.log("Dependencies found in the file:", deps);
 
     // traverse and create lcl deps if it doesnt exist
+    
 
     // Create component
     console.log(

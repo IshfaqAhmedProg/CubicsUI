@@ -3,6 +3,7 @@ import init from "./commands/init.js";
 import add from "./commands/add.js";
 import { commandDesc } from "./constants/descriptions.js";
 import newComponent from "./commands/new/component.js";
+import newProject from "./commands/new/project.js";
 
 // Consumer commands
 program
@@ -28,5 +29,10 @@ newCommand
   .description(commandDesc.new.component)
   .argument("<filepath>", "Path of the file you want to upload")
   .action((filepath) => newComponent(filepath));
+
+newCommand
+  .command("project")
+  .description(commandDesc.new.project)
+  .action(newProject);
 
 program.parse(process.argv);

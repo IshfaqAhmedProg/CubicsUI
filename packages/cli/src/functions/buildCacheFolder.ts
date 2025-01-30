@@ -1,13 +1,11 @@
 import { resolve } from "path";
-import { defaultProject } from "../constants/defaults.js";
+import { cacheDirName, defaultProject, projectCacheName } from "../constants/defaults.js";
 import db from "../configs/prismaClient.js";
 import writeFile from "./writeFile.js";
 
-export const cacheDirName = ".cui";
-export const filesToIgnore = [cacheDirName];
 export default async function buildCacheFolder() {
   // Initialise
-  const prFilePath = resolve(process.cwd(), cacheDirName, "project.json");
+  const prFilePath = resolve(process.cwd(), cacheDirName, projectCacheName);
 
   console.log(
     "⏬ Fetching using default databaseConfig, if you want to use your own database and project make sure to add them in databaseConfig in the cui.config files "
