@@ -184,6 +184,9 @@ importers:
       prettier:
         specifier: ^3.4.1
         version: 3.4.1
+      prisma:
+        specifier: ^6.2.1
+        version: 6.2.1
       tsx:
         specifier: ^4.19.2
         version: 4.19.2
@@ -203,9 +206,6 @@ importers:
       eslint:
         specifier: ^9.15.0
         version: 9.15.0
-      prisma:
-        specifier: ^6.2.1
-        version: 6.2.1
       typescript:
         specifier: ^5.7.2
         version: 5.7.2
@@ -223,13 +223,13 @@ importers:
       case:
         specifier: ^1.6.3
         version: 1.6.3
+      prisma:
+        specifier: ^6.2.1
+        version: 6.2.1
     devDependencies:
       '@cubicsui/configs':
         specifier: workspace:^
         version: link:../configs
-      prisma:
-        specifier: ^6.2.1
-        version: 6.2.1
       typescript:
         specifier: ^5.7.2
         version: 5.7.2
