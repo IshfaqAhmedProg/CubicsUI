@@ -16,7 +16,8 @@
     "build": "eslint && tsc -b",
     "lint": "eslint",
     "clean": "rimraf node_modules .turbo dist",
-    "clean:build": "pnpm clean && pnpm i && pnpm build"
+    "clean:build": "pnpm clean && pnpm i && pnpm build",
+    "postinstall": "pnpm build"
   },
   "keywords": [
     "cli",
