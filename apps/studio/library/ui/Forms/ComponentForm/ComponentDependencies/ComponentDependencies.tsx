@@ -6,7 +6,7 @@ import CollapsibleSection from "@/library/ui/Layout/CollapsibleSection";
 import { useComponentForm } from "@/library/contexts/ComponentFormContext";
 import ExternalDependencyTable from "./ExternalDependencyTable";
 import LocalDependencyTable from "./LocalDependencyTable/LocalDependencyTable";
-import dependencyAnalyser from "@/library/functions/dependencyAnalyser";
+import { dependencyAnalyser } from "@cubicsui/helpers";
 
 export function DependencySectionLayout({
   children,
@@ -27,15 +27,10 @@ export function DependencySectionLayout({
 }
 
 export default function ComponentDependencies() {
-  const { scriptCode, setDeps, formState, formPending, outPath } =
-    useComponentForm();
+  const { scriptCode, setDeps, formState, formPending } = useComponentForm();
 
   async function analyseDependencies() {
-    const newDeps = await dependencyAnalyser(
-      scriptCode,
-      { "@/*": ["./*"] },
-      outPath
-    );
+    const newDeps = await dependencyAnalyser(scriptCode, { "@/*": ["./*"] });
     if (newDeps.ext.length !== 0 || newDeps.lcl.length !== 0) {
       setDeps(newDeps);
     }

@@ -6,7 +6,7 @@ import {
 } from "@mui/icons-material";
 import { Stack, Tooltip, IconButton, TextField, Button } from "@mui/material";
 import LinkLocalDependencyButton from "./LinkLocalDependencyButton";
-import { createExternalDependency } from "@/library/functions/dependencyAnalyser";
+import { createExternalDependency } from "@cubicsui/helpers";
 import { DependencySectionLayout } from "../ComponentDependencies";
 
 export default function LocalDependencyTable() {

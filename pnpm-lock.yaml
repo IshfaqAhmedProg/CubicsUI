@@ -75,6 +75,9 @@ importers:
       '@cubicsui/db':
         specifier: workspace:^
         version: link:../../packages/db
+      '@cubicsui/helpers':
+        specifier: workspace:^
+        version: link:../../packages/helpers
       '@emotion/cache':
         specifier: ^11.14.0
         version: 11.14.0
@@ -187,9 +190,9 @@ importers:
       '@cubicsui/db':
         specifier: workspace:^
         version: link:../db
-      '@cubicsui/gen':
+      '@cubicsui/helpers':
         specifier: workspace:^
-        version: link:../gen
+        version: link:../helpers
       babel-walk:
         specifier: ^3.0.1
         version: 3.0.1
@@ -270,6 +273,37 @@ importers:
       '@types/lodash':
         specifier: ^4.17.13
         version: 4.17.13
+      '@types/node':
+        specifier: ^22.10.1
+        version: 22.10.1
+      eslint:
+        specifier: ^9.15.0
+        version: 9.15.0
+      typescript:
+        specifier: ^5.7.2
+        version: 5.7.2
+      typescript-eslint:
+        specifier: ^8.16.0
+        version: 8.16.0(eslint@9.15.0)(typescript@5.7.2)
+
+  packages/helpers:
+    dependencies:
+      '@babel/parser':
+        specifier: ^7.26.5
+        version: 7.26.5
+      '@cubicsui/db':
+        specifier: workspace:^
+        version: link:../db
+      babel-walk:
+        specifier: ^3.0.1
+        version: 3.0.1
+    devDependencies:
+      '@cubicsui/configs':
+        specifier: workspace:^
+        version: link:../configs
+      '@eslint/js':
+        specifier: ^9.16.0
+        version: 9.16.0
       '@types/node':
         specifier: ^22.10.1
         version: 22.10.1

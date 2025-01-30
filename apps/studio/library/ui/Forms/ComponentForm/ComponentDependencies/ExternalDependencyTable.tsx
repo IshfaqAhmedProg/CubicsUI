@@ -16,7 +16,7 @@ import {
   FormControl,
   InputLabel,
 } from "@mui/material";
-import { createLocalDependency } from "@/library/functions/dependencyAnalyser";
+import { createLocalDependency } from "@cubicsui/helpers";
 import { DependencySectionLayout } from "./ComponentDependencies";
 
 export const externalDependencyTypes = ["normal", "dev", "peer"];

@@ -1,7 +1,7 @@
 import { readFile } from "fs/promises";
 import { basename, extname } from "path";
 import db from "../../configs/prismaClient.js";
-import dependencyAnalyser from "../../functions/dependencyAnalyser.js";
+import { dependencyAnalyser } from "@cubicsui/helpers";
 import getRelativePath from "../../functions/getRelativePath.js";
 import loadConfig from "../../functions/loadConfig.js";
 
@@ -26,7 +26,7 @@ export default async function newComponent(filepath: string): Promise<void> {
     const fileContent = (await readFile(filepath)).toString();
 
     // Create deps {ext:[],lcl:[]}
-    const deps = dependencyAnalyser(fileContent, { "@/*": ["./*"] });
+    const deps = await dependencyAnalyser(fileContent, { "@/*": ["./*"] });
     console.log("Dependencies found in the file:", deps);
 
     // traverse and create lcl deps if it doesnt exist
