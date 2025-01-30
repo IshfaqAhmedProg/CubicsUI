@@ -155,33 +155,6 @@ importers:
         specifier: ^5
         version: 5.7.2
 
-  jobs/generate-libraries:
-    devDependencies:
-      '@cubicsui/configs':
-        specifier: workspace:^
-        version: link:../../packages/configs
-      '@cubicsui/gen':
-        specifier: workspace:^
-        version: link:../../packages/gen
-      '@eslint/js':
-        specifier: ^9.16.0
-        version: 9.16.0
-      '@types/node':
-        specifier: ^22.10.1
-        version: 22.10.1
-      eslint:
-        specifier: ^9.15.0
-        version: 9.15.0
-      type-fest:
-        specifier: ^4.30.0
-        version: 4.30.0
-      typescript:
-        specifier: ^5.7.2
-        version: 5.7.2
-      typescript-eslint:
-        specifier: ^8.16.0
-        version: 8.16.0(eslint@9.15.0)(typescript@5.7.2)
-
   packages/cli:
     dependencies:
       '@babel/parser':
@@ -254,37 +227,6 @@ importers:
       typescript:
         specifier: ^5.7.2
         version: 5.7.2
-
-  packages/gen:
-    dependencies:
-      commander:
-        specifier: ^12.1.0
-        version: 12.1.0
-      lodash:
-        specifier: ^4.17.21
-        version: 4.17.21
-    devDependencies:
-      '@cubicsui/configs':
-        specifier: workspace:^
-        version: link:../configs
-      '@eslint/js':
-        specifier: ^9.16.0
-        version: 9.16.0
-      '@types/lodash':
-        specifier: ^4.17.13
-        version: 4.17.13
-      '@types/node':
-        specifier: ^22.10.1
-        version: 22.10.1
-      eslint:
-        specifier: ^9.15.0
-        version: 9.15.0
-      typescript:
-        specifier: ^5.7.2
-        version: 5.7.2
-      typescript-eslint:
-        specifier: ^8.16.0
-        version: 8.16.0(eslint@9.15.0)(typescript@5.7.2)
 
   packages/helpers:
     dependencies:
@@ -4044,10 +3986,6 @@ packages:
   type-check@0.4.0:
     resolution: {integrity: sha512-XleUoc9uwGXqjWwXaUTZAmzMcFZ5858QA2vvx1Ur5xIcixXIP+8LnFDgRplU30us6teqdlskFfu+ae4K79Ooew==}
     engines: {node: '>= 0.8.0'}
-
-  type-fest@4.30.0:
-    resolution: {integrity: sha512-G6zXWS1dLj6eagy6sVhOMQiLtJdxQBHIA9Z6HFUNLOlr6MFOgzV8wvmidtPONfPtEUv0uZsy77XJNzTAfwPDaA==}
-    engines: {node: '>=16'}
 
   typed-array-buffer@1.0.3:
     resolution: {integrity: sha512-nAYYwfY3qnzX30IkA6AQZjVbtK6duGontcQm1WSG1MD94YLqK0515GNApXkoxKOWMusVssAHWLh9SeaoefYFGw==}
@@ -8877,8 +8815,6 @@ snapshots:
   type-check@0.4.0:
     dependencies:
       prelude-ls: 1.2.1
-
-  type-fest@4.30.0: {}
 
   typed-array-buffer@1.0.3:
     dependencies:
