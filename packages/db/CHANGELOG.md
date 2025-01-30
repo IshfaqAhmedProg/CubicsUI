@@ -1,5 +1,11 @@
 # @cubicsui/db
 
+## 1.2.3
+
+### Patch Changes
+
+- Added binaries to prisma schema
+
 ## 1.2.2
 
 ### Patch Changes
