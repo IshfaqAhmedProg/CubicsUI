@@ -37,6 +37,7 @@
     "@cubicsui/helpers": "workspace:^",
     "@inquirer/prompts": "^7.2.4",
     "babel-walk": "^3.0.1",
+    "prisma": "^6.2.1",
     "case": "^1.6.3",
     "commander": "^12.1.0",
     "js-beautify": "^1.15.1",
