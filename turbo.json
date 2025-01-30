@@ -11,11 +11,18 @@
       "cache": false,
       "persistent": true
     },
+    "dev:studio": { "cache": false, "persistent": true },
     "clean": {
       "cache": false
     },
     "jobs": {
       "outputs": ["../../libraries/**"]
+    },
+    "db:generate": {
+      "cache": false
+    },
+    "db:push": {
+      "cache": false
     }
   }
 }

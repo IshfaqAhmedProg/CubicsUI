@@ -1,0 +1,123 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mongodb"
+  url      = env("DATABASE_URL")
+}
+
+model projects {
+  /// Id of the project
+  id       String         @id @default(auto()) @map("_id") @db.ObjectId
+  /// A unique name following npm package naming convention
+  name     String         @unique
+  /// Language used to define the project
+  lang     Language
+  /// Style extension used for style files in the project
+  styleExt StyleExtension
+  /// The environments that can support the component
+  envs     TargetEnvs[]
+  /// A short description of the project
+  desc     String?
+
+  created DateTime @default(now())
+  updated DateTime @updatedAt
+
+  configurations configurations[]
+  components     components[]
+}
+
+model configurations {
+  id   String @id @default(auto()) @map("_id") @db.ObjectId
+  name String
+  data String
+
+  created DateTime @default(now())
+  updated DateTime @updatedAt
+
+  prId    String   @db.ObjectId
+  project projects @relation(fields: [prId], references: [id], onDelete: Cascade, onUpdate: Cascade)
+}
+
+model components {
+  /// Id of the library the component belongs 
+  prId    String   @db.ObjectId
+  project projects @relation(fields: [prId], references: [id], onDelete: Cascade, onUpdate: Cascade)
+  /// Id of the component
+  id      String   @id @default(auto()) @map("_id") @db.ObjectId
+  /// Name of the component that will be used by cli to create the component
+  name    String
+  /// The path of the file relative to current working directory
+  outPath String
+  /// A short description of what the component does
+  desc    String
+
+  /// Dependencies of the component
+  deps Dependencies
+  /// To allow better searching
+  tags String[]
+
+  created DateTime @default(now())
+  updated DateTime @updatedAt
+
+  /// codeblocks associated with the component 1:1
+  codeblocks codeblocks?
+
+  /// outPath and name should be unique for each component in a project orelse it would clash when creating the component
+  @@unique([prId, outPath])
+  @@unique([prId, name])
+}
+
+model codeblocks {
+  id     String  @id @default(auto()) @map("_id") @db.ObjectId
+  script String
+  styles String?
+
+  created DateTime @default(now())
+  updated DateTime @updatedAt
+
+  cmpId     String     @unique @db.ObjectId
+  component components @relation(fields: [cmpId], references: [id], onDelete: Cascade, onUpdate: Cascade)
+}
+
+enum StyleExtension {
+  css
+  scss
+  sass
+}
+
+type TargetEnvs {
+  /// Libraries like react, svelte etc.
+  lib String
+  /// frameworks like nextjs, sveltekit etc.
+  fw  String?
+}
+
+type ExternalDependency {
+  /// Name of the dependency
+  name String
+  /// Version of the dependency
+  ver  String
+  /// Type of the dependency
+  type String?
+}
+
+type LocalDependency {
+  /// Name of the dependency
+  name  String
+  /// Id of the component that corresponds to the dependency 
+  cmpId String
+}
+
+type Dependencies {
+  /// Third party dependencies
+  ext ExternalDependency[]
+  /// Local modules
+  lcl LocalDependency[]
+}
+
+enum Language {
+  javascript
+  typescript
+}

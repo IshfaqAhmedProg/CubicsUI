@@ -1,26 +1,29 @@
 import { resolve } from "path";
 import { register } from "tsx/esm/api";
 import { pathToFileURL } from "url";
-import { CUIConfig } from "@cubicsui/db";
 import configFiles from "../constants/configFiles.js";
-
-// Register is used to allow importing both ts and js config files and prevent
-// TypeError [ERR_UNKNOWN_FILE_EXTENSION]: Unknown file extension ".ts"
-register();
+import { CUIConfig } from "../types/CUIConfig.js";
 
 /**
  * Loads the configuration file "cui.config" from the project,
  * @returns {CUIConfig} Validated configuration object.
  */
 export default async function loadConfig(): Promise<CUIConfig> {
+  // Register is used to allow importing both ts and js config files and prevent
+  // TypeError [ERR_UNKNOWN_FILE_EXTENSION]: Unknown file extension ".ts"
+  register();
   let module;
   for (const configFile of configFiles) {
     try {
       // Resolve absolute path
-      const configPath = resolve(process.cwd(), configFile);
+      const configPath = pathToFileURL(
+        resolve(process.cwd(), configFile)
+      ).toString();
       // Import directly with tsx handling
-      module = await import(pathToFileURL(configPath).toString());
+      // console.log(`trying ${configFile}, path:${configPath}`);
+      module = await import(configPath);
     } catch {
+      // console.error(e);
       continue;
     }
   }

@@ -1,0 +1,8 @@
+.code {
+  background-color: #888888;
+  color: #222222;
+  padding-inline: 0.5em;
+  border-radius: 0.25em;
+  font-size: 0.9em;
+  white-space: nowrap;
+}
