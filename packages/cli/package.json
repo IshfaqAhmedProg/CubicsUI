@@ -39,6 +39,7 @@
     "babel-walk": "^3.0.1",
     "case": "^1.6.3",
     "commander": "^12.1.0",
+    "dotenv": "^16.4.7",
     "js-beautify": "^1.15.1",
     "prettier": "^3.4.1",
     "tsx": "^4.19.2"

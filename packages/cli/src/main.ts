@@ -4,6 +4,12 @@ import add from "./commands/add.js";
 import { commandDesc } from "./constants/descriptions.js";
 import newComponent from "./commands/new/component.js";
 import newProject from "./commands/new/project.js";
+import { resolve } from "path";
+import { config } from "dotenv";
+
+// Resolve `.env` from the user's project root
+const envPath = resolve(process.cwd(), ".env");
+config({ path: envPath });
 
 // Consumer commands
 program
