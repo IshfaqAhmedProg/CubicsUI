@@ -41,6 +41,7 @@
     "commander": "^12.1.0",
     "js-beautify": "^1.15.1",
     "prettier": "^3.4.1",
+    "prisma": "^6.2.1",
     "tsx": "^4.19.2"
   },
   "devDependencies": {
@@ -49,7 +50,6 @@
     "@types/js-beautify": "^1.14.3",
     "@types/node": "^22.10.1",
     "eslint": "^9.15.0",
-    "prisma": "^6.2.1",
     "typescript": "^5.7.2",
     "typescript-eslint": "^8.16.0"
   }
