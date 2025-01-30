@@ -1,6 +1,6 @@
 {
   "name": "@cubicsui/helpers",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "description": "Helper functions that are used across cubicsui packages and apps",
   "publishConfig": {
     "access": "public"

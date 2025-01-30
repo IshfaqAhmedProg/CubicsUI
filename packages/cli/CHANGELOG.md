@@ -1,5 +1,14 @@
 # @cubicsui/cli
 
+## 1.3.1
+
+### Patch Changes
+
+- Added postinstall script
+- Updated dependencies
+  - @cubicsui/db@1.1.1
+  - @cubicsui/helpers@1.1.1
+
 ## 1.3.0
 
 ### Minor Changes
