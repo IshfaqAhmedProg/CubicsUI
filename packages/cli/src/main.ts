@@ -2,7 +2,9 @@ import { program } from "commander";
 import init from "./commands/init.js";
 import add from "./commands/add.js";
 import { commandDesc } from "./constants/descriptions.js";
+import newComponent from "./commands/new/component.js";
 
+// Consumer commands
 program
   .command("init")
   .option(
@@ -17,5 +19,14 @@ program
   .description(commandDesc.add)
   .argument("<componentName>", "Name of the component")
   .action((component) => add(component));
+
+// Provider commands
+const newCommand = program.command("new");
+
+newCommand
+  .command("component")
+  .description(commandDesc.new.component)
+  .argument("<filepath>", "Path of the file you want to upload")
+  .action((filepath) => newComponent(filepath));
 
 program.parse(process.argv);

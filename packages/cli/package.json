@@ -32,8 +32,10 @@
   },
   "license": "MIT",
   "dependencies": {
+    "@babel/parser": "^7.26.5",
     "@cubicsui/db": "workspace:^",
     "@cubicsui/gen": "workspace:^",
+    "babel-walk": "^3.0.1",
     "case": "^1.6.3",
     "commander": "^12.1.0",
     "js-beautify": "^1.15.1",
