@@ -10,3 +10,5 @@ export {
   resolveLocalDependencyPath,
   resolveRelativePath,
 } from "./functions/pathResolvers.js";
+
+export { npmPackageNameRegex } from "./regex/nameRegex.js";
