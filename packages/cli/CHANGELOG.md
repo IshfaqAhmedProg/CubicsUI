@@ -1,5 +1,11 @@
 # @cubicsui/cli
 
+## 1.4.1
+
+### Patch Changes
+
+- Added back npmignore
+
 ## 1.4.0
 
 ### Minor Changes
