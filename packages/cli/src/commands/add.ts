@@ -1,6 +1,5 @@
 import { db } from "@cubicsui/db";
 import loadConfig from "../functions/loadConfig.js";
-import { Prisma } from "@cubicsui/db";
 import buildComponentTree from "../functions/buildComponentTree.js";
 import { ComponentWithCB } from "../types/Components.js";
 
@@ -49,15 +48,9 @@ export default async function add(requestedComponent: string): Promise<void> {
 
     console.log(`✨ You are good to go!`);
   } catch (error) {
-    if (
-      error instanceof Prisma.PrismaClientKnownRequestError &&
-      error.code === "P2025"
-    ) {
-      console.error(
-        `✖ ${requestedComponent} does not exist in the database:`,
-        error.message
-      );
-    }
+    // if (error?.code && error.code === "P2025") {
+    //   console.error(`✖ ${requestedComponent} does not exist in the database:`);
+    // }
     // console.log(error);
     console.error(`✖ Failed to create ${requestedComponent}:`, error);
     process.exit(1);

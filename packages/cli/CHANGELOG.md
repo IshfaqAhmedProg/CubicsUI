@@ -1,5 +1,11 @@
 # @cubicsui/cli
 
+## 1.4.3
+
+### Patch Changes
+
+- patched cli
+
 ## 1.4.2
 
 ### Patch Changes
