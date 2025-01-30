@@ -1,5 +1,11 @@
 # @cubicsui/db
 
+## 1.1.1
+
+### Patch Changes
+
+- Added postinstall script
+
 ## 1.1.0
 
 ### Minor Changes
