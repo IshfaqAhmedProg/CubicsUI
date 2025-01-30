@@ -8,5 +8,5 @@ export default tseslint.config(
   tseslint.configs.strict,
   // Ignoring bin.js because of error
   //  A `require()` style import is forbidden  @typescript-eslint/no-require-imports
-  { ignores: ["dist", "node_modules"] }
+  { ignores: ["dist", "node_modules", "generated"] }
 );

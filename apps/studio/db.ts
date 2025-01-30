@@ -1,5 +1,2 @@
-import { PrismaClient } from "@cubicsui/db";
-
-const db = new PrismaClient();
-
+import { db } from "@cubicsui/db";
 export default db;

@@ -1,4 +1,4 @@
-import db from "../configs/prismaClient.js";
+import { db } from "@cubicsui/db";
 import loadConfig from "../functions/loadConfig.js";
 import { Prisma } from "@cubicsui/db";
 import buildComponentTree from "../functions/buildComponentTree.js";
@@ -25,7 +25,7 @@ export default async function add(requestedComponent: string): Promise<void> {
     console.log(
       `⏬ Fetching project: ${config.databaseConfig.project} from database, please wait...`
     );
-    const project = await db().projects.findFirst({
+    const project = await db.projects.findFirst({
       where: { name: config.databaseConfig.project },
     });
 
@@ -37,7 +37,7 @@ export default async function add(requestedComponent: string): Promise<void> {
     console.log(
       `⏬ Fetching component: ${requestedComponent} from database, please wait...`
     );
-    const component = (await db().components.findFirstOrThrow({
+    const component = (await db.components.findFirstOrThrow({
       where: {
         name: requestedComponent,
         prId: project.id,

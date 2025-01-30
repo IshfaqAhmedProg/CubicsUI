@@ -2,7 +2,7 @@ import { input, select, Separator } from "@inquirer/prompts";
 import loadConfig from "../../functions/loadConfig.js";
 import { npmPackageNameRegex } from "@cubicsui/helpers";
 import { Language, StyleExtension } from "@cubicsui/db";
-import db from "../../configs/prismaClient.js";
+import { db } from "@cubicsui/db";
 
 export default async function newProject() {
   const config = await loadConfig();
@@ -39,12 +39,12 @@ export default async function newProject() {
     ],
   });
   try {
-    console.log("⏳ Building project with configurations:",{
+    console.log("⏳ Building project with configurations:", {
       name: newProjectName,
       language: newProjectLang,
       styleExtension: newProjectStyleExt,
     });
-    const project = await db().projects.create({
+    const project = await db.projects.create({
       data: {
         name: newProjectName,
         styleExt: newProjectStyleExt,

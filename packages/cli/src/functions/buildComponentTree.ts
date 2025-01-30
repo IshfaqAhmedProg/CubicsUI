@@ -1,7 +1,7 @@
 import buildStyleModule from "./buildStyleModule.js";
 import { CUIConfig } from "../types/CUIConfig.js";
 import { ComponentWithCB } from "../types/Components.js";
-import db from "../configs/prismaClient.js";
+import { db } from "@cubicsui/db";
 import { resolve } from "path";
 import writeFile from "./writeFile.js";
 
@@ -47,7 +47,7 @@ export default async function buildComponentTree(
         break;
       default:
         {
-          const localDepComponent = await db().components.findFirstOrThrow({
+          const localDepComponent = await db.components.findFirstOrThrow({
             where: { id: dep.cmpId },
             include: { codeblocks: true },
           });
