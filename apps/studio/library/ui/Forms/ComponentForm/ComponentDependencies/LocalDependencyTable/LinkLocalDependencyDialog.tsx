@@ -98,23 +98,7 @@ export default function LinkLocalDependencyDialog({
   const [selectedComponent, setSelectedComponent] = useState<components | null>(
     null
   );
-  const [inputValue, setInputValue] = useState("");
-  const [loading, setLoading] = useState(false);
-
   const { project, component } = useComponentForm();
-
-  const [prComponentList, setPrComponentList] = useState<components[]>([]);
-
-  useEffect(() => {
-    const subscribe = async () => {
-      setLoading(true);
-      const prCmpList = await getProjectComponents(project.id, component?.id);
-      setPrComponentList(prCmpList);
-      setLoading(false);
-    };
-    subscribe();
-  }, [project, component]);
-
   return (
     <Dialog
       {...rest}

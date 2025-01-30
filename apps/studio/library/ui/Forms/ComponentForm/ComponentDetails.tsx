@@ -7,8 +7,9 @@ import ComponentTagsInput from "./ComponentTagsInput";
 import { useComponentForm } from "@/library/contexts/ComponentFormContext";
 
 export default function ComponentDetails() {
-  const { name, setName, outPath, setOutPath, formState, formPending } =
+  const { name, setName, deps, outPath, setOutPath, formState, formPending } =
     useComponentForm();
+  console.log(deps);
   return (
     <CollapsibleSection
       title="Details"

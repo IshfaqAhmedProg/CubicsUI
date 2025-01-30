@@ -10,7 +10,6 @@
   },
   "dependencies": {
     "@babel/parser": "^7.26.5",
-    "@babel/traverse": "^7.26.5",
     "@cubicsui/db": "workspace:^",
     "@emotion/cache": "^11.14.0",
     "@emotion/react": "^11.14.0",
@@ -19,6 +18,7 @@
     "@mui/icons-material": "^6.3.0",
     "@mui/material": "^6.3.0",
     "@mui/material-nextjs": "^6.3.0",
+    "babel-walk": "^3.0.1",
     "lodash": "^4.17.21",
     "next": "15.1.3",
     "nextjs-toploader": "^3.7.15",
@@ -30,7 +30,6 @@
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3",
-    "@types/babel__traverse": "^7.20.6",
     "@types/lodash": "^4.17.13",
     "@types/node": "^20",
     "@types/package-json-validator": "^0.6.1",

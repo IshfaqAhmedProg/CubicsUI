@@ -12,10 +12,10 @@ import { DependencySectionLayout } from "../ComponentDependencies";
 export default function LocalDependencyTable() {
   const { deps, setDeps, formPending } = useComponentForm();
 
-  function shiftFromLclToExt(index: number) {
+  async function shiftFromLclToExt(index: number) {
     let lcl = [...deps.lcl],
       ext = [...deps.ext];
-    ext.push(createExternalDependency(lcl[index].name));
+    ext.push(await createExternalDependency(lcl[index].name));
     lcl.splice(index, 1);
     setDeps({ lcl, ext });
   }

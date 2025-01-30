@@ -23,10 +23,10 @@ export const externalDependencyTypes = ["normal", "dev", "peer"];
 
 export default function ExternalDependencyTable() {
   const { deps, setDeps, formPending } = useComponentForm();
-  function shiftFromExtToLcl(index: number) {
+  async function shiftFromExtToLcl(index: number) {
     let lcl = [...deps.lcl],
       ext = [...deps.ext];
-    lcl.push(createLocalDependency(ext[index].name));
+    lcl.push(await createLocalDependency(ext[index].name));
     ext.splice(index, 1);
     setDeps({ lcl, ext });
   }

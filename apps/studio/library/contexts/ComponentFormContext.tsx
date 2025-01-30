@@ -78,7 +78,7 @@ function useComponentFormStates({
   );
   const initialStyleCode = codeblocks?.styles
     ? codeblocks.styles
-    : project.styleEng == "scss"
+    : project.styleExt == "scss"
       ? sampleSassModule
       : sampleCssModule;
 

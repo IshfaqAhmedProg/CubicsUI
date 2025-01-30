@@ -1,77 +1,20 @@
+"use server";
 import * as parser from "@babel/parser";
-import traverse from "@babel/traverse";
+import { recursive as walkRecursive } from "babel-walk";
 import {
   Dependencies,
   LocalDependency,
   ExternalDependency,
 } from "@cubicsui/db";
+import { isNodeModule } from "./isNodeModule";
 
 /**
  * TypeScript path mapping configuration from tsconfig.json
  * Example: { "@/*": ["./src/*"] }
  */
-type TsConfigPaths = {
+export type TsConfigPaths = {
   [key: string]: string[];
 };
-
-/**
- * Determines if an import path refers to a node module (external dependency)
- * Handles both scoped (@org/pkg) and regular (lodash) packages
- *
- * @param importPath - The raw import path from the code
- * @param paths - TypeScript path mappings from tsconfig
- * @returns True if the import is a node module, false otherwise
- */
-function isNodeModule(importPath: string, paths: TsConfigPaths): boolean {
-  if (importPath.startsWith("@") && importPath.split("/").length > 1) {
-    const [scope] = importPath.split("/");
-    // Check if the scope matches any of our path aliases
-    return !Object.keys(paths).some(
-      (alias) => alias.startsWith(scope + "/") || alias === scope
-    );
-  }
-  // If not starting with . or / and not matching any aliases, it's a node module
-  return (
-    !importPath.startsWith(".") &&
-    !importPath.startsWith("/") &&
-    !Object.keys(paths).some((alias) =>
-      importPath.startsWith(alias.replace("/*", ""))
-    )
-  );
-}
-
-/**
- * Resolves an import path using TypeScript path aliases
- * Example: '@/components/Button' -> './src/components/Button'
- *
- * @param importPath - The raw import path from the code
- * @param paths - TypeScript path mappings from tsconfig
- * @returns The resolved path
- */
-function resolveAliasedPath(importPath: string, paths: TsConfigPaths): string {
-  if (isNodeModule(importPath, paths)) {
-    return importPath;
-  }
-
-  // Normalize paths by removing trailing /* from patterns
-  const normalizedPaths = Object.fromEntries(
-    Object.entries(paths).map(([key, values]) => [
-      key.replace(/\/\*$/, ""),
-      values.map((v) => v.replace(/\/\*$/, "")),
-    ])
-  );
-
-  for (const [alias, possiblePaths] of Object.entries(normalizedPaths)) {
-    const normalizedAlias = alias.replace(/\/\*$/, "");
-    if (importPath.startsWith(normalizedAlias)) {
-      for (const possiblePath of possiblePaths) {
-        const normalizedPossiblePath = possiblePath.replace(/\/\*$/, "");
-        return importPath.replace(normalizedAlias, normalizedPossiblePath);
-      }
-    }
-  }
-  return importPath;
-}
 
 /**
  * Creates a new Ext Dependency object
@@ -79,7 +22,9 @@ function resolveAliasedPath(importPath: string, paths: TsConfigPaths): string {
  * @param name - The name or path of the dependency
  * @returns A new Dependency object
  */
-export function createExternalDependency(name: string): ExternalDependency {
+export async function createExternalDependency(
+  name: string
+): Promise<ExternalDependency> {
   return {
     name,
     ver: "@latest",
@@ -92,7 +37,9 @@ export function createExternalDependency(name: string): ExternalDependency {
  * @param name - The name or path of the dependency
  * @returns A new Dependency object
  */
-export function createLocalDependency(name: string): LocalDependency {
+export async function createLocalDependency(
+  name: string
+): Promise<LocalDependency> {
   return {
     name,
     cmpId: "",
@@ -108,10 +55,11 @@ export function createLocalDependency(name: string): LocalDependency {
  * @param paths - TypeScript path mappings from tsconfig
  * @returns Object containing external and local dependencies
  */
-export function analyzeCodeDependencies(
+export default async function dependencyAnalyser(
   code: string | undefined,
-  paths: TsConfigPaths
-): Dependencies {
+  paths: TsConfigPaths,
+  outPath: string
+): Promise<Dependencies> {
   const dependencies: Dependencies = {
     ext: [],
     lcl: [],
@@ -129,7 +77,7 @@ export function analyzeCodeDependencies(
     });
 
     // Process a single import statement or require call
-    const processImport = (importSource: string) => {
+    const processImport = async (importSource: string) => {
       if (isNodeModule(importSource, paths)) {
         // For scoped packages, keep the full scope (@org/pkg)
         const packageName = importSource.split("/").slice(0, 2).join("/");
@@ -137,56 +85,56 @@ export function analyzeCodeDependencies(
           (d) => d.name === packageName
         );
         if (!existingDep) {
-          dependencies.ext.push(createExternalDependency(packageName));
+          dependencies.ext.push(await createExternalDependency(packageName));
         }
         return;
       }
 
-      const resolvedPath = resolveAliasedPath(importSource, paths);
       // Check if it's a local module (starts with ./ or / or matches an alias)
       if (
-        resolvedPath.startsWith(".") ||
-        resolvedPath.startsWith("/") ||
+        importSource.startsWith(".") ||
+        importSource.startsWith("/") ||
         Object.keys(paths).some((alias) =>
-          resolvedPath.startsWith(alias.replace("/*", ""))
+          importSource.startsWith(alias.replace("/*", ""))
         )
       ) {
         const existingDep = dependencies.lcl.find(
-          (d) => d.name === resolvedPath
+          (d) => d.name === importSource
         );
         if (!existingDep) {
-          dependencies.lcl.push(createLocalDependency(resolvedPath));
+          dependencies.lcl.push(await createLocalDependency(importSource));
         }
       } else {
-        const packageName = resolvedPath.split("/")[0];
+        const packageName = importSource.split("/")[0];
         const existingDep = dependencies.ext.find(
           (d) => d.name === packageName
         );
         if (!existingDep) {
-          dependencies.ext.push(createExternalDependency(packageName));
+          dependencies.ext.push(await createExternalDependency(packageName));
         }
       }
     };
 
-    // Walk the AST looking for imports and requires
-    traverse(ast, {
+    const visitors = walkRecursive({
       // Handle ES module imports
-      ImportDeclaration: (path) => {
-        processImport(path.node.source.value);
+      ImportDeclaration: (node) => {
+        processImport(node.source.value);
       },
       // Handle CommonJS require calls
-      CallExpression: (path) => {
+      CallExpression: (node) => {
         if (
-          path.node.callee.type === "Identifier" &&
-          path.node.callee.name === "require"
+          node.callee.type === "Identifier" &&
+          node.callee.name === "require"
         ) {
-          const arg = path.node.arguments[0];
+          const arg = node.arguments[0];
           if (arg && arg.type === "StringLiteral") {
             processImport(arg.value);
           }
         }
       },
     });
+    // Walk the AST looking for imports and requires
+    visitors(ast);
   } catch (error) {
     console.error("Error analyzing dependencies:", error);
   }

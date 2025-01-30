@@ -6,7 +6,7 @@ import CollapsibleSection from "@/library/ui/Layout/CollapsibleSection";
 import { useComponentForm } from "@/library/contexts/ComponentFormContext";
 import ExternalDependencyTable from "./ExternalDependencyTable";
 import LocalDependencyTable from "./LocalDependencyTable/LocalDependencyTable";
-import { analyzeCodeDependencies } from "@/library/functions/dependencyAnalyser";
+import dependencyAnalyser from "@/library/functions/dependencyAnalyser";
 
 export function DependencySectionLayout({
   children,
@@ -27,10 +27,15 @@ export function DependencySectionLayout({
 }
 
 export default function ComponentDependencies() {
-  const { scriptCode, setDeps, formState, formPending } = useComponentForm();
+  const { scriptCode, setDeps, formState, formPending, outPath } =
+    useComponentForm();
 
-  function analyseDependencies() {
-    const newDeps = analyzeCodeDependencies(scriptCode, { "@/*": ["./*"] });
+  async function analyseDependencies() {
+    const newDeps = await dependencyAnalyser(
+      scriptCode,
+      { "@/*": ["./*"] },
+      outPath
+    );
     if (newDeps.ext.length !== 0 || newDeps.lcl.length !== 0) {
       setDeps(newDeps);
     }

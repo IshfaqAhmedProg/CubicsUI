@@ -14,6 +14,7 @@ interface ComponentListCardProps {
   componentActions: ComponentCardProps["actions"];
 }
 
+// TODO Convert to RSC to remove unneccesary fetches
 /**
  * Components in the project
  * @returns
