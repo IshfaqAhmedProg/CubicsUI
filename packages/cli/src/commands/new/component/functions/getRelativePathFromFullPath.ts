@@ -10,7 +10,7 @@ import path from "path";
  * const relativePath = getRelativePath("C:/../src/components/Avatar/Avatar.tsx","./src")
  * // returns "./components/Avatar/Avatar.tsx"
  */
-export default function getRelativePath(
+export default function getRelativePathFromFullPath(
   fullpath: string,
   rootDir: string
 ): string {

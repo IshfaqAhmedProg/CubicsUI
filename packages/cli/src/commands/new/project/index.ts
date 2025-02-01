@@ -3,7 +3,7 @@ import { npmPackageNameRegex } from "@cubicsui/helpers";
 import { Language, StyleExtension } from "@cubicsui/db";
 import { db } from "@cubicsui/db";
 
-export default async function newProject() {
+export default async function () {
   console.log(`Creating new project on ${process.env.DATABASE_URL}`);
   const newProjectName = await input({
     message:

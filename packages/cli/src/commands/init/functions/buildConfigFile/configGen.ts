@@ -1,4 +1,4 @@
-import { CUIConfig, DetectedConfig } from "../types/CUIConfig.js";
+import { CUIConfig, DetectedConfig } from "@/types/CUIConfig.js";
 
 /**
  * Generates the final configuration of the `cui.config` file.

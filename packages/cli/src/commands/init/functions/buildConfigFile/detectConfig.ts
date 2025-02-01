@@ -1,12 +1,12 @@
 import configGen from "./configGen.js";
-import { DetectedConfig } from "../types/CUIConfig.js";
+import { DetectedConfig } from "@/types/CUIConfig.js";
 import {
   checkEnv,
   isUsingTypescript,
   checkIfSrcFolderExists,
   checkStyleEngine,
-} from "./checks.js";
-import { InitOptions } from "../commands/init.js";
+} from "@/utils/checks.js";
+import { InitOptions } from "@/commands/init/index.js";
 
 /**
  * Detects the host projects environment using check functions defined in checks.ts
@@ -22,8 +22,6 @@ export default function getDetectedConfig(
   detectedConfig.envOptions.styleExt = checkStyleEngine();
   detectedConfig.envOptions.typescript =
     options?.typescript ?? isUsingTypescript();
-  detectedConfig.envOptions.rootDir = checkIfSrcFolderExists()
-    ? "./src"
-    : ".";
+  detectedConfig.envOptions.rootDir = checkIfSrcFolderExists() ? "./src" : ".";
   return detectedConfig;
 }

@@ -1,12 +1,12 @@
 import { resolve } from "path";
 import { format } from "prettier";
 import { writeFile } from "fs/promises";
-import { configTemplateESM } from "../functions/configTemplateESM.js";
-import getDetectedConfig from "../functions/detectConfig.js";
-import getConfigName from "../functions/getConfigName.js";
-import { InitOptions } from "../commands/init.js";
+import { configTemplateESM } from "./configTemplateESM.js";
+import getDetectedConfig from "./detectConfig.js";
+import getConfigName from "./getConfigName.js";
+import { InitOptions } from "@/commands/init/index.js";
 
-export default async function buildConfigFile(options: InitOptions) {
+export default async function (options: InitOptions) {
   //  Detect the necessary values for the config file from the host project automatically or ask the host
   const detectedConfig = getDetectedConfig(options);
   const configFileName = getConfigName();

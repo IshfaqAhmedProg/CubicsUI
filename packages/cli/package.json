@@ -13,7 +13,7 @@
   },
   "exports": "./dist/index.js",
   "scripts": {
-    "build": "eslint && tsc -b",
+    "build": "eslint && tsc -b && tsc-alias -p tsconfig.json",
     "lint": "eslint",
     "clean": "rimraf node_modules .turbo dist",
     "clean:build": "pnpm clean && pnpm i && pnpm build"
@@ -50,6 +50,7 @@
     "@types/js-beautify": "^1.14.3",
     "@types/node": "^22.10.1",
     "eslint": "^9.15.0",
+    "tsc-alias": "^1.8.10",
     "typescript": "^5.7.2",
     "typescript-eslint": "^8.16.0"
   }

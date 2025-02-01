@@ -1,6 +1,6 @@
 import { components } from "@cubicsui/db";
 import { basename, extname } from "path";
-import { CUIConfig } from "../types/CUIConfig.js";
+import { CUIConfig } from "@/types/CUIConfig.js";
 
 export default function getStyleFileName(
   fileName: string,

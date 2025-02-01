@@ -1,7 +1,7 @@
-import { checkIfAlreadyConfigured } from "../functions/checks.js";
-import buildConfigFile from "../functions/buildConfigFile.js";
-import buildCacheFolder from "../functions/buildCacheFolder.js";
-import modifyIgnoreFiles from "../functions/modifyIgnoreFiles.js";
+import { checkIfAlreadyConfigured } from "@/utils/checks.js";
+import buildConfigFile from "./functions/buildConfigFile/index.js";
+import buildCacheFolder from "./functions/buildCacheFolder.js";
+import modifyIgnoreFiles from "./functions/modifyIgnoreFiles.js";
 
 export interface InitOptions {
   typescript?: boolean;
@@ -22,7 +22,7 @@ export interface InitOptions {
  * // Typical usage
  * npx cui init
  */
-export default async function init(options: InitOptions): Promise<void> {
+export default async function (options: InitOptions): Promise<void> {
   // Check if config already exists in the root
   checkIfAlreadyConfigured();
   // Build the cache folder

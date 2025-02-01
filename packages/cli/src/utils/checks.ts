@@ -1,7 +1,7 @@
 import { existsSync, readdirSync } from "fs";
-import configFiles from "../constants/configFiles.js";
+import configFiles from "@/constants/configFiles.js";
 import { parse, resolve } from "path";
-import { CUIConfig } from "../types/CUIConfig.js";
+import { CUIConfig } from "@/types/CUIConfig.js";
 
 /**
  * TODO Check which env value suits the best for the host project

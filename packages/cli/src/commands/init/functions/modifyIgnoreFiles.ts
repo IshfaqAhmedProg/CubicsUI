@@ -1,7 +1,7 @@
 import { readFile } from "fs/promises";
 import { resolve } from "path";
-import writeFile from "./writeFile.js";
-import { filesToIgnore } from "../constants/defaults.js";
+import writeFile from "@/utils/writeFile.js";
+import { filesToIgnore } from "@/constants/defaults.js";
 
 /**
  * Writes files to ignore to .gitignore and other ignore files if present

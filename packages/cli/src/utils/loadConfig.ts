@@ -1,8 +1,8 @@
 import { resolve } from "path";
 import { register } from "tsx/esm/api";
 import { pathToFileURL } from "url";
-import configFiles from "../constants/configFiles.js";
-import { CUIConfig } from "../types/CUIConfig.js";
+import configFiles from "@/constants/configFiles.js";
+import { CUIConfig } from "@/types/CUIConfig.js";
 
 /**
  * Loads the configuration file "cui.config" from the project,

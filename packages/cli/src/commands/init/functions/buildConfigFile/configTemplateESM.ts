@@ -1,4 +1,4 @@
-import { DetectedConfig } from "../types/CUIConfig.js";
+import { DetectedConfig } from "@/types/CUIConfig.js";
 import configGen from "./configGen.js";
 
 /**

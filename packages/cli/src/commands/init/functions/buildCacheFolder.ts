@@ -3,9 +3,9 @@ import {
   cacheDirName,
   defaultProject,
   projectCacheName,
-} from "../constants/defaults.js";
+} from "@/constants/defaults.js";
 import { db } from "@cubicsui/db";
-import writeFile from "./writeFile.js";
+import writeFile from "@/utils/writeFile.js";
 
 export default async function buildCacheFolder() {
   // Initialise

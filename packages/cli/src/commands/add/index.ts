@@ -1,8 +1,8 @@
 import { db } from "@cubicsui/db";
-import loadConfig from "../functions/loadConfig.js";
+import loadConfig from "@/utils/loadConfig.js";
 import { Prisma } from "@cubicsui/db";
-import buildComponentTree from "../functions/buildComponentTree.js";
-import { ComponentWithCB } from "../types/Components.js";
+import buildComponentTree from "./functions/buildComponentTree.js";
+import { ComponentWithCB } from "@/types/Components.js";
 
 /**
  * Adds the requested component from the database to your project, by building the dependency tree
@@ -17,7 +17,7 @@ import { ComponentWithCB } from "../types/Components.js";
  * npx cui add <component>
  */
 
-export default async function add(requestedComponent: string): Promise<void> {
+export default async function (requestedComponent: string): Promise<void> {
   try {
     const config = await loadConfig();
 

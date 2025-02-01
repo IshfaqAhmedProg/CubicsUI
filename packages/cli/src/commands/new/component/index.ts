@@ -2,8 +2,8 @@ import { readFile } from "fs/promises";
 import { basename, extname } from "path";
 import { db } from "@cubicsui/db";
 import { dependencyAnalyser } from "@cubicsui/helpers";
-import getRelativePath from "../../functions/getRelativePath.js";
-import loadConfig from "../../functions/loadConfig.js";
+import getRelativePathFromFullPath from "./functions/getRelativePathFromFullPath.js";
+import loadConfig from "@/utils/loadConfig.js";
 
 /**
  * Creates the given filePath as a component in the database
@@ -17,7 +17,7 @@ import loadConfig from "../../functions/loadConfig.js";
  * // Typical usage
  * npx cui upload <filepath>
  */
-export default async function newComponent(filepath: string): Promise<void> {
+export default async function (filepath: string): Promise<void> {
   console.log(filepath);
   try {
     const config = await loadConfig();
@@ -40,7 +40,10 @@ export default async function newComponent(filepath: string): Promise<void> {
     });
 
     const name = basename(filepath, extname(filepath));
-    const outPath = getRelativePath(filepath, config.envOptions.rootDir);
+    const outPath = getRelativePathFromFullPath(
+      filepath,
+      config.envOptions.rootDir
+    );
 
     console.log("⏫ Uploading component to database");
     const component = await db.components.create({

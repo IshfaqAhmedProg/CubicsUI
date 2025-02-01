@@ -1,5 +1,5 @@
-import configFiles from "../constants/configFiles.js";
-import { isUsingNextJs, isUsingTypescript } from "./checks.js";
+import configFiles from "@/constants/configFiles.js";
+import { isUsingNextJs, isUsingTypescript } from "@/utils/checks.js";
 
 export default function getConfigName() {
   // By default use the "cui.config.mjs" file

@@ -1,9 +1,9 @@
 import buildStyleModule from "./buildStyleModule.js";
-import { CUIConfig } from "../types/CUIConfig.js";
-import { ComponentWithCB } from "../types/Components.js";
+import { CUIConfig } from "@/types/CUIConfig.js";
+import { ComponentWithCB } from "@/types/Components.js";
 import { db } from "@cubicsui/db";
 import { resolve } from "path";
-import writeFile from "./writeFile.js";
+import writeFile from "@/utils/writeFile.js";
 
 export default async function buildComponentTree(
   component: ComponentWithCB,
@@ -31,17 +31,13 @@ export default async function buildComponentTree(
     component.outPath
   );
 
-  // TODO Add modifications, like TS->JS to the script here
-
-  await writeFile(componentOutPath, component.codeblocks.script);
-  console.log(`✔ Created ${component.name} in the project root.`);
-
   const lclDeps = component.deps.lcl;
   console.log(`👀 Analysing ${component.name} dependencies`);
   for (const dep of lclDeps) {
     switch (dep.cmpId) {
       case "":
       case undefined:
+      case null:
         console.error(
           `Dependency: ${dep.name}, isnt linked to any component or styles`
         );
@@ -61,4 +57,8 @@ export default async function buildComponentTree(
         break;
     }
   }
+  // TODO Add modifications, like TS->JS to the script here
+
+  await writeFile(componentOutPath, component.codeblocks.script);
+  console.log(`✔ Created ${component.name} in the project root.`);
 }

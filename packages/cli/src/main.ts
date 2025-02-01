@@ -1,9 +1,9 @@
 import { program } from "commander";
-import init from "./commands/init.js";
-import add from "./commands/add.js";
-import { commandDesc } from "./constants/descriptions.js";
-import newComponent from "./commands/new/component.js";
-import newProject from "./commands/new/project.js";
+import init from "@/commands/init/index.js";
+import add from "@/commands/add/index.js";
+import { commandDesc } from "@/constants/descriptions.js";
+import newComponent from "@/commands/new/component/index.js";
+import newProject from "@/commands/new/project/index.js";
 import { resolve } from "path";
 import { config } from "dotenv";
 
