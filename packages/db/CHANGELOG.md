@@ -1,5 +1,11 @@
 # @cubicsui/db
 
+## 1.2.7
+
+### Patch Changes
+
+- Added back binaryTargets in @cubicsui/db
+
 ## 1.2.6
 
 ### Patch Changes
