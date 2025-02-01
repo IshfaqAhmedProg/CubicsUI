@@ -59,6 +59,15 @@ export function checkStyleEngine(): CUIConfig["envOptions"]["styleExt"] {
 export function checkIfSrcFolderExists(): boolean {
   return existsSync(resolve(process.cwd(), "src"));
 }
+
+/**
+ * Checks if CUI_DATABASE_URL exists in environment
+ */
+export function checkIfDBUrlExistsInEnvironment() {
+  if (process.env.CUI_DATABASE_URL) return true;
+  else return false;
+}
+
 /**
  * Check if there is an existing cui.config in the project
  */

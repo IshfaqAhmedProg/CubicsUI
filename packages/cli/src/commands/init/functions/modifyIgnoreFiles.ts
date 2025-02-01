@@ -15,7 +15,7 @@ export default async function modifyIgnoreFiles() {
     }
   });
   const filesToIgnoreString = filesToIgnore.join("\n");
-  const dataToAppend = "# Added by CubicsUI" + "\n" + filesToIgnoreString;
+  const dataToAppend = "\n# Added by CubicsUI\n" + filesToIgnoreString;
 
   if (ignoreFileData?.includes(filesToIgnoreString)) {
     return;

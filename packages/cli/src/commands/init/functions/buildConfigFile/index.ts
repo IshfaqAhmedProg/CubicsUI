@@ -6,6 +6,10 @@ import getDetectedConfig from "./detectConfig.js";
 import getConfigName from "./getConfigName.js";
 import { InitOptions } from "@/commands/init/index.js";
 
+/**
+ * Builds the `cui.config` file in the root of the project
+ * @param options
+ */
 export default async function (options: InitOptions) {
   //  Detect the necessary values for the config file from the host project automatically or ask the host
   const detectedConfig = getDetectedConfig(options);
