@@ -1,5 +1,11 @@
 # @cubicsui/db
 
+## 1.2.4
+
+### Patch Changes
+
+- Modified binary target to native only
+
 ## 1.2.3
 
 ### Patch Changes

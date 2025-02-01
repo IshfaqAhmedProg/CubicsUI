@@ -1,5 +1,12 @@
 # @cubicsui/helpers
 
+## 1.1.6
+
+### Patch Changes
+
+- Updated dependencies
+  - @cubicsui/db@1.2.4
+
 ## 1.1.5
 
 ### Patch Changes
