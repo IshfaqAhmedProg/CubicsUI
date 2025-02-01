@@ -1,6 +1,6 @@
 {
   "name": "@cubicsui/db",
-  "version": "1.2.4",
+  "version": "1.2.5",
   "description": "The database that holds all the constants required to generate components",
   "private": false,
   "publishConfig": {
@@ -28,7 +28,8 @@
     "db:deploy": "prisma migrate deploy",
     "db:push": "prisma db push",
     "lint": "eslint",
-    "build": "pnpm db:generate && pnpm lint && tsc"
+    "build": "pnpm db:generate && pnpm lint && tsc",
+    "postinstall": "prisma generate"
   },
   "devDependencies": {
     "@cubicsui/configs": "workspace:^",

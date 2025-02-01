@@ -1,5 +1,11 @@
 # @cubicsui/db
 
+## 1.2.5
+
+### Patch Changes
+
+- Added postinstall script to @cubicsui/db
+
 ## 1.2.4
 
 ### Patch Changes
