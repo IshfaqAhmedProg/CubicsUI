@@ -37,107 +37,78 @@ export type Environment = {
  */
 
 export type CUIConfig = {
-  /**
-   * The generated code for the components depends on the `env` object is selected
-   * @remarks
-   * This will be detected when you run
-   * `cui init`
-   */
-  env: Environment;
-  /**
-   * Controls which flavor of css should be used when generating styles for the components,
-   * - `css` (default)
-   * - `tailwind`: If any `tailwind.config` file is detected in the project root
-   * - `scss`: If any `.scss` file is detected anywhere in the project.
-   * @remarks
-   * This will be automatically detected when you run
-   * `cui init`
-   * @default "css"
-   */
-  styleEngine: "css" | "scss" | "tailwind";
-  /**
-   * Set to true if the generated components should use typescript,
-   *
-   * @remarks
-   * This will be detected when you run
-   * `cui init`
-   */
-  typescript: boolean;
-  /**
-   * Controls wether the root directory is in src or process.cwd()
-   *
-   * @remarks
-   * This will be detected when you run
-   * `cui init`
-   */
-  rootDir: string;
-  /**
-   * Controls the rendering of comments during component generation.
-   * - `all` (default): Renders all comments, including detailed and minor explanations.
-   * - `none`: Suppresses all comments during component generation.
-   * - `important`: Renders only necessary or critical comments that provide essential context.
-   * @default "none"
-   */
-  renderComments?: "none" | "all" | "important";
-  /**
-   * Controls the naming convention for the files of the generated component
-   * - `CapitalCase`(default): File names will be in capital case eg:- TimeCard.tsx
-   * - `camelCase`: File names will be in camel case eg:- timeCard.tsx
-   * - `kebab-case`: Files will be in kebab case eg:- time-card.tsx
-   * - `snake_case`: Files will be in snake case eg:- time_card.tsx
-   * - `UPPERCASE`: Files will be in snake case eg:- TIMECARD.tsx
-   * @default "CapitalCase"
-   */
-  fileNamingConvention: NamingConvention;
-  /**
-   * Controls the naming convention for the folders that will contain the generated component
-   * - `CapitalCase`(default): File names will be in capital case eg:- TimeCard
-   * - `camelCase`: File names will be in camel case eg:- timeCard
-   * - `kebab-case`: Files will be in kebab case eg:- time-card
-   * - `snake_case`: Files will be in snake case eg:- time_card
-   * - `UPPERCASE`: Files will be in snake case eg:- TIMECARD
-   * @default "CapitalCase"
-   */
-  dirNamingConvention: NamingConvention;
+  envOptions: {
+    /**
+     * The generated code for the components depends on the `env` object is selected
+     * @remarks
+     * This will be detected when you run
+     * `cui init`
+     */
+    env: Environment;
+    /**
+     * Controls which flavor of css should be used when generating styles for the components,
+     * - `css` (default)
+     * - `tailwind`: If any `tailwind.config` file is detected in the project root
+     * - `scss`: If any `.scss` file is detected anywhere in the project.
+     * @remarks
+     * This will be automatically detected when you run
+     * `cui init`
+     * @default "css"
+     */
+    styleExt: "css" | "scss" | "tailwind";
 
-  /**
-   * Database URL configuration object for the host project
-   * Controls which database to connect to and which project the components belong to.
-   * @remarks You can use the `url` property to provide a complete database URL
-   * or use the individual properties to construct the URL
-   * @remarks you can use a public account with read-only access for usersname and password.
-   */
-  databaseConfig: {
     /**
-     * The project name to which the components belong
+     * Set to true if the generated components should use typescript,
+     *
+     * @remarks
+     * This will be detected when you run
+     * `cui init`
      */
-    project: string;
+    typescript: boolean;
     /**
-     * Can be string or object containing the components that builds the url
+     * Controls wether the root directory is in src or process.cwd()
+     *
+     * @remarks
+     * This will be detected when you run
+     * `cui init`
      */
-    db: string | DBUrl;
+    rootDir: string;
+    /**
+     * Controls the rendering of comments during component generation.
+     * - `all` (default): Renders all comments, including detailed and minor explanations.
+     * - `none`: Suppresses all comments during component generation.
+     * - `important`: Renders only necessary or critical comments that provide essential context.
+     * @default "none"
+     */
+    // renderComments?: "none" | "all" | "important";
+    /**
+     * Controls the naming convention for the files of the generated component
+     * - `CapitalCase`(default): File names will be in capital case eg:- TimeCard.tsx
+     * - `camelCase`: File names will be in camel case eg:- timeCard.tsx
+     * - `kebab-case`: Files will be in kebab case eg:- time-card.tsx
+     * - `snake_case`: Files will be in snake case eg:- time_card.tsx
+     * - `UPPERCASE`: Files will be in snake case eg:- TIMECARD.tsx
+     * @default "CapitalCase"
+     */
+    // fileNamingConvention: NamingConvention;
+    /**
+     * Controls the naming convention for the folders that will contain the generated component
+     * - `CapitalCase`(default): File names will be in capital case eg:- TimeCard
+     * - `camelCase`: File names will be in camel case eg:- timeCard
+     * - `kebab-case`: Files will be in kebab case eg:- time-card
+     * - `snake_case`: Files will be in snake case eg:- time_card
+     * - `UPPERCASE`: Files will be in snake case eg:- TIMECARD
+     * @default "CapitalCase"
+     */
+    // dirNamingConvention: NamingConvention;
   };
-};
-
-export type DBUrl = {
-  /**
-   * MongoDB username, environment variable `CUI_USERNAME`
-   */
-  username: string;
-  /**
-   * MongoDB password, environment variable `CUI_PASSWORD`
-   */
-  password: string;
-
-  /**
-   * Database hostUrl, environment variable `CUI_HOST_URL`
-   */
-  hostUrl: string;
-
-  /**
-   * Name of the database, environment variable `CUI_DB_NAME`
-   */
-  dbName: string;
+  databaseOptions: {
+    /**
+     * Name of the project in the database where the components can be found
+     */
+    projectName: string;
+  };
+  mods?: [];
 };
 
 /**
@@ -154,10 +125,7 @@ export type DBUrl = {
  *
  * @see CUIConfig for the complete configuration interface
  */
-export type DetectedConfig = Pick<
-  CUIConfig,
-  "env" | "styleEngine" | "typescript" | "rootDir" | "databaseConfig"
->;
+export type DetectedConfig = Pick<CUIConfig, "envOptions">;
 /**
  * A type that represents the literal string types of valid configuration file names.
  *

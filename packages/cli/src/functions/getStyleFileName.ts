@@ -2,7 +2,6 @@ import { components } from "@cubicsui/db";
 import { basename, extname } from "path";
 import { CUIConfig } from "../types/CUIConfig.js";
 
-
 export default function getStyleFileName(
   fileName: string,
   component: components,
@@ -17,7 +16,8 @@ export default function getStyleFileName(
   // orelse create a new style file from the component name and adding the extension from user config
   if (!styleFileName) {
     styleFileName =
-      basename(fileName, extname(fileName)) + `.module.${config.styleEngine}`;
+      basename(fileName, extname(fileName)) +
+      `.module.${config.envOptions.styleExt}`;
   }
 
   return styleFileName;

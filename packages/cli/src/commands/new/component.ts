@@ -33,14 +33,14 @@ export default async function newComponent(filepath: string): Promise<void> {
 
     // Create component
     console.log(
-      `⏬ Fetching project ${config.databaseConfig.project} from database, please wait...`
+      `⏬ Fetching project ${config.databaseOptions.projectName} from database, please wait...`
     );
     const project = await db.projects.findFirstOrThrow({
-      where: { name: config.databaseConfig.project },
+      where: { name: config.databaseOptions.projectName },
     });
 
     const name = basename(filepath, extname(filepath));
-    const outPath = getRelativePath(filepath, config.rootDir);
+    const outPath = getRelativePath(filepath, config.envOptions.rootDir);
 
     console.log("⏫ Uploading component to database");
     const component = await db.components.create({

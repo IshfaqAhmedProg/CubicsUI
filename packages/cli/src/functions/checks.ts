@@ -5,9 +5,9 @@ import { CUIConfig } from "../types/CUIConfig.js";
 
 /**
  * TODO Check which env value suits the best for the host project
- * @returns {CUIConfig["env"]} The environment detected in the host project
+ * @returns {CUIConfig["envOptions"]["env"]} The environment detected in the host project
  */
-export function checkEnv(): CUIConfig["env"] {
+export function checkEnv(): CUIConfig["envOptions"]["env"] {
   const init = {
     library: "react",
     framework: "none",
@@ -49,7 +49,7 @@ export function isUsingTypescript(): boolean {
  * TODO Check the style engine used in the host project
  * @returns {CUIConfig["styleEngine"]} The detected config for the host project
  */
-export function checkStyleEngine(): CUIConfig["styleEngine"] {
+export function checkStyleEngine(): CUIConfig["envOptions"]["styleExt"] {
   return "css";
 }
 /**

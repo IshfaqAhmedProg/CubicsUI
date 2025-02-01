@@ -23,15 +23,15 @@ export default async function add(requestedComponent: string): Promise<void> {
 
     // TODO use cache .cui/project.json instead
     console.log(
-      `⏬ Fetching project: ${config.databaseConfig.project} from database, please wait...`
+      `⏬ Fetching project: ${config.databaseOptions.projectName} from database, please wait...`
     );
     const project = await db.projects.findFirst({
-      where: { name: config.databaseConfig.project },
+      where: { name: config.databaseOptions.projectName },
     });
 
     if (!project)
       throw new Error(
-        `No project with name ${config.databaseConfig.project} found!`
+        `No project with name ${config.databaseOptions.projectName} found!`
       );
 
     console.log(

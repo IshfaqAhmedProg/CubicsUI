@@ -1,14 +1,10 @@
 import { input, select, Separator } from "@inquirer/prompts";
-import loadConfig from "../../functions/loadConfig.js";
 import { npmPackageNameRegex } from "@cubicsui/helpers";
 import { Language, StyleExtension } from "@cubicsui/db";
 import { db } from "@cubicsui/db";
 
 export default async function newProject() {
-  const config = await loadConfig();
-  console.log(
-    `Creating new project on ${JSON.stringify(config.databaseConfig.db)}`
-  );
+  console.log(`Creating new project on ${process.env.DATABASE_URL}`);
   const newProjectName = await input({
     message:
       "Enter the name for your new project, the project name should follow NPM naming conventions",

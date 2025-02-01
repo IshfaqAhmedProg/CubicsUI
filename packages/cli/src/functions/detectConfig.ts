@@ -3,8 +3,8 @@ import { DetectedConfig } from "../types/CUIConfig.js";
 import {
   checkEnv,
   isUsingTypescript,
-  checkStyleEngine,
   checkIfSrcFolderExists,
+  checkStyleEngine,
 } from "./checks.js";
 import { InitOptions } from "../commands/init.js";
 
@@ -18,9 +18,12 @@ export default function getDetectedConfig(
 ): DetectedConfig {
   console.log("⏳ Checking project environment, please wait...");
   const detectedConfig = configGen() as DetectedConfig;
-  detectedConfig.env = checkEnv();
-  detectedConfig.typescript = options?.typescript ?? isUsingTypescript();
-  detectedConfig.styleEngine = checkStyleEngine();
-  detectedConfig.rootDir = checkIfSrcFolderExists() ? "./src" : ".";
+  detectedConfig.envOptions.env = checkEnv();
+  detectedConfig.envOptions.styleExt = checkStyleEngine();
+  detectedConfig.envOptions.typescript =
+    options?.typescript ?? isUsingTypescript();
+  detectedConfig.envOptions.rootDir = checkIfSrcFolderExists()
+    ? "./src"
+    : ".";
   return detectedConfig;
 }

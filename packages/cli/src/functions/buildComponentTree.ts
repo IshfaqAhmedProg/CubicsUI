@@ -19,11 +19,15 @@ export default async function buildComponentTree(
       "Component script is missing. Please check the script section of the component and try again."
     );
   }
-  const outPath = resolve(process.cwd(), config.rootDir, component.outPath);
+  const outPath = resolve(
+    process.cwd(),
+    config.envOptions.rootDir,
+    component.outPath
+  );
 
   const componentOutPath = resolve(
     process.cwd(),
-    config.rootDir,
+    config.envOptions.rootDir,
     component.outPath
   );
 

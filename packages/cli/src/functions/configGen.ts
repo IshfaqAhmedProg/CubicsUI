@@ -8,18 +8,19 @@ import { CUIConfig, DetectedConfig } from "../types/CUIConfig.js";
  */
 export default function configGen(detectedConfig?: DetectedConfig): CUIConfig {
   return {
-    env: { library: "react", framework: "none" },
-    styleEngine: "css",
-    typescript: false,
-    rootDir: ".",
-    databaseConfig: {
-      project: "@cubicsui/lib",
-      // TODO Instead of string use env variables
-      db: "mongodb+srv://ishfaqahmed:Fm6okdd4FADbgaor@cubicsui.l8bf4.mongodb.net/cubicsuidb?retryWrites=true&w=majority&appName=CubicsUI",
+    envOptions: {
+      env: { library: "react", framework: "none" },
+      styleExt: "css",
+      typescript: false,
+      rootDir: ".",
     },
-    fileNamingConvention: "CapitalCase",
-    dirNamingConvention: "CapitalCase",
-    renderComments: "none",
+    databaseOptions: {
+      projectName: "@cubicsui/lib",
+    },
     ...detectedConfig,
+    // styleEngine: "css",
+    // renderComments: "none",
+    // dirNamingConvention: "CapitalCase",
+    // fileNamingConvention: "CapitalCase",
   };
 }
