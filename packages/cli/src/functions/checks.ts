@@ -1,6 +1,6 @@
-import { existsSync } from "fs";
+import { existsSync, readdirSync } from "fs";
 import configFiles from "../constants/configFiles.js";
-import { resolve } from "path";
+import { parse, resolve } from "path";
 import { CUIConfig } from "../types/CUIConfig.js";
 
 /**
@@ -22,8 +22,18 @@ export function checkEnv(): CUIConfig["env"] {
  * @returns {boolean} true if the project is using nextJS
  */
 export function isUsingNextJs(): boolean {
-  return ["js", "ts", "mjs"].some((ext) =>
-    existsSync(resolve(process.cwd(), `next.config.${ext}`))
+  return readdirSync(process.cwd()).some(
+    (file) => parse(file).name == "next.config"
+  );
+}
+/**
+ * Check if project is using next js or not by checking if the
+ * file `vite.config` exists or not
+ * @returns {boolean} true if the project is using vite
+ */
+export function isUsingVite(): boolean {
+  return readdirSync(process.cwd()).some(
+    (file) => parse(file).name == "vite.config"
   );
 }
 /**
