@@ -87,3 +87,4 @@ export function checkIfAlreadyConfigured() {
     process.exit(1);
   }
 }
+

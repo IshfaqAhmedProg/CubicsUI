@@ -1,8 +1,8 @@
 import { db } from "@cubicsui/db";
 import loadConfig from "@/utils/loadConfig.js";
-import { Prisma } from "@cubicsui/db";
 import buildComponentTree from "./functions/buildComponentTree.js";
 import { ComponentWithCB } from "@/types/Components.js";
+import { isDocumentNotFoundError } from "@/utils/errors.js";
 
 /**
  * Adds the requested component from the database to your project, by building the dependency tree
@@ -49,17 +49,11 @@ export default async function (requestedComponent: string): Promise<void> {
 
     console.log(`✨ You are good to go!`);
   } catch (error) {
-    if (
-      error instanceof Prisma.PrismaClientKnownRequestError &&
-      error.code === "P2025"
-    ) {
-      console.error(
-        `✖ ${requestedComponent} does not exist in the database:`,
-        error.message
-      );
+    if (isDocumentNotFoundError(error)) {
+      console.error(`✖ ${requestedComponent} does not exist in the database:`);
+    } else {
+      console.error(`✖ Failed to create ${requestedComponent}:`, error);
     }
-    // console.log(error);
-    console.error(`✖ Failed to create ${requestedComponent}:`, error);
     process.exit(1);
   }
 }
