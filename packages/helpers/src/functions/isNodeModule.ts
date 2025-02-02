@@ -10,12 +10,13 @@ import { TsConfigPaths } from "../types/TsConfigPaths.js";
  */
 export default function isNodeModule(
   importPath: string,
-  paths: TsConfigPaths
+  paths?: TsConfigPaths
 ): boolean {
+  const pathAliases = paths != undefined ? Object.keys(paths) : [];
   if (importPath.startsWith("@") && importPath.split("/").length > 1) {
     const [scope] = importPath.split("/");
     // Check if the scope matches any of our path aliases
-    return !Object.keys(paths).some(
+    return !pathAliases.some(
       (alias) => alias.startsWith(scope + "/") || alias === scope
     );
   }
@@ -23,8 +24,6 @@ export default function isNodeModule(
   return (
     !importPath.startsWith(".") &&
     !importPath.startsWith("/") &&
-    !Object.keys(paths).some((alias) =>
-      importPath.startsWith(alias.replace("/*", ""))
-    )
+    !pathAliases.some((alias) => importPath.startsWith(alias.replace("/*", "")))
   );
 }

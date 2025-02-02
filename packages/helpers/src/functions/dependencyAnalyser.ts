@@ -1,9 +1,9 @@
 import * as parser from "@babel/parser";
 import { recursive as walkRecursive } from "babel-walk";
 import {
-    Dependencies,
-    LocalDependency,
-    ExternalDependency,
+  Dependencies,
+  LocalDependency,
+  ExternalDependency,
 } from "@cubicsui/db";
 import isNodeModule from "./isNodeModule.js";
 import { TsConfigPaths } from "../types/TsConfigPaths.js";
@@ -49,8 +49,9 @@ export async function createLocalDependency(
  */
 export default async function dependencyAnalyser(
   code: string | undefined,
-  paths: TsConfigPaths
+  paths?: TsConfigPaths
 ): Promise<Dependencies> {
+  const pathAliases = paths ? Object.keys(paths) : [];
   const dependencies: Dependencies = {
     ext: [],
     lcl: [],
@@ -85,7 +86,7 @@ export default async function dependencyAnalyser(
       if (
         importSource.startsWith(".") ||
         importSource.startsWith("/") ||
-        Object.keys(paths).some((alias) =>
+        pathAliases.some((alias) =>
           importSource.startsWith(alias.replace("/*", ""))
         )
       ) {
