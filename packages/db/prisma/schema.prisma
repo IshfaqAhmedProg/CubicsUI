@@ -53,7 +53,7 @@ model components {
   /// The path of the file relative to current working directory
   outPath String
   /// A short description of what the component does
-  desc    String
+  desc    String?
 
   /// Dependencies of the component
   deps Dependencies
