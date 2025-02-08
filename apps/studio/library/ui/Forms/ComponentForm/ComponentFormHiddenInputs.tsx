@@ -1,9 +1,8 @@
-import React from "react";
 import HiddenInput from "../../Inputs/HiddenInput";
 import { useComponentForm } from "@/library/contexts/ComponentFormContext";
 
 export default function ComponentFormHiddenInputs() {
-  const { project, component, codeblocks } = useComponentForm();
+  const { library, component, codeblocks } = useComponentForm();
   return (
     <>
       {codeblocks && (
@@ -19,8 +18,8 @@ export default function ComponentFormHiddenInputs() {
         />
       )}
       <HiddenInput
-        value={project.id}
-        name="prId"
+        value={library.id}
+        name="libId"
       />
     </>
   );

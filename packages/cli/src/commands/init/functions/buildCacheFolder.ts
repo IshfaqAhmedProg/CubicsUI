@@ -1,7 +1,7 @@
 import { resolve } from "path";
 import {
   cacheDirName,
-  defaultProject,
+  defaultLibrary,
   projectCacheName,
 } from "@/constants/defaults.js";
 import { db } from "@cubicsui/db";
@@ -14,9 +14,9 @@ export default async function buildCacheFolder() {
   // Initialise
   const prFilePath = resolve(process.cwd(), cacheDirName, projectCacheName);
 
-  console.log("⏬ Fetching default components project!");
-  const prFileContent = await db.projects.findFirst({
-    where: { name: defaultProject },
+  console.log("⏬ Fetching default component library!");
+  const prFileContent = await db.libraries.findFirst({
+    where: { name: defaultLibrary },
     include: { configurations: true },
   });
   // Write default project data

@@ -5,7 +5,7 @@ import configFiles from "@/constants/configFiles.js";
 import { CUIConfig } from "@/types/CUIConfig.js";
 
 /**
- * Loads the configuration file "cui.config" from the project,
+ * Loads the configuration file "cui.config" from the host project,
  * @returns {CUIConfig} Validated configuration object.
  */
 export default async function loadConfig(): Promise<CUIConfig> {
@@ -29,9 +29,8 @@ export default async function loadConfig(): Promise<CUIConfig> {
   }
   if (!module)
     throw new Error(
-      `
-    Config file is missing, please initialise the project
-    Run: 
+      `Config file is missing, please initialise your project by running
+      
         npx cui init`
     );
 

@@ -1,5 +1,5 @@
 import supportedLanguageWithIcons from "@/library/constants/supportedLangs";
-import { Language, projects } from "@cubicsui/db";
+import { Language, libraries } from "@cubicsui/db";
 import {
   FormControl,
   InputLabel,
@@ -12,16 +12,16 @@ import {
 import { capitalize } from "lodash";
 import { useState } from "react";
 
-interface ProjectLanguageInputProps extends FormControlProps {
-  project?: projects;
+interface LibraryLanguageInputProps extends FormControlProps {
+  library?: libraries;
 }
 
-export default function ProjectLanguageInput({
-  project,
+export default function LibraryLanguageInput({
+  library,
   ...rest
-}: ProjectLanguageInputProps) {
+}: LibraryLanguageInputProps) {
   const [lang, setLang] = useState<Language>(
-    project?.lang ?? supportedLanguageWithIcons[0].name
+    library?.lang ?? supportedLanguageWithIcons[0].name
   );
 
   return (

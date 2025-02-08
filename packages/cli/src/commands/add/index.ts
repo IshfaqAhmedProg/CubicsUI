@@ -21,17 +21,17 @@ export default async function (requestedComponent: string): Promise<void> {
   try {
     const config = await loadConfig();
 
-    // TODO use cache .cui/project.json instead
+    // TODO use cache .cui/library.json instead
     console.log(
-      `⏬ Fetching project: ${config.databaseOptions.projectName} from database, please wait...`
+      `⏬ Fetching library: ${config.databaseOptions.libraryName} from database, please wait...`
     );
-    const project = await db.projects.findFirst({
-      where: { name: config.databaseOptions.projectName },
+    const library = await db.libraries.findFirst({
+      where: { name: config.databaseOptions.libraryName },
     });
 
-    if (!project)
+    if (!library)
       throw new Error(
-        `No project with name ${config.databaseOptions.projectName} found!`
+        `No project with name ${config.databaseOptions.libraryName} found!`
       );
 
     console.log(
@@ -40,7 +40,7 @@ export default async function (requestedComponent: string): Promise<void> {
     const component = (await db.components.findFirstOrThrow({
       where: {
         name: requestedComponent,
-        prId: project.id,
+        libId: library.id,
       },
       include: { codeblocks: true },
     })) as ComponentWithCB;

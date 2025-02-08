@@ -1,7 +1,7 @@
 import { readdir } from "fs/promises";
 
 /**
- * Detects the package manager being used in the project
+ * Detects the package manager being used in the host project
  */
 export default async function detectPackageManager(): Promise<string> {
   try {

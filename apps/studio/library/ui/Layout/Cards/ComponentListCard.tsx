@@ -5,22 +5,22 @@ import ComponentCard, {
   ComponentCardProps,
   ComponentSkeleton,
 } from "./ComponentCard";
-import { getProjectComponents } from "../../Forms/ComponentForm/ComponentDependencies/LocalDependencyTable/actions";
-import { components, projects } from "@cubicsui/db";
+import { getLibraryComponents } from "../../Forms/ComponentForm/ComponentDependencies/LocalDependencyTable/actions";
+import { components, libraries } from "@cubicsui/db";
 
 interface ComponentListCardProps {
-  project: projects;
+  library: libraries;
   componentToExclude?: components | null;
   componentActions: ComponentCardProps["actions"];
 }
 
 // TODO Convert to RSC to remove unneccesary fetches
 /**
- * Components in the project
+ * Components in the library
  * @returns
  */
 export default function ComponentListCard({
-  project,
+  library,
   componentToExclude,
   componentActions,
 }: ComponentListCardProps) {
@@ -31,15 +31,15 @@ export default function ComponentListCard({
   useEffect(() => {
     const subscribe = async () => {
       setLoading(true);
-      const prCmpList = await getProjectComponents(
-        project.id,
+      const prCmpList = await getLibraryComponents(
+        library.id,
         componentToExclude?.id
       );
       setPrComponentList(prCmpList);
       setLoading(false);
     };
     subscribe();
-  }, [project, componentToExclude]);
+  }, [library, componentToExclude]);
 
   return (
     <Stack

@@ -15,7 +15,7 @@ export default function configGen(detectedConfig?: DetectedConfig): CUIConfig {
       rootDir: ".",
     },
     databaseOptions: {
-      projectName: "@cubicsui/lib",
+      libraryName: "@cubicsui/lib",
     },
     ...detectedConfig,
     // styleEngine: "css",

@@ -11,7 +11,7 @@ export default function ComponentScripts() {
     setScriptCode,
     setStyleCode,
     outPath,
-    project,
+    library,
     styleCode,
     scriptIncludesStyles,
     setScriptIncludesStyles,
@@ -36,7 +36,7 @@ export default function ComponentScripts() {
           editorData={scriptCode}
           path={scriptName()}
           setEditorData={(v) => setScriptCode(v)}
-          language={project.lang.toLowerCase()}
+          language={library.lang.toLowerCase()}
           onMount={onMountHandler}
         />
         <Stack
@@ -71,9 +71,9 @@ export default function ComponentScripts() {
               <CodeEditor
                 name="styles"
                 editorData={styleCode}
-                path={`${name}.${project.styleExt}`}
+                path={`${name}.${library.styleExt}`}
                 setEditorData={(v) => setStyleCode(v)}
-                language={project.styleExt}
+                language={library.styleExt}
               />
             </Stack>
           )}

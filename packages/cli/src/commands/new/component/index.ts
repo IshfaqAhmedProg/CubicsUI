@@ -21,12 +21,12 @@ export default async function (filepath: string): Promise<void> {
     const config = await loadConfig();
     // TODO replace with cached project
     console.log(
-      `⏬ Fetching project ${config.databaseOptions.projectName} from database, please wait...`
+      `⏬ Fetching library ${config.databaseOptions.libraryName} from database, please wait...`
     );
-    const project = await db.projects.findFirstOrThrow({
-      where: { name: config.databaseOptions.projectName },
+    const library = await db.libraries.findFirstOrThrow({
+      where: { name: config.databaseOptions.libraryName },
     });
-    await uploadComponentTree(project, filepath, config);
+    await uploadComponentTree(library, filepath, config);
   } catch (error) {
     console.error(error);
   }

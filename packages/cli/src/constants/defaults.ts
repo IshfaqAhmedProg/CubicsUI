@@ -1,4 +1,4 @@
-export const defaultProject = "@cubicsui/lib";
+export const defaultLibrary = "@cubicsui/lib";
 export const cacheDirName = ".cui";
 export const filesToIgnore = [cacheDirName, ".env"];
 export const envVariables = {

@@ -17,7 +17,7 @@ import CodeEditor from "@/library/ui/Inputs/CodeEditor";
 import HiddenInput from "@/library/ui/Inputs/HiddenInput";
 import { Suggestion } from "@/library/types/Suggestions";
 import { configurations } from "@cubicsui/db";
-import { useProject } from "../../../../library/contexts/ProjectContext";
+import { useLibrary } from "@/library/contexts/LibraryContext";
 import { saveConfigAction } from "./actions";
 import useDisclosure from "@/library/hooks/useDisclosure";
 
@@ -35,7 +35,7 @@ export function ConfigurationDialog(props: ConfigurationDialogProps) {
   const { handleClose, handleStrictClose, suggestion, configuration, ...rest } =
     props;
   const [state, formAction, pending] = useActionState(saveConfigAction, {});
-  const { project } = useProject();
+  const { library } = useLibrary();
 
   useEffect(() => {
     if (state?.status === "success") {
@@ -65,8 +65,8 @@ export function ConfigurationDialog(props: ConfigurationDialogProps) {
           mt={3}
         >
           <HiddenInput
-            name="prId"
-            value={project.id}
+            name="libId"
+            value={library.id}
           />
           {configuration?.id && (
             <HiddenInput

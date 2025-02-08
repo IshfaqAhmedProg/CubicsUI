@@ -80,8 +80,8 @@ export default function Sidebar() {
 
   const sidebarItems: SidebarItemProps["item"][] = [
     {
-      label: "Projects",
-      href: "/projects",
+      label: "Libraries",
+      href: "/libraries",
       icon: LibraryBooksRounded,
     },
     {

@@ -7,9 +7,9 @@ import {
 import { Suggestion } from "@/library/types/Suggestions";
 import { configurations } from "@cubicsui/db";
 import { Paper, Stack, Typography } from "@mui/material";
-import { useProject } from "../../../../library/contexts/ProjectContext";
+import { useLibrary } from "@/library/contexts/LibraryContext";
 import ConfigurationButton from "./button";
-import { knownConfigurations } from "../../../../library/constants/knownConfigurations";
+import { knownConfigurations } from "@/library/constants/knownConfigurations";
 
 interface ConfigurationSuggestionsProps {
   configurations: configurations[];
@@ -21,15 +21,15 @@ interface ConfigurationSuggestionsProps {
 export function ConfigurationSuggestions({
   configurations,
 }: ConfigurationSuggestionsProps) {
-  const { project } = useProject();
+  const { library } = useLibrary();
   const suggestions: Suggestion[] = [];
   if (!configurations.some((cfg) => cfg.name == "package.json"))
     suggestions.push({
       ...knownConfigurations.packageJson,
-      sample: samplePkgJson(project),
+      sample: samplePkgJson(library),
     });
 
-  if (project?.lang == "typescript") {
+  if (library?.lang == "typescript") {
     if (!configurations.some((cfg) => cfg.name == "tsconfig.json"))
       suggestions.push({
         ...knownConfigurations.tsconfigJson,

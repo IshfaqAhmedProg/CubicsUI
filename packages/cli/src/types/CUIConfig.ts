@@ -104,9 +104,9 @@ export type CUIConfig = {
   };
   databaseOptions: {
     /**
-     * Name of the project in the database where the components can be found
+     * Name of the library in the database where the components can be found
      */
-    projectName: string;
+    libraryName: string;
   };
   mods?: [];
 };

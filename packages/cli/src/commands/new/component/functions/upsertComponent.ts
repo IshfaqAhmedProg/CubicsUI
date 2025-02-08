@@ -2,7 +2,7 @@ import { isDocumentNotFoundError } from "@/utils/errors.js";
 import { codeblocks, components, db } from "@cubicsui/db";
 
 interface UpsertComponentProps {
-  component: Pick<components, "name" | "outPath" | "prId" | "deps" | "desc">;
+  component: Pick<components, "name" | "outPath" | "libId" | "deps" | "desc">;
   codeblocks: Pick<codeblocks, "script" | "styles">;
 }
 
@@ -14,7 +14,7 @@ export default async function upsertComponent({
   try {
     const existingComponent = await db.components.findFirstOrThrow({
       where: {
-        prId: component.prId,
+        libId: component.libId,
         name: component.name,
         outPath: component.outPath,
       },

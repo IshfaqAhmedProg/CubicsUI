@@ -1,6 +1,6 @@
 "use client";
 import { Button, Stack } from "@mui/material";
-import { useComponentForm } from "../../../library/contexts/ComponentFormContext";
+import { useComponentForm } from "@/library/contexts/ComponentFormContext";
 import ComponentDetails from "@/library/ui/Forms/ComponentForm/ComponentDetails";
 import ComponentScripts from "@/library/ui/Forms/ComponentForm/ComponentScripts";
 import ComponentActionBar from "@/library/ui/Forms/ComponentForm/ComponentActionBar";

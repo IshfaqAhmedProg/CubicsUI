@@ -3,6 +3,6 @@ export const commandDesc = {
   add: "Adds the requested component from the database to your project, by building the dependency tree",
   new: {
     component: "Creates the given filePath as a component in the database",
-    project: "Creates a new project with your configurations in the database",
+    library: "Creates a new project with your configurations in the database",
   },
 };

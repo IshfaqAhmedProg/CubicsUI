@@ -7,15 +7,17 @@ import db from "@/db";
 import ConfigurationButton from "./button";
 import Title from "@/library/ui/Typography/Title";
 
-export default async function ProjectConfigurationsPage({
+export default async function ConfigurationsPage({
   params,
 }: {
-  params: Promise<{ prId: string }>;
+  params: Promise<{ libId: string }>;
 }) {
-  const prId = (await params).prId;
-  if (!prId) return notFound();
+  const libId = (await params).libId;
+  if (!libId) return notFound();
 
-  const configurations = await db.configurations.findMany({ where: { prId } });
+  const configurations = await db.configurations.findMany({
+    where: { libId },
+  });
 
   return (
     <Stack
@@ -34,9 +36,9 @@ export default async function ProjectConfigurationsPage({
         variant="body2"
         color="text.primary"
       >
-        *Note: These configurations are used only when building components in
-        CubicsUI studio, they are not reusable blocks of code accessible by the
-        CLI if you want reusable configurations instead build a component{" "}
+        *Note: These configurations are used only when creating new components
+        in the Studio, they are not reusable blocks of code accessible by the
+        CLI if you want reusable configurations instead create the configuration as a component{" "}
       </Typography>
       <ConfigurationSuggestions configurations={configurations} />
       <Stack

@@ -7,23 +7,12 @@ import {
   DialogProps,
   DialogTitle,
   Divider,
-  Paper,
   Stack,
-  TextField,
   Typography,
 } from "@mui/material";
-import { useEffect, useState } from "react";
-import {
-  CheckRounded,
-  LinkOffRounded,
-  LinkRounded,
-  SearchRounded,
-} from "@mui/icons-material";
+import { useState } from "react";
+import { CheckRounded, LinkOffRounded, LinkRounded } from "@mui/icons-material";
 import { components, LocalDependency } from "@cubicsui/db";
-import { getProjectComponents } from "./actions";
-import ComponentCard, {
-  ComponentSkeleton,
-} from "@/library/ui/Layout/Cards/ComponentCard";
 import { ComponentLink } from "./LinkLocalDependencyButton";
 import ComponentListCard from "@/library/ui/Layout/Cards/ComponentListCard";
 
@@ -98,7 +87,7 @@ export default function LinkLocalDependencyDialog({
   const [selectedComponent, setSelectedComponent] = useState<components | null>(
     null
   );
-  const { project, component } = useComponentForm();
+  const { library, component } = useComponentForm();
   return (
     <Dialog
       {...rest}
@@ -120,7 +109,7 @@ export default function LinkLocalDependencyDialog({
               You can link the local dependency to a component below
             </Typography>
             <ComponentListCard
-              project={project}
+              library={library}
               componentToExclude={component}
               componentActions={(prc) => (
                 <Button

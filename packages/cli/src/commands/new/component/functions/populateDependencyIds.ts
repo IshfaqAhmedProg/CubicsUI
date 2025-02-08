@@ -1,12 +1,12 @@
 import { CUIConfig } from "@/types/CUIConfig.js";
 import resolveAliasedPath from "@/utils/resolveAliasedPath.js";
-import { LocalDependency, projects } from "@cubicsui/db";
+import { LocalDependency, libraries } from "@cubicsui/db";
 import { TsConfigPaths } from "@cubicsui/helpers";
 import uploadComponentTree from "./uploadComponentTree.js";
 
 interface PopulateDependencyIdProps {
   localDeps: LocalDependency[];
-  project: projects;
+  library: libraries;
   config: CUIConfig;
   pathAliases?: TsConfigPaths;
   styleModule?: string;
@@ -18,7 +18,7 @@ interface PopulateDependencyIdProps {
  */
 export default async function populateDependencyIds({
   localDeps,
-  project,
+  library,
   config,
   pathAliases,
   styleModule,
@@ -35,7 +35,7 @@ export default async function populateDependencyIds({
       );
       console.log("depPath", depPath);
       dep.cmpId =
-        (await uploadComponentTree(project, depPath, config))?.id ?? "";
+        (await uploadComponentTree(library, depPath, config))?.id ?? "";
     }
   }
   return localDeps;

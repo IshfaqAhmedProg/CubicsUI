@@ -9,7 +9,7 @@ datasource db {
   url      = env("CUI_DATABASE_URL")
 }
 
-model projects {
+model libraries {
   /// Id of the project
   id       String         @id @default(auto()) @map("_id") @db.ObjectId
   /// A unique name following npm package naming convention
@@ -38,16 +38,16 @@ model configurations {
   created DateTime @default(now())
   updated DateTime @updatedAt
 
-  prId    String   @db.ObjectId
-  project projects @relation(fields: [prId], references: [id], onDelete: Cascade, onUpdate: Cascade)
+  libId   String    @db.ObjectId
+  library libraries @relation(fields: [libId], references: [id], onDelete: Cascade, onUpdate: Cascade)
 }
 
 model components {
   /// Id of the library the component belongs 
-  prId    String   @db.ObjectId
-  project projects @relation(fields: [prId], references: [id], onDelete: Cascade, onUpdate: Cascade)
+  libId   String    @db.ObjectId
+  library libraries @relation(fields: [libId], references: [id], onDelete: Cascade, onUpdate: Cascade)
   /// Id of the component
-  id      String   @id @default(auto()) @map("_id") @db.ObjectId
+  id      String    @id @default(auto()) @map("_id") @db.ObjectId
   /// Name of the component that will be used by cli to create the component
   name    String
   /// The path of the file relative to current working directory
@@ -67,8 +67,8 @@ model components {
   codeblocks codeblocks?
 
   /// outPath and name should be unique for each component in a project orelse it would clash when creating the component
-  @@unique([prId, outPath])
-  @@unique([prId, name])
+  @@unique([libId, outPath])
+  @@unique([libId, name])
 }
 
 model codeblocks {

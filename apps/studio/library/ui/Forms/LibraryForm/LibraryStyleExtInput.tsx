@@ -1,7 +1,7 @@
 "use client";
 
 import styleExtWithLogos from "@/library/constants/styleEngines";
-import { projects, StyleExtension } from "@cubicsui/db";
+import { libraries, StyleExtension } from "@cubicsui/db";
 import {
   FormControl,
   FormControlProps,
@@ -13,16 +13,16 @@ import {
 } from "@mui/material";
 import { useState } from "react";
 
-interface ProjectStyleExtInputProps extends FormControlProps {
-  project?: projects;
+interface LibraryStyleExtInputProps extends FormControlProps {
+  library?: libraries;
 }
 
-export default function ProjectStyleExtInput({
-  project,
+export default function LibraryStyleExtInput({
+  library,
   ...rest
-}: ProjectStyleExtInputProps) {
+}: LibraryStyleExtInputProps) {
   const [styleExt, setStyleExt] = useState<StyleExtension>(
-    project?.styleExt ?? styleExtWithLogos[0].name
+    library?.styleExt ?? styleExtWithLogos[0].name
   );
   return (
     <FormControl {...rest}>

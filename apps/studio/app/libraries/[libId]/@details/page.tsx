@@ -3,15 +3,15 @@
 import HiddenInput from "@/library/ui/Inputs/HiddenInput";
 import Spinner from "@/library/ui/Navigation/Spinner/Spinner";
 import { Stack, TextField, Button } from "@mui/material";
-import { useProject } from "../../../../library/contexts/ProjectContext";
+import { useLibrary } from "@/library/contexts/LibraryContext";
 import { useActionState } from "react";
-import { updateProjectAction } from "./actions";
-import ProjectLanguageInput from "@/library/ui/Forms/ProjectForm/ProjectLanguageInput";
-import ProjectStyleExtInput from "@/library/ui/Forms/ProjectForm/ProjectStyleExtInput";
+import { updateLibraryAction } from "../../actions";
+import LibraryLanguageInput from "@/library/ui/Forms/LibraryForm/LibraryLanguageInput";
+import LibraryStyleExtInput from "@/library/ui/Forms/LibraryForm/LibraryStyleExtInput";
 
 export default function LibraryDetailsPage() {
-  const { project } = useProject();
-  const [state, formAction, pending] = useActionState(updateProjectAction, {});
+  const { library } = useLibrary();
+  const [state, formAction, pending] = useActionState(updateLibraryAction, {});
 
   // TODO add toast notification
   console.log(state?.status);
@@ -23,11 +23,11 @@ export default function LibraryDetailsPage() {
       gap={3}
     >
       <HiddenInput
-        name="prId"
-        value={project.id}
+        name="libId"
+        value={library.id}
       />
       <TextField
-        defaultValue={project.name}
+        defaultValue={library.name}
         label={"Library Name"}
         name="name"
         disabled={pending}
@@ -36,15 +36,15 @@ export default function LibraryDetailsPage() {
         direction={"row"}
         gap={3}
       >
-        <ProjectLanguageInput
-          project={project}
+        <LibraryLanguageInput
+          library={library}
           hiddenLabel
           required
           disabled={pending}
           fullWidth
         />
-        <ProjectStyleExtInput
-          project={project}
+        <LibraryStyleExtInput
+          library={library}
           hiddenLabel
           required
           disabled={pending}
@@ -54,7 +54,7 @@ export default function LibraryDetailsPage() {
       <TextField
         label="Description"
         placeholder="Enter a brief description describing the library"
-        defaultValue={project.desc}
+        defaultValue={library.desc}
         name="desc"
         multiline
         minRows={2}

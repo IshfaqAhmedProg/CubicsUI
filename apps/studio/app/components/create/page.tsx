@@ -1,23 +1,23 @@
-import db from "@/db";
 import CreateComponentForm from "./form";
 import { notFound } from "next/navigation";
-import ComponentFormProvider from "../../../library/contexts/ComponentFormContext";
+import ComponentFormProvider from "@/library/contexts/ComponentFormContext";
+import { readLibraryAction } from "@/app/libraries/actions";
 
-type SearchParams = Promise<{ prId: string }>;
+type SearchParams = Promise<{ libId: string }>;
 
 export default async function CreatePage({
   searchParams,
 }: {
   searchParams: SearchParams;
 }) {
-  const { prId } = await searchParams;
+  const { libId } = await searchParams;
 
-  const project = await db.projects.findFirst({ where: { id: prId } });
+  const library = await readLibraryAction(libId);
 
-  if (!project || !prId) return notFound();
+  if (!library || !libId) return notFound();
 
   return (
-    <ComponentFormProvider project={project}>
+    <ComponentFormProvider library={library}>
       <CreateComponentForm />
     </ComponentFormProvider>
   );

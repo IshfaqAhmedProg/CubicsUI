@@ -3,7 +3,7 @@ import { Button, Stack } from "@mui/material";
 import ComponentDetails from "@/library/ui/Forms/ComponentForm/ComponentDetails";
 import ComponentScripts from "@/library/ui/Forms/ComponentForm/ComponentScripts";
 import ComponentActionBar from "@/library/ui/Forms/ComponentForm/ComponentActionBar";
-import { useComponentForm } from "../../../library/contexts/ComponentFormContext";
+import { useComponentForm } from "@/library/contexts/ComponentFormContext";
 import ComponentFormHiddenInputs from "@/library/ui/Forms/ComponentForm/ComponentFormHiddenInputs";
 import ComponentDependencies from "@/library/ui/Forms/ComponentForm/ComponentDependencies/ComponentDependencies";
 import DeleteWithConfirmation from "@/library/ui/Inputs/DeleteWithConfirmation";
@@ -46,7 +46,7 @@ export default function ComponentForm() {
             deleteAction={deleteComponent}
             deleteMessage={`Are you sure you want to delete "${component.name}" and all its scripts? 
             This action is irreversible.`}
-            redirectTo={`/projects/${component.prId}`}
+            redirectTo={`/libraries/${component.libId}`}
           />
         )}
       </Stack>

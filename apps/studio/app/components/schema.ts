@@ -3,7 +3,7 @@ import isValidRelativePath from "@/library/functions/isValidRelativePath";
 import { z } from "zod";
 
 export const componentSchema = z.object({
-  prId: z.string({ message: "Project Id is not string" }),
+  libId: z.string({ message: "Library Id is not string" }),
   name: z
     .string()
     .nonempty({ message: "Component Name cannot be empty." })

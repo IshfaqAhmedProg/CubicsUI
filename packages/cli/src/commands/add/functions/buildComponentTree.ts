@@ -60,5 +60,5 @@ export default async function buildComponentTree(
   // TODO Add modifications, like TS->JS to the script here
 
   await writeFile(componentOutPath, component.codeblocks.script);
-  console.log(`✔ Created ${component.name} in the project root.`);
+  console.log(`✔ Created ${component.name} in your project.`);
 }

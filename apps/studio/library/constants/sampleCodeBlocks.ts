@@ -1,9 +1,9 @@
-import { Project } from "../types/Project";
+import { libraries } from "@cubicsui/db";
 
-export const samplePkgJson = (project?: Project) => `{
-  "name": "${project?.name ?? "projectName"}",
+export const samplePkgJson = (library?: libraries) => `{
+  "name": "${library?.name ?? "library-name"}",
   "version": "1.0.0",
-  "description": "${project?.desc ?? ""}",
+  "description": "${library?.desc ?? ""}",
   "author": "",
   "license": "MIT",
   "dependencies": {},

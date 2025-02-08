@@ -2,22 +2,22 @@
 
 import styleExtWithLogos from "@/library/constants/styleEngines";
 import supportedLanguageWithIcons from "@/library/constants/supportedLangs";
-import { Project } from "@/library/types/Project";
 import { CalendarTodayRounded, UpdateRounded } from "@mui/icons-material";
 import { Button, ButtonProps, Paper, Stack, Typography } from "@mui/material";
 import DateText from "../../Typography/DateText";
+import { libraries } from "@cubicsui/db";
 
-export default function ProjectCard({
-  project,
+export default function LibraryCard({
+  library,
   ...rest
 }: {
-  project: Partial<Project>;
+  library: Partial<libraries>;
 } & ButtonProps) {
   const supportedLang = supportedLanguageWithIcons.find(
-    (sl) => sl.name == project.lang
+    (sl) => sl.name == library.lang
   );
   const supportedStyle = styleExtWithLogos.find(
-    (sl) => sl.name == project.styleExt
+    (sl) => sl.name == library.styleExt
   );
 
   const LangLogo = supportedLang?.Logo;
@@ -51,7 +51,7 @@ export default function ProjectCard({
             fontWeight={"bold"}
             color="textPrimary"
           >
-            {project.name}
+            {library.name}
           </Typography>
           <Stack
             direction={"row"}
@@ -76,7 +76,7 @@ export default function ProjectCard({
             WebkitBoxOrient: "vertical",
           }}
         >
-          {project.desc ? project.desc : "Project Description"}
+          {library.desc ? library.desc : "Library Description"}
         </Typography>
       </Stack>
       <Stack
@@ -84,13 +84,13 @@ export default function ProjectCard({
         alignSelf={"flex-start"}
       >
         <DateText
-          date={project.created}
+          date={library.created}
           icon={<CalendarTodayRounded fontSize="inherit" />}
           title={(date) => `Created on ${date}`}
         />
-        {project.created?.getTime() != project.updated?.getTime() && (
+        {library.created?.getTime() != library.updated?.getTime() && (
           <DateText
-            date={project.updated}
+            date={library.updated}
             icon={<UpdateRounded fontSize="inherit" />}
             title={(date) => `Modified on ${date}`}
           />

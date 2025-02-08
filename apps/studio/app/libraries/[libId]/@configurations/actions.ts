@@ -6,7 +6,7 @@ import {
   FormActionReturnType,
 } from "@/library/types/ActionReturnTypes";
 import { z } from "zod";
-import { createConfigSchema as configSchema } from "../../schema";
+import { createConfigSchema as configSchema } from "./schema";
 import { revalidatePath } from "next/cache";
 import { configurations } from "@cubicsui/db";
 
@@ -16,17 +16,17 @@ export async function saveConfigAction(
 ): ActionReturnType<FormActionReturnType> {
   const errors: FormActionReturnType["errors"] = {};
   // Validate inputs
-  const prId = formdata.get("prId");
+  const libId = formdata.get("libId");
   const configId = formdata.get("configId");
 
   try {
-    if (!prId || typeof prId !== "string")
-      throw new Error("Project id is not defined");
+    if (!libId || typeof libId !== "string")
+      throw new Error("Library id is not defined");
     // Create the config
     const validatedInputs = configSchema.parse({
       name: formdata.get("name"),
       data: formdata.get("data"),
-      prId: formdata.get("prId"),
+      libId: formdata.get("libId"),
     });
     const payload =
       typeof configId == "string"
@@ -38,7 +38,7 @@ export async function saveConfigAction(
             data: validatedInputs,
           });
     console.log("Saved config:", payload);
-    revalidatePath(`/projects/${prId}`);
+    revalidatePath(`/libraries/${payload.libId}`);
     return { status: "success", payload };
   } catch (err) {
     console.error(err);
@@ -60,7 +60,7 @@ export async function deleteConfigurations(
     if (!id || typeof id !== "string")
       throw new Error("Configuration Id not found!");
     const payload = await db.configurations.delete({ where: { id } });
-    revalidatePath(`/projects/${payload.prId}`);
+    revalidatePath(`/libaries/${payload.libId}`);
     return { status: "success", payload };
   } catch (error) {
     console.error(error);

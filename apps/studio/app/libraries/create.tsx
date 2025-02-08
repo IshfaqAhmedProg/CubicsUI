@@ -13,20 +13,20 @@ import {
   TextField,
   Typography,
 } from "@mui/material";
-import { createProjectAction } from "./actions";
+import { createLibraryAction } from "./actions";
 import { useActionState, useEffect } from "react";
 import Link from "next/link";
 import { npmPackageNamingLink } from "@/library/constants/externalLinks";
 import Spinner from "@/library/ui/Navigation/Spinner/Spinner";
 import { ButtonedDialogProps } from "@/library/types/Dialog";
-import ProjectLanguageInput from "@/library/ui/Forms/ProjectForm/ProjectLanguageInput";
-import ProjectStyleExtInput from "@/library/ui/Forms/ProjectForm/ProjectStyleExtInput";
+import LibraryLanguageInput from "@/library/ui/Forms/LibraryForm/LibraryLanguageInput";
+import LibraryStyleExtInput from "@/library/ui/Forms/LibraryForm/LibraryStyleExtInput";
 import { redirect, RedirectType } from "next/navigation";
 
 /**
- * Button that when clicked opens a dialog to create a project.
+ * Button that when clicked opens a dialog to creates a library.
  */
-export default function CreateProjectButton(props: ButtonedDialogProps) {
+export default function CreateLibraryButton(props: ButtonedDialogProps) {
   const { open, handleClose, handleStrictClose, handleOpen } = useDisclosure();
   const { dialogProps, children, ...rest } = props;
   return (
@@ -36,9 +36,9 @@ export default function CreateProjectButton(props: ButtonedDialogProps) {
         startIcon={<AddRounded />}
         {...rest}
       >
-        {children ?? "Create Project"}
+        {children ?? "Create Library"}
       </Button>
-      <CreateProjectDialog
+      <CreateLibraryDialog
         handleClose={handleClose}
         handleStrictClose={handleStrictClose}
         {...dialogProps}
@@ -48,24 +48,24 @@ export default function CreateProjectButton(props: ButtonedDialogProps) {
   );
 }
 
-interface CreateProjectDialogProps extends DialogProps {
+interface CreateLibraryDialogProps extends DialogProps {
   handleClose: ReturnType<typeof useDisclosure>["handleClose"];
   handleStrictClose: ReturnType<typeof useDisclosure>["handleStrictClose"];
 }
 
 /**
- * Dialog to create a project, consists of a form containing inputs for the project name and the language.
+ * Dialog to create a library, consists of a form containing inputs for the library name and the language.
  */
-export function CreateProjectDialog({
+export function CreateLibraryDialog({
   handleClose,
   handleStrictClose,
   ...rest
-}: CreateProjectDialogProps) {
-  const [state, formAction, pending] = useActionState(createProjectAction, {});
+}: CreateLibraryDialogProps) {
+  const [state, formAction, pending] = useActionState(createLibraryAction, {});
 
   useEffect(() => {
     if (state?.status == "success" && state.payload?.id) {
-      redirect(`/projects/${state.payload.id}`, RedirectType.push);
+      redirect(`/libraries/${state.payload.id}`, RedirectType.push);
     }
   }, [state]);
   return (
@@ -74,14 +74,15 @@ export function CreateProjectDialog({
       {...rest}
       PaperProps={{ component: "form", action: formAction }}
     >
-      <DialogTitle>Create Project</DialogTitle>
+      <DialogTitle>Create Library</DialogTitle>
       <DialogContent>
         <Stack
           px={6}
           gap={6}
         >
           <FormLabel htmlFor="name">
-            Enter the name for your new project, the project name should follow{" "}
+            Enter the name for your new component library, the library name
+            should follow{" "}
             <Link
               href={npmPackageNamingLink}
               target="_blank"
@@ -92,7 +93,7 @@ export function CreateProjectDialog({
           </FormLabel>
           <TextField
             disabled={pending}
-            label="Project Name"
+            label="Library Name"
             error={Boolean(state?.errors?.name)}
             helperText={state?.errors?.name}
             required
@@ -107,7 +108,7 @@ export function CreateProjectDialog({
             <Typography variant="body2">
               Select the language you will be using to define the components.
             </Typography>
-            <ProjectLanguageInput
+            <LibraryLanguageInput
               hiddenLabel
               required
               disabled={pending}
@@ -121,9 +122,9 @@ export function CreateProjectDialog({
           >
             <Typography variant="body2">
               Select the style extension that will be used in the style files of
-              the project.
+              the library.
             </Typography>
-            <ProjectStyleExtInput
+            <LibraryStyleExtInput
               hiddenLabel
               required
               disabled={pending}

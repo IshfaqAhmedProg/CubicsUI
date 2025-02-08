@@ -1,42 +1,39 @@
-import { Grid2 as Grid, Stack, Typography } from "@mui/material";
+import { Grid2 as Grid, Typography } from "@mui/material";
 import { ReactNode } from "react";
 import { notFound } from "next/navigation";
-import db from "@/db";
-import ProjectProvider from "../../../library/contexts/ProjectContext";
-import DeleteProjectButton from "./delete";
+import LibraryProvider from "../../../library/contexts/LibraryContext";
 import { ExpandMoreRounded } from "@mui/icons-material";
 import CollapsibleSection from "@/library/ui/Layout/CollapsibleSection";
 import DeleteWithConfirmation from "@/library/ui/Inputs/DeleteWithConfirmation";
-import { deleteProjectAction } from "../actions";
+import { deleteLibraryAction, readLibraryAction } from "../actions";
 
-interface ProjectLayoutProps {
+interface LibraryLayoutProps {
   children: ReactNode;
   details: ReactNode;
   configurations: ReactNode;
   components: ReactNode;
-  params: Promise<{ prId: string }>;
+  params: Promise<{ libId: string }>;
 }
 
-export default async function ProjectLayout({
+export default async function LibraryLayout({
   children,
   details,
   configurations,
   components,
   params,
-}: ProjectLayoutProps) {
-  const id = (await params).prId;
+}: LibraryLayoutProps) {
+  const id = (await params).libId;
   if (!id) return notFound();
-
-  const project = await db.projects.findFirst({ where: { id } });
-  if (!project)
+  const library = await readLibraryAction(id);
+  if (!library)
     return (
       <Typography color="error">
-        Project with id:{id} does not exist in the database
+        Library with id:{id} does not exist in the database
       </Typography>
     );
 
   return (
-    <ProjectProvider project={project}>
+    <LibraryProvider library={library}>
       <Grid
         container
         spacing={2}
@@ -62,17 +59,17 @@ export default async function ProjectLayout({
 
           {configurations}
           <DeleteWithConfirmation
-            itemToDelete={project.name}
-            formDatas={[{ name: "prId", value: project.id }]}
-            deleteAction={deleteProjectAction}
-            deleteMessage={`Are you sure you want to delete "${project.name}" and
+            itemToDelete={library.name}
+            formDatas={[{ name: "libId", value: library.id }]}
+            deleteAction={deleteLibraryAction}
+            deleteMessage={`Are you sure you want to delete "${library.name}" and
                 all its configurations and components? This action is
                 irreversible.`}
-            redirectTo="/projects"
+            redirectTo="/libraries"
           />
         </Grid>
         <Grid size={6}>{components}</Grid>
       </Grid>
-    </ProjectProvider>
+    </LibraryProvider>
   );
 }

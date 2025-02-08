@@ -1,6 +1,6 @@
 import { Stack } from "@mui/material";
-import ProjectsList from "./list";
-import CreateProjectButton from "./create";
+import LibrariesList from "./list";
+import CreateLibraryButton from "./create";
 import { Suspense } from "react";
 import Spinner from "@/library/ui/Navigation/Spinner/Spinner";
 
@@ -8,7 +8,7 @@ export default async function LibrariesPage() {
   return (
     <Stack gap={3}>
       <Stack alignItems={"flex-end"}>
-        <CreateProjectButton />
+        <CreateLibraryButton />
       </Stack>
       <Suspense
         fallback={
@@ -18,7 +18,7 @@ export default async function LibrariesPage() {
           />
         }
       >
-        <ProjectsList />
+        <LibrariesList />
       </Suspense>
     </Stack>
   );

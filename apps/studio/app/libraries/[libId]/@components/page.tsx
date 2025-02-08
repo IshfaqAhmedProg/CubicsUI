@@ -6,15 +6,15 @@ import { notFound } from "next/navigation";
 import ComponentsList from "./list";
 import Title from "@/library/ui/Typography/Title";
 
-export default async function ProjectComponentsPage({
+export default async function LibraryComponentsPage({
   params,
 }: {
-  params: Promise<{ prId: string }>;
+  params: Promise<{ libId: string }>;
 }) {
-  const prId = (await params).prId;
-  if (!prId) return notFound();
+  const libId = (await params).libId;
+  if (!libId) return notFound();
 
-  const components = await db.components.findMany({ where: { prId } });
+  const components = await db.components.findMany({ where: { libId } });
 
   return (
     <Stack
@@ -29,9 +29,9 @@ export default async function ProjectComponentsPage({
         <Button
           startIcon={<AddRounded />}
           LinkComponent={Link}
-          href={`/components/create?prId=${prId}`}
+          href={`/components/create?libId=${libId}`}
         >
-          Add Component to project
+          Add Component to library
         </Button>
       )}
       {components.length == 0 ? (
@@ -43,9 +43,9 @@ export default async function ProjectComponentsPage({
           <Button
             startIcon={<AddRounded />}
             LinkComponent={Link}
-            href={`/components/create?prId=${prId}`}
+            href={`/components/create?libId=${libId}`}
           >
-            Add Component to project
+            Add Component to library
           </Button>
         </Stack>
       ) : (

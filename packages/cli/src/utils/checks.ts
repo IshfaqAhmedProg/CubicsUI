@@ -53,8 +53,8 @@ export function checkStyleEngine(): CUIConfig["envOptions"]["styleExt"] {
   return "css";
 }
 /**
- * Check if there is a src folder in the project root
- * @returns {boolean} returns true if src folder exists in the root of the project
+ * Check if there is a src folder in the host project root
+ * @returns {boolean} returns true if src folder exists in the root of the host project
  */
 export function checkIfSrcFolderExists(): boolean {
   return existsSync(resolve(process.cwd(), "src"));
@@ -79,12 +79,11 @@ export function checkIfAlreadyConfigured() {
     console.error(
       "This project seems to be already initialised for @cubicsui/cli."
     );
-    console.error("If you want to generate a new component run:");
-    console.error("   npx cui create <component>");
+    console.error("If you want to add a new component run:");
+    console.error("   npx cui add <component>");
     console.error(
-      "If you are trying to reinitialise this project then delete the config file(cui.config) before initialising again."
+      "If you are trying to reinitialise this project then delete the config file(cui.config) and .cui folder before initialising again."
     );
     process.exit(1);
   }
 }
-

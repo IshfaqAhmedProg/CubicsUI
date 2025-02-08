@@ -5,12 +5,12 @@ import { input, select } from "@inquirer/prompts";
 import { basename, dirname, extname, resolve } from "path";
 import getRelativePathFromFullPath from "./getRelativePathFromFullPath.js";
 import readModuleFile from "@/utils/readModuleFile.js";
-import { components, projects } from "@cubicsui/db";
+import { components, libraries } from "@cubicsui/db";
 import upsertComponent from "./upsertComponent.js";
 import populateDependencyIds from "./populateDependencyIds.js";
 
 export default async function uploadComponentTree(
-  project: projects,
+  library: libraries,
   filePath: string,
   config: CUIConfig
 ): Promise<components | undefined> {
@@ -48,7 +48,7 @@ export default async function uploadComponentTree(
     }
     deps.lcl = await populateDependencyIds({
       localDeps: deps.lcl,
-      project,
+      library: library,
       config,
       pathAliases,
       styleModule,
@@ -56,7 +56,7 @@ export default async function uploadComponentTree(
   }
 
   const component = await upsertComponent({
-    component: { name, prId: project.id, deps, desc: "", outPath },
+    component: { name, libId: library.id, deps, desc: "", outPath },
     codeblocks: { script: fileContent.data, styles: styleModuleData },
   });
 

@@ -39,24 +39,24 @@ export async function saveComponentAction(
   formdata: FormData
 ): ActionReturnType<FormActionReturnType<SaveComponentActionReturnType>> {
   const errors: FormActionReturnType["errors"] = {};
-  const prId = formdata.get("prId");
+  const libId = formdata.get("libId");
 
-  if (!prId || typeof prId !== "string")
+  if (!libId || typeof libId !== "string")
     return {
       status: "error",
-      errors: { formError: "Project Id is not defined" },
+      errors: { formError: "Library Id is not defined" },
     };
   try {
-    const component = await saveComponent(prId, formdata);
+    const component = await saveComponent(libId, formdata);
     const codeblocks = await saveCodeblock(component.id, formdata);
-    revalidatePath(`/projects/${prId}`);
+    revalidatePath(`/libraries/${libId}`);
     return { payload: { ...component, codeblocks }, status: "success" };
   } catch (err) {
     if (
       err instanceof Prisma.PrismaClientKnownRequestError &&
       err.code === "P2002"
     ) {
-      errors.formError = `A component with the same name or output path exists in the project! Please choose another name or output path.`;
+      errors.formError = `A component with the same name or output path exists in the libraries! Please choose another name or output path.`;
     } else if (err instanceof z.ZodError) {
       const fieldErrors = err.flatten().fieldErrors;
       Object.keys(fieldErrors).forEach((field) => {
@@ -73,12 +73,12 @@ export async function saveComponentAction(
     };
   }
 }
-export async function saveComponent(prId: string, formdata: FormData) {
+export async function saveComponent(libId: string, formdata: FormData) {
   const cmpId = formdata.get("cmpId");
   try {
     const deps = await zipDeps(formdata);
     const cmpValidatedFields = componentSchema.parse({
-      prId,
+      libId: libId,
       name: formdata.get("name"),
       outPath: formdata.get("outPath"),
       desc: formdata.get("desc"),

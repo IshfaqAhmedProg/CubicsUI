@@ -6,7 +6,7 @@ import {
   sampleSassModule,
   sampleTsComponentReact,
 } from "@/library/constants/sampleCodeBlocks";
-import { codeblocks, components, Dependencies, projects } from "@cubicsui/db";
+import { codeblocks, components, Dependencies, libraries } from "@cubicsui/db";
 import {
   createContext,
   ReactNode,
@@ -17,7 +17,7 @@ import {
 import { saveComponentAction } from "@/app/components/actions";
 
 interface ComponentFormDefaultStateProps {
-  project: projects;
+  library: libraries;
   component?: components | null;
   codeblocks?: codeblocks | null;
 }
@@ -56,7 +56,7 @@ export default function ComponentFormProvider({
   );
 }
 function useComponentFormStates({
-  project,
+  library,
   codeblocks,
   component,
 }: ComponentFormDefaultStateProps) {
@@ -69,7 +69,7 @@ function useComponentFormStates({
   );
   const initialsScriptCode = codeblocks?.script
     ? codeblocks.script
-    : project.lang == "typescript"
+    : library.lang == "typescript"
       ? sampleTsComponentReact
       : sampleJsComponentReact;
 
@@ -78,7 +78,7 @@ function useComponentFormStates({
   );
   const initialStyleCode = codeblocks?.styles
     ? codeblocks.styles
-    : project.styleExt == "scss"
+    : library.styleExt == "scss"
       ? sampleSassModule
       : sampleCssModule;
 
