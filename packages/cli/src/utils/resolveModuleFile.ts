@@ -1,6 +1,5 @@
 import { commonJSExtensions } from "@/constants/defaults.js";
 import { existsSync } from "fs";
-import { readFile as _readFile } from "fs/promises";
 import { extname, resolve } from "path";
 
 /**

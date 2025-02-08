@@ -28,8 +28,8 @@ export default function ComponentDetails() {
             textOverflow={"ellipsis"}
             maxWidth={"45ch"}
           >
-            Note* create using &nbsp;&nbsp;
-            <code>{`npx cui create ${name !== "" ? name : "<name>"}`}</code>
+            Note* Add to your project using &nbsp;&nbsp;
+            <code>{`npx cui add ${name !== "" ? name : "<name>"}`}</code>
           </Typography>
         </FormLabel>
         <TextField
