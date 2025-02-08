@@ -6,14 +6,8 @@ import { Prisma } from "@cubicsui/db";
  * @param error Any kind of actual error, object or otherwise
  * @returns Boolean indicating whether the error is a PrismaClientKnownRequestError
  */
-export function isPrismaError(
+export function isPrismaClientKnownRequestError(
   error: any
 ): error is Prisma.PrismaClientKnownRequestError {
   return error.constructor.name === Prisma.PrismaClientKnownRequestError.name;
-}
-
-export function isPrismaValidationError(
-  error: any
-): error is Prisma.PrismaClientValidationError {
-  return error.constructor.name === Prisma.PrismaClientValidationError.name;
 }

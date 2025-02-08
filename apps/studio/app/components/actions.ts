@@ -4,11 +4,12 @@ import {
   ActionReturnType,
   FormActionReturnType,
 } from "@/library/types/ActionReturnTypes";
-import { codeblocks, components, Prisma } from "@cubicsui/db";
+import { codeblocks, components } from "@cubicsui/db";
 import { z } from "zod";
 import { codeblocksSchema, componentSchema } from "./schema";
 import db from "@/db";
 import { revalidatePath } from "next/cache";
+import { isPrismaClientKnownRequestError } from "@/library/functions/isPrismaClientKnownRequestError";
 
 export async function zipDeps(formdata: FormData) {
   const extNames = formdata.getAll("depsExtName");
@@ -52,10 +53,7 @@ export async function saveComponentAction(
     revalidatePath(`/libraries/${libId}`);
     return { payload: { ...component, codeblocks }, status: "success" };
   } catch (err) {
-    if (
-      err instanceof Prisma.PrismaClientKnownRequestError &&
-      err.code === "P2002"
-    ) {
+    if (isPrismaClientKnownRequestError(err) && err.code === "P2002") {
       errors.formError = `A component with the same name or output path exists in the libraries! Please choose another name or output path.`;
     } else if (err instanceof z.ZodError) {
       const fieldErrors = err.flatten().fieldErrors;

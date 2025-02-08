@@ -2,13 +2,13 @@
 
 import { createLibrarySchema, updateLibrarySchema } from "./schema";
 import db from "@/db";
-import { Prisma } from "@cubicsui/db";
 import { z } from "zod";
 import {
   ActionReturnType,
   FormActionReturnType,
 } from "@/library/types/ActionReturnTypes";
 import { revalidatePath } from "next/cache";
+import { isPrismaClientKnownRequestError } from "@/library/functions/isPrismaClientKnownRequestError";
 
 export async function createLibraryAction(
   prevState: unknown,
@@ -31,10 +31,7 @@ export async function createLibraryAction(
     return { payload, status: "success" };
   } catch (err) {
     console.error(err);
-    if (
-      err instanceof Prisma.PrismaClientKnownRequestError &&
-      err.code === "P2002"
-    ) {
+    if (isPrismaClientKnownRequestError(err) && err.code === "P2002") {
       errors.name =
         "A component library with the same name exists in the database! Please choose another name.";
     } else if (err instanceof z.ZodError) {
@@ -93,10 +90,7 @@ export async function updateLibraryAction(
     return { status: "success", payload };
   } catch (err) {
     console.error(err);
-    if (
-      err instanceof Prisma.PrismaClientKnownRequestError &&
-      err.code === "P2002"
-    ) {
+    if (isPrismaClientKnownRequestError(err) && err.code === "P2002") {
       errors.name =
         "A component library with the same name exists in the database! Please choose another name.";
     } else if (err instanceof z.ZodError) {
