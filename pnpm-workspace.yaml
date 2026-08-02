@@ -1,0 +1,17 @@
+packages:
+  - apps/**/*
+  - packages/*
+  - configs/*
+  - scripts/*
+
+ignoredBuiltDependencies:
+  - sharp
+  - unrs-resolver
+
+onlyBuiltDependencies:
+  - '@clerk/shared'
+  - '@parcel/watcher'
+  - '@swc/core'
+  - core-js
+  - es5-ext
+  - esbuild

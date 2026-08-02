@@ -1,0 +1,26 @@
+"use client";
+
+import { type MouseEvent, useMemo, useState } from "react";
+import { type SetState } from "@cubicsui/types";
+
+export interface UseAnchorElementReturnType<T extends HTMLElement> {
+  open: boolean;
+  anchorEl: T | null;
+  handleClick: (event: MouseEvent<T>) => void;
+  handleClose: () => void;
+  setAnchorEl: SetState<T | null>;
+}
+
+export function useAnchorElement<
+  T extends HTMLElement,
+>(): UseAnchorElementReturnType<T> {
+  const [anchorEl, setAnchorEl] = useState<T | null>(null);
+  const open = useMemo(() => Boolean(anchorEl), [anchorEl]);
+  const handleClick = (event: MouseEvent<T>): void => {
+    setAnchorEl(event.currentTarget);
+  };
+  const handleClose = (): void => {
+    setAnchorEl(null);
+  };
+  return { open, anchorEl, handleClick, handleClose, setAnchorEl };
+}

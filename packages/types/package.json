@@ -1,0 +1,42 @@
+{
+  "name": "@cubicsui/types",
+  "description": "Package containing helpful typescript types by Studio Cubics",
+  "publishConfig": {
+    "access": "public"
+  },
+  "private": false,
+  "version": "0.0.28",
+  "keywords": [
+    "@cubicsui",
+    "@studiocubics",
+    "cubics",
+    "studio",
+    "types",
+    "typescript"
+  ],
+  "author": {
+    "name": "Ishfaq Ahmed",
+    "email": "ishfaqahmed0837@gmail.com",
+    "url": "https://studio-cubics.vercel.app"
+  },
+  "license": "MIT",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.d.ts"
+    }
+  },
+  "scripts": {
+    "build": "tsc",
+    "clean": "rimraf dist node_modules"
+  },
+  "devDependencies": {
+    "@cubicsui/tsconfig": "workspace:^",
+    "@types/react": "^19",
+    "@types/react-dom": "^19",
+    "typescript": "^5"
+  },
+  "peerDependencies": {
+    "react": ">= 19"
+  }
+}

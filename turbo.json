@@ -1,0 +1,34 @@
+{
+  "$schema": "https://v2-10-8.turborepo.dev/schema.json",
+  "ui": "tui",
+  "tasks": {
+    "build": {
+      "dependsOn": ["^build"],
+      "inputs": ["$TURBO_DEFAULT$", ".env*"],
+      "outputs": [".next/**", "!.next/cache/**", "dist/**"],
+      "env": [
+        "CLERK_SECRET_KEY",
+        "CLERK_SIGN_IN_URL",
+        "CLERK_SIGN_UP_URL",
+        "CLERK_SIGN_IN_FORCE_REDIRECT_URL",
+        "CLERK_SIGN_UP_FORCE_REDIRECT_URL"
+      ]
+    },
+    "build:packages": {
+      "dependsOn": ["^build:packages"],
+      "inputs": ["src/**", "tsconfig.json", "tsdown.config.js", "package.json"],
+      "outputs": ["dist/**"]
+    },
+    "lint": {
+      "dependsOn": ["^lint"]
+    },
+    "dev": {
+      "cache": false,
+      "persistent": true
+    },
+    "clean": {
+      "cache": false,
+      "persistent": true
+    }
+  }
+}

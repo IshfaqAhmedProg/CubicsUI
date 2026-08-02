@@ -1,0 +1,55 @@
+{
+  "name": "@cubicsui/hooks",
+  "description": "Package containing important hooks by Studio Cubics",
+  "publishConfig": {
+    "access": "public"
+  },
+  "private": false,
+  "version": "0.0.28",
+  "keywords": [
+    "@cubicsui",
+    "@studiocubics",
+    "cubics",
+    "studio",
+    "react",
+    "hooks"
+  ],
+  "author": {
+    "name": "Ishfaq Ahmed",
+    "email": "ishfaqahmed0837@gmail.com",
+    "url": "https://studio-cubics.vercel.app"
+  },
+  "license": "MIT",
+  "type": "module",
+  "exports": {
+    ".": {
+      "import": {
+        "types": "./dist/index.d.mts",
+        "default": "./dist/index.mjs"
+      }
+    }
+  },
+  "scripts": {
+    "build": "tsdown",
+    "lint": "eslint .",
+    "clean": "rimraf dist node_modules"
+  },
+  "peerDependencies": {
+    "react": ">= 19",
+    "react-dom": ">= 19"
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.39.1",
+    "@cubicsui/tsconfig": "workspace:^",
+    "@cubicsui/types": "workspace:^",
+    "@types/node": "24.10.1",
+    "@types/react": "^19",
+    "@types/react-dom": "^19",
+    "eslint": "^9.39.1",
+    "eslint-plugin-react-hooks": "^7.0.1",
+    "globals": "^17.4.0",
+    "tsdown": "^0.21.9",
+    "typescript": "^5",
+    "typescript-eslint": "^8.58.1"
+  }
+}
