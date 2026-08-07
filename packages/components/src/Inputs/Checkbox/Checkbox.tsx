@@ -72,13 +72,15 @@ export function Checkbox(props: CheckboxProps): ReactElement {
   useEffect(() => {
     if (!inputRef.current) return;
     const c = inputRef.current.checked;
-    setCurrentState(c ? "checked" : "unchecked");
+    setCurrentState(
+      indeterminate ? "indeterminate" : c ? "checked" : "unchecked",
+    );
     // Register with group if inside <CheckboxProvider/>
     if (group && !skipGroup && !isRegistered.current && name) {
       isRegistered.current = true;
       group.register(name, c);
     }
-  }, [group, skipGroup, name]);
+  }, [group, skipGroup, name, indeterminate]);
 
   // Set indeterminate state
   useEffect(() => {
