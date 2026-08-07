@@ -1,5 +1,6 @@
 import type { ComponentProps, ReactElement, ReactNode } from "react";
 import type { UseRippleProps } from "../../Misc/Ripple/Ripple";
+import type { InputErrorsProps } from "../../Typography/InputErrors/InputErrors";
 
 export interface CheckboxProps extends Omit<
   ComponentProps<"input">,
@@ -8,11 +9,11 @@ export interface CheckboxProps extends Omit<
   /** Class for the root of the Checkbox component to modify class of the input element use slotProps.input */
   className?: string;
 
-  /** Label for the checkbox containing helpful info */
+  /** Label for the input containing helpful info */
   label?: string;
 
-  /** Text containing error info about the input if the input is errored */
-  error?: string;
+  /** Text or array of text containing error info about the input if the input is errored */
+  error?: string | string[];
 
   /** Handle the indeterminate state */
   indeterminate?: boolean;
@@ -41,7 +42,7 @@ export interface CheckboxProps extends Omit<
    */
   slotProps?: CheckboxSlotProps;
 
-  /** Size of the checkbox and its label */
+  /** Size of the checkbox and its label, to use the html attribute `size` use `htmlSize` */
   size?: "xs" | "sm" | "md" | "lg" | "xl";
 
   /** Color of the checkbox and its label */
@@ -51,7 +52,20 @@ export interface CheckboxProps extends Omit<
   htmlSize?: ComponentProps<"input">["size"];
 }
 
-/** The slot props for the checkbox */
+/** The slot props for the checkbox
+ * ```
+ *  root
+ *   |inputWrapper
+ *   |   |startIcon
+ *   |   |checkbox
+ *   |   |   |ripple
+ *   |   |   |input
+ *   |   |   |checkboxIconsWrapper
+ *   |   |label
+ *   |   |endIcon
+ *   |error
+ * ```
+ */
 export interface CheckboxSlotProps {
   /** If the root wrapping `<div/>` needs some props to be passed, for className use the className prop of the `<Checkbox/>` component instead */
   root?: Omit<ComponentProps<"div">, "className">;
@@ -62,7 +76,7 @@ export interface CheckboxSlotProps {
   /** Contains the startIcon in a `<span/>` */
   startIcon?: ComponentProps<"span">;
 
-  /** A `<span/>` acting as the visual checkbox */
+  /** A `<span/>` that wraps the input checkbox */
   checkbox?: ComponentProps<"span">;
 
   /** Props for the Ripple component */
@@ -74,8 +88,10 @@ export interface CheckboxSlotProps {
   /** Contains the label text in a `<label/>` */
   label?: ComponentProps<"label">;
 
-  /** Contains a `<p/>` tag with the error text */
-  error?: ComponentProps<"p">;
+  /** Contains a `<p/>` tag with the error text
+   * @link InputErrorsProps
+   */
+  error?: InputErrorsProps;
 
   /** If for some reason the className of the input needs to be modified */
   input?: Pick<ComponentProps<"input">, "className">;

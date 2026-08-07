@@ -14,6 +14,7 @@ import styles from "./Checkbox.module.css";
 import type { CheckboxCurrentState, CheckboxProps } from "./Checkbox.types";
 import { useCheckbox } from "./CheckboxProvider";
 import { CheckIconAnimated, DashIconAnimated } from "@cubicsui/icons";
+import { InputErrors } from "../../Typography/InputErrors/InputErrors";
 
 export function Checkbox(props: CheckboxProps): ReactElement {
   const {
@@ -166,12 +167,11 @@ export function Checkbox(props: CheckboxProps): ReactElement {
       </span>
       {/* Error text */}
       {error && (
-        <p
+        <InputErrors
           {...slotProps.error}
           className={cn(styles.error, slotProps.error?.className)}
-        >
-          {error}
-        </p>
+          error={error}
+        />
       )}
     </div>
   );
