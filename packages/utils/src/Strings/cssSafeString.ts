@@ -1,3 +1,6 @@
+/**
+ * Converts a given string to a css safe version of the string
+ */
 export function cssSafeString(str?: string): string | undefined {
   if (!str) return;
   const encoded = encodeURIComponent(str)
