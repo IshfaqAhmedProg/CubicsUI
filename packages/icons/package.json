@@ -21,6 +21,7 @@
   },
   "license": "MIT",
   "type": "module",
+  "sideEffects": false,
   "exports": {
     ".": {
       "import": {

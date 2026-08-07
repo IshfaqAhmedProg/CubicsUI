@@ -43,7 +43,6 @@ export function CheckboxProvider({
   const selected = Object.keys(values).filter(
     (_, i) => Object.values(values)[i],
   );
-  console.log("values", values);
 
   function register(id: string, checked: boolean = false): void {
     setValues((prev) => ({ ...prev, [id]: checked }));
