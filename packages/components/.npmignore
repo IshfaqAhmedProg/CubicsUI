@@ -4,3 +4,4 @@ tsconfig.*
 eslint.config.*
 CHANGELOG.md
 tsdown.config.*
+**/*.mdx

@@ -1,0 +1,25 @@
+.container {
+  position: absolute;
+  overflow: hidden;
+  inset: 0;
+  border-radius: inherit;
+  pointer-events: none;
+}
+.ripple {
+  --ripple-color: currentColor;
+  --ripple-duration: 750ms;
+  filter: blur(10px);
+  position: absolute;
+  border-radius: 50%;
+  background: var(--ripple-color);
+  transform: scale(0);
+  opacity: 0.6;
+  animation: ripple-expand var(--ripple-duration, 750ms) var(--transition-tf);
+  pointer-events: none;
+}
+@keyframes ripple-expand {
+  to {
+    transform: scale(2);
+    opacity: 0;
+  }
+}
