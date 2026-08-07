@@ -1,8 +1,10 @@
 import type { Metadata } from "next";
 import { Fira_Code, Outfit, Titillium_Web } from "next/font/google";
-import "./globals.css";
-// import "@cubicsui/components/styles.css";
 import { ThemeProvider } from "@/lib/providers/ThemeProvider";
+import { Header } from "@/lib/ui/Layout/Header/Header";
+import "@cubicsui/components/styles.css";
+import "@cubicsui/icons/animations.css";
+import "./globals.css";
 
 export const firaCode = Fira_Code({
   variable: "--font-code",
@@ -38,7 +40,10 @@ export default function RootLayout({
       <body
         className={`${outfit.variable} ${titiliumWeb.variable} ${firaCode.variable}`}
       >
-        <ThemeProvider enableSystem>{children}</ThemeProvider>
+        <ThemeProvider enableSystem>
+          <Header />
+          {children}
+        </ThemeProvider>
       </body>
     </html>
   );

@@ -1,0 +1,21 @@
+.root {
+  display: flex;
+  flex-direction: column;
+  gap: var(--gap-6);
+  padding: var(--gap-10);
+  & > section {
+    display: flex;
+    flex-direction: column;
+    gap: var(--gap-5);
+    padding-inline: var(--gap-10);
+  }
+}
+.row {
+  display: flex;
+  gap: var(--gap-5);
+}
+.column {
+  display: flex;
+  flex-direction: column;
+  gap: var(--gap-2);
+}

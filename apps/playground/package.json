@@ -9,6 +9,9 @@
     "lint": "eslint"
   },
   "dependencies": {
+    "@cubicsui/components": "workspace:^",
+    "@cubicsui/hooks": "workspace:^",
+    "@cubicsui/icons": "workspace:^",
     "next": "16.2.12",
     "next-themes": "^0.4.6",
     "react": "19.2.4",
@@ -16,6 +19,7 @@
   },
   "devDependencies": {
     "@cubicsui/tsconfig": "workspace:^",
+    "@cubicsui/types": "workspace:^",
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",
