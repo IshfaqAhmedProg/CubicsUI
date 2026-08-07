@@ -1,0 +1,41 @@
+.root {
+  position: relative;
+}
+.square {
+  aspect-ratio: 1;
+}
+.fullWidth {
+  width: 100%;
+}
+.fullHeight {
+  height: 100%;
+}
+.fullScreen {
+  width: 100dvw;
+  height: 100dvh;
+}
+
+.size_sm {
+  padding: var(--gap-2);
+  border-radius: var(--br-sm);
+}
+.size_md {
+  padding: var(--gap-4);
+  border-radius: var(--br-md);
+}
+.size_lg {
+  padding: var(--gap-6);
+  border-radius: var(--br-lg);
+}
+
+.outlined {
+  border: 1px solid var(--color-outline);
+  background: none;
+}
+.contained {
+  background: var(--color-surface-alpha);
+  backdrop-filter: var(--backdrop-blur);
+}
+.disableGutters {
+  padding: 0;
+}
