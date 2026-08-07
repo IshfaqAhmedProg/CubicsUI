@@ -5,7 +5,7 @@
   --bg-hover: color-mix(in srgb, var(--color-on-background) 10%, transparent);
   --outline: var(--color-on-background);
   /* Root styles */
-  position: relative;
+  position: relative; /* Relative because of ripple, dont remove orelse ripple wont work */
   display: flex;
   justify-content: center;
   align-items: center;
@@ -59,18 +59,6 @@
   }
 }
 
-.position_absolute {
-  position: absolute;
-}
-.position_relative {
-  position: relative;
-}
-.position_fixed {
-  position: fixed;
-}
-.position_sticky {
-  position: sticky;
-}
 .fullWidth {
   max-width: 100%;
 }

@@ -48,7 +48,6 @@ function ButtonBase<C extends ElementType = ButtonDefaultElement>(
     fullWidth = false,
     onTouchStart,
     onClick,
-    position,
     disabled,
     slotProps: _slotProps,
     ...restProps
@@ -64,7 +63,6 @@ function ButtonBase<C extends ElementType = ButtonDefaultElement>(
       square ? styles.square : "",
       fullWidth ? styles.fullWidth : "",
       disabled ? styles.disabled : "",
-      position ? styles[`position_${position}`] : "",
       variant ? styles[variant] : "",
     ),
     onTouchStart: eventWithRipple(createRipple, onTouchStart),
@@ -76,7 +74,6 @@ function ButtonBase<C extends ElementType = ButtonDefaultElement>(
 
   return (
     <Component {...componentProps}>
-      {rippleElements}
       {startIcon && (
         <span
           {...slotProps.startIcon}
@@ -94,6 +91,7 @@ function ButtonBase<C extends ElementType = ButtonDefaultElement>(
           {endIcon}
         </span>
       )}
+      {rippleElements}
     </Component>
   );
 }
