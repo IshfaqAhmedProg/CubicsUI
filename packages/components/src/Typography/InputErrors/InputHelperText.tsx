@@ -1,31 +1,26 @@
 import { type ElementType } from "react";
-import styles from "./InputErrors.module.css";
-import { cn } from "@cubicsui/utils";
 import type {
   UnionElementComponentType,
   UnionElementProps,
 } from "@cubicsui/types";
-import type { InputErrorsBaseProps } from "./InputErrors.types";
+import type { InputHelperTextBaseProps } from "./InputHelperText.types";
 
 const defaultElements: ["p", "ul"] = ["p", "ul"];
 type DefaultElements = (typeof defaultElements)[number];
 
-export type InputErrorsProps<C extends ElementType = DefaultElements> =
-  UnionElementProps<C, InputErrorsBaseProps>;
+export type InputHelperTextProps<C extends ElementType = DefaultElements> =
+  UnionElementProps<C, InputHelperTextBaseProps>;
 
-function InputErrorsBase<C extends ElementType = DefaultElements>(
-  props: InputErrorsProps<C>,
+function InputHelperTextBase<C extends ElementType = DefaultElements>(
+  props: InputHelperTextProps<C>,
 ) {
-  const {
-    error: _error,
-    className,
-    ...rest
-  } = props as InputErrorsProps<DefaultElements>;
+  const { text: _error, ...rest } =
+    props as InputHelperTextProps<DefaultElements>;
   const error = _error?.length == 1 ? _error[0] : _error;
   if (!error || !error.length) return null;
   const isStringError = typeof error === "string";
   const Component = (isStringError ? "p" : "ul") as ElementType;
-  const componentProps = { className: cn(className, styles.root), ...rest };
+  const componentProps = { ...rest };
   return (
     <Component {...componentProps}>
       {isStringError
@@ -37,7 +32,7 @@ function InputErrorsBase<C extends ElementType = DefaultElements>(
   );
 }
 
-InputErrorsBase.displayName = "InputErrors";
+InputHelperTextBase.displayName = "InputHelperText";
 
 /**
  * Use this when you want to render errors that is of string or array of string type.
@@ -48,7 +43,7 @@ InputErrorsBase.displayName = "InputErrors";
  * <InputError error={"error1"}>...</InputError> // Renders <p>
  * ```
  */
-export const InputErrors = InputErrorsBase as UnionElementComponentType<
+export const InputHelperText = InputHelperTextBase as UnionElementComponentType<
   DefaultElements,
-  InputErrorsBaseProps
+  InputHelperTextBaseProps
 >;
