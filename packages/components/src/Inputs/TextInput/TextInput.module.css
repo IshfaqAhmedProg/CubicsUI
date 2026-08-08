@@ -87,8 +87,7 @@
   width: 100%;
 }
 .disablePadding {
-  & .inputWrapper,
-  & .input {
+  & .inputWrapper {
     padding: 0;
   }
 }
