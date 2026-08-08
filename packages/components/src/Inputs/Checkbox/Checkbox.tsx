@@ -14,7 +14,7 @@ import styles from "./Checkbox.module.css";
 import type { CheckboxCurrentState, CheckboxProps } from "./Checkbox.types";
 import { useCheckbox } from "./CheckboxProvider";
 import { CheckIconAnimated, DashIconAnimated } from "@cubicsui/icons";
-import { InputErrors } from "../../Typography/InputErrors/InputErrors";
+import { InputHelperText } from "../../Typography/InputErrors/InputHelperText";
 
 export function Checkbox(props: CheckboxProps): ReactElement {
   const {
@@ -36,6 +36,7 @@ export function Checkbox(props: CheckboxProps): ReactElement {
     color,
     disabled,
     error,
+    helperText,
     "aria-label": ariaLabel,
     checkedIcon = <CheckIconAnimated />,
     indeterminateIcon = <DashIconAnimated />,
@@ -47,7 +48,7 @@ export function Checkbox(props: CheckboxProps): ReactElement {
 
   const isRegistered = useRef(false);
   const inputRef = useRef<HTMLInputElement>(null);
-  const { rippleElements, createRipple } = useRipple();
+  const { rippleElements, createRipple } = useRipple(slotProps.ripple);
   const [currentState, setCurrentState] = useState<CheckboxCurrentState>(
     defaultChecked || checked
       ? "checked"
@@ -97,12 +98,44 @@ export function Checkbox(props: CheckboxProps): ReactElement {
     setCurrentState(group.values[name] ? "checked" : "unchecked");
   }, [group.values, name]);
 
+  // Native form reset restores input.checked to defaultChecked but does not
+  // fire onChange, so currentState never changes
+  useEffect(() => {
+    const input = inputRef.current;
+    const form = input?.form;
+    if (!input || !form) return;
+
+    function handleReset() {
+      // The reset event fires before the browser applies the reset
+      // algorithm (restoring each control's value)
+      setTimeout(() => {
+        if (!inputRef.current) return;
+        // Explicitly set indeterminate if it was passed as prop from parent
+        inputRef.current.indeterminate = indeterminate;
+        setCurrentState(
+          indeterminate
+            ? "indeterminate"
+            : inputRef.current.checked
+              ? "checked"
+              : "unchecked",
+        );
+        if (group && !skipGroup && name) {
+          group.update(name, inputRef.current.checked);
+        }
+      }, 0);
+    }
+
+    form.addEventListener("reset", handleReset);
+    return () => form.removeEventListener("reset", handleReset);
+  }, [group, skipGroup, name, indeterminate]);
+
   return (
     <div
       {...slotProps.root}
       className={cn(styles.root, className)}
       data-size={size}
-      data-color={color}
+      data-color={error ? "error" : color}
+      data-error={!!error}
     >
       <span className={cn(styles.inputWrapper)}>
         {/* Start Icon */}
@@ -126,7 +159,7 @@ export function Checkbox(props: CheckboxProps): ReactElement {
             aria-checked={isIndeterminate ? "mixed" : isChecked}
             aria-label={ariaLabel ?? label}
             onChange={handleChange}
-            className={slotProps.input?.className}
+            className={cn(slotProps.input?.className, styles.input)}
             onTouchStart={eventWithRipple(createRipple, onTouchStart)}
             onClick={eventWithRipple(createRipple, onClick)}
             disabled={disabled}
@@ -142,8 +175,14 @@ export function Checkbox(props: CheckboxProps): ReactElement {
               slotProps.checkboxIconsWrapper?.className,
             )}
           >
-            {isChecked && checkedIcon}
-            {isIndeterminate && indeterminateIcon}
+            <span className={cn(styles.checkboxIconWrapper, styles.checked)}>
+              {checkedIcon}
+            </span>
+            <span
+              className={cn(styles.checkboxIconWrapper, styles.indeterminate)}
+            >
+              {indeterminateIcon}
+            </span>
           </span>
           {rippleElements}
         </span>
@@ -165,14 +204,12 @@ export function Checkbox(props: CheckboxProps): ReactElement {
           </span>
         )}
       </span>
-      {/* Error text */}
-      {error && (
-        <InputErrors
-          {...slotProps.error}
-          className={cn(styles.error, slotProps.error?.className)}
-          error={error}
-        />
-      )}
+      {/* Helper text */}
+      <InputHelperText
+        {...slotProps.helperText}
+        className={cn(styles.helperText, slotProps.helperText?.className)}
+        text={error ?? helperText}
+      />
     </div>
   );
 }
@@ -182,11 +219,11 @@ export function Checkbox(props: CheckboxProps): ReactElement {
     |inputWrapper
     |   |startIcon
     |   |checkbox
-    |   |   |ripple
     |   |   |input
     |   |   |checkboxIconsWrapper
+    |   |   |ripple
     |   |label
     |   |endIcon
-    |error
+    |helperText
 */
 }

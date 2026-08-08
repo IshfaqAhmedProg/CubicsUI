@@ -1,19 +1,22 @@
 import type { ComponentProps, ReactElement, ReactNode } from "react";
-import type { UseRippleProps } from "../../Misc/Ripple/Ripple";
-import type { InputErrorsProps } from "../../Typography/InputErrors/InputErrors";
+import type { InputHelperTextProps } from "../../Typography/InputErrors/InputHelperText";
+import type { UseRippleProps } from "../../Misc/Ripple/Ripple.types";
 
 export interface CheckboxProps extends Omit<
   ComponentProps<"input">,
   "onChange" | "type" | "size"
 > {
-  /** Class for the root of the Checkbox component to modify class of the input element use slotProps.input */
+  /** Class for the root of the `<Checkbox/>` component, to modify class of the input element use `slotProps.input` */
   className?: string;
 
   /** Label for the input containing helpful info */
   label?: string;
 
+  /** Text or array of text containing  info about the input */
+  helperText?: InputHelperTextProps["text"];
+
   /** Text or array of text containing error info about the input if the input is errored */
-  error?: string | string[];
+  error?: InputHelperTextProps["text"];
 
   /** Handle the indeterminate state */
   indeterminate?: boolean;
@@ -46,13 +49,13 @@ export interface CheckboxProps extends Omit<
   size?: "xs" | "sm" | "md" | "lg" | "xl";
 
   /** Color of the checkbox and its label */
-  color?: "primary" | "secondary" | "tertiary" | "error" | "warn" | "success";
+  color?: "primary" | "secondary" | "tertiary" | "error";
 
   /** size attribute of the html `<input size=""/>` element */
   htmlSize?: ComponentProps<"input">["size"];
 }
 
-/** The slot props for the checkbox
+/** The slot props for `<Checkbox/>`
  * ```
  *  root
  *   |inputWrapper
@@ -79,25 +82,28 @@ export interface CheckboxSlotProps {
   /** A `<span/>` that wraps the input checkbox */
   checkbox?: ComponentProps<"span">;
 
-  /** Props for the Ripple component */
+  /** Props for the useRipple component
+   * @link UseRippleProps
+   */
   ripple?: UseRippleProps;
 
-  /** Contains the endIcon in a `<span/>` */
-  endIcon?: ComponentProps<"span">;
-
-  /** Contains the label text in a `<label/>` */
-  label?: ComponentProps<"label">;
-
-  /** Contains a `<p/>` tag with the error text
-   * @link InputErrorsProps
-   */
-  error?: InputErrorsProps;
-
-  /** If for some reason the className of the input needs to be modified */
+  /** If for some reason the className of the input needs to be modified, rest of the props can be passed to the `<Checkbox/>` component */
   input?: Pick<ComponentProps<"input">, "className">;
 
   /** Contains the checkbox icons for checked and indeterminate states */
   checkboxIconsWrapper?: ComponentProps<"span">;
+
+  /** Contains the label text in a `<label/>` */
+  label?: ComponentProps<"label">;
+
+  /** Contains the endIcon in a `<span/>` */
+  endIcon?: ComponentProps<"span">;
+
+  /**
+   * Contains a `<p/>` or `<ul/>` tag with the helper text
+   * @link InputHelperTextProps
+   */
+  helperText?: InputHelperTextProps;
 }
 
 export type CheckboxCurrentState =
