@@ -26,9 +26,6 @@
 
   /* Errored state */
   &[data-error="true"] {
-    & .label {
-      color: var(--color-error);
-    }
     & .helperText {
       color: var(--color-error);
     }
@@ -57,7 +54,7 @@
     /* Focused and errored */
     &[data-error="true"] {
       & .label {
-        color: var(--color-error-alpha);
+        color: var(--color-error);
       }
       & .inputWrapper {
         border-color: var(--color-error);
@@ -99,6 +96,7 @@
   color: var(--color);
   background: var(--bg);
   backdrop-filter: blur(var(--blur-heavy));
+  transition: all var(--transition-time) var(--transition-tf);
 }
 .input {
   appearance: none;
