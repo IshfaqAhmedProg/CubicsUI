@@ -1,39 +1,47 @@
 import type { ComponentProps, ReactNode } from "react";
-import type { UseRippleProps } from "../../Misc/Ripple/Ripple";
+import type { UseRippleProps } from "../../Misc/Ripple/Ripple.types";
 
 /** Props specific to the Button component. */
 export interface ButtonBaseProps {
   /** Renders an icon at the beginning of the button. */
   startIcon?: ReactNode;
+
   /** Renders an icon at the end of the button. */
   endIcon?: ReactNode;
+
   /** Marks the button as selected. */
   selected?: boolean;
+
   /**
    * Visual style variant.
    * @default "text"
    */
   variant?: "contained" | "outlined";
+
   /**
    * Expands width to 100%.
    * @default false
    */
   fullWidth?: boolean;
+
   /**
    * Force a 1:1 aspect ratio, good for icons.
    * @default false
    */
   square?: boolean;
+
   /**
    * Button size.
    * @default "md"
    */
   size?: "xs" | "sm" | "md" | "lg" | "xl";
+
   /**
    * Adds disabled styles to the button. Added this to make `<Link/>` have disabled style in Next.js.
    * @default false
    */
   disabled?: boolean;
+
   /** Color theme of the button. */
   color?: "primary" | "secondary" | "tertiary" | "error" | "warn" | "success";
 
@@ -47,7 +55,7 @@ export interface ButtonBaseProps {
 /** The slot props for the button */
 export interface ButtonSlotProps {
   /**
-   * Props for the ripple effect.
+   * Props for the useRipple component
    * @link UseRippleProps
    */
   ripple?: UseRippleProps;
