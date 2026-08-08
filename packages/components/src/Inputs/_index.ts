@@ -9,5 +9,8 @@ export * from "./Checkbox/CheckboxProvider";
 export * from "./CloseButton/CloseButton";
 export * from "./CloseButton/CloseButton.types";
 
+export * from "./TextAreaInput/TextAreaInput";
+export * from "./TextAreaInput/TextAreaInput.types";
+
 export * from "./TextInput/TextInput";
 export * from "./TextInput/TextInput.types";
