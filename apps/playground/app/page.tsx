@@ -26,6 +26,7 @@ export default function Page() {
         <Item href={"/components/checkbox"}>Checkbox ✅</Item>
         <Item href={"/components/closeButton"}>CloseButton ✅</Item>
         <Item href={"/components/textInput"}>TextInput ✅</Item>
+        <Item href={"/components/textAreaInput"}>TextAreaInput ✅</Item>
       </ol>
       <h2>Typography</h2>
       <ol className={styles.column}>

@@ -9,6 +9,7 @@ import { Sizes } from "./sizes";
 import { WithIcons } from "./withIcons";
 import { FullWidth } from "./fullWidth";
 import { DisablePadding } from "./disablePadding";
+import { DisableResize } from "./disableResize";
 
 export default function Page() {
   return (
@@ -37,6 +38,10 @@ export default function Page() {
 
       <h2>Helper text</h2>
       <HelperText />
+      <hr />
+
+      <h2>Disable Resize</h2>
+      <DisableResize />
       <hr />
 
       <h2>Disable Input Width</h2>

@@ -1,12 +1,12 @@
-import { TextInput, Button } from "@cubicsui/components";
+import { TextAreaInput, Button } from "@cubicsui/components";
 import { CubicsUIFavicon } from "@cubicsui/icons";
 
 export function WithIcons() {
   return (
     <section>
-      <TextInput label="Start Icon" startIcon={<CubicsUIFavicon />} />
-      <TextInput label="End Icon" endIcon={<CubicsUIFavicon />} />
-      <TextInput
+      <TextAreaInput label="Start Icon" startIcon={<CubicsUIFavicon />} />
+      <TextAreaInput label="End Icon" endIcon={<CubicsUIFavicon />} />
+      <TextAreaInput
         label="Both Icons"
         startIcon={<CubicsUIFavicon />}
         endIcon={<CubicsUIFavicon />}

@@ -1,13 +1,13 @@
-import { TextInput } from "@cubicsui/components";
+import { TextAreaInput } from "@cubicsui/components";
 
 export function DisableInputWidth() {
   return (
     <section>
       <p>Removes min-width of 20ch</p>
       <h3>Final width calculated from label</h3>
-      <TextInput label="tiny" disableInputWidth />
+      <TextAreaInput label="tiny" disableInputWidth />
       <h3>Final width calculated from helperText</h3>
-      <TextInput label="tiny" disableInputWidth helperText={"tinier"} />
+      <TextAreaInput label="tiny" disableInputWidth helperText={"tinier"} />
     </section>
   );
 }
