@@ -34,8 +34,9 @@
   /* Surface colors */
   --color-background: #f5f0f1;
   --color-on-background: #313133;
+  --color-on-background-low: #a5a5a5;
   --color-surface: #e6dbde;
-  --color-on-surface: #686868;
+  --color-on-surface: #4b4b4b;
   --color-surface-high: #d9c9ce;
   --color-surface-highest: #ccbdc2;
   --color-surface-dim: #bfb1b6;
@@ -124,6 +125,8 @@
   --z-drawer: 999;
   --z-modal: 9999;
   --border-width: 2.3px;
+  --gr: 1.618;
+  --focus-ring: var(--border-width) dashed var(--color-focus);
 }
 [data-theme="dark"] {
   color-scheme: dark;
@@ -161,8 +164,9 @@
   /* Surface colors */
   --color-background: #0f0f13;
   --color-on-background: #d9d9da;
+  --color-on-background-low: #acacac;
   --color-surface: #272731;
-  --color-on-surface: #8d8d8f;
+  --color-on-surface: #b3b3b3;
   --color-surface-high: #302f3a;
   --color-surface-highest: #393842;
   --color-surface-dim: #18181e;

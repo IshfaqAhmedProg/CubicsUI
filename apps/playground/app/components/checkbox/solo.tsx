@@ -5,7 +5,6 @@ export function Solo() {
     <section>
       <Checkbox label="Solo Checkbox 1" />
       <Checkbox label="Solo Checkbox 2" />
-      <hr />
     </section>
   );
 }

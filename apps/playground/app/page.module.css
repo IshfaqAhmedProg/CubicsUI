@@ -9,13 +9,42 @@
     gap: var(--gap-5);
     padding-inline: var(--gap-10);
   }
+  & code {
+    color: var(--color-on-surface);
+    background: var(--color-surface);
+    border-radius: var(--br-sm);
+    padding-inline: var(--gap);
+  }
 }
 .row {
   display: flex;
   gap: var(--gap-5);
+  flex-wrap: wrap;
 }
 .column {
   display: flex;
   flex-direction: column;
   gap: var(--gap-2);
+}
+/* TODO make into one section with color picker */
+.rgb_bg {
+  padding: var(--gap-5);
+  background-image: linear-gradient(
+    to left,
+    #f00 0%,
+    #f00 33.33%,
+    #0f0 33.33%,
+    #0f0 66.66%,
+    #00f 66.66%,
+    #00f 100%
+  );
+  background-size: 100px 50px;
+  background-repeat: repeat;
+}
+.image_bg {
+  padding: var(--gap-5);
+  background-image: url("/images/landscapeSample.jpg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
 }

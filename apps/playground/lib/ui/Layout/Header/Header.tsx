@@ -6,11 +6,14 @@ import { ThemeToggleButton } from "./ThemeToggleButton";
 import { useTheme } from "next-themes";
 import { useMounted } from "@cubicsui/hooks";
 import type { ThemeObject } from "@cubicsui/types";
+import Link from "next/link";
 
 export function Header() {
   return (
     <nav className={styles.root}>
-      <span className={styles.logo}>Playground</span>
+      <Link href="/">
+        <span className={styles.logo}>Playground</span>
+      </Link>
       <ThemeToggle />
     </nav>
   );

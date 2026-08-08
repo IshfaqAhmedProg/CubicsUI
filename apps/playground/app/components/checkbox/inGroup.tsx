@@ -18,17 +18,18 @@ export function InGroup() {
     <section>
       <ul>
         <li>
-          Make sure to pass a unique name to each {"<Checkbox/>"} when using in
-          a group as that will be used to identify the checkbox in the group.
+          Make sure to pass a unique name to each <code>{"<Checkbox/>"}</code>{" "}
+          when using in a group as that will be used to identify the checkbox in
+          the group.
         </li>
         <li>
-          If the name is passed to {"<CheckboxGroupControl/>"} then that will
-          show up in FormData too along with the other checkboxes
+          If the name is passed to <code>{"<CheckboxGroupControl/>"}</code> then
+          that will show up in FormData too along with the other checkboxes
         </li>
         <li>
-          {"<CheckboxGroupControl/>"} will always skip group by default and wont
-          show up in values inside {"<CheckboxProvider/>"}, when using
-          useCheckbox
+          <code>{"<CheckboxGroupControl/>"}</code> will always skip group by
+          default and wont show up in values inside{" "}
+          <code>{"<CheckboxProvider/>"}</code>, when using useCheckbox
         </li>
       </ul>
 
@@ -39,6 +40,8 @@ export function InGroup() {
             <CheckboxGroupControl size="sm" label="Select All" />
             <Checkbox label="Form Checkbox 1" name="form-checkbox-1" />
             <Checkbox label="Form Checkbox 2" name="form-checkbox-2" />
+            <Checkbox label="Form Checkbox 3" name="form-checkbox-3" />
+            <Checkbox label="Form Checkbox 4" name="form-checkbox-4" />
           </CheckboxProvider>
           <Button type="submit" variant="contained">
             Submit
