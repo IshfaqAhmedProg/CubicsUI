@@ -6,38 +6,21 @@ import type {
   FocusEvent,
   MouseEvent,
   ReactElement,
+  RefObject,
   SyntheticEvent,
   TouchEvent,
 } from "react";
 import { useCallback, useState } from "react";
 import styles from "./Ripple.module.css";
+import type {
+  Ripple,
+  RippleEventHandler,
+  UseRippleProps,
+} from "./Ripple.types";
 
-export interface UseRippleProps {
-  /**
-   * duration of the ripple in miliseconds
-   * @default 750
-   */
-  duration?: number;
-  /**
-   * color of the ripple
-   * @default "currentColor"
-   */
-  color?: CSSProperties["color"];
-  /**
-   * disabled ripple effect
-   * @default false
-   */
-  disabled?: boolean;
-}
-
-interface Ripple {
-  key: number;
-  size: number;
-  x: number;
-  y: number;
-}
-export type RippleEventHandler<T = unknown> = (event: T) => void;
-
+/**
+ * Utitlity function to augment the trigger event with any other function
+ */
 export function eventWithRipple<
   E extends SyntheticEvent<HTMLElement> = SyntheticEvent<HTMLElement>,
 >(
@@ -50,8 +33,12 @@ export function eventWithRipple<
   };
 }
 
+/**
+ * Use to add ripples to any components triggered by any event
+ */
 export function useRipple<C extends HTMLElement>(
   props: UseRippleProps = {},
+  containerRef?: RefObject<HTMLElement | null>,
 ): {
   createRipple: (
     event: TouchEvent<C> | MouseEvent<C> | ChangeEvent<C> | FocusEvent<C>,
@@ -71,7 +58,8 @@ export function useRipple<C extends HTMLElement>(
       if (!currentTarget) return;
       if (disabled) return;
 
-      const element = event.currentTarget;
+      // measure against the container if it exists instead of the element that fired the event
+      const element = containerRef?.current ?? event.currentTarget;
       const rect = element.getBoundingClientRect();
 
       const diameter = Math.max(element.offsetWidth, element.offsetHeight);
@@ -100,7 +88,7 @@ export function useRipple<C extends HTMLElement>(
         );
       }, duration);
     },
-    [duration, color, disabled],
+    [duration, color, disabled, containerRef],
   );
 
   const rippleElements = ripples.map((ripple) => (
@@ -114,6 +102,9 @@ export function useRipple<C extends HTMLElement>(
 
   return { createRipple, rippleElements };
 }
+/**
+ * The main ripple component that is rendered by useRipple
+ */
 function Ripple({
   ripple,
   color,
