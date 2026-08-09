@@ -12,7 +12,7 @@ export function CloseButton(props: CloseButtonProps): ReactElement {
   return (
     <Button
       {...rest}
-      square
+      icon
       style={{ margin, position: "absolute", ...style }}
       className={cn(className, styles.root)}
       data-pos-y={y}

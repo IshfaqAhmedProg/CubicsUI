@@ -44,7 +44,7 @@ function ButtonBase<C extends ElementType = ButtonDefaultElement>(
     startIcon,
     color = "default",
     endIcon,
-    square,
+    icon,
     fullWidth = false,
     onTouchStart,
     onClick,
@@ -60,7 +60,7 @@ function ButtonBase<C extends ElementType = ButtonDefaultElement>(
     className: cn(
       className,
       styles.root,
-      square ? styles.square : "",
+      icon ? styles.icon : "",
       fullWidth ? styles.fullWidth : "",
       disabled ? styles.disabled : "",
       variant ? styles[variant] : "",

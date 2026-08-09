@@ -16,7 +16,7 @@ export function DisablePadding() {
         disablePadding
         label="Button Start Icon"
         startIcon={
-          <Button square>
+          <Button icon>
             <CubicsUIFavicon />
           </Button>
         }
@@ -25,7 +25,7 @@ export function DisablePadding() {
         disablePadding
         label="Button End Icon"
         endIcon={
-          <Button variant="outlined" square>
+          <Button variant="outlined" icon>
             <CubicsUIFavicon />
           </Button>
         }
@@ -34,12 +34,12 @@ export function DisablePadding() {
         disablePadding
         label="Button Both Icons"
         startIcon={
-          <Button variant="contained" square>
+          <Button variant="contained" icon>
             <CubicsUIFavicon />
           </Button>
         }
         endIcon={
-          <Button variant="contained" square>
+          <Button variant="contained" icon>
             <CubicsUIFavicon />
           </Button>
         }

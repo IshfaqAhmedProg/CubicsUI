@@ -1,7 +1,7 @@
 import { Button } from "@cubicsui/components";
 import styles from "../../page.module.css";
 import { CubicsUIFavicon } from "@cubicsui/icons";
-export function Square() {
+export function IconButton() {
   return (
     <section>
       <p>Use this for buttons containing only icons</p>
@@ -9,31 +9,31 @@ export function Square() {
       <div className={styles.row}>
         <div className={styles.column}>
           <h6>Extra Small</h6>
-          <Button square size="xs">
+          <Button icon size="xs">
             <CubicsUIFavicon width={16} />
           </Button>
         </div>
         <div className={styles.column}>
           <h6>Small</h6>
-          <Button square size="sm">
+          <Button icon size="sm">
             <CubicsUIFavicon width={18} />
           </Button>
         </div>
         <div className={styles.column}>
           <h6>Medium</h6>
-          <Button square size="md">
+          <Button icon size="md">
             <CubicsUIFavicon width={24} />
           </Button>
         </div>
         <div className={styles.column}>
           <h6>Large</h6>
-          <Button square size="lg">
+          <Button icon size="lg">
             <CubicsUIFavicon width={28} />
           </Button>
         </div>
         <div className={styles.column}>
           <h6>Extra Large</h6>
-          <Button square size="xl">
+          <Button icon size="xl">
             <CubicsUIFavicon width={32} />
           </Button>
         </div>
@@ -42,31 +42,31 @@ export function Square() {
       <div className={styles.row}>
         <div className={styles.column}>
           <h6>Extra Small</h6>
-          <Button square variant="outlined" size="xs">
+          <Button icon variant="outlined" size="xs">
             <CubicsUIFavicon width={16} />
           </Button>
         </div>
         <div className={styles.column}>
           <h6>Small</h6>
-          <Button square variant="outlined" size="sm">
+          <Button icon variant="outlined" size="sm">
             <CubicsUIFavicon width={18} />
           </Button>
         </div>
         <div className={styles.column}>
           <h6>Medium</h6>
-          <Button square variant="outlined" size="md">
+          <Button icon variant="outlined" size="md">
             <CubicsUIFavicon width={24} />
           </Button>
         </div>
         <div className={styles.column}>
           <h6>Large</h6>
-          <Button square variant="outlined" size="lg">
+          <Button icon variant="outlined" size="lg">
             <CubicsUIFavicon width={28} />
           </Button>
         </div>
         <div className={styles.column}>
           <h6>Extra Large</h6>
-          <Button square variant="outlined" size="xl">
+          <Button icon variant="outlined" size="xl">
             <CubicsUIFavicon width={32} />
           </Button>
         </div>
@@ -75,31 +75,31 @@ export function Square() {
       <div className={styles.row}>
         <div className={styles.column}>
           <h6>Extra Small</h6>
-          <Button square variant="contained" size="xs">
+          <Button icon variant="contained" size="xs">
             <CubicsUIFavicon width={16} />
           </Button>
         </div>
         <div className={styles.column}>
           <h6>Small</h6>
-          <Button square variant="contained" size="sm">
+          <Button icon variant="contained" size="sm">
             <CubicsUIFavicon width={18} />
           </Button>
         </div>
         <div className={styles.column}>
           <h6>Medium</h6>
-          <Button square variant="contained" size="md">
+          <Button icon variant="contained" size="md">
             <CubicsUIFavicon width={24} />
           </Button>
         </div>
         <div className={styles.column}>
           <h6>Large</h6>
-          <Button square variant="contained" size="lg">
+          <Button icon variant="contained" size="lg">
             <CubicsUIFavicon width={28} />
           </Button>
         </div>
         <div className={styles.column}>
           <h6>Extra Large</h6>
-          <Button square variant="contained" size="xl">
+          <Button icon variant="contained" size="xl">
             <CubicsUIFavicon width={32} />
           </Button>
         </div>

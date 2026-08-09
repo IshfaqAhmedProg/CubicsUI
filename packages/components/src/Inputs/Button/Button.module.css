@@ -142,9 +142,10 @@
   max-width: 100%;
 }
 
-.square {
+.icon {
   aspect-ratio: 1 / 1;
   padding: var(--size);
+  height: auto;
 }
 .contained {
   --color: var(--color-background);

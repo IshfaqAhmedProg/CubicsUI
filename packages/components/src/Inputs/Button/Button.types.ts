@@ -25,10 +25,10 @@ export interface ButtonBaseProps {
   fullWidth?: boolean;
 
   /**
-   * Force a 1:1 aspect ratio, good for icons.
+   * When button is supposed to be an icon button, make sure to pass a square icon to not mess up the button's size
    * @default false
    */
-  square?: boolean;
+  icon?: boolean;
 
   /**
    * Button size.

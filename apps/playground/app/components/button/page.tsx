@@ -1,6 +1,6 @@
 import { Colors } from "./colors";
 import { Sizes } from "./sizes";
-import { Square } from "./square";
+import { IconButton } from "./iconButton";
 import { Variants } from "./variants";
 import styles from "../../page.module.css";
 import { WithIcons } from "./withIcons";
@@ -22,8 +22,8 @@ export default function Page() {
       <Sizes />
       <hr />
 
-      <h2>Square</h2>
-      <Square />
+      <h2>Icon Button</h2>
+      <IconButton />
 
       <h2>With start and end icon</h2>
       <WithIcons />
