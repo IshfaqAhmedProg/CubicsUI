@@ -42,29 +42,28 @@ export interface TextInputProps extends Omit<ComponentProps<"input">, "size"> {
   disablePadding?: boolean;
 
   /**
-   * Makes css calculate width from label and helperText instead of input 
+   * Makes css calculate width from label and helperText instead of input
    */
   disableInputWidth?: boolean;
 
   /**
    * Slot props for customizing internal elements.
+   *  ```
+   *  root
+   *   |label
+   *   |inputWrapper
+   *   |   |startIcon
+   *   |   |input
+   *   |   |endIcon
+   *   |   |ripple
+   *   |helperText
+   * ```
    * @link TextInputSlotProps
+   *
    */
   slotProps?: TextInputSlotProps;
 }
-/**
- * The slot props for the `<TextInput/>`
- * ```
- *  root
- *   |label
- *   |inputWrapper
- *   |   |startIcon
- *   |   |input
- *   |   |endIcon
- *   |   |ripple
- *   |helperText
- * ```
- */
+
 export interface TextInputSlotProps {
   /** If the root wrapping `<div/>` needs some props to be passed, for className use the className prop of the `<TextInput/>` component instead */
   root?: Omit<ComponentProps<"div">, "className">;

@@ -35,12 +35,12 @@ function InputHelperTextBase<C extends ElementType = DefaultElements>(
 InputHelperTextBase.displayName = "InputHelperText";
 
 /**
- * Use this when you want to render errors that is of string or array of string type.
+ * Use this when you want to render text that is of string or array of string type.
  * By default it renders a `<p>`, when a list is provided it will render a `<ul>` with each error inside an `<li>`.
  * ```tsx
- * <InputError error={["error1","error2"]}>...</InputError> // Renders `<ul>`
- * <InputError error={["error1"]}>...</InputError> // Renders <p>
- * <InputError error={"error1"}>...</InputError> // Renders <p>
+ * <InputHelperText text={["text1","text2"]}>...</InputHelperText> // Renders `<ul>`
+ * <InputHelperText text={["text1"]}>...</InputHelperText> // Renders <p>
+ * <InputHelperText text={"text1"}>...</InputHelperText> // Renders <p>
  * ```
  */
 export const InputHelperText = InputHelperTextBase as UnionElementComponentType<

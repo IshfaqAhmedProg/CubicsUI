@@ -6,7 +6,9 @@ export interface CloseButtonProps extends Omit<
   ButtonProps,
   "children" | "position"
 > {
+  /** spacing around the button */
   margin?: CSSProperties["margin"];
+  /** Where the `<CloseButton/>` should be positioned */
   position?: PositionStringExclude<
     "center center" | "center left" | "center right"
   >;

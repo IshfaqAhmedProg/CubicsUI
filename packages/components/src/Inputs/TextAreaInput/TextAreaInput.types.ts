@@ -49,23 +49,20 @@ export interface TextAreaInputProps extends ComponentProps<"textarea"> {
   disableResize?: boolean;
   /**
    * Slot props for customizing internal elements.
+   * ```
+   *  root
+   *   |label
+   *   |inputWrapper
+   *   |   |startIcon
+   *   |   |input
+   *   |   |endIcon
+   *   |   |ripple
+   *   |helperText
+   * ```
    * @link TextAreaInputSlotProps
    */
   slotProps?: TextAreaInputSlotProps;
 }
-/**
- * The slot props for the `<TextAreaInput/>`
- * ```
- *  root
- *   |label
- *   |inputWrapper
- *   |   |startIcon
- *   |   |input
- *   |   |endIcon
- *   |   |ripple
- *   |helperText
- * ```
- */
 export interface TextAreaInputSlotProps {
   /** If the root wrapping `<div/>` needs some props to be passed, for className use the className prop of the `<TextAreaInput/>` component instead */
   root?: Omit<ComponentProps<"div">, "className">;
