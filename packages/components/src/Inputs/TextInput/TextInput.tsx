@@ -4,7 +4,7 @@ import { useId, useRef, type ReactElement } from "react";
 import { cn, mergeRefs } from "@cubicsui/utils";
 import { eventWithRipple, useRipple } from "../../Misc/Ripple/Ripple";
 import styles from "./TextInput.module.css";
-import { InputHelperText } from "../../Typography/InputErrors/InputHelperText";
+import { InputHelperText } from "../../Typography/InputHelperText/InputHelperText";
 import type { TextInputProps } from "./TextInput.types";
 
 export function TextInput(props: TextInputProps): ReactElement {

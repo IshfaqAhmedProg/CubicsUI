@@ -1,2 +1,2 @@
-export * from "./InputErrors/InputHelperText";
-export * from "./InputErrors/InputHelperText.types";
+export * from "./InputHelperText/InputHelperText";
+export * from "./InputHelperText/InputHelperText.types";

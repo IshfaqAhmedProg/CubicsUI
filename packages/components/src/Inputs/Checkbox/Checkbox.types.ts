@@ -1,5 +1,5 @@
 import type { ComponentProps, ReactElement, ReactNode } from "react";
-import type { InputHelperTextProps } from "../../Typography/InputErrors/InputHelperText";
+import type { InputHelperTextProps } from "../../Typography/InputHelperText/InputHelperText";
 import type { UseRippleProps } from "../../Misc/Ripple/Ripple.types";
 
 export interface CheckboxProps extends Omit<

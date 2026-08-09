@@ -14,7 +14,7 @@ import styles from "./Checkbox.module.css";
 import type { CheckboxCurrentState, CheckboxProps } from "./Checkbox.types";
 import { useCheckbox } from "./CheckboxProvider";
 import { CheckIconAnimated, DashIconAnimated } from "@cubicsui/icons";
-import { InputHelperText } from "../../Typography/InputErrors/InputHelperText";
+import { InputHelperText } from "../../Typography/InputHelperText/InputHelperText";
 
 export function Checkbox(props: CheckboxProps): ReactElement {
   const {
