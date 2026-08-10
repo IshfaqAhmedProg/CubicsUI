@@ -3,9 +3,9 @@
 import { useId, useRef, type ReactElement } from "react";
 import { cn, mergeRefs } from "@cubicsui/utils";
 import { eventWithRipple, useRipple } from "../../Misc/Ripple/Ripple";
-import styles from "./TextInput.module.css";
 import { InputHelperText } from "../../Typography/InputHelperText/InputHelperText";
 import type { TextInputProps } from "./TextInput.types";
+import styles from "./TextInput.module.css";
 
 export function TextInput(props: TextInputProps): ReactElement {
   const {
@@ -16,16 +16,16 @@ export function TextInput(props: TextInputProps): ReactElement {
     helperText,
     onTouchStart,
     onClick,
-    htmlSize,
     size = "md",
     startIcon,
     endIcon,
     disablePadding,
     disableInputWidth,
+    htmlSize,
+    type = "text",
     fullWidth,
     required,
     slotProps = {},
-    type = "text",
     ...inputProps
   } = props;
   const wrapperRef = useRef<HTMLDivElement>(null);
@@ -42,9 +42,9 @@ export function TextInput(props: TextInputProps): ReactElement {
       className={cn(
         className,
         styles.root,
+        fullWidth ? styles.fullWidth : "",
         disablePadding ? styles.disablePadding : "",
         disableInputWidth ? styles.disableInputWidth : "",
-        fullWidth ? styles.fullWidth : "",
       )}
       data-size={size}
       data-error={!!error}

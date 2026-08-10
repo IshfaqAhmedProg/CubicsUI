@@ -1,11 +1,11 @@
 "use client";
 
-import { cn, mergeRefs } from "@cubicsui/utils";
 import { useId, useRef, type ReactElement } from "react";
+import { cn, mergeRefs } from "@cubicsui/utils";
 import { eventWithRipple, useRipple } from "../../Misc/Ripple/Ripple";
-import styles from "./TextAreaInput.module.css";
 import { InputHelperText } from "../../Typography/InputHelperText/InputHelperText";
 import type { TextAreaInputProps } from "./TextAreaInput.types";
+import styles from "./TextAreaInput.module.css";
 
 export function TextAreaInput(props: TextAreaInputProps): ReactElement {
   const {
@@ -41,10 +41,10 @@ export function TextAreaInput(props: TextAreaInputProps): ReactElement {
       className={cn(
         className,
         styles.root,
+        fullWidth ? styles.fullWidth : "",
         disablePadding ? styles.disablePadding : "",
         disableInputWidth ? styles.disableInputWidth : "",
         disableResize ? styles.disableResize : "",
-        fullWidth ? styles.fullWidth : "",
       )}
       data-size={size}
       data-error={!!error}

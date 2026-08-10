@@ -3,6 +3,9 @@ import type { InputHelperTextProps } from "../../Typography/InputHelperText/Inpu
 import type { UseRippleProps } from "../../Misc/Ripple/Ripple.types";
 
 export interface TextInputProps extends Omit<ComponentProps<"input">, "size"> {
+  /** Only text type inputs are allowed here */
+  type?: "text" | "email" | "search" | "tel" | "url";
+
   /** Class for the root of the `<TextInput/>` component, to modify class of the input element use slotProps.input */
   className?: string;
 

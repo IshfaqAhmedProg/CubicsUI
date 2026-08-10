@@ -87,13 +87,11 @@
   width: 100%;
 }
 .disablePadding {
-  & .inputWrapper,
-  & .input {
+  & .inputWrapper {
     padding: 0;
   }
-  .input:has(~ .iconContainer),
-  .iconContainer ~ .input {
-    padding-block: var(--size);
+  & .input {
+    padding: var(--size);
   }
 }
 .disableInputWidth {
@@ -113,11 +111,7 @@
     resize: none;
   }
 }
-/* When input has a start or icon */
-.input:has(~ .iconContainer),
-.iconContainer ~ .input {
-  padding-block: 0;
-}
+
 .inputWrapper {
   display: flex;
   align-items: stretch;
@@ -139,13 +133,12 @@
   flex: 1 1 100%;
   width: 100%;
   min-width: 20ch;
-  height: 100%;
   border: none;
   background: none;
   color: inherit;
   font-size: var(--fs);
   font-family: var(--ff);
-  padding: var(--size);
+  padding-inline: var(--size);
 }
 .label {
   font-size: 0.9em;
@@ -156,10 +149,9 @@
 .iconContainer {
   display: flex;
   justify-content: center;
-  align-items: flex-start;
-  flex: 1 1 0;
+  height: 100%;
+  flex-shrink: 0;
 }
-
 .helperText {
   font-size: 0.8em;
   margin-left: calc(var(--gap-2) + var(--size));
