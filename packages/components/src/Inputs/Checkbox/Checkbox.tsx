@@ -13,8 +13,11 @@ import { cn, mergeRefs } from "@cubicsui/utils";
 import styles from "./Checkbox.module.css";
 import type { CheckboxCurrentState, CheckboxProps } from "./Checkbox.types";
 import { useCheckbox } from "./CheckboxProvider";
-import { CheckIconAnimated, DashIconAnimated } from "@cubicsui/icons";
 import { InputHelperText } from "../../Typography/InputHelperText/InputHelperText";
+import {
+  CheckIconAnimated,
+  DashIconAnimated,
+} from "./CheckboxCheckIcons/CheckboxCheckIcons";
 
 export function Checkbox(props: CheckboxProps): ReactElement {
   const {

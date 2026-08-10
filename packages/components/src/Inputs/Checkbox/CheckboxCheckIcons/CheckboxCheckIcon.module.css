@@ -1,5 +1,4 @@
-.check-animate path,
-.dash-animate path {
+.root path {
   stroke-dasharray: 1;
   stroke-dashoffset: 1;
   animation: draw-path var(--transition-time) var(--transition-tf) forwards;
