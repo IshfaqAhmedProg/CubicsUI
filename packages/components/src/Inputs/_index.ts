@@ -10,6 +10,10 @@ export * from "./Checkbox/CheckboxCheckIcons/CheckboxCheckIcons";
 export * from "./CloseButton/CloseButton";
 export * from "./CloseButton/CloseButton.types";
 
+export * from "./PasswordInput/PasswordInput";
+export * from "./PasswordInput/PasswordInput.types";
+export * from "./PasswordInput/PasswordVisibilityToggle/PasswordVisibilityToggle";
+
 export * from "./TextAreaInput/TextAreaInput";
 export * from "./TextAreaInput/TextAreaInput.types";
 
