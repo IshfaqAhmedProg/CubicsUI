@@ -122,12 +122,12 @@
   backdrop-filter: blur(var(--blur-heavy));
   transition: all var(--transition-time) var(--transition-tf);
 }
+
 .input {
   appearance: none;
   -webkit-appearance: none;
   flex: 1 1 100%;
   width: 100%;
-  min-width: 20ch;
   border: none;
   background: none;
   color: inherit;
@@ -135,18 +135,21 @@
   font-family: var(--ff);
   padding-inline: var(--size);
 }
+
 .label {
   font-size: 0.9em;
   width: 0;
   min-width: 100%;
   color: var(--label-color);
 }
+
 .iconContainer {
   display: flex;
   justify-content: center;
   height: 100%;
   flex-shrink: 0;
 }
+
 .helperText {
   font-size: 0.8em;
   margin-left: calc(var(--gap-2) + var(--size));

@@ -5,6 +5,7 @@ import { cn, mergeRefs } from "@cubicsui/utils";
 import { eventWithRipple, useRipple } from "../../Misc/Ripple/Ripple";
 import { InputHelperText } from "../../Typography/InputHelperText/InputHelperText";
 import type { TextAreaInputProps } from "./TextAreaInput.types";
+import textInputStyles from "../TextInput/TextInput.module.css";
 import styles from "./TextAreaInput.module.css";
 
 export function TextAreaInput(props: TextAreaInputProps): ReactElement {
@@ -40,10 +41,10 @@ export function TextAreaInput(props: TextAreaInputProps): ReactElement {
       {...slotProps.root}
       className={cn(
         className,
-        styles.root,
-        fullWidth ? styles.fullWidth : "",
-        disablePadding ? styles.disablePadding : "",
-        disableInputWidth ? styles.disableInputWidth : "",
+        textInputStyles.root,
+        fullWidth ? textInputStyles.fullWidth : "",
+        disablePadding ? textInputStyles.disablePadding : "",
+        disableInputWidth ? textInputStyles.disableInputWidth : "",
         disableResize ? styles.disableResize : "",
       )}
       data-size={size}
@@ -53,7 +54,7 @@ export function TextAreaInput(props: TextAreaInputProps): ReactElement {
         <label
           {...slotProps.label}
           htmlFor={id}
-          className={cn(slotProps.label?.className, styles.label)}
+          className={cn(slotProps.label?.className, textInputStyles.label)}
         >
           {required && "*"}
           {label}
@@ -62,19 +63,29 @@ export function TextAreaInput(props: TextAreaInputProps): ReactElement {
       <div
         {...slotProps.inputWrapper}
         ref={mergeRefs(slotProps.inputWrapper?.ref, wrapperRef)}
-        className={cn(slotProps.inputWrapper?.className, styles.inputWrapper)}
+        className={cn(
+          slotProps.inputWrapper?.className,
+          textInputStyles.inputWrapper,
+        )}
       >
         {startIcon && (
           <span
             {...slotProps.startIcon}
-            className={cn(styles.iconContainer, slotProps.startIcon?.className)}
+            className={cn(
+              textInputStyles.iconContainer,
+              slotProps.startIcon?.className,
+            )}
           >
             {startIcon}
           </span>
         )}
         <textarea
           id={id}
-          className={cn(slotProps.input?.className, styles.input)}
+          className={cn(
+            slotProps.input?.className,
+            textInputStyles.input,
+            styles.input,
+          )}
           onTouchStart={eventWithRipple(createRipple, onTouchStart)}
           onClick={eventWithRipple(createRipple, onClick)}
           aria-invalid={!!error}
@@ -84,7 +95,10 @@ export function TextAreaInput(props: TextAreaInputProps): ReactElement {
         {endIcon && (
           <span
             {...slotProps.endIcon}
-            className={cn(styles.iconContainer, slotProps.endIcon?.className)}
+            className={cn(
+              textInputStyles.iconContainer,
+              slotProps.endIcon?.className,
+            )}
           >
             {endIcon}
           </span>
@@ -93,7 +107,10 @@ export function TextAreaInput(props: TextAreaInputProps): ReactElement {
       </div>
       <InputHelperText
         {...slotProps.helperText}
-        className={cn(slotProps.helperText?.className, styles.helperText)}
+        className={cn(
+          slotProps.helperText?.className,
+          textInputStyles.helperText,
+        )}
         text={error ?? helperText}
       />
     </div>

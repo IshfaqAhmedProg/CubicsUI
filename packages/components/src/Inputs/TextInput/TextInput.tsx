@@ -1,6 +1,12 @@
 "use client";
 
-import { useId, useRef, type ReactElement } from "react";
+import {
+  useId,
+  useRef,
+  type ComponentProps,
+  type ReactElement,
+  type ReactNode,
+} from "react";
 import { cn, mergeRefs } from "@cubicsui/utils";
 import { eventWithRipple, useRipple } from "../../Misc/Ripple/Ripple";
 import { InputHelperText } from "../../Typography/InputHelperText/InputHelperText";
@@ -50,27 +56,19 @@ export function TextInput(props: TextInputProps): ReactElement {
       data-error={!!error}
     >
       {label && (
-        <label
-          {...slotProps.label}
-          htmlFor={id}
-          className={cn(slotProps.label?.className, styles.label)}
-        >
-          {required && "*"}
+        <TextInputLabel {...slotProps.label} inputId={id} required={required}>
           {label}
-        </label>
+        </TextInputLabel>
       )}
-      <div
+      <TextInputInputWrapper
         {...slotProps.inputWrapper}
+        rippleElements={rippleElements}
         ref={mergeRefs(slotProps.inputWrapper?.ref, wrapperRef)}
-        className={cn(slotProps.inputWrapper?.className, styles.inputWrapper)}
       >
         {startIcon && (
-          <span
-            {...slotProps.startIcon}
-            className={cn(styles.iconContainer, slotProps.startIcon?.className)}
-          >
+          <TextInputIconContainer {...slotProps.startIcon}>
             {startIcon}
-          </span>
+          </TextInputIconContainer>
         )}
         <input
           type={type}
@@ -84,20 +82,50 @@ export function TextInput(props: TextInputProps): ReactElement {
           {...inputProps}
         />
         {endIcon && (
-          <span
-            {...slotProps.endIcon}
-            className={cn(styles.iconContainer, slotProps.endIcon?.className)}
-          >
+          <TextInputIconContainer {...slotProps.endIcon}>
             {endIcon}
-          </span>
+          </TextInputIconContainer>
         )}
         {rippleElements}
-      </div>
+      </TextInputInputWrapper>
       <InputHelperText
         {...slotProps.helperText}
         className={cn(slotProps.helperText?.className, styles.helperText)}
         text={error ?? helperText}
       />
+    </div>
+  );
+}
+export function TextInputLabel(
+  props: ComponentProps<"label"> & { inputId: string; required?: boolean },
+): ReactElement {
+  const { children, className, inputId, required, ...rest } = props;
+  return (
+    <label {...rest} htmlFor={inputId} className={cn(className, styles.label)}>
+      {required && "*"}
+      {children}
+    </label>
+  );
+}
+export function TextInputIconContainer(
+  props: ComponentProps<"span"> & { icon?: ReactNode },
+): ReactElement {
+  const { children, className, ...rest } = props;
+  return (
+    <span {...rest} className={cn(className, styles.iconContainer)}>
+      {children}
+    </span>
+  );
+}
+export function TextInputInputWrapper(
+  props: ComponentProps<"div"> & { rippleElements?: ReactNode },
+): ReactElement {
+  const { className, children, rippleElements, ...rest } = props;
+
+  return (
+    <div {...rest} className={cn(className, styles.inputWrapper)}>
+      {children}
+      {rippleElements}
     </div>
   );
 }
