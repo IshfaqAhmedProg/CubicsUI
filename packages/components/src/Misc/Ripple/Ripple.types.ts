@@ -1,4 +1,11 @@
-import type { CSSProperties } from "react";
+import type {
+  ChangeEvent,
+  CSSProperties,
+  FocusEvent,
+  MouseEvent,
+  ReactElement,
+  TouchEvent,
+} from "react";
 
 export interface UseRippleProps {
   /**
@@ -18,6 +25,12 @@ export interface UseRippleProps {
   disabled?: boolean;
 }
 
+export type UseRipplePropsReturns<C extends HTMLElement> = {
+  createRipple: (
+    event: TouchEvent<C> | MouseEvent<C> | ChangeEvent<C> | FocusEvent<C>,
+  ) => void;
+  rippleElements: ReactElement[];
+};
 export interface Ripple {
   key: number;
   size: number;

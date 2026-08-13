@@ -5,7 +5,6 @@ import type {
   CSSProperties,
   FocusEvent,
   MouseEvent,
-  ReactElement,
   RefObject,
   SyntheticEvent,
   TouchEvent,
@@ -16,6 +15,7 @@ import type {
   Ripple,
   RippleEventHandler,
   UseRippleProps,
+  UseRipplePropsReturns,
 } from "./Ripple.types";
 
 /**
@@ -39,12 +39,7 @@ export function eventWithRipple<
 export function useRipple<C extends HTMLElement>(
   props: UseRippleProps = {},
   containerRef?: RefObject<HTMLElement | null>,
-): {
-  createRipple: (
-    event: TouchEvent<C> | MouseEvent<C> | ChangeEvent<C> | FocusEvent<C>,
-  ) => void;
-  rippleElements: ReactElement[];
-} {
+): UseRipplePropsReturns<C> {
   const { duration = 750, color = "currentColor", disabled = false } = props;
 
   const [ripples, setRipples] = useState<Ripple[]>([]);
