@@ -15,8 +15,9 @@ export function PasswordInput(props: PasswordInputProps): ReactElement {
     className,
     label,
     id: _id,
-    error,
     helperText,
+    error,
+    disabled,
     onTouchStart,
     onClick,
     size = "md",
@@ -51,6 +52,7 @@ export function PasswordInput(props: PasswordInputProps): ReactElement {
       aria-invalid={!!error}
       size={htmlSize}
       required={required}
+      disabled={disabled}
     />
   );
 
@@ -66,6 +68,7 @@ export function PasswordInput(props: PasswordInputProps): ReactElement {
       )}
       data-size={size}
       data-error={!!error}
+      data-disabled={disabled}
     >
       {label && (
         <label

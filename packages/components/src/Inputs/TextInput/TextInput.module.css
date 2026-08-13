@@ -31,10 +31,12 @@
     }
   }
   /* Disabled State */
-  &:has(.input:disabled) {
+  &[data-disabled="true"] {
     opacity: 0.5;
 
-    & .inputWrapper {
+    & .inputWrapper,
+    & .input,
+    & .label {
       cursor: not-allowed;
     }
   }

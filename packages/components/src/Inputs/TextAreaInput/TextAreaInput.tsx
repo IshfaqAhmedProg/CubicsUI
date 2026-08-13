@@ -13,8 +13,9 @@ export function TextAreaInput(props: TextAreaInputProps): ReactElement {
     className,
     label,
     id: _id,
-    error,
     helperText,
+    error,
+    disabled,
     onTouchStart,
     onClick,
     size = "md",
@@ -49,6 +50,7 @@ export function TextAreaInput(props: TextAreaInputProps): ReactElement {
       )}
       data-size={size}
       data-error={!!error}
+      data-disabled={disabled}
     >
       {label && (
         <label
@@ -90,6 +92,8 @@ export function TextAreaInput(props: TextAreaInputProps): ReactElement {
           onClick={eventWithRipple(createRipple, onClick)}
           aria-invalid={!!error}
           required={required}
+          disabled={disabled}
+
           {...inputProps}
         />
         {endIcon && (

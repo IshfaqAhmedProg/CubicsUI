@@ -20,6 +20,7 @@ export function TextInput(props: TextInputProps): ReactElement {
     id: _id,
     error,
     helperText,
+    disabled,
     onTouchStart,
     onClick,
     size = "md",
@@ -54,6 +55,7 @@ export function TextInput(props: TextInputProps): ReactElement {
       )}
       data-size={size}
       data-error={!!error}
+      data-disabled={disabled}
     >
       {label && (
         <TextInputLabel {...slotProps.label} inputId={id} required={required}>
@@ -79,6 +81,7 @@ export function TextInput(props: TextInputProps): ReactElement {
           aria-invalid={!!error}
           size={htmlSize}
           required={required}
+          disabled={disabled}
           {...inputProps}
         />
         {endIcon && (
