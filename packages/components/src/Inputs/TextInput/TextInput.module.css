@@ -23,67 +23,6 @@
   gap: var(--gap);
   font-size: var(--fs);
   width: fit-content;
-
-  /* Errored state */
-  &[data-error="true"] {
-    & .helperText {
-      color: var(--color-error);
-    }
-  }
-  /* Disabled State */
-  &[data-disabled="true"] {
-    opacity: 0.5;
-
-    & .inputWrapper,
-    & .input,
-    & .label {
-      cursor: not-allowed;
-    }
-  }
-  /* Focused */
-  &:has(.input:focus) {
-    & .label {
-      color: var(--label-color-focused);
-    }
-    & .inputWrapper {
-      background: var(--bg-focused);
-      border-color: var(--border-color-focused);
-      color: var(--color-focused);
-    }
-    & .input {
-      outline: none;
-    }
-    /* Focused and errored */
-    &[data-error="true"] {
-      & .label {
-        color: var(--color-error);
-      }
-      & .inputWrapper {
-        border-color: var(--color-error);
-      }
-    }
-  }
-  /* Size styles  */
-  &[data-size="xs"] {
-    --fs: var(--fs-xs);
-    --br: var(--br-xs);
-    --size: calc(var(--gap) / var(--gr));
-  }
-  &[data-size="sm"] {
-    --fs: var(--fs-sm);
-    --br: var(--br-sm);
-    --size: var(--gap);
-  }
-  &[data-size="lg"] {
-    --fs: var(--fs-lg);
-    --br: var(--br-lg);
-    --size: var(--gap-3);
-  }
-  &[data-size="xl"] {
-    --fs: var(--fs-xl);
-    --br: var(--br-xl);
-    --size: var(--gap-3);
-  }
 }
 .fullWidth {
   width: 100%;
@@ -92,7 +31,8 @@
   & .inputWrapper {
     padding: 0;
   }
-  & .input {
+  & /* Has start and end icon */
+.iconContainer ~ .input,.input:has(~ .iconContainer) {
     padding: var(--size);
   }
 }
@@ -135,7 +75,14 @@
   color: inherit;
   font-size: var(--fs);
   font-family: var(--ff);
-  padding-inline: var(--size);
+}
+/* Has start icon */
+.iconContainer ~ .input {
+  padding-left: var(--size);
+}
+/* Has end icon */
+.input:has(~ .iconContainer) {
+  padding-right: var(--size);
 }
 
 .label {
@@ -152,9 +99,67 @@
   flex-shrink: 0;
 }
 
-.helperText {
-  font-size: 0.8em;
-  margin-left: calc(var(--gap-2) + var(--size));
-  width: 0;
-  min-width: 100%;
+/* Errored state */
+.root[data-error="true"] {
+  & .helperText,
+  & .label {
+    color: var(--color-error);
+  }
+  & .inputWrapper {
+    border-color: var(--color-error);
+  }
+}
+/* Disabled State */
+.root[data-disabled="true"] {
+  opacity: 0.5;
+
+  & .inputWrapper,
+  & .input,
+  & .label {
+    cursor: not-allowed;
+  }
+}
+/* Focused */
+.root:has(.input:focus) {
+  & .label {
+    color: var(--label-color-focused);
+  }
+  & .inputWrapper {
+    background: var(--bg-focused);
+    border-color: var(--border-color-focused);
+    color: var(--color-focused);
+  }
+  & .input {
+    outline: none;
+  }
+  /* Focused and errored */
+  &[data-error="true"] {
+    & .label {
+      color: var(--color);
+    }
+    & .label {
+      color: var(--color);
+    }
+  }
+}
+/* Size styles  */
+.root[data-size="xs"] {
+  --fs: var(--fs-xs);
+  --br: var(--br-xs);
+  --size: calc(var(--gap) / var(--gr));
+}
+.root[data-size="sm"] {
+  --fs: var(--fs-sm);
+  --br: var(--br-sm);
+  --size: var(--gap);
+}
+.root[data-size="lg"] {
+  --fs: var(--fs-lg);
+  --br: var(--br-lg);
+  --size: var(--gap-3);
+}
+.root[data-size="xl"] {
+  --fs: var(--fs-xl);
+  --br: var(--br-xl);
+  --size: var(--gap-3);
 }
