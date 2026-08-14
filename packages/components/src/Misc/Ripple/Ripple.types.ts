@@ -25,7 +25,7 @@ export interface UseRippleProps {
   disabled?: boolean;
 }
 
-export type UseRipplePropsReturns<C extends HTMLElement> = {
+export type UseRippleReturns<C extends HTMLElement> = {
   createRipple: (
     event: TouchEvent<C> | MouseEvent<C> | ChangeEvent<C> | FocusEvent<C>,
   ) => void;

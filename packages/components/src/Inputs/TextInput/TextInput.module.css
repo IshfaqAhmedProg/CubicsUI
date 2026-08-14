@@ -99,6 +99,12 @@
   flex-shrink: 0;
 }
 
+.helperText {
+  font-size: 0.8em;
+  margin-left: calc(var(--gap-2) + var(--size));
+  width: 0;
+  min-width: 100%;
+}
 /* Errored state */
 .root[data-error="true"] {
   & .helperText,

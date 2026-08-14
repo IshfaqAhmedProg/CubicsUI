@@ -43,13 +43,13 @@
   },
   "dependencies": {
     "@cubicsui/hooks": "workspace:^",
-    "@cubicsui/utils": "workspace:^",
-    "@cubicsui/icons": "workspace:^"
+    "@cubicsui/icons": "workspace:^",
+    "@cubicsui/utils": "workspace:^"
   },
   "devDependencies": {
-    "@eslint/js": "^9.39.1",
     "@cubicsui/tsconfig": "workspace:^",
     "@cubicsui/types": "workspace:^",
+    "@eslint/js": "^9.39.1",
     "@tsdown/css": "^0.21.7",
     "@types/react": "^19",
     "@types/react-dom": "^19",

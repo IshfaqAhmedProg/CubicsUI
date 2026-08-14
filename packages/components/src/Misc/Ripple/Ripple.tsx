@@ -15,7 +15,7 @@ import type {
   Ripple,
   RippleEventHandler,
   UseRippleProps,
-  UseRipplePropsReturns,
+  UseRippleReturns,
 } from "./Ripple.types";
 
 /**
@@ -39,7 +39,7 @@ export function eventWithRipple<
 export function useRipple<C extends HTMLElement>(
   props: UseRippleProps = {},
   containerRef?: RefObject<HTMLElement | null>,
-): UseRipplePropsReturns<C> {
+): UseRippleReturns<C> {
   const { duration = 750, color = "currentColor", disabled = false } = props;
 
   const [ripples, setRipples] = useState<Ripple[]>([]);
