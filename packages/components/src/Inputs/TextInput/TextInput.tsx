@@ -5,6 +5,7 @@ import { cn, mergeRefs } from "@cubicsui/utils";
 import { eventWithRipple, useRipple } from "../../Misc/Ripple/Ripple";
 import { InputHelperText } from "../../Typography/InputHelperText/InputHelperText";
 import type { TextInputProps } from "./TextInput.types";
+import iFStyles from "../../Bases/styles/InputField.module.css";
 import styles from "./TextInput.module.css";
 
 export function TextInput(props: TextInputProps): ReactElement {
@@ -40,10 +41,10 @@ export function TextInput(props: TextInputProps): ReactElement {
       {...slotProps.root}
       className={cn(
         className,
-        styles.root,
-        fullWidth ? styles.fullWidth : "",
-        disablePadding ? styles.disablePadding : "",
-        disableInputWidth ? styles.disableInputWidth : "",
+        iFStyles.root,
+        fullWidth ? iFStyles.fullWidth : "",
+        disablePadding ? iFStyles.disablePadding : "",
+        disableInputWidth ? iFStyles.disableInputWidth : "",
       )}
       data-size={size}
       data-error={!!error}
@@ -52,7 +53,7 @@ export function TextInput(props: TextInputProps): ReactElement {
         <label
           {...slotProps.label}
           htmlFor={id}
-          className={cn(slotProps.label?.className, styles.label)}
+          className={cn(slotProps.label?.className, iFStyles.label)}
         >
           {required && "*"}
           {label}
@@ -61,12 +62,15 @@ export function TextInput(props: TextInputProps): ReactElement {
       <div
         {...slotProps.inputWrapper}
         ref={mergeRefs(slotProps.inputWrapper?.ref, wrapperRef)}
-        className={cn(slotProps.inputWrapper?.className, styles.inputWrapper)}
+        className={cn(slotProps.inputWrapper?.className, iFStyles.inputWrapper)}
       >
         {startIcon && (
           <span
             {...slotProps.startIcon}
-            className={cn(styles.iconContainer, slotProps.startIcon?.className)}
+            className={cn(
+              iFStyles.iconContainer,
+              slotProps.startIcon?.className,
+            )}
           >
             {startIcon}
           </span>
@@ -74,7 +78,11 @@ export function TextInput(props: TextInputProps): ReactElement {
         <input
           type={type}
           id={id}
-          className={cn(slotProps.input?.className, styles.input)}
+          className={cn(
+            slotProps.input?.className,
+            iFStyles.input,
+            styles.input,
+          )}
           onTouchStart={eventWithRipple(createRipple, onTouchStart)}
           onClick={eventWithRipple(createRipple, onClick)}
           aria-invalid={!!error}
@@ -85,7 +93,7 @@ export function TextInput(props: TextInputProps): ReactElement {
         {endIcon && (
           <span
             {...slotProps.endIcon}
-            className={cn(styles.iconContainer, slotProps.endIcon?.className)}
+            className={cn(iFStyles.iconContainer, slotProps.endIcon?.className)}
           >
             {endIcon}
           </span>
@@ -94,7 +102,7 @@ export function TextInput(props: TextInputProps): ReactElement {
       </div>
       <InputHelperText
         {...slotProps.helperText}
-        className={cn(slotProps.helperText?.className, styles.helperText)}
+        className={cn(slotProps.helperText?.className, iFStyles.helperText)}
         text={error ?? helperText}
       />
     </div>

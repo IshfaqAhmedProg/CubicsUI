@@ -5,7 +5,7 @@ import { cn, mergeRefs } from "@cubicsui/utils";
 import { eventWithRipple, useRipple } from "../../Misc/Ripple/Ripple";
 import { InputHelperText } from "../../Typography/InputHelperText/InputHelperText";
 import type { TextAreaInputProps } from "./TextAreaInput.types";
-import textInputStyles from "../TextInput/TextInput.module.css";
+import iFStyles from "../../Bases/styles/InputField.module.css";
 import styles from "./TextAreaInput.module.css";
 
 export function TextAreaInput(props: TextAreaInputProps): ReactElement {
@@ -42,10 +42,10 @@ export function TextAreaInput(props: TextAreaInputProps): ReactElement {
       {...slotProps.root}
       className={cn(
         className,
-        textInputStyles.root,
-        fullWidth ? textInputStyles.fullWidth : "",
-        disablePadding ? textInputStyles.disablePadding : "",
-        disableInputWidth ? textInputStyles.disableInputWidth : "",
+        iFStyles.root,
+        fullWidth ? iFStyles.fullWidth : "",
+        disablePadding ? iFStyles.disablePadding : "",
+        disableInputWidth ? iFStyles.disableInputWidth : "",
         disableResize ? styles.disableResize : "",
       )}
       data-size={size}
@@ -56,7 +56,7 @@ export function TextAreaInput(props: TextAreaInputProps): ReactElement {
         <label
           {...slotProps.label}
           htmlFor={id}
-          className={cn(slotProps.label?.className, textInputStyles.label)}
+          className={cn(slotProps.label?.className, iFStyles.label)}
         >
           {required && "*"}
           {label}
@@ -65,16 +65,13 @@ export function TextAreaInput(props: TextAreaInputProps): ReactElement {
       <div
         {...slotProps.inputWrapper}
         ref={mergeRefs(slotProps.inputWrapper?.ref, wrapperRef)}
-        className={cn(
-          slotProps.inputWrapper?.className,
-          textInputStyles.inputWrapper,
-        )}
+        className={cn(slotProps.inputWrapper?.className, iFStyles.inputWrapper)}
       >
         {startIcon && (
           <span
             {...slotProps.startIcon}
             className={cn(
-              textInputStyles.iconContainer,
+              iFStyles.iconContainer,
               slotProps.startIcon?.className,
             )}
           >
@@ -85,7 +82,7 @@ export function TextAreaInput(props: TextAreaInputProps): ReactElement {
           id={id}
           className={cn(
             slotProps.input?.className,
-            textInputStyles.input,
+            iFStyles.input,
             styles.input,
           )}
           onTouchStart={eventWithRipple(createRipple, onTouchStart)}
@@ -99,10 +96,7 @@ export function TextAreaInput(props: TextAreaInputProps): ReactElement {
         {endIcon && (
           <span
             {...slotProps.endIcon}
-            className={cn(
-              textInputStyles.iconContainer,
-              slotProps.endIcon?.className,
-            )}
+            className={cn(iFStyles.iconContainer, slotProps.endIcon?.className)}
           >
             {endIcon}
           </span>
@@ -111,10 +105,7 @@ export function TextAreaInput(props: TextAreaInputProps): ReactElement {
       </div>
       <InputHelperText
         {...slotProps.helperText}
-        className={cn(
-          slotProps.helperText?.className,
-          textInputStyles.helperText,
-        )}
+        className={cn(slotProps.helperText?.className, iFStyles.helperText)}
         text={error ?? helperText}
       />
     </div>

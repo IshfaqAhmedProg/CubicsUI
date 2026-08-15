@@ -7,7 +7,7 @@ import { InputHelperText } from "../../Typography/InputHelperText/InputHelperTex
 import { PasswordVisibilityToggle } from "./PasswordVisibilityToggle/PasswordVisibilityToggle";
 import { PasswordStrengthMeter } from "../../Display/PasswordStrengthMeter/PasswordStrengthMeter";
 import type { PasswordInputProps } from "./PasswordInput.types";
-import textInputStyles from "../TextInput/TextInput.module.css";
+import iFStyles from "../../Bases/styles/InputField.module.css";
 import styles from "./PasswordInput.module.css";
 
 export function PasswordInput(props: PasswordInputProps): ReactElement {
@@ -46,7 +46,7 @@ export function PasswordInput(props: PasswordInputProps): ReactElement {
       {...inputProps}
       type={showPass ? "text" : "password"}
       id={id}
-      className={cn(slotProps.input?.className, textInputStyles.input)}
+      className={cn(slotProps.input?.className, iFStyles.input, styles.input)}
       onTouchStart={eventWithRipple(createRipple, onTouchStart)}
       onClick={eventWithRipple(createRipple, onClick)}
       aria-invalid={!!error}
@@ -61,10 +61,12 @@ export function PasswordInput(props: PasswordInputProps): ReactElement {
       {...slotProps.root}
       className={cn(
         className,
-        textInputStyles.root,
-        fullWidth ? textInputStyles.fullWidth : "",
-        disablePadding ? textInputStyles.disablePadding : "",
-        disableInputWidth ? textInputStyles.disableInputWidth : "",
+        iFStyles.root,
+        fullWidth ? iFStyles.fullWidth : "",
+        disablePadding
+          ? cn(iFStyles.disablePadding, styles.disablePadding)
+          : "",
+        disableInputWidth ? iFStyles.disableInputWidth : "",
       )}
       data-size={size}
       data-error={!!error}
@@ -74,7 +76,7 @@ export function PasswordInput(props: PasswordInputProps): ReactElement {
         <label
           {...slotProps.label}
           htmlFor={id}
-          className={cn(slotProps.label?.className, textInputStyles.label)}
+          className={cn(slotProps.label?.className, iFStyles.label)}
         >
           {required && "*"}
           {label}
@@ -83,16 +85,14 @@ export function PasswordInput(props: PasswordInputProps): ReactElement {
       <div
         {...slotProps.inputWrapper}
         ref={mergeRefs(slotProps.inputWrapper?.ref, wrapperRef)}
-        className={cn(
-          slotProps.inputWrapper?.className,
-          textInputStyles.inputWrapper,
-        )}
+        className={cn(slotProps.inputWrapper?.className, iFStyles.inputWrapper)}
       >
         {startIcon && (
           <span
             {...slotProps.startIcon}
             className={cn(
-              textInputStyles.iconContainer,
+              iFStyles.iconContainer,
+              styles.iconContainer,
               slotProps.startIcon?.className,
             )}
           >
@@ -116,7 +116,8 @@ export function PasswordInput(props: PasswordInputProps): ReactElement {
           <span
             {...slotProps.endIcon}
             className={cn(
-              textInputStyles.iconContainer,
+              iFStyles.iconContainer,
+              styles.iconContainer,
               slotProps.endIcon?.className,
             )}
           >
@@ -130,10 +131,7 @@ export function PasswordInput(props: PasswordInputProps): ReactElement {
       )}
       <InputHelperText
         {...slotProps.helperText}
-        className={cn(
-          slotProps.helperText?.className,
-          textInputStyles.helperText,
-        )}
+        className={cn(slotProps.helperText?.className, iFStyles.helperText)}
         text={error ?? helperText}
       />
     </div>
