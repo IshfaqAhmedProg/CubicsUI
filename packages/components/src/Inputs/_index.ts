@@ -14,6 +14,9 @@ export * from "./PasswordInput/PasswordInput";
 export * from "./PasswordInput/PasswordInput.types";
 export * from "./PasswordInput/PasswordVisibilityToggle/PasswordVisibilityToggle";
 
+export * from "./Select/Select";
+export * from "./Select/Select.types";
+
 export * from "./TextAreaInput/TextAreaInput";
 export * from "./TextAreaInput/TextAreaInput.types";
 
