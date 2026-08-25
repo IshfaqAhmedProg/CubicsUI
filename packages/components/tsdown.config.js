@@ -10,13 +10,9 @@ export default defineConfig({
   treeshake: true,
   unbundle: true,
   css: {
-    splitting: false,
-    fileName: "index.css",
-    modules: {
-      scopeBehaviour: "local",
-      generateScopedName: "[name]_[local]_[hash]",
-      localsConvention: "camelCase",
-    },
+    splitting: true,
+    inject: true,
+    modules: false,
   },
   deps: {
     neverBundle: [
