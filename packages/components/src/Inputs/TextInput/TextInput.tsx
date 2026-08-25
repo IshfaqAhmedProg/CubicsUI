@@ -54,8 +54,8 @@ export function TextInput(props: TextInputProps): ReactElement {
           {...slotProps.label}
           htmlFor={id}
           className={cn(slotProps.label?.className, iFStyles.label)}
+          data-required={required}
         >
-          {required && "*"}
           {label}
         </label>
       )}

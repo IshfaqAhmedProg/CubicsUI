@@ -97,6 +97,11 @@
   width: 0;
   min-width: 100%;
   color: var(--label-color);
+  &[data-required="true"] {
+    &::before {
+      content: "*";
+    }
+  }
 }
 
 .iconContainer {
