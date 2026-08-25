@@ -14,7 +14,7 @@ import { DisableResize } from "./disableResize";
 export default function Page() {
   return (
     <div className={styles.root}>
-      <h1>TextInput</h1>
+      <h1>TextAreaInput</h1>
 
       <h2>Labels</h2>
       <Labels />
@@ -32,10 +32,6 @@ export default function Page() {
       <BackgroundCheck />
       <hr />
 
-      <h2>With start and end icons</h2>
-      <WithIcons />
-      <hr />
-
       <h2>Helper text</h2>
       <HelperText />
       <hr />
@@ -46,6 +42,10 @@ export default function Page() {
 
       <h2>Disable Input Width</h2>
       <DisableInputWidth />
+      <hr />
+
+      <h2>With start and end icons</h2>
+      <WithIcons />
       <hr />
 
       <h2>Disable Padding</h2>

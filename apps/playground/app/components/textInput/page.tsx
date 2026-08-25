@@ -31,10 +31,6 @@ export default function Page() {
       <BackgroundCheck />
       <hr />
 
-      <h2>With start and end icons</h2>
-      <WithIcons />
-      <hr />
-
       <h2>Helper text</h2>
       <HelperText />
       <hr />
@@ -43,6 +39,10 @@ export default function Page() {
       <DisableInputWidth />
       <hr />
 
+      <h2>With start and end icons</h2>
+      <WithIcons />
+      <hr />
+      
       <h2>Disable Padding</h2>
       <DisablePadding />
       <hr />

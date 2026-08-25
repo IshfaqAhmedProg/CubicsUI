@@ -125,7 +125,7 @@ importers:
         version: 9.39.5
       '@tsdown/css':
         specifier: ^0.21.7
-        version: 0.21.10(postcss@8.4.31)(tsdown@0.21.10)
+        version: 0.21.10(postcss@8.5.26)(tsdown@0.21.10)
       '@types/react':
         specifier: ^19
         version: 19.2.18
@@ -2093,6 +2093,11 @@ packages:
     engines: {node: ^10 || ^12 || ^13.7 || ^14 || >=15.0.1}
     hasBin: true
 
+  nanoid@3.3.18:
+    resolution: {integrity: sha512-DTg4MJbGMWkfi6VZFdNt2/caMbQy4Ou+Op/hJQvGEWcnVfoA1QA+xzRKAzw9jD6+GVOOeYr/mIcuDSdug6F6+w==}
+    engines: {node: ^10 || ^12 || ^13.7 || ^14 || >=15.0.1}
+    hasBin: true
+
   napi-postinstall@0.3.4:
     resolution: {integrity: sha512-PHI5f1O0EP5xJ9gQmFGMS6IZcrVvTjpXjz7Na41gTE7eE2hK11lg04CECCYEEjdc17EV4DO+fkGEtt7TpTaTiQ==}
     engines: {node: ^12.20.0 || ^14.18.0 || >=16.0.0}
@@ -2282,6 +2287,10 @@ packages:
 
   postcss@8.4.31:
     resolution: {integrity: sha512-PS08Iboia9mts/2ygV3eLpY5ghnUcfLV/EXTOW1E2qYxJKGGBUtNjN76FYHnMs36RmARn41bC0AZmn+rR0OVpQ==}
+    engines: {node: ^10 || ^12 || >=14}
+
+  postcss@8.5.26:
+    resolution: {integrity: sha512-u82N74LFzG8ca+dD8puPnplTXoGH4fTPpVGuIbt36G3qvNlkvfD0lEAZSxaly3KX8TS/L1A1gsCEmvKmBcVbkQ==}
     engines: {node: ^10 || ^12 || >=14}
 
   prelude-ls@1.2.1:
@@ -3334,14 +3343,14 @@ snapshots:
     dependencies:
       tslib: 2.8.1
 
-  '@tsdown/css@0.21.10(postcss@8.4.31)(tsdown@0.21.10)':
+  '@tsdown/css@0.21.10(postcss@8.5.26)(tsdown@0.21.10)':
     dependencies:
       lightningcss: 1.33.0
-      postcss-load-config: 6.0.1(postcss@8.4.31)
+      postcss-load-config: 6.0.1(postcss@8.5.26)
       rolldown: 1.0.0-rc.17
       tsdown: 0.21.10(@tsdown/css@0.21.10)(typescript@5.9.3)
     optionalDependencies:
-      postcss: 8.4.31
+      postcss: 8.5.26
     transitivePeerDependencies:
       - jiti
       - tsx
@@ -4660,6 +4669,9 @@ snapshots:
 
   nanoid@3.3.16: {}
 
+  nanoid@3.3.18:
+    optional: true
+
   napi-postinstall@0.3.4: {}
 
   natural-compare@1.4.0: {}
@@ -4824,17 +4836,24 @@ snapshots:
 
   possible-typed-array-names@1.1.0: {}
 
-  postcss-load-config@6.0.1(postcss@8.4.31):
+  postcss-load-config@6.0.1(postcss@8.5.26):
     dependencies:
       lilconfig: 3.1.3
     optionalDependencies:
-      postcss: 8.4.31
+      postcss: 8.5.26
 
   postcss@8.4.31:
     dependencies:
       nanoid: 3.3.16
       picocolors: 1.1.1
       source-map-js: 1.2.1
+
+  postcss@8.5.26:
+    dependencies:
+      nanoid: 3.3.18
+      picocolors: 1.1.1
+      source-map-js: 1.2.1
+    optional: true
 
   prelude-ls@1.2.1: {}
 
@@ -5214,7 +5233,7 @@ snapshots:
       unconfig-core: 7.5.0
       unrun: 0.2.39
     optionalDependencies:
-      '@tsdown/css': 0.21.10(postcss@8.4.31)(tsdown@0.21.10)
+      '@tsdown/css': 0.21.10(postcss@8.5.26)(tsdown@0.21.10)
       typescript: 5.9.3
     transitivePeerDependencies:
       - '@ts-macro/tsc'

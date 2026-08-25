@@ -13,8 +13,21 @@ export function DisablePadding() {
         label="Without icon is not supposed to be used"
       />
       <TextAreaInput
+        label="Normal Icon Without disablePadding"
+        startIcon={<CubicsUIFavicon />}
+      />
+      <TextAreaInput
+        label="Button Icon Without disablePadding"
+        startIcon={
+          <Button icon>
+            <CubicsUIFavicon />
+          </Button>
+        }
+      />
+
+      <TextAreaInput
         disablePadding
-        label="Button Start Icon"
+        label="Button Start Icon with disablePadding"
         startIcon={
           <Button icon>
             <CubicsUIFavicon />
@@ -23,7 +36,7 @@ export function DisablePadding() {
       />
       <TextAreaInput
         disablePadding
-        label="Button End Icon"
+        label="Button End Icon with disablePadding"
         endIcon={
           <Button variant="outlined" icon>
             <CubicsUIFavicon />
@@ -32,7 +45,23 @@ export function DisablePadding() {
       />
       <TextAreaInput
         disablePadding
-        label="Button Both Icons"
+        label="Button Both Icons with disablePadding"
+        startIcon={
+          <Button variant="contained" icon>
+            <CubicsUIFavicon />
+          </Button>
+        }
+        endIcon={
+          <Button variant="contained" icon>
+            <CubicsUIFavicon />
+          </Button>
+        }
+      />
+      <TextAreaInput
+        disablePadding
+        disableResize
+        label="Button Both Icons with disablePadding, disableResize and rows={1}"
+        rows={1}
         startIcon={
           <Button variant="contained" icon>
             <CubicsUIFavicon />

@@ -1,20 +1,19 @@
 # Components
 
-## Cards
-
-<!-- [] Card -->
-<!-- [] GlassCard -->
-<!-- [] CollectionItemCard -->
-
 ## Display
+
+Contains components that display data or information to the user
 
 <!-- [] Accordion -->
 <!-- [] AspectRatio -->
+<!-- [] Card -->
 <!-- [] Carousel -->
 <!-- [] Chip -->
 <!-- [] Code -->
+<!-- [] CollectionItemCard -->
 <!-- [] Divider -->
 <!-- [] DynamicSection -->
+<!-- [] GlassCard -->
 <!-- [] IdentityDisplay -->
 <!-- [] InputErrors -->
 <!-- [] Kbd -->
@@ -28,9 +27,13 @@
 
 ## Forms
 
+Contains components that can be used to create commonly used forms
+
 <!-- [] ConfirmationForm -->
 
 ## Inputs
+
+Contains components that are interactable and used by the user to input data
 
 <!-- [] ArrayOfObjectsInput -->
 <!-- [] Button -->
@@ -51,6 +54,8 @@
 <!-- [] ToggleGroup -->
 
 ## Layout
+
+Contains components that are used to visually organise other components
 
 <!-- [] Dialog -->
 <!-- [] Drawer -->
@@ -74,12 +79,16 @@
 
 ## Navigation
 
+Contains components that are used to navigate around.
+
 <!-- [] Breadcrumbs -->
 <!-- [] Pagination -->
 <!-- [] Tabs -->
 <!-- [] TableOfContents -->
 
 ## Typography
+
+Contains commonly used components to display text
 
 <!-- [] ClampedText -->
 <!-- [] CopyableText -->

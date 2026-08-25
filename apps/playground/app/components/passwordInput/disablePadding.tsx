@@ -1,4 +1,4 @@
-import { TextInput, Button } from "@cubicsui/components";
+import { PasswordInput, Button } from "@cubicsui/components";
 import { CubicsUIFavicon } from "@cubicsui/icons";
 
 export function DisablePadding() {
@@ -8,15 +8,15 @@ export function DisablePadding() {
         Use to remove the padding of the inputWrapper, mainly used when using{" "}
         <code>{"<Button/>"}</code> for start or end icons
       </p>
-      <TextInput
+      <PasswordInput
         disablePadding
         label="Without icon is not supposed to be used"
       />
-      <TextInput
+      <PasswordInput
         label="Normal Icon Without disable padding"
         startIcon={<CubicsUIFavicon />}
       />
-      <TextInput
+      <PasswordInput
         label="Button Icon Without disable padding"
         startIcon={
           <Button icon>
@@ -25,7 +25,7 @@ export function DisablePadding() {
         }
       />
 
-      <TextInput
+      <PasswordInput
         disablePadding
         label="Button Start Icon with disable padding"
         startIcon={
@@ -34,7 +34,7 @@ export function DisablePadding() {
           </Button>
         }
       />
-      <TextInput
+      <PasswordInput
         disablePadding
         label="Button End Icon with disable padding"
         endIcon={
@@ -43,7 +43,7 @@ export function DisablePadding() {
           </Button>
         }
       />
-      <TextInput
+      <PasswordInput
         disablePadding
         label="Button Both Icons with disable padding"
         startIcon={

@@ -46,7 +46,7 @@ export function ThemeToggleButton(props: ThemeToggleButtonProps): ReactElement {
       return (
         <Button
           variant={buttonVariant}
-          square
+          icon
           onClick={(e) => {
             onClick?.(e);
             current.onClick?.(e);

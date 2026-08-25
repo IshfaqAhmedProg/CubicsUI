@@ -19,18 +19,23 @@ export default function Page() {
       <h2>Display</h2>
       <ol className={styles.column}>
         <Item href={"/components/card"}>Card ⌛</Item>
+        <Item href={"/components/passwordStrengthMeter"}>
+          PasswordStrengthMeter ⌛
+        </Item>
       </ol>
       <h2>Inputs</h2>
       <ol className={styles.column}>
         <Item href={"/components/button"}>Button ✅</Item>
         <Item href={"/components/checkbox"}>Checkbox ✅</Item>
         <Item href={"/components/closeButton"}>CloseButton ✅</Item>
-        <Item href={"/components/textInput"}>TextInput ✅</Item>
+        <Item href={"/components/passwordInput"}>PasswordInput ✅</Item>
+        <Item href={"/components/select"}>Select ⌛</Item>
         <Item href={"/components/textAreaInput"}>TextAreaInput ✅</Item>
+        <Item href={"/components/textInput"}>TextInput ✅</Item>
       </ol>
       <h2>Typography</h2>
       <ol className={styles.column}>
-        <Item href={"/components/inputErrors"}>InputErrors ⌛</Item>
+        <Item href={"/components/inputErrors"}>InputHelperText ⌛</Item>
       </ol>
       <h2>Misc</h2>
       <ol className={styles.column}>

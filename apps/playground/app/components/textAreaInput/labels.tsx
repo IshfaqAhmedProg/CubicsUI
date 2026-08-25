@@ -6,7 +6,7 @@ export function Labels() {
     <section>
       <div className={styles.column}>
         <h3>
-          <code>{"<TextInput/>"}</code> with label
+          <code>{"<TextAreaInput/>"}</code> with label
         </h3>
         <TextAreaInput label="Enter your first name" />
         <TextAreaInput label="This is a really long label, a really really long label" />

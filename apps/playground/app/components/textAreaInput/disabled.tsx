@@ -1,13 +1,20 @@
-import { TextInput } from "@cubicsui/components";
+import { TextAreaInput } from "@cubicsui/components";
+import { CubicsUIFavicon } from "@cubicsui/icons";
 
 export function Disabled() {
   return (
     <section>
-      <TextInput label="Disabled TextInput" disabled />
-      <TextInput
-        label="Disabled TextInput"
+      <TextAreaInput label="Disabled TextAreaInput" disabled />
+      <TextAreaInput
+        label="Disabled TextAreaInput"
         defaultValue={"This is disabled"}
         disabled
+      />
+      <TextAreaInput
+        label="Disabled TextAreaInput"
+        defaultValue={"This is disabled"}
+        disabled
+        startIcon={<CubicsUIFavicon />}
       />
     </section>
   );
