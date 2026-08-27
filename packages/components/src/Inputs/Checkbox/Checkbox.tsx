@@ -62,6 +62,7 @@ export function Checkbox(props: CheckboxProps): ReactElement {
   const isChecked = currentState == "checked";
   const isIndeterminate = currentState == "indeterminate";
   const id = _id ?? fallbackId;
+  const stringLabel = typeof label === "string" ? label : undefined;
 
   function handleChange(e: ChangeEvent<HTMLInputElement>) {
     if (disabled) return;
@@ -150,7 +151,7 @@ export function Checkbox(props: CheckboxProps): ReactElement {
             ref={mergeRefs(ref, inputRef)}
             type="checkbox"
             aria-checked={isIndeterminate ? "mixed" : isChecked}
-            aria-label={ariaLabel ?? label}
+            aria-label={ariaLabel ?? stringLabel}
             onChange={handleChange}
             className={cn(slotProps.input?.className, "Checkbox_input")}
             onTouchStart={eventWithRipple(createRipple, onTouchStart)}

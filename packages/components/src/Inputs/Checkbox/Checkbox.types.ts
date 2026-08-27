@@ -10,7 +10,7 @@ export interface CheckboxProps extends Omit<
   className?: string;
 
   /** Label for the input containing helpful info */
-  label?: string;
+  label?: ReactNode;
 
   /** Text or array of text containing  info about the input */
   helperText?: TextOrListProps["text"];
