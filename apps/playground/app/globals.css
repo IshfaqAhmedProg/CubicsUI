@@ -115,7 +115,7 @@
   --transition-time-fast: 0.15s;
 
   /* Misc */
-  --blur-heavy: 10px;
+  --blur-heavy: 32px;
   --blur-light: 5px;
   --blur-gradient: 90px;
   --header-height: 7vh;

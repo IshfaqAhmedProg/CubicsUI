@@ -73,6 +73,7 @@ export function useRipple<C extends HTMLElement>(
         x: left,
         y: top,
         color,
+        blur: diameter * 0.168,
       };
 
       setRipples((prev) => (prev.length <= 2 ? [...prev, newRipple] : prev));
@@ -113,6 +114,7 @@ function Ripple({
           ...({
             "--ripple-color": color,
             "--ripple-duration": `${duration}ms`,
+            "--ripple-blur": `${ripple.blur}px`, // scales with diameter now
           } as CSSProperties),
           width: ripple.size,
           height: ripple.size,

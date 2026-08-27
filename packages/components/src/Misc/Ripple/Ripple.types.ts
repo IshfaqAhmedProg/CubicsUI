@@ -36,5 +36,6 @@ export interface Ripple {
   size: number;
   x: number;
   y: number;
+  blur:number;
 }
 export type RippleEventHandler<T = unknown> = (event: T) => void;

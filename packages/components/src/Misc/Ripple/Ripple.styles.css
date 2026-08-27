@@ -6,20 +6,19 @@
   pointer-events: none;
 }
 .Ripple_main {
-  --ripple-color: currentColor;
-  --ripple-duration: 750ms;
-  filter: blur(10px);
+  filter: blur(var(--ripple-blur, 30px));
   position: absolute;
   border-radius: 50%;
-  background: var(--ripple-color);
+  background: var(--ripple-color, currentColor);
   transform: scale(0);
-  opacity: 0.6;
+  opacity: 0.5;
   animation: ripple-expand var(--ripple-duration, 750ms) var(--transition-tf);
   pointer-events: none;
 }
 @keyframes ripple-expand {
   to {
     transform: scale(2);
+
     opacity: 0;
   }
 }
