@@ -3,6 +3,7 @@ import { Fira_Code, Outfit, Titillium_Web } from "next/font/google";
 import { ThemeProvider } from "@/lib/providers/ThemeProvider";
 import { Header } from "@/lib/ui/Layout/Header/Header";
 import "./globals.css";
+import "./pg-globals.css";
 
 export const firaCode = Fira_Code({
   variable: "--font-code",

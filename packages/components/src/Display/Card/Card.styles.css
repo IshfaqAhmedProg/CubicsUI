@@ -1,0 +1,48 @@
+.Card_root {
+  position: relative;
+  &[data-size="xs"] {
+    padding: var(--gap);
+    border-radius: var(--br-sm);
+  }
+  &[data-size="sm"] {
+    padding: var(--gap-2);
+    border-radius: var(--br-sm);
+  }
+  &[data-size="md"] {
+    padding: var(--gap-4);
+    border-radius: var(--br-md);
+  }
+  &[data-size="lg"] {
+    padding: var(--gap-6);
+    border-radius: var(--br-lg);
+  }
+  &[data-size="xl"] {
+    padding: var(--gap-8);
+    border-radius: var(--br-xl);
+  }
+}
+.Card_square {
+  aspect-ratio: 1;
+}
+.Card_fullWidth {
+  width: 100%;
+}
+.Card_fullHeight {
+  height: 100%;
+}
+.Card_fullScreen {
+  width: 100dvw;
+  height: 100dvh;
+}
+
+.Card_variant_outlined {
+  border: 1px solid var(--color-outline);
+  background: none;
+}
+.Card_variant_contained {
+  background: var(--color-surface-alpha);
+  backdrop-filter: var(--backdrop-blur);
+}
+.Card_disablePadding {
+  padding: 0;
+}

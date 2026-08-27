@@ -1,0 +1,22 @@
+.CloseButton_root {
+  &[data-pos-x="center"] {
+    left: 50%;
+    translate: -50% 0;
+  }
+  &[data-pos-x="left"] {
+    left: 0;
+  }
+  &[data-pos-y="top"] {
+    top: 0;
+  }
+  &[data-pos-y="center"] {
+    top: 50%;
+    translate: 0 -50%;
+  }
+  &[data-pos-y="bottom"] {
+    bottom: 0;
+  }
+  &[data-pos-x="right"] {
+    right: 0;
+  }
+}

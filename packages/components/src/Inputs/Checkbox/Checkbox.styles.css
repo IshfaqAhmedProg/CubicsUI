@@ -1,0 +1,189 @@
+.Checkbox_root {
+  --check-color: var(--color-on-surface);
+  --bg: color-mix(in srgb, var(--color-surface-highest) 30%, transparent);
+  --label-color: var(--color-on-background);
+  --border-color: var(--color-outline);
+  --check-color-checked: var(--color-surface);
+  --bg-checked: var(--color-on-surface);
+  --label-color-checked: var(--color-on-surface);
+  --border-color-checked: transparent;
+  --fs: var(--fs-md);
+  --size: 24px;
+  --br: var(--br-md);
+
+  display: flex;
+  flex-direction: column;
+
+  /* Checked state */
+  &:has(.Checkbox_input:checked),
+  &:has(.Checkbox_input:indeterminate) {
+    --check-color: var(--check-color-checked);
+    --bg: var(--bg-checked);
+    & .Checkbox_input {
+      border: none;
+    }
+    & .Checkbox_label {
+      color: var(--label-color-checked);
+    }
+  }
+  /* Checked state */
+  &:has(.Checkbox_input:checked) {
+    & .Checkbox_checkedIcon {
+      display: block;
+    }
+    & .Checkbox_indeterminateIcon {
+      display: none;
+    }
+  }
+  /* Indeterminate state */
+  &:has(.Checkbox_input:indeterminate) {
+    & .Checkbox_indeterminateIcon {
+      display: block;
+    }
+    & .Checkbox_checkedIcon {
+      display: none;
+    }
+  }
+  /* Errored state */
+  &[data-error="true"] {
+    & .Checkbox_helperText {
+      color: var(--color-error);
+    }
+  }
+  /* Disabled state */
+  &:has(.Checkbox_input:disabled) {
+    opacity: 0.5;
+    cursor: not-allowed;
+    & .Checkbox_label {
+      cursor: not-allowed;
+    }
+  }
+
+  /* Focused state */
+  &:has(.Checkbox_input:focus-visible) {
+    font-weight: bold;
+  }
+
+  /* Size */
+  &[data-size="xs"] {
+    --fs: var(--fs-sm);
+    --size: 18px;
+    --br: var(--br-sm);
+  }
+  &[data-size="sm"] {
+    --fs: var(--fs-sm);
+    --size: 20px;
+    --br: var(--br-sm);
+  }
+  &[data-size="lg"] {
+    --fs: var(--fs-lg);
+    --size: 28px;
+    --br: var(--br-lg);
+  }
+  &[data-size="xl"] {
+    --fs: var(--fs-xl);
+    --size: 32px;
+    --br: var(--br-lg);
+  }
+  /* Colors */
+  &[data-color="primary"] {
+    --check-color: var(--color-primary);
+    --bg: var(--color-primary-alpha);
+    --check-color-checked: var(--color-on-primary);
+    --bg-checked: var(--color-primary);
+    --label-color-checked: var(--color-on-primary-container);
+  }
+  &[data-color="secondary"] {
+    --check-color: var(--color-on-secondary);
+    --bg: var(--color-secondary-alpha);
+    --check-color-checked: var(--color-on-secondary);
+    --bg-checked: var(--color-secondary);
+    --label-color-checked: var(--color-on-secondary-container);
+  }
+  &[data-color="tertiary"] {
+    --check-color: var(--color-on-tertiary);
+    --bg: var(--color-tertiary-alpha);
+    --check-color-checked: var(--color-on-tertiary);
+    --bg-checked: var(--color-tertiary);
+    --label-color-checked: var(--color-on-tertiary-container);
+  }
+  &[data-color="error"] {
+    --check-color: var(--color-on-error);
+    --bg: var(--color-error-alpha);
+    --check-color-checked: var(--color-on-error);
+    --bg-checked: var(--color-error);
+    --label-color-checked: var(--color-on-error-container);
+  }
+}
+.Checkbox_inputWrapper {
+  display: flex;
+  align-items: center;
+  gap: var(--gap-2);
+  &:has(.Checkbox_input:focus-visible) {
+    font-weight: bold;
+  }
+}
+.Checkbox_checkbox {
+  width: var(--size);
+  height: var(--size);
+  position: relative;
+  flex-shrink: 0;
+}
+.Checkbox_input {
+  cursor: pointer;
+  -webkit-appearance: none;
+  appearance: none;
+  margin: 0;
+  width: 100%;
+  height: 100%;
+  color: var(--check-color);
+  background: var(--bg);
+  border-radius: var(--br);
+  border: 1px solid var(--border-color);
+  backdrop-filter: blur(var(--blur-light));
+  transition: all var(--transition-time) var(--transition-tf);
+  &:focus-visible {
+    border: var(--focus-ring);
+  }
+  &:disabled {
+    cursor: not-allowed;
+  }
+}
+.Checkbox_checkIconsWrapper {
+  position: absolute;
+  inset: 0;
+  color: var(--check-color);
+  pointer-events: none;
+  height: 100%;
+  text-align: center;
+  & .Checkbox_indeterminateIcon,
+  & .Checkbox_checkedIcon {
+    display: none;
+    height: 100%;
+    width: 100%;
+    & svg {
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      position: absolute;
+    }
+  }
+}
+.Checkbox_label {
+  font-size: var(--fs);
+  cursor: pointer;
+  color: var(--label-color);
+}
+/* For start and end icons */
+.Checkbox_iconContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.Checkbox_helperText {
+  font-size: 0.8em;
+  color: var(--color-on-background-low);
+  margin-left: calc(var(--gap-2) + var(--size));
+  width: 0;
+  min-width: 100%;
+}

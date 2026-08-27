@@ -11,8 +11,8 @@ export default defineConfig({
   unbundle: true,
   css: {
     splitting: true,
+    minify: true,
     inject: true,
-    modules: false,
   },
   deps: {
     neverBundle: [

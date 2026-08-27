@@ -32,7 +32,7 @@
   },
   "sideEffects": true,
   "scripts": {
-    "build": "tsdown",
+    "build": "tsdown --clean",
     "dev": "tsdown --watch",
     "lint": "eslint .",
     "clean": "rimraf dist node_modules"
