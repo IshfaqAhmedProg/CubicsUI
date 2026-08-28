@@ -57,15 +57,16 @@ function ButtonBase<C extends ElementType = "button">(
     className: cn(
       className,
       "Button_root",
-      icon && "Button_type_icon",
-      fullWidth && "Button_fullWidth",
-      disabled && "Button_disabled",
-      variant && `Button_variant_${variant}`,
+      icon && "icon",
+      fullWidth && "fullWidth",
+      disabled && "disabled",
+      variant && `variant_${variant}`,
     ),
     onTouchStart: eventWithRipple(createRipple, onTouchStart),
     onClick: eventWithRipple(createRipple, onClick),
     "data-color": color,
     "data-size": size,
+    disabled,
     ...restProps,
   };
 

@@ -34,7 +34,7 @@
   }
   /* Disabled styles */
   &:disabled,
-  &.Button_disabled {
+  &.disabled {
     cursor: not-allowed;
     opacity: 0.5;
   }
@@ -132,11 +132,11 @@
   }
 }
 
-.Button_fullWidth {
+.Button_root.fullWidth {
   max-width: 100%;
 }
 /* Button of icon type */
-.Button_type_icon {
+.Button_root.icon {
   aspect-ratio: 1 / 1;
   padding: var(--size);
   height: auto;
@@ -150,12 +150,12 @@
   height: max-content;
 }
 
-.Button_variant_contained {
+.Button_root.variant_contained {
   --color: var(--color-background);
   --bg: var(--color-on-background);
 }
 
-.Button_variant_outlined {
+.Button_root.variant_outlined {
   outline: var(--border-width) solid var(--border-color);
   outline-offset: calc(-1 * var(--border-width));
   &:not(:disabled):hover {

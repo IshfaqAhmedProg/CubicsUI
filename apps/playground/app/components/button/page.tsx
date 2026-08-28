@@ -1,5 +1,7 @@
 import { Button } from "@cubicsui/components";
 import { CubicsUIFavicon } from "@cubicsui/icons";
+import Link from "next/link";
+import { AsLink } from "./asLink";
 
 export default function Page() {
   return (
@@ -307,6 +309,24 @@ export default function Page() {
           Full Width Button
         </Button>
       </section>
+
+      <h2>Disabled Button</h2>
+      <section>
+        <div className="row">
+          <Button disabled>Disabled</Button>
+          <Button disabled variant="outlined">
+            Disabled
+          </Button>
+          <Button disabled variant="contained">
+            Disabled
+          </Button>
+        </div>
+      </section>
+
+      <h2>
+        Button as a <code>{"<Link/>"}</code>
+      </h2>
+      <AsLink />
     </main>
   );
 }

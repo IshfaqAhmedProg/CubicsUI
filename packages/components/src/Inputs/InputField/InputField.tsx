@@ -42,8 +42,8 @@ export function InputField(props: InputFieldProps): ReactElement {
       className={cn(
         rootClasses,
         "InputField_root",
-        fullWidth && "InputField_fullWidth",
-        disablePadding && "InputField_disablePadding",
+        fullWidth && "fullWidth",
+        disablePadding && "disablePadding",
       )}
       data-size={size}
       data-error={!!error}

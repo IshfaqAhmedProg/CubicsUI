@@ -77,11 +77,11 @@
 .InputField_inputSurface[data-end-adornment] .InputField_input {
   padding-right: var(--size);
 }
-.InputField_fullWidth {
+.InputField_root.fullWidth {
   width: 100%;
 }
 /* With padding disabled */
-.InputField_disablePadding {
+.InputField_root.disablePadding {
   & .InputField_inputSurface {
     padding: 0;
   }
