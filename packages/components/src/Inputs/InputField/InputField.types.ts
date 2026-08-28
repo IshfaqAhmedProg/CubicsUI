@@ -41,6 +41,9 @@ export interface InputFieldSharedProps {
   /** Removes padding around inputSurface, use when using a button for start or end icon. */
   disablePadding?: boolean;
 
+  /** Removes ripple effect when clicking on the input */
+  disableRipple?: boolean;
+
   /** Additional classNames that get passed to the root */
   rootClasses?: string;
 }

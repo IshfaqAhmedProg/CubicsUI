@@ -28,7 +28,7 @@ export default function Page() {
         <Item href={"/components/checkbox"}>Checkbox ✅</Item>
         <Item href={"/components/closeButton"}>CloseButton ✅</Item>
         <Item href={"/components/passwordInput"}>PasswordInput ✅</Item>
-        {/* <Item href={"/components/select"}>Select ⌛</Item>*/}
+        <Item href={"/components/select"}>Select ⌛</Item>
         <Item href={"/components/textAreaInput"}>TextAreaInput ✅</Item>
         <Item href={"/components/textInput"}>TextInput ✅</Item>
       </ol>

@@ -20,9 +20,12 @@ export function TextAreaInput(props: TextAreaInputProps): ReactElement {
     endAdornment,
     fullWidth,
     disablePadding,
+    disableRipple,
+    rootClasses,
     slotProps = {},
 
     id,
+    className,
     disableResize,
     onTouchStart,
     onClick,
@@ -44,11 +47,15 @@ export function TextAreaInput(props: TextAreaInputProps): ReactElement {
     endAdornment,
     fullWidth,
     disablePadding,
+    disableRipple,
+    rootClasses: cn(
+      rootClasses,
+      disableResize && "TextAreaInput_disableResize",
+    ),
     slotProps,
 
     inputId,
     descriptionId,
-    rootClasses: cn(disableResize && "TextAreaInput_disableResize"),
   };
   return (
     <InputField {...inputFieldProps}>
@@ -56,7 +63,7 @@ export function TextAreaInput(props: TextAreaInputProps): ReactElement {
         return (
           <textarea
             id={inputId}
-            className={cn("InputField_input", "TextAreaInput_input")}
+            className={cn(className, "InputField_input", "TextAreaInput_input")}
             onTouchStart={eventWithRipple(createRipple, onTouchStart)}
             onClick={eventWithRipple(createRipple, onClick)}
             aria-invalid={!!error}

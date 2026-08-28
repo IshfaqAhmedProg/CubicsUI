@@ -5,6 +5,7 @@ import { InputField } from "../InputField/InputField";
 import { eventWithRipple } from "../../Misc/Ripple/Ripple";
 import { cn } from "@cubicsui/utils";
 import type { TextInputProps } from "./TextInput.types";
+import type { InputFieldProps } from "../InputField/InputField.types";
 
 export function TextInput(props: TextInputProps): ReactElement {
   const {
@@ -18,9 +19,12 @@ export function TextInput(props: TextInputProps): ReactElement {
     endAdornment,
     fullWidth,
     disablePadding,
+    disableRipple,
+    rootClasses,
     slotProps = {},
 
     id,
+    className,
     type = "text",
     htmlSize,
     onTouchStart,
@@ -32,7 +36,7 @@ export function TextInput(props: TextInputProps): ReactElement {
   const descriptionId =
     !!error || !!helperText ? `${inputId}-description` : undefined;
 
-  const inputFieldProps = {
+  const inputFieldProps: InputFieldProps = {
     label,
     error,
     helperText,
@@ -43,6 +47,8 @@ export function TextInput(props: TextInputProps): ReactElement {
     endAdornment,
     fullWidth,
     disablePadding,
+    disableRipple,
+    rootClasses,
     slotProps,
 
     inputId,
@@ -55,7 +61,7 @@ export function TextInput(props: TextInputProps): ReactElement {
           <input
             type={type}
             id={inputId}
-            className={cn("InputField_input")}
+            className={cn(className, "InputField_input")}
             onTouchStart={eventWithRipple(createRipple, onTouchStart)}
             onClick={eventWithRipple(createRipple, onClick)}
             aria-invalid={!!error}

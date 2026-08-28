@@ -22,9 +22,12 @@ export function PasswordInput(props: PasswordInputProps): ReactElement {
     endAdornment,
     fullWidth,
     disablePadding,
+    disableRipple,
+    rootClasses,
     slotProps: _slotProps = {},
 
     id,
+    className,
     htmlSize,
     disableVisibilityToggle,
     enableStrengthMeter,
@@ -55,6 +58,8 @@ export function PasswordInput(props: PasswordInputProps): ReactElement {
     endAdornment,
     fullWidth,
     disablePadding,
+    disableRipple,
+    rootClasses,
     slotProps,
 
     inputId,
@@ -68,7 +73,7 @@ export function PasswordInput(props: PasswordInputProps): ReactElement {
             <input
               type={showPass ? "text" : "password"}
               id={inputId}
-              className={cn("InputField_input")}
+              className={cn(className, "InputField_input")}
               onTouchStart={eventWithRipple(createRipple, onTouchStart)}
               onClick={eventWithRipple(createRipple, onClick)}
               aria-invalid={!!error}

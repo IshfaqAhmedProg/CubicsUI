@@ -19,6 +19,7 @@ export function InputField(props: InputFieldProps): ReactElement {
     endAdornment,
     fullWidth,
     disablePadding,
+    disableRipple,
     slotProps = {},
 
     inputId,
@@ -27,7 +28,13 @@ export function InputField(props: InputFieldProps): ReactElement {
     children,
   } = props;
   const surfaceRef = useRef<HTMLDivElement>(null);
-  const { createRipple, rippleElements } = useRipple({}, surfaceRef);
+  const { createRipple, rippleElements } = useRipple(
+    {
+      ...slotProps.ripple,
+      disabled: slotProps.ripple?.disabled ?? disableRipple,
+    },
+    surfaceRef,
+  );
 
   return (
     <div
