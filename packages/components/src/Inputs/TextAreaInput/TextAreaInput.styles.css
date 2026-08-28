@@ -1,0 +1,5 @@
+.TextAreaInput_disableResize {
+  & .TextAreaInput_input {
+    resize: none;
+  }
+}

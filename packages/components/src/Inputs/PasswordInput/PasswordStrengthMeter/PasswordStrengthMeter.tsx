@@ -8,7 +8,7 @@ import {
 } from "react";
 import type { PasswordStrengthMeterProps } from "./PasswordStrengthMeter.types";
 import { cn } from "@cubicsui/utils";
-import { TextOrList } from "../../../../Typography/TextOrList/TextOrList";
+import { TextOrList } from "../../../Typography/TextOrList/TextOrList";
 import "./PasswordStrengthMeter.styles.css";
 
 export function PasswordStrengthMeter(

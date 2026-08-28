@@ -1,5 +1,5 @@
 import type { ComponentProps } from "react";
-import type { TextOrListProps } from "../../../../Typography/TextOrList/TextOrList";
+import type { TextOrListProps } from "../../../Typography/TextOrList/TextOrList";
 
 export interface PasswordStrengthMeterProps extends ComponentProps<"div"> {
   /** Strength of the password from 0-4, the strength value can be got from something like https://github.com/zxcvbn-ts/zxcvbn

@@ -12,6 +12,9 @@
     padding-inline: 4.165%;
     padding-bottom: var(--gap-5);
     border-bottom: var(--border-width) solid var(--color-outline);
+    &:last-child {
+      border-bottom: none;
+    }
   }
   & code {
     color: var(--color-on-surface);

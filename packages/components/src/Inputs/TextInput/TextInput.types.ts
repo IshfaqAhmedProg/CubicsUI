@@ -1,8 +1,13 @@
 import type { ComponentProps } from "react";
-import type { InputFieldSharedProps, InputFieldSlotProps } from "../InputField/InputField.types";
+import type {
+  InputFieldSharedProps,
+  InputFieldSlotProps,
+} from "../InputField/InputField.types";
 
 export interface TextInputProps
-  extends InputFieldSharedProps, Omit<ComponentProps<"input">, "size"> {
+  extends
+    Omit<ComponentProps<"input">, "size" | "type">,
+    InputFieldSharedProps {
   /** Only text type inputs are allowed here */
   type?: "text" | "email" | "search" | "tel" | "url";
 
@@ -10,20 +15,21 @@ export interface TextInputProps
   htmlSize?: ComponentProps<"input">["size"];
 
   /**
-   * Slot props for customizing internal elements.
-   *  ```
-   *  root
-   *   |label
-   *   |inputSurface
-   *   |   |startIcon
-   *   |   |inputWrapper
-   *   |   |   |input
-   *   |   |endIcon
-   *   |   |ripple
-   *   |helperText
+   * The slot props for the `<TextInput/>`
+   * ```
+   *  root <div/>
+   *   |label <label/>
+   *   |{beforeSurface}
+   *   |inputSurface <div/>
+   *   |   |startAdornment <span/>
+   *   |   |input <input/>
+   *   |   |endAdornment <span/>
+   *   |   |{ripple}
+   *   |{afterSurface}
+   *   |helperText <TextOrString/>
    * ```
    * @link TextInputSlotProps
-   *
    */
-  slotProps?: InputFieldSlotProps;
+  slotProps?: TextInputSlotProps;
 }
+export interface TextInputSlotProps extends InputFieldSlotProps {}

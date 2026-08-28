@@ -1,40 +1,56 @@
-import { Button, Card, TextInput } from "@cubicsui/components";
-import { HybridInput } from "./hybridInput";
+import { Button, Card, TextAreaInput } from "@cubicsui/components";
 import { CubicsUIFavicon } from "@cubicsui/icons";
+import { HybridInput } from "./hybridInput";
 
 export default function Page() {
   return (
     <main className="main">
       <h1>
-        <code>{"<TextInput/>"}</code>
+        <code>{"<TextAreaInput/>"}</code>
       </h1>
       <h2>Labels</h2>
       <section>
         <div className={"column"}>
           <h3>
-            <code>{"<TextInput/>"}</code> with label
+            <code>{"<TextAreaInput/>"}</code> with label
           </h3>
-          <TextInput label="Enter your first name" />
-          <TextInput label="This is a really long label, a really really long label" />
+          <TextAreaInput label="Enter your first name" />
+          <TextAreaInput label="This is a really long label, a really really long label" />
         </div>
         <hr />
         <div className={"column"}>
           <h3>
-            <code>{"<TextInput/>"}</code> without label
+            <code>{"<TextAreaInput/>"}</code> without label
           </h3>
           <p>
             You have to use <code>placeholder</code> prop to do labelling
           </p>
-          <TextInput placeholder="Enter your first name" />
-          <TextInput placeholder="This is a really long label, how long you say? Really long." />
+          <TextAreaInput placeholder="Enter your first name" />
+          <TextAreaInput placeholder="This is a really long label, how long you say? Really long." />
         </div>
         <hr />
         <div className={"column"}>
           <h3>
-            A required <code>{"<TextInput/>"}</code>
+            A required <code>{"<TextAreaInput/>"}</code>
           </h3>
-          <TextInput required label="Enter your first name" />
+          <TextAreaInput required label="Enter your first name" />
         </div>
+      </section>
+
+      <h2>
+        With <code>disableResize</code>
+      </h2>
+      <section>
+        <p>
+          Use <code>disableResize</code> to remove the resize handle from the{" "}
+          <code>{"<textarea/>"}</code>
+        </p>
+        <TextAreaInput disableResize label="Resize handle is removed" />
+        <TextAreaInput
+          disableResize
+          label="Resize handle is removed with rows={15}"
+          rows={15}
+        />
       </section>
 
       <h2>Hybrid input</h2>
@@ -42,35 +58,44 @@ export default function Page() {
 
       <h2>Sizes</h2>
       <section>
-        <TextInput label="Extra Small" size="xs" />
-        <TextInput label="Small" size="sm" />
-        <TextInput label="Medium" size="md" />
-        <TextInput label="Large" size="lg" />
-        <TextInput label="Extra Large" size="xl" />
+        <TextAreaInput label="Extra Small" size="xs" />
+        <TextAreaInput label="Small" size="sm" />
+        <TextAreaInput label="Medium" size="md" />
+        <TextAreaInput label="Large" size="lg" />
+        <TextAreaInput label="Extra Large" size="xl" />
       </section>
 
       <h2>Background Check</h2>
       <section>
         <h3>On Card</h3>
         <Card className={"column"}>
-          <TextInput label="On top of a card" />
-          <TextInput
+          <TextAreaInput
+            label="On top of a card"
+            placeholder="This is a placeholder"
+          />
+          <TextAreaInput
             label="On top of a card"
             placeholder="This is a placeholder"
           />
         </Card>
         <h3>On RGB</h3>
         <div className={"column rgb_bg"}>
-          <TextInput label="On top of rgb colors" />
-          <TextInput
+          <TextAreaInput
+            label="On top of rgb colors"
+            placeholder="This is a placeholder"
+          />
+          <TextAreaInput
             label="On top of rgb colors"
             placeholder="This is a placeholder"
           />
         </div>
         <h3>On Image</h3>
         <div className={"column image_bg"}>
-          <TextInput label="On top of image" />
-          <TextInput
+          <TextAreaInput
+            label="On top of image"
+            placeholder="This is a placeholder"
+          />
+          <TextAreaInput
             label="On top of image"
             placeholder="This is a placeholder"
           />
@@ -81,25 +106,25 @@ export default function Page() {
       <section>
         <div className={"column"}>
           <h3>Normal Helper text</h3>
-          <TextInput
+          <TextAreaInput
             label="Enter address"
             helperText="Make sure to add in format city, state, country"
           />
-          <TextInput
-            label="TextInput with multiple helper texts"
+          <TextAreaInput
+            label="TextAreaInput with multiple helper texts"
             helperText={["Do this", "and then that"]}
           />
         </div>
         <hr />
         <div className={"column"}>
           <h3>When Errored</h3>
-          <TextInput
-            label="Errored TextInput"
-            error="Make sure to check the TextInput here"
+          <TextAreaInput
+            label="Errored TextAreaInput"
+            error="Make sure to check the TextAreaInput here"
           />
-          <TextInput
-            label="Errored TextInput with multiple errors"
-            error={["This textinput has", "multiple errors"]}
+          <TextAreaInput
+            label="Errored TextAreaInput with multiple errors"
+            error={["This TextAreaInput has", "multiple errors"]}
           />
         </div>
       </section>
@@ -108,20 +133,20 @@ export default function Page() {
         With <code>fullWidth</code>{" "}
       </h2>
       <section>
-        <TextInput label="TextInput with fullWidth" fullWidth />
-        <TextInput
-          label="TextInput with fullWidth and helper text"
+        <TextAreaInput label="TextAreaInput with fullWidth" fullWidth />
+        <TextAreaInput
+          label="TextAreaInput with fullWidth and helper text"
           fullWidth
           helperText={["This is helper text"]}
         />
-        <TextInput
+        <TextAreaInput
           label="Lorem ipsum dolor sit amet consectetur adipisicing elit. Ab voluptatibus minima exercitationem ea quis quo vitae harum libero possimus, odio impedit quibusdam eos iure consequatur fugiat repellendus? Pariatur, repellendus atque!,Lorem ipsum dolor sit amet consectetur adipisicing elit. Ab voluptatibus minima exercitationem ea quis quo vitae harum libero possimus, odio impedit quibusdam eos iure consequatur fugiat repellendus? Pariatur, repellendus atque!"
           fullWidth
         />
-        <TextInput
+        <TextAreaInput
           startAdornment={<CubicsUIFavicon />}
           endAdornment={<CubicsUIFavicon />}
-          label="TextInput with fullWidth and icons"
+          label="TextAreaInput with fullWidth and icons"
           fullWidth
         />
       </section>
@@ -134,15 +159,15 @@ export default function Page() {
           Use to remove the padding of the inputWrapper, mainly used when using{" "}
           <code>{"<Button/>"}</code> for start or end icons
         </p>
-        <TextInput
+        <TextAreaInput
           disablePadding
           label="Without icon is not supposed to be used"
         />
-        <TextInput
+        <TextAreaInput
           label="Normal Icon Without disable padding"
           startAdornment={<CubicsUIFavicon />}
         />
-        <TextInput
+        <TextAreaInput
           label="Button Icon Without disable padding"
           startAdornment={
             <Button icon>
@@ -151,7 +176,7 @@ export default function Page() {
           }
         />
 
-        <TextInput
+        <TextAreaInput
           disablePadding
           label="Button Start Icon with disable padding"
           startAdornment={
@@ -160,7 +185,7 @@ export default function Page() {
             </Button>
           }
         />
-        <TextInput
+        <TextAreaInput
           disablePadding
           label="Button End Icon with disable padding"
           endAdornment={
@@ -169,7 +194,7 @@ export default function Page() {
             </Button>
           }
         />
-        <TextInput
+        <TextAreaInput
           disablePadding
           label="Button Both Icons with disable padding"
           startAdornment={
@@ -187,10 +212,10 @@ export default function Page() {
 
       <h2>Disabled Input</h2>
       <section>
-        <TextInput label="Disabled TextInput" disabled />
-        <TextInput label="Enabled TextInput" />
-        <TextInput
-          label="Disabled TextInput with default value"
+        <TextAreaInput label="Disabled TextAreaInput" disabled />
+        <TextAreaInput label="Enabled TextAreaInput" />
+        <TextAreaInput
+          label="Disabled TextAreaInput with default value"
           defaultValue={"This is disabled"}
           disabled
         />

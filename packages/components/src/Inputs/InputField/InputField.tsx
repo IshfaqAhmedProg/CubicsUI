@@ -3,7 +3,7 @@
 import { useRef, type ReactElement } from "react";
 import { useRipple } from "../../Misc/Ripple/Ripple";
 import { TextOrList } from "../../Typography/TextOrList/TextOrList";
-import { cn } from "@cubicsui/utils";
+import { cn, mergeRefs } from "@cubicsui/utils";
 import "./InputField.style.css";
 import type { InputFieldProps } from "./InputField.types";
 
@@ -19,42 +19,78 @@ export function InputField(props: InputFieldProps): ReactElement {
     endAdornment,
     fullWidth,
     disablePadding,
-    disableInputWidth,
+    slotProps = {},
 
     inputId,
+    descriptionId,
+    rootClasses,
     children,
   } = props;
   const surfaceRef = useRef<HTMLDivElement>(null);
   const { createRipple, rippleElements } = useRipple({}, surfaceRef);
+
   return (
     <div
+      {...slotProps.root}
       className={cn(
+        rootClasses,
         "InputField_root",
         fullWidth && "InputField_fullWidth",
         disablePadding && "InputField_disablePadding",
-        disableInputWidth && "InputField_disableInputWidth",
       )}
       data-size={size}
+      data-error={!!error}
     >
       {label && (
-        <label className={"InputField_label"} htmlFor={inputId}>
+        <label
+          {...slotProps.label}
+          className={cn(slotProps.label?.className, "InputField_label")}
+          htmlFor={inputId}
+        >
           {label}
         </label>
       )}
       {beforeSurface}
-      <div ref={surfaceRef} className={"InputField_inputSurface"}>
-        {startAdornment && (
-          <span className={"InputField_adornment"}>{startAdornment}</span>
+      <div
+        {...slotProps.inputSurface}
+        ref={mergeRefs(slotProps.inputSurface?.ref, surfaceRef)}
+        className={cn(
+          slotProps.inputSurface?.className,
+          "InputField_inputSurface",
         )}
-        {children({ createRipple })}
+        data-start-adornment={!!startAdornment || undefined}
+        data-end-adornment={!!endAdornment || undefined}
+      >
+        {startAdornment && (
+          <span
+            {...slotProps.startAdornment}
+            className={cn(
+              slotProps.startAdornment?.className,
+              "InputField_adornment",
+            )}
+          >
+            {startAdornment}
+          </span>
+        )}
+        {children?.({ createRipple })}
         {endAdornment && (
-          <span className={"InputField_adornment"}>{endAdornment}</span>
+          <span
+            {...slotProps.endAdornment}
+            className={cn(
+              slotProps.endAdornment?.className,
+              "InputField_adornment",
+            )}
+          >
+            {endAdornment}
+          </span>
         )}
         {rippleElements}
       </div>
       {afterSurface}
       <TextOrList
-        className={"InputField_helperText"}
+        {...slotProps.helperText}
+        id={(slotProps.helperText?.id, descriptionId)}
+        className={cn(slotProps.helperText?.className, "InputField_helperText")}
         text={error ?? helperText}
       />
     </div>

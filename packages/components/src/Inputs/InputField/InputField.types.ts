@@ -41,36 +41,56 @@ export interface InputFieldSharedProps {
   /** Removes padding around inputSurface, use when using a button for start or end icon. */
   disablePadding?: boolean;
 
-  /** Makes css calculate width from label and helperText instead of input */
-  disableInputWidth?: boolean;
+  /** Additional classNames that get passed to the root */
+  rootClasses?: string;
 }
 
 export type InputFieldOwnProps = {
   /** id of the input element */
   inputId?: string;
+  /** Id of the helperText or error  */
+  descriptionId?: string;
 
   /** The input element that will be wrapped by `inputWrapper` */
-  children: (props: {
+  children?: (props: {
     /** Bind with onTouchstart and onClick to trigger ripple on inputSurface */
     createRipple: UseRippleReturns<HTMLElement>["createRipple"];
   }) => ReactNode;
+
+  /**
+   * The slotProps for the InputField these will also be inherited by components using InputField
+   * ```
+   *  root <div/>
+   *   |label <label/>
+   *   |{beforeSurface}
+   *   |inputSurface <div/>
+   *   |   |startAdornment <span/>
+   *   |   |{children}
+   *   |   |endAdornment <span/>
+   *   |   |{ripple}
+   *   |{afterSurface}
+   *   |helperText <TextOrString/>
+   * ```
+   * @link InputFieldSlotProps
+   */
+  slotProps?: InputFieldSlotProps;
 };
 export type InputFieldProps = InputFieldOwnProps & InputFieldSharedProps;
 
 export interface InputFieldSlotProps {
+  /** Is the root div of the InputField component, for className use rootClasses prop */
+  root?: Omit<ComponentProps<"div">, "className">;
+
   /** Contains the label text in a `<label/>` */
   label?: ComponentProps<"label">;
 
-  /** Contains `[{startIcon} {inputWrapper} {endIcon} {ripple}]` this is the visual surface of the input*/
+  /** Contains `[{startAdornment} {children} {endAdornment} {ripple}]` this is the visual surface of the input*/
   inputSurface?: ComponentProps<"div">;
 
-  /** Contains the main input and anything else that has to be absolutely positioned on top of the input */
-  inputWrapper?: ComponentProps<"span">;
-
-  /** Contains the startIcon in a `<span/>` */
+  /** Contains the startAdornment in a `<span/>` */
   startAdornment?: ComponentProps<"span">;
 
-  /** Contains the endIcon in a `<span/>` */
+  /** Contains the endAdornment in a `<span/>` */
   endAdornment?: ComponentProps<"span">;
 
   /**

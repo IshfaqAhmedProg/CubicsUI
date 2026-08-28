@@ -4,9 +4,11 @@ import { useId, type ReactElement } from "react";
 import { InputField } from "../InputField/InputField";
 import { eventWithRipple } from "../../Misc/Ripple/Ripple";
 import { cn } from "@cubicsui/utils";
-import type { TextInputProps } from "./TextInput.types";
+import type { TextAreaInputProps } from "./TextAreaInput.types";
+import "./TextAreaInput.styles.css";
+import type { InputFieldProps } from "../InputField/InputField.types";
 
-export function TextInput(props: TextInputProps): ReactElement {
+export function TextAreaInput(props: TextAreaInputProps): ReactElement {
   const {
     label,
     error,
@@ -21,18 +23,17 @@ export function TextInput(props: TextInputProps): ReactElement {
     slotProps = {},
 
     id,
-    type = "text",
-    htmlSize,
+    disableResize,
     onTouchStart,
     onClick,
-    ...inputProps
+    ...textareaProps
   } = props;
   const fallbackId = useId();
   const inputId = id ?? fallbackId;
   const descriptionId =
     !!error || !!helperText ? `${inputId}-description` : undefined;
 
-  const inputFieldProps = {
+  const inputFieldProps: InputFieldProps = {
     label,
     error,
     helperText,
@@ -47,21 +48,20 @@ export function TextInput(props: TextInputProps): ReactElement {
 
     inputId,
     descriptionId,
+    rootClasses: cn(disableResize && "TextAreaInput_disableResize"),
   };
   return (
     <InputField {...inputFieldProps}>
       {({ createRipple }) => {
         return (
-          <input
-            type={type}
+          <textarea
             id={inputId}
-            className={cn("InputField_input")}
+            className={cn("InputField_input", "TextAreaInput_input")}
             onTouchStart={eventWithRipple(createRipple, onTouchStart)}
             onClick={eventWithRipple(createRipple, onClick)}
             aria-invalid={!!error}
             aria-describedby={descriptionId}
-            size={htmlSize}
-            {...inputProps}
+            {...textareaProps}
           />
         );
       }}

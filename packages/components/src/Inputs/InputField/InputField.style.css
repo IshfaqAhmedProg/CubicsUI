@@ -70,11 +70,11 @@
 }
 
 /* Has start icon */
-.InputField_adornment ~ .InputField_input {
+.InputField_inputSurface[data-start-adornment] .InputField_input {
   padding-left: var(--size);
 }
 /* Has end icon */
-.InputField_input:has(~ .InputField_adornment) {
+.InputField_inputSurface[data-end-adornment] .InputField_input {
   padding-right: var(--size);
 }
 .InputField_fullWidth {
@@ -86,24 +86,33 @@
     padding: 0;
   }
   /* Has start and end icon */
-  & .InputField_adornment ~ .InputField_input,
-  & .InputField_input:has(~ .InputField_adornment) {
+  & .InputField_inputSurface[data-start-adornment] .InputField_input,
+  & .InputField_inputSurface[data-end-adornment] .InputField_input {
     padding: var(--size);
   }
 }
-/* With disableInputWidth */
-.InputField_disableInputWidth {
-  & .InputField_input {
-    width: 0;
-    min-width: 0;
-    flex: 1 1 0;
+/* Errored state */
+.InputField_root[data-error="true"],
+.InputField_root:has(.InputField_input:user-invalid) {
+  & .InputField_helperText,
+  & .InputField_label {
+    color: var(--color-error);
   }
-  & .InputField_label,
-  & .InputField_helperText {
-    width: auto;
-    min-width: 0;
+  & .InputField_inputSurface {
+    border-color: var(--color-error);
+  }
+  /* Focused */
+  &:has(.InputField_input:focus) {
+    & .InputField_helperText,
+    & .InputField_label {
+      color: var(--color);
+    }
+    & .InputField_inputSurface {
+      border-color: var(--border-color-focused);
+    }
   }
 }
+
 /* Required Input */
 .InputField_root:has(.InputField_input:required) {
   & .InputField_label {
@@ -122,6 +131,7 @@
     cursor: not-allowed;
   }
 }
+/* Focused input */
 .InputField_root:has(.InputField_input:focus) {
   & .InputField_label {
     color: var(--label-color-focused);
@@ -134,4 +144,26 @@
   & .InputField_input {
     outline: none;
   }
+}
+
+/* Size styles  */
+.InputField_root[data-size="xs"] {
+  --fs: var(--fs-xs);
+  --br: var(--br-xs);
+  --size: calc(var(--gap) / var(--gr));
+}
+.InputField_root[data-size="sm"] {
+  --fs: var(--fs-sm);
+  --br: var(--br-sm);
+  --size: var(--gap);
+}
+.InputField_root[data-size="lg"] {
+  --fs: var(--fs-lg);
+  --br: var(--br-lg);
+  --size: var(--gap-3);
+}
+.InputField_root[data-size="xl"] {
+  --fs: var(--fs-xl);
+  --br: var(--br-xl);
+  --size: var(--gap-3);
 }

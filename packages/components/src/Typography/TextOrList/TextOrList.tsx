@@ -19,9 +19,8 @@ function TextOrListBase<C extends ElementType = DefaultElements>(
   if (!t || !t.length) return null;
   const isString = typeof t === "string";
   const Component = (isString ? "p" : "ul") as ElementType;
-  const componentProps = { ...rest };
   return (
-    <Component {...componentProps}>
+    <Component {...rest}>
       {isString
         ? t
         : t.map((c, i) => {
@@ -31,15 +30,15 @@ function TextOrListBase<C extends ElementType = DefaultElements>(
   );
 }
 
-TextOrListBase.displayName = "InputHelperText";
+TextOrListBase.displayName = "TextOrList";
 
 /**
  * Use this when you want to render text that is of string or array of string type.
  * By default it renders a `<p>`, when a list is provided it will render a `<ul>` with each error inside an `<li>`.
  * ```tsx
- * <InputHelperText text={["text1","text2"]}>...</InputHelperText> // Renders `<ul>`
- * <InputHelperText text={["text1"]}>...</InputHelperText> // Renders <p>
- * <InputHelperText text={"text1"}>...</InputHelperText> // Renders <p>
+ * <TextOrList text={["text1","text2"]}>...</TextOrList> // Renders `<ul>`
+ * <TextOrList text={["text1"]}>...</TextOrList> // Renders <p>
+ * <TextOrList text={"text1"}>...</TextOrList> // Renders <p>
  * ```
  */
 export const TextOrList = TextOrListBase as UnionElementComponentType<
