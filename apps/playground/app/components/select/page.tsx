@@ -274,7 +274,7 @@ export default function Page() {
 
       <h2>With optgroups</h2>
       <section>
-        <Select label="Select a fruit or vegetable" fullWidth>
+        <Select label="Select a fruit or vegetable">
           <option value="">Select an option</option>
           <optgroup label="Fruits">
             <option value="apple">Apple</option>
