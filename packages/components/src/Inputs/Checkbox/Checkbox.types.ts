@@ -1,5 +1,4 @@
 import type { ComponentProps, ReactElement, ReactNode } from "react";
-import type { UseRippleProps } from "../../Misc/Ripple/Ripple.types";
 import type { TextOrListProps } from "../../Typography/TextOrList/TextOrList";
 
 export interface CheckboxProps extends Omit<
@@ -49,7 +48,6 @@ export interface CheckboxProps extends Omit<
    *   |   |   |checkIconsWrapper <span/>
    *   |   |   |   |checkedIcon <span/>
    *   |   |   |   |indeterminateIcon <span/>
-   *   |   |   |{ripple}
    *   |   |label <label/>
    *   |helperText <TextOrString/>
    * ```
@@ -79,11 +77,6 @@ export interface CheckboxSlotProps {
 
   /** Span that wraps the indeterminate icon */
   indeterminateIcon?: ComponentProps<"span">;
-
-  /** Props for the useRipple component
-   * @link UseRippleProps
-   */
-  ripple?: UseRippleProps;
 
   /** Contains the label text in a `<label/>` */
   label?: ComponentProps<"label">;

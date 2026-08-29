@@ -19,12 +19,13 @@ export function InGroup() {
         </li>
         <li>
           If a name is passed to <code>{"<CheckboxGroupControl/>"}</code> then
-          that will show up in FormData too along with the other checkboxes
+          that will show up in FormData too along with the other checkboxes.
         </li>
         <li>
           <code>{"<CheckboxGroupControl/>"}</code> will always skip group by
           default and wont show up in values inside{" "}
-          <code>{"<CheckboxProvider/>"}</code>, when using useCheckbox
+          <code>{"<CheckboxProvider/>"}</code> when using{" "}
+          <code>useCheckbox</code>.
         </li>
       </ul>
 

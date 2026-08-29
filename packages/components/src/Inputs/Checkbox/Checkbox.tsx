@@ -8,7 +8,6 @@ import {
   type ChangeEvent,
   type ReactElement,
 } from "react";
-import { eventWithRipple, useRipple } from "../../Misc/Ripple/Ripple";
 import { cn, mergeRefs } from "@cubicsui/utils";
 import type { CheckboxCurrentState, CheckboxProps } from "./Checkbox.types";
 import { useCheckbox } from "./CheckboxProvider";
@@ -49,7 +48,6 @@ export function Checkbox(props: CheckboxProps): ReactElement {
 
   const isRegistered = useRef(false);
   const inputRef = useRef<HTMLInputElement>(null);
-  const { rippleElements, createRipple } = useRipple(slotProps.ripple);
   const [currentState, setCurrentState] = useState<CheckboxCurrentState>(
     defaultChecked || checked
       ? "checked"
@@ -160,8 +158,6 @@ export function Checkbox(props: CheckboxProps): ReactElement {
             aria-label={ariaLabel ?? stringLabel}
             onChange={handleChange}
             className={cn(className, "Checkbox_input")}
-            onTouchStart={eventWithRipple(createRipple, onTouchStart)}
-            onClick={eventWithRipple(createRipple, onClick)}
             disabled={disabled}
             value={value}
             name={name}
@@ -194,7 +190,6 @@ export function Checkbox(props: CheckboxProps): ReactElement {
               {indeterminateIcon}
             </span>
           </span>
-          {rippleElements}
         </span>
         {/* Label */}
         {label && (
