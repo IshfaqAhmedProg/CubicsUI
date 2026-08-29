@@ -1,6 +1,6 @@
 import type { PositionStringExclude } from "@cubicsui/types";
 import type { CSSProperties } from "react";
-import type { ButtonProps } from "../Button/Button";
+import type { ButtonProps } from "../Button/Button.types";
 
 export interface CloseButtonProps extends Omit<
   ButtonProps,

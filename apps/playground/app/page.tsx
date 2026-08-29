@@ -32,6 +32,10 @@ export default function Page() {
         <Item href={"/components/textAreaInput"}>TextAreaInput ✅</Item>
         <Item href={"/components/textInput"}>TextInput ✅</Item>
       </ol>
+      <h2>Layout</h2>
+      <ol className="column">
+        <Item href="/components/popover">Popover</Item>
+      </ol>
       <h2>Typography</h2>
       <ol className={"column"}>
         {/* <Item href={"/components/inputErrors"}>InputHelperText ⌛</Item> */}

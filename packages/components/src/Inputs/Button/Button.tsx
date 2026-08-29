@@ -1,34 +1,12 @@
 "use client";
 
-import type {
-  PolymorphicComponentProps,
-  PolymorphicComponentType,
-} from "@cubicsui/types";
+import type { PolymorphicComponentType } from "@cubicsui/types";
 import { type ElementType, type ReactElement } from "react";
 import { eventWithRipple, useRipple } from "../../Misc/Ripple/Ripple";
 import { cn } from "@cubicsui/utils";
-import type { ButtonBaseProps } from "./Button.types";
+import type { ButtonBaseProps, ButtonProps } from "./Button.types";
 import "./Button.styles.css";
 
-/**
- * Polymorphic props for the Button component.
- *
- * `C` defines the element type rendered by the component (e.g. `"button"`, `"a"`, `"div"`).
- * All intrinsic props for `C` are supported unless overridden by `ButtonBaseProps`.
- *
- */
-export type ButtonProps<C extends ElementType = "button"> =
-  PolymorphicComponentProps<C, ButtonBaseProps>;
-
-/**
- * Base implementation for the Button component.
- *
- * This is a polymorphic component that defaults to rendering a `<button>`.
- * Use the `as` prop to change the underlying element.
- *
- * @typeParam C - The intrinsic or custom element type to render.
- *
- */
 function ButtonBase<C extends ElementType = "button">(
   props: ButtonProps<C>,
 ): ReactElement {

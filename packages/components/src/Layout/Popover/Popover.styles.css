@@ -1,0 +1,46 @@
+/* Popover.styles.css */
+
+.Popover_root {
+  --popover-duration: var(--transition-time-fast);
+  --popover-easing: var(--transition-tf);
+  --popover-scale-from: 0.5;
+  --popover-translate-from: 0px;
+
+  margin: 0;
+  inset: auto;
+  border: none;
+  background: none;
+
+  position: fixed;
+  position-area: var(--popover-position-area, bottom center);
+  position-try-fallbacks: flip-block, flip-inline, flip-start;
+
+  transform-origin: var(--popover-transform-origin, top center);
+
+  /* closed state */
+  opacity: 0;
+  scale: var(--popover-scale-from);
+  translate: var(--popover-translate-from);
+
+  transition:
+    opacity var(--popover-duration) var(--popover-easing),
+    scale var(--popover-duration) var(--popover-easing),
+    translate var(--popover-duration) var(--popover-easing),
+    display var(--popover-duration) var(--popover-easing) allow-discrete,
+    overlay var(--popover-duration) var(--popover-easing) allow-discrete;
+}
+
+/* open state */
+.Popover_root:popover-open {
+  opacity: 1;
+  scale: 1;
+  translate: 0;
+}
+
+@starting-style {
+  .Popover_root:popover-open {
+    opacity: 0;
+    scale: var(--popover-scale-from);
+    translate: var(--popover-translate-from);
+  }
+}
