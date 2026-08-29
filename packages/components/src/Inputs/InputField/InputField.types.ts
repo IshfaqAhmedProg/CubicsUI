@@ -45,7 +45,7 @@ export interface InputFieldSharedProps {
   disableRipple?: boolean;
 
   /** Additional classNames that get passed to the root */
-  rootClasses?: string;
+  rootClass?: string;
 }
 
 export type InputFieldOwnProps = {

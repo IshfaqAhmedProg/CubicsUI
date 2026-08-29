@@ -21,7 +21,7 @@ export function TextAreaInput(props: TextAreaInputProps): ReactElement {
     fullWidth,
     disablePadding,
     disableRipple,
-    rootClasses,
+    rootClass,
     slotProps = {},
 
     id,
@@ -48,10 +48,7 @@ export function TextAreaInput(props: TextAreaInputProps): ReactElement {
     fullWidth,
     disablePadding,
     disableRipple,
-    rootClasses: cn(
-      rootClasses,
-      disableResize && "TextAreaInput_disableResize",
-    ),
+    rootClass: cn(rootClass, disableResize && "TextAreaInput_disableResize"),
     slotProps,
 
     inputId,

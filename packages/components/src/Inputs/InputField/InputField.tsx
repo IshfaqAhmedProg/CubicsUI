@@ -24,7 +24,7 @@ export function InputField(props: InputFieldProps): ReactElement {
 
     inputId,
     descriptionId,
-    rootClasses,
+    rootClass,
     children,
   } = props;
   const surfaceRef = useRef<HTMLDivElement>(null);
@@ -40,7 +40,7 @@ export function InputField(props: InputFieldProps): ReactElement {
     <div
       {...slotProps.root}
       className={cn(
-        rootClasses,
+        rootClass,
         "InputField_root",
         fullWidth && "fullWidth",
         disablePadding && "disablePadding",

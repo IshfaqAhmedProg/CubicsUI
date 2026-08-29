@@ -23,7 +23,7 @@ export function PasswordInput(props: PasswordInputProps): ReactElement {
     fullWidth,
     disablePadding,
     disableRipple,
-    rootClasses,
+    rootClass,
     slotProps: _slotProps = {},
 
     id,
@@ -59,7 +59,7 @@ export function PasswordInput(props: PasswordInputProps): ReactElement {
     fullWidth,
     disablePadding,
     disableRipple,
-    rootClasses,
+    rootClass,
     slotProps,
 
     inputId,

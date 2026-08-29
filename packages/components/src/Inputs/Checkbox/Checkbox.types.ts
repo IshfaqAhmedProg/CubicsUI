@@ -7,7 +7,7 @@ export interface CheckboxProps extends Omit<
   "onChange" | "type" | "size"
 > {
   /** Class for the root of the `<Checkbox/>` component, to modify class of the input element use `slotProps.input` */
-  className?: string;
+  rootClass?: string;
 
   /** Label for the input containing helpful info */
   label?: ReactNode;
@@ -33,68 +33,62 @@ export interface CheckboxProps extends Omit<
   /** Use if you want to pass your own indeterminate state icon */
   indeterminateIcon?: ReactElement<ComponentProps<"svg">>;
 
-  /**
-   * Slot props for customizing internal elements.
-   * @link CheckboxSlotProps
-   */
-  slotProps?: CheckboxSlotProps;
-
   /** Size of the checkbox and its label, to use the html attribute `size` use `htmlSize` */
   size?: "xs" | "sm" | "md" | "lg" | "xl";
 
   /** Color of the checkbox and its label */
   color?: "primary" | "secondary" | "tertiary" | "error";
 
-  /** size attribute of the html `<input size=""/>` element */
-  htmlSize?: ComponentProps<"input">["size"];
+  /**
+   * Slot props for customizing internal elements.
+   * ```
+   *  root <div/>
+   *   |inputWrapper <div/>
+   *   |   |checkbox <span/>
+   *   |   |   |input <input/>
+   *   |   |   |checkIconsWrapper <span/>
+   *   |   |   |   |checkedIcon <span/>
+   *   |   |   |   |indeterminateIcon <span/>
+   *   |   |   |{ripple}
+   *   |   |label <label/>
+   *   |helperText <TextOrString/>
+   * ```
+   * @link CheckboxSlotProps
+   */
+  slotProps?: CheckboxSlotProps;
 }
 
 /** The slot props for `<Checkbox/>`
- * ```
- *  root
- *   |inputWrapper
- *   |   |startIcon
- *   |   |checkbox
- *   |   |   |ripple
- *   |   |   |input
- *   |   |   |checkboxIconsWrapper
- *   |   |label
- *   |   |endIcon
- *   |error
- * ```
+
  */
 export interface CheckboxSlotProps {
   /** If the root wrapping `<div/>` needs some props to be passed, for className use the className prop of the `<Checkbox/>` component instead */
-  root?: Omit<ComponentProps<"div">, "className">;
+  root?: ComponentProps<"div">;
 
-  /** Contains `[{startIcon} {checkbox} {label} {endIcon}]` */
-  inputWrapper?: ComponentProps<"span">;
-
-  /** Contains the startIcon in a `<span/>` */
-  startIcon?: ComponentProps<"span">;
+  /** Contains `[{checkbox} {label}]` */
+  inputWrapper?: ComponentProps<"div">;
 
   /** A `<span/>` that wraps the input checkbox */
   checkbox?: ComponentProps<"span">;
+
+  /** Contains `[{checkedIcon} {indeterminateIcon}]` */
+  checkIconsWrapper?: ComponentProps<"span">;
+
+  /** Span that wraps the checked icon */
+  checkedIcon?: ComponentProps<"span">;
+
+  /** Span that wraps the indeterminate icon */
+  indeterminateIcon?: ComponentProps<"span">;
 
   /** Props for the useRipple component
    * @link UseRippleProps
    */
   ripple?: UseRippleProps;
 
-  /** If for some reason the className of the input needs to be modified, rest of the props can be passed to the `<Checkbox/>` component */
-  input?: Pick<ComponentProps<"input">, "className">;
-
-  /** Contains the checkbox icons for checked and indeterminate states */
-  checkboxIconsWrapper?: ComponentProps<"span">;
-
   /** Contains the label text in a `<label/>` */
   label?: ComponentProps<"label">;
 
-  /** Contains the endIcon in a `<span/>` */
-  endIcon?: ComponentProps<"span">;
-
-  /**
-   * Contains a `<p/>` or `<ul/>` tag with the helper text
+  /** Contains a `<p/>` or `<ul/>` tag with the helper text
    * @link TextOrListProps
    */
   helperText?: TextOrListProps;
@@ -102,3 +96,15 @@ export interface CheckboxSlotProps {
 
 export type CheckboxCurrentState =
   "checked" | "unchecked" | "indeterminate" | undefined;
+
+export interface CheckboxContextProps {
+  values: Record<string, boolean>;
+  selected: string[];
+  register: (id: string, checked?: boolean) => void;
+  update: (id: string, checked: boolean) => void;
+  setAll: (checked: boolean) => void;
+}
+export interface CheckboxProviderProps {
+  children: ReactNode;
+  onChange?: (checked: Record<string, boolean>) => void;
+}

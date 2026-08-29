@@ -25,7 +25,7 @@ export function Select(props: SelectProps): ReactElement {
     fullWidth,
     disablePadding,
     disableRipple,
-    rootClasses,
+    rootClass,
     slotProps = {},
 
     id,
@@ -54,7 +54,7 @@ export function Select(props: SelectProps): ReactElement {
     fullWidth,
     disablePadding,
     disableRipple: multiple ?? disableRipple,
-    rootClasses,
+    rootClass,
     slotProps,
 
     inputId,

@@ -6,7 +6,7 @@ import type { CloseButtonProps } from "./CloseButton.types";
 import "./CloseButton.styles.css";
 
 export function CloseButton(props: CloseButtonProps): ReactElement {
-  const { className, style, margin, position = "top right", ...rest } = props;
+  const { className: className, style, margin, position = "top right", ...rest } = props;
   const [y, x] = position.split(" ");
 
   return (

@@ -20,7 +20,7 @@ export function TextInput(props: TextInputProps): ReactElement {
     fullWidth,
     disablePadding,
     disableRipple,
-    rootClasses,
+    rootClass,
     slotProps = {},
 
     id,
@@ -48,7 +48,7 @@ export function TextInput(props: TextInputProps): ReactElement {
     fullWidth,
     disablePadding,
     disableRipple,
-    rootClasses,
+    rootClass,
     slotProps,
 
     inputId,
