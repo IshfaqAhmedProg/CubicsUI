@@ -1,0 +1,91 @@
+.Chip_root {
+  --color: var(--color-background);
+  --bg: var(--color-on-background);
+
+  --ff: var(--font-p);
+  --br: var(--br-md);
+  --fs: var(--fs-sm);
+  --size: var(--gap);
+
+  display: flex;
+  align-items: center;
+  gap: var(--size);
+  width: fit-content;
+  height: fit-content;
+  padding-inline: var(--size);
+  color: var(--color);
+  background: var(--bg);
+  border-radius: var(--br);
+  font-size: var(--fs);
+  font-family: var(--ff);
+  backdrop-filter: blur(var(--blur-heavy));
+
+  & > svg {
+    width: 1em;
+    height: 1em;
+  }
+}
+
+/* Variant */
+.Chip_root.variant_outlined {
+  --color: var(--color-on-background);
+  --border-color: color-mix(in srgb, var(--color) 30%, transparent);
+  --bg: none;
+  outline: var(--border-width) solid var(--border-color);
+  background: none;
+}
+/* Variant Colors */
+.Chip_root[data-color="primary"] {
+  --color: var(--color-on-primary);
+  --bg: var(--color-primary);
+  &.variant_outlined {
+    --color: var(--color-primary);
+  }
+}
+.Chip_root[data-color="secondary"] {
+  --color: var(--color-on-secondary);
+  --bg: var(--color-secondary);
+  &.variant_outlined {
+    --color: var(--color-secondary);
+  }
+}
+.Chip_root[data-color="error"] {
+  --color: var(--color-on-tertiary);
+  --bg: var(--color-tertiary);
+  &.variant_outlined {
+    --color: var(--color-tertiary);
+  }
+}
+.Chip_root[data-color="error"] {
+  --color: var(--color-on-error);
+  --bg: var(--color-error);
+  &.variant_outlined {
+    --color: var(--color-error);
+  }
+}
+.Chip_root[data-color="warn"] {
+  --color: var(--color-on-warn);
+  --bg: var(--color-warn);
+  &.variant_outlined {
+    --color: var(--color-warn);
+  }
+}
+.Chip_root[data-color="success"] {
+  --color: var(--color-on-success);
+  --bg: var(--color-success);
+  &.variant_outlined {
+    --color: var(--color-success);
+  }
+}
+
+/* Sizes */
+.Chip_root[data-size="sm"] {
+  --br: var(--br-sm);
+  --fs: var(--fs-xs);
+  --size: calc(var(--gap) / 2);
+}
+.Chip_root[data-size="lg"] {
+  --br: var(--br-md);
+  --fs: var(--fs-md);
+  --size: var(--gap);
+}

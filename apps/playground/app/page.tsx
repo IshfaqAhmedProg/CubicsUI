@@ -17,20 +17,20 @@ export default function Page() {
       <h1>Components</h1>
       <h2>Display</h2>
       <ol className={"column"}>
-        {/* <Item href={"/components/card"}>Card ⌛</Item>
-        <Item href={"/components/passwordStrengthMeter"}>
-          PasswordStrengthMeter ⌛
+        <Item href={"/components/chip"}>Chip</Item>
+        {/* <Item href={"/components/passwordStrengthMeter"}>
+          PasswordStrengthMeter
         </Item> */}
       </ol>
       <h2>Inputs</h2>
       <ol className={"column"}>
-        <Item href={"/components/button"}>Button ✅</Item>
-        <Item href={"/components/checkbox"}>Checkbox ✅</Item>
-        <Item href={"/components/closeButton"}>CloseButton ✅</Item>
-        <Item href={"/components/passwordInput"}>PasswordInput ✅</Item>
-        <Item href={"/components/select"}>Select ⌛</Item>
-        <Item href={"/components/textAreaInput"}>TextAreaInput ✅</Item>
-        <Item href={"/components/textInput"}>TextInput ✅</Item>
+        <Item href={"/components/button"}>Button</Item>
+        <Item href={"/components/checkbox"}>Checkbox</Item>
+        <Item href={"/components/closeButton"}>CloseButton</Item>
+        <Item href={"/components/passwordInput"}>PasswordInput</Item>
+        <Item href={"/components/select"}>Select</Item>
+        <Item href={"/components/textAreaInput"}>TextAreaInput</Item>
+        <Item href={"/components/textInput"}>TextInput</Item>
       </ol>
       <h2>Layout</h2>
       <ol className="column">
@@ -38,10 +38,10 @@ export default function Page() {
       </ol>
       <h2>Typography</h2>
       <ol className={"column"}>
-        {/* <Item href={"/components/inputErrors"}>InputHelperText ⌛</Item> */}
+        {/* <Item href={"/components/inputErrors"}>InputHelperText</Item> */}
       </ol>
       <h2>Misc</h2>
-      <ol className={"column"}>{/* <Item href={"/"}>Ripple ⌛</Item> */}</ol>
+      <ol className={"column"}>{/* <Item href={"/"}>Ripple</Item> */}</ol>
     </div>
   );
 }

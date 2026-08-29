@@ -57,10 +57,7 @@ export default function Page() {
           <Checkbox label="On top of rgb colors" />
         </div>
         <h3>On Image</h3>
-        <div
-          className={cn("image_bg", "column")}
-          style={{ colorScheme: "dark" }}
-        >
+        <div className={cn("image_bg", "column")}>
           <Checkbox label="On top of image" />
           <Checkbox label="On top of image" />
         </div>
