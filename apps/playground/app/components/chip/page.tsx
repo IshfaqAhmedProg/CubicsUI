@@ -78,7 +78,10 @@ export default function Page() {
           width and height
         </p>
         <Chip>
-          <CubicsUIFavicon /> With Icon in the start
+          <CubicsUIFavicon /> With Icon
+        </Chip>
+        <Chip>
+          <CubicsUIFavicon /> With Multiple Icons <CubicsUIFavicon />
         </Chip>
       </section>
 
