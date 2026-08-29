@@ -197,13 +197,15 @@ export function Checkbox(props: CheckboxProps): ReactElement {
           {rippleElements}
         </span>
         {/* Label */}
-        <label
-          {...slotProps.label}
-          htmlFor={id}
-          className={cn(slotProps.label?.className, "Checkbox_label")}
-        >
-          {label}
-        </label>
+        {label && (
+          <label
+            {...slotProps.label}
+            htmlFor={id}
+            className={cn(slotProps.label?.className, "Checkbox_label")}
+          >
+            {label}
+          </label>
+        )}
       </div>
       {/* Helper text */}
       <TextOrList

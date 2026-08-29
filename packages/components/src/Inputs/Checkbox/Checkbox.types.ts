@@ -6,7 +6,7 @@ export interface CheckboxProps extends Omit<
   ComponentProps<"input">,
   "onChange" | "type" | "size"
 > {
-  /** Class for the root of the `<Checkbox/>` component, to modify class of the input element use `slotProps.input` */
+  /** Class for the root of the `<Checkbox/>` component */
   rootClass?: string;
 
   /** Label for the input containing helpful info */
