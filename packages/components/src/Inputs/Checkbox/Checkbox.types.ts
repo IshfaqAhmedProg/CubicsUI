@@ -38,10 +38,9 @@ export interface CheckboxProps extends Omit<
   /** Color of the checkbox and its label */
   color?: "primary" | "secondary" | "tertiary" | "error";
 
-  /**
-   * Slot props for customizing internal elements.
+  /** Slot props for customizing internal elements.
    * ```
-   *  root <div/>
+   *  `root <div/>
    *   |inputWrapper <div/>
    *   |   |checkbox <span/>
    *   |   |   |input <input/>
@@ -49,7 +48,7 @@ export interface CheckboxProps extends Omit<
    *   |   |   |   |checkedIcon <span/>
    *   |   |   |   |indeterminateIcon <span/>
    *   |   |label <label/>
-   *   |helperText <TextOrString/>
+   *   |helperText <TextOrString/>`
    * ```
    * @link CheckboxSlotProps
    */

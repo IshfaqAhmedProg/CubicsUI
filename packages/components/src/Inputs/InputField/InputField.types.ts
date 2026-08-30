@@ -63,7 +63,7 @@ export type InputFieldOwnProps = {
   /**
    * The slotProps for the InputField these will also be inherited by components using InputField
    * ```
-   *  root <div/>
+   *  `root <div/>
    *   |label <label/>
    *   |{beforeSurface}
    *   |inputSurface <div/>
@@ -72,7 +72,7 @@ export type InputFieldOwnProps = {
    *   |   |endAdornment <span/>
    *   |   |{ripple}
    *   |{afterSurface}
-   *   |helperText <TextOrString/>
+   *   |helperText <TextOrString/>`
    * ```
    * @link InputFieldSlotProps
    */

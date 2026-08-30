@@ -18,7 +18,7 @@ export interface SelectProps
   /**
    * The slot props for the `<Select/>`
    * ```
-   *  root <div/>
+   *  `root <div/>
    *   |label <label/>
    *   |{beforeSurface}
    *   |inputSurface <div/>
@@ -27,7 +27,7 @@ export interface SelectProps
    *   |   |endAdornment <span/>
    *   |   |{ripple}
    *   |{afterSurface}
-   *   |helperText <TextOrString/>
+   *   |helperText <TextOrString/>`
    * ```
    * @link SelectSlotProps
    */

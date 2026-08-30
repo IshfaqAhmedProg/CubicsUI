@@ -17,7 +17,7 @@ export interface TextInputProps
   /**
    * The slot props for the `<TextInput/>`
    * ```
-   *  root <div/>
+   *  `root <div/>
    *   |label <label/>
    *   |{beforeSurface}
    *   |inputSurface <div/>
@@ -26,7 +26,7 @@ export interface TextInputProps
    *   |   |endAdornment <span/>
    *   |   |{ripple}
    *   |{afterSurface}
-   *   |helperText <TextOrString/>
+   *   |helperText <TextOrString/>`
    * ```
    * @link TextInputSlotProps
    */

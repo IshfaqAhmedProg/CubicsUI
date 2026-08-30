@@ -1,0 +1,281 @@
+.Switch_root {
+  --track-color: var(--color-on-surface);
+  --track-bg: var(--color-input-surface);
+  --thumb-color: var(--color-surface-highest);
+  --thumb-bg: var(--color-on-surface);
+
+  --track-color-checked: var(--color-surface-highest);
+  --track-bg-checked: var(--color-on-surface);
+  --thumb-color-checked: var(--color-on-surface);
+  --thumb-bg-checked: var(--color-surface-highest);
+
+  --label-color: var(--color-on-background);
+  --border-color: var(--color-outline);
+
+  --fs: var(--fs-md);
+  --br: var(--br-md);
+  --size: 28px;
+  --track-width: calc(var(--size) * var(--gr));
+  --track-border-width: var(--border-width);
+  --thumb-width: 55%;
+
+  display: flex;
+  flex-direction: column;
+  height: fit-content;
+  font-size: var(--fs);
+}
+
+.Switch_inputWrapper {
+  display: flex;
+  align-items: center;
+  gap: 0.5em;
+}
+.Switch_switch {
+  /* Dont ask i was ill (1.618+(1.618/2))/1.392 */
+  width: var(--track-width);
+  height: var(--size);
+  position: relative;
+  flex-shrink: 0;
+}
+
+.Switch_input {
+  cursor: pointer;
+  -webkit-appearance: none;
+  appearance: none;
+  position: relative;
+  margin: 0;
+  width: 100%;
+  height: 100%;
+  border-radius: var(--br);
+  &:focus-visible {
+    outline: none;
+  }
+}
+.Switch_track {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-direction: row-reverse;
+  position: absolute;
+  inset: 0;
+  color: var(--track-color);
+  background: var(--track-bg);
+  outline: var(--track-border-width) solid var(--border-color);
+  border-radius: var(--br);
+  backdrop-filter: blur(var(--blur-light));
+  transition: all var(--transition-time) var(--transition-tf);
+  pointer-events: none;
+}
+.Switch_thumb {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  left: 0;
+  top: 50%;
+  translate: 0% -50%;
+  width: var(--thumb-width);
+  height: 100%;
+  color: var(--thumb-color);
+  background-color: var(--thumb-bg);
+  border-radius: var(--br);
+  scale: 0.8;
+  transition: all var(--transition-time) var(--transition-tf);
+  animation: turnOffSwitch var(--transition-time) var(--transition-tf) forwards;
+}
+.Switch .Switch_label {
+  cursor: pointer;
+  color: var(--label-color);
+}
+
+.Switch_helperText {
+  font-size: 0.8em;
+  color: var(--color-on-background-low);
+  margin-left: var(--size);
+  margin-top: var(--gap);
+  width: 0;
+  min-width: 100%;
+}
+
+.Switch_trackIcons {
+  position: absolute;
+  width: var(--thumb-width);
+  height: 100%;
+  left: 50%;
+  top: 50%;
+  translate: 0 -50%;
+  animation: turnOnSwitch var(--transition-time) var(--transition-tf) forwards;
+}
+
+.Switch_thumbIcons,
+.Switch_trackIcons {
+  display: grid;
+  place-items: center;
+  scale: 0.95;
+  & svg {
+    width: 1em;
+    height: 1em;
+  }
+  & .on,
+  & .off {
+    grid-area: 1 / 1;
+  }
+  & .on {
+    opacity: 0;
+  }
+  & .off {
+    opacity: 1;
+  }
+}
+/* When both trackIcons and thumbIcons exist trackIcons should only fade not slide */
+.Switch_root:has(.Switch_trackIcons):has(.Switch_thumbIcons)
+  .Switch_trackIcons {
+  animation: none;
+}
+/* Not disabled */
+.Switch_root:has(.Switch_input:not(:disabled)) {
+  & .Switch_switch:hover .Switch_thumb {
+    scale: 1;
+  }
+}
+/* Disabled */
+.Switch_root:has(.Switch_input:disabled) {
+  opacity: 0.3;
+  & .Switch_input,
+  & .Switch_label {
+    cursor: not-allowed;
+  }
+}
+/* Errored */
+.Switch_root[data-error="true"],
+.Switch_root:has(.Switch_input:user-invalid) {
+  & .Switch_helperText {
+    color: var(--color-error);
+  }
+}
+/* Focused state */
+.Switch_root:has(.Switch_input:focus-visible) {
+  & .Switch_label {
+    font-weight: bold;
+  }
+  & .Switch_track {
+    outline: var(--focus-ring);
+  }
+}
+/* isOn */
+.Switch_root:has(.Switch_input:checked) {
+  --track-border-width: 0;
+  & .Switch_track {
+    background-color: var(--track-bg-checked);
+    color: var(--track-color-checked);
+  }
+  & .Switch_thumb {
+    background-color: var(--thumb-bg-checked);
+    color: var(--thumb-color-checked);
+    animation: turnOnSwitch var(--transition-time) var(--transition-tf) forwards;
+  }
+  .Switch_trackIcons {
+    animation: turnOffSwitch var(--transition-time) var(--transition-tf)
+      forwards;
+  }
+  .Switch_thumbIcons,
+  .Switch_trackIcons {
+    & .on {
+      opacity: 1;
+    }
+    & .off {
+      opacity: 0;
+    }
+  }
+  &:has(.Switch_trackIcons):has(.Switch_thumbIcons) .Switch_trackIcons {
+    animation: none;
+    left: 0;
+  }
+}
+/* Size */
+.Switch_root[data-size="xs"] {
+  --fs: var(--fs-sm);
+  --size: 20px;
+  --br: var(--br-sm);
+}
+.Switch_root[data-size="sm"] {
+  --fs: var(--fs-sm);
+  --size: 24px;
+  --br: var(--br-sm);
+}
+.Switch_root[data-size="lg"] {
+  --fs: var(--fs-lg);
+  --size: 32px;
+  --br: var(--br-lg);
+}
+.Switch_root[data-size="xl"] {
+  --fs: var(--fs-xl);
+  --size: 36px;
+  --br: var(--br-lg);
+}
+
+/* Colors */
+.Switch_root[data-color] {
+  --track-color-checked: var(--track-bg);
+  --track-bg-checked: var(--track-color);
+  --thumb-color-checked: var(--thumb-bg);
+  --thumb-bg-checked: var(--thumb-color);
+}
+.Switch_root[data-color="primary"] {
+  --track-color: var(--color-primary);
+  --track-bg: var(--color-primary-alpha);
+  --thumb-color: var(--color-on-primary);
+  --thumb-bg: var(--color-primary);
+}
+.Switch_root[data-color="secondary"] {
+  --track-color: var(--color-secondary);
+  --track-bg: var(--color-secondary-alpha);
+  --thumb-color: var(--color-on-secondary);
+  --thumb-bg: var(--color-secondary);
+}
+.Switch_root[data-color="tertiary"] {
+  --track-color: var(--color-tertiary);
+  --track-bg: var(--color-tertiary-alpha);
+  --thumb-color: var(--color-on-tertiary);
+  --thumb-bg: var(--color-tertiary);
+}
+.Switch_root[data-color="error"] {
+  --track-color: var(--color-error);
+  --track-bg: var(--color-error-alpha);
+  --thumb-color: var(--color-on-error);
+  --thumb-bg: var(--color-error);
+}
+@keyframes turnOnSwitch {
+  0% {
+    left: 0%;
+    width: var(--thumb-width);
+    height: 100%;
+  }
+  50% {
+    left: 0;
+    width: 100%;
+    height: 80%;
+  }
+  100% {
+    left: calc(100% - var(--thumb-width));
+    width: var(--thumb-width);
+    height: 100%;
+  }
+}
+@keyframes turnOffSwitch {
+  0% {
+    left: 50%;
+    width: var(--thumb-width);
+    height: 100%;
+  }
+  50% {
+    left: 0;
+    width: 100%;
+    height: 80%;
+  }
+  100% {
+    left: 0;
+    width: var(--thumb-width);
+    height: 100%;
+  }
+}

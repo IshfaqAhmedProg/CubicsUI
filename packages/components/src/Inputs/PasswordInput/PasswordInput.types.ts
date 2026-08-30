@@ -21,7 +21,7 @@ export interface PasswordInputProps
   /**
    * The slot props for the `<PasswordInput/>`, extends InputFieldSlotProps
    * ```
-   *  root <div/>
+   *  `root <div/>
    *   |label <label/>
    *   |{beforeSurface}
    *   |inputSurface <div/>
@@ -34,7 +34,7 @@ export interface PasswordInputProps
    *   |   |{ripple}
    *   |strengthMeter <PasswordStrengthMeter/>
    *   |{afterSurface}
-   *   |helperText <TextOrString/>
+   *   |helperText <TextOrString/>`
    * ```
    * @link PasswordInputSlotProps
    */

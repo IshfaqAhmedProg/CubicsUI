@@ -55,11 +55,11 @@ export function Checkbox(props: CheckboxProps): ReactElement {
         ? "indeterminate"
         : "unchecked",
   );
-  const fallbackId = useId();
   const group = useCheckbox();
+  const fallbackId = useId();
+  const id = _id ?? fallbackId;
   const isChecked = currentState == "checked";
   const isIndeterminate = currentState == "indeterminate";
-  const id = _id ?? fallbackId;
   const stringLabel = typeof label === "string" ? label : undefined;
 
   function handleChange(e: ChangeEvent<HTMLInputElement>) {

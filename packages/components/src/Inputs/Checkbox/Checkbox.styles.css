@@ -1,6 +1,6 @@
 .Checkbox_root {
   --check-color: var(--color-on-surface);
-  --bg: color-mix(in srgb, var(--color-surface-highest) 30%, transparent);
+  --bg: var(--color-input-surface);
   --label-color: var(--color-on-background);
   --border-color: var(--color-outline);
 
@@ -10,16 +10,18 @@
   --border-color-checked: transparent;
 
   --fs: var(--fs-md);
-  --size: 1.5em;
+  --size: 24px;
   --br: var(--br-md);
 
   display: flex;
   flex-direction: column;
+  height: fit-content;
+  font-size: var(--fs);
 }
 .Checkbox_inputWrapper {
   display: flex;
   align-items: center;
-  gap: var(--gap-2);
+  gap: 0.5em;
 }
 .Checkbox_checkbox {
   width: var(--size);
@@ -37,7 +39,7 @@
   color: var(--check-color);
   background: var(--bg);
   border-radius: var(--br);
-  border: 1px solid var(--border-color);
+  border: var(--border-width) solid var(--border-color);
   backdrop-filter: blur(var(--blur-light));
   transition: all var(--transition-time) var(--transition-tf);
 }
@@ -62,7 +64,6 @@
   }
 }
 .Checkbox_label {
-  font-size: var(--fs);
   cursor: pointer;
   color: var(--label-color);
 }
@@ -131,9 +132,11 @@
 
 /* Focused state */
 .Checkbox_root:has(.Checkbox_input:focus-visible) {
-  font-weight: bold;
+  & .Checkbox_label {
+    font-weight: bold;
+  }
   & .Checkbox_input {
-    border: var(--focus-ring);
+    outline: var(--focus-ring);
   }
 }
 /* Size */

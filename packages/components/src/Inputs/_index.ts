@@ -21,6 +21,9 @@ export * from "./PasswordInput/PasswordInput.types";
 export * from "./Select/Select";
 export * from "./Select/Select.types";
 
+export * from "./Switch/Switch";
+export * from "./Switch/Switch.types";
+
 export * from "./TextInput/TextInput";
 export * from "./TextInput/TextInput.types";
 
