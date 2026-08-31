@@ -5,7 +5,7 @@ import { type ElementType, type ReactElement } from "react";
 import { eventWithRipple, useRipple } from "../../Misc/Ripple/Ripple";
 import { cn } from "@cubicsui/utils";
 import type { ButtonBaseProps, ButtonProps } from "./Button.types";
-import "./Button.styles.css";
+import styles from "./Button.module.css";
 
 function ButtonBase<C extends ElementType = "button">(
   props: ButtonProps<C>,
@@ -34,11 +34,11 @@ function ButtonBase<C extends ElementType = "button">(
   const componentProps = {
     className: cn(
       className,
-      "Button_root",
-      icon && "icon",
-      fullWidth && "fullWidth",
-      disabled && "disabled",
-      variant && `variant_${variant}`,
+      styles.root,
+      icon && styles.iconButton,
+      fullWidth && styles.fullWidth,
+      disabled && styles.disabled,
+      variant && styles[variant],
     ),
     onTouchStart: eventWithRipple(createRipple, onTouchStart),
     onClick: eventWithRipple(createRipple, onClick),
@@ -53,7 +53,7 @@ function ButtonBase<C extends ElementType = "button">(
       {startIcon && (
         <span
           {...slotProps.startIcon}
-          className={cn("Button_icon", slotProps.startIcon?.className)}
+          className={cn(styles.adornment, slotProps.startIcon?.className)}
         >
           {startIcon}
         </span>
@@ -62,7 +62,7 @@ function ButtonBase<C extends ElementType = "button">(
       {endIcon && (
         <span
           {...slotProps.endIcon}
-          className={cn("Button_icon", slotProps.endIcon?.className)}
+          className={cn(styles.adornment, slotProps.endIcon?.className)}
         >
           {endIcon}
         </span>

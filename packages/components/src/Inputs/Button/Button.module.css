@@ -1,4 +1,4 @@
-.Button_root {
+.root {
   --color: var(--color-on-background);
   --bg: none;
   --color-hover: var(--color-on-background);
@@ -30,30 +30,30 @@
   border-radius: var(--br);
 }
 /* Variant styles */
-.Button_root.variant_contained {
+.root.contained {
   --color: var(--color-background);
   --bg: var(--color-on-background);
 }
 
-.Button_root.variant_outlined {
+.root.outlined {
   outline: var(--border-width) solid var(--border-color);
   outline-offset: calc(-1 * var(--border-width));
   &:not(:disabled):hover {
     border-color: transparent;
   }
 }
-.Button_root.fullWidth {
+.root.fullWidth {
   max-width: 100%;
 }
 /* Button of icon type */
-.Button_root.icon {
+.root.iconButton {
   aspect-ratio: 1 / 1;
   padding: var(--size);
   height: auto;
 }
 
 /* Icons in the start and end containers */
-.Button_icon {
+.adornment {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -61,23 +61,23 @@
 }
 
 /* Hover Styles */
-.Button_root:not(:disabled):hover {
+.root:not(:disabled):hover {
   color: var(--color-hover);
   background: color-mix(in srgb, var(--bg-hover) 50%, transparent);
 }
 /* Disabled styles */
-.Button_root:disabled,
-.Button_root.disabled {
+.root:disabled,
+.root.disabled {
   cursor: not-allowed;
   opacity: 0.5;
 }
 /* When focused with keyboard state */
-.Button_root:focus-visible {
+.root:focus-visible {
   outline: var(--focus-ring);
 }
 
 /* Variant colors */
-.Button_root[data-color="primary"] {
+.root[data-color="primary"] {
   --color: var(--color-primary);
   --bg: none;
   --color-hover: var(--color-on-primary-container);
@@ -88,7 +88,7 @@
     --bg: var(--color-primary);
   }
 }
-.Button_root[data-color="secondary"] {
+.root[data-color="secondary"] {
   --color: var(--color-secondary);
   --bg: none;
   --color-hover: var(--color-on-secondary-container);
@@ -99,7 +99,7 @@
     --bg: var(--color-secondary);
   }
 }
-.Button_root[data-color="tertiary"] {
+.root[data-color="tertiary"] {
   --color: var(--color-tertiary);
   --bg: none;
   --color-hover: var(--color-on-tertiary-container);
@@ -110,7 +110,7 @@
     --bg: var(--color-tertiary);
   }
 }
-.Button_root[data-color="error"] {
+.root[data-color="error"] {
   --color: var(--color-error);
   --bg: none;
   --color-hover: var(--color-on-error-container);
@@ -121,7 +121,7 @@
     --bg: var(--color-error);
   }
 }
-.Button_root[data-color="warn"] {
+.root[data-color="warn"] {
   --color: var(--color-warn);
   --bg: none;
   --color-hover: var(--color-on-warn-container);
@@ -132,7 +132,7 @@
     --bg: var(--color-warn);
   }
 }
-.Button_root[data-color="success"] {
+.root[data-color="success"] {
   --color: var(--color-success);
   --bg: none;
   --color-hover: var(--color-on-success-container);
@@ -144,22 +144,22 @@
   }
 }
 /* Size styles */
-.Button_root[data-size="xs"] {
+.root[data-size="xs"] {
   --fs: var(--fs-xs);
   --br: var(--br-sm);
   --size: calc(var(--gap) / var(--gr));
 }
-.Button_root[data-size="sm"] {
+.root[data-size="sm"] {
   --fs: var(--fs-sm);
   --br: var(--br-md);
   --size: var(--gap);
 }
-.Button_root[data-size="lg"] {
+.root[data-size="lg"] {
   --fs: var(--fs-lg);
   --br: var(--br-lg);
   --size: var(--gap-3);
 }
-.Button_root[data-size="xl"] {
+.root[data-size="xl"] {
   --fs: var(--fs-xl);
   --br: var(--br-xl);
   --size: var(--gap-4);
