@@ -1,135 +1,33 @@
 .root {
   --check-color: var(--color-on-surface);
-  --bg: color-mix(in srgb, var(--color-surface-highest) 30%, transparent);
+  --bg: var(--color-input-surface);
   --label-color: var(--color-on-background);
   --border-color: var(--color-outline);
+
   --check-color-checked: var(--color-surface);
   --bg-checked: var(--color-on-surface);
   --label-color-checked: var(--color-on-surface);
   --border-color-checked: transparent;
+
   --fs: var(--fs-md);
   --size: 24px;
   --br: var(--br-md);
 
   display: flex;
   flex-direction: column;
-
-  /* Checked state */
-  &:has(.input:checked),
-  &:has(.input:indeterminate) {
-    --check-color: var(--check-color-checked);
-    --bg: var(--bg-checked);
-    & .input {
-      border: none;
-    }
-    & .label {
-      color: var(--label-color-checked);
-    }
-  }
-  /* Checked state */
-  &:has(.input:checked) {
-    .checkboxIconWrapper {
-      &.checked {
-        display: block;
-      }
-      &.indeterminate {
-        display: none;
-      }
-    }
-  }
-  &:has(.input:indeterminate) {
-    .checkboxIconWrapper {
-      &.indeterminate {
-        display: block;
-      }
-      &.checked {
-        display: none;
-      }
-    }
-  }
-  /* Errored state */
-  &[data-error="true"] {
-    & .helperText {
-      color: var(--color-error);
-    }
-  }
-  /* Disabled state */
-  &:has(.input:disabled) {
-    opacity: 0.5;
-    cursor: not-allowed;
-    & .label {
-      cursor: not-allowed;
-    }
-  }
-
-  /* Focused state */
-  &:has(.input:focus-visible) {
-    font-weight: bold;
-  }
-
-  /* Size */
-  &[data-size="xs"] {
-    --fs: var(--fs-sm);
-    --size: 18px;
-    --br: var(--br-sm);
-  }
-  &[data-size="sm"] {
-    --fs: var(--fs-sm);
-    --size: 20px;
-    --br: var(--br-sm);
-  }
-  &[data-size="lg"] {
-    --fs: var(--fs-lg);
-    --size: 28px;
-    --br: var(--br-lg);
-  }
-  &[data-size="xl"] {
-    --fs: var(--fs-xl);
-    --size: 32px;
-    --br: var(--br-lg);
-  }
-  /* Colors */
-  &[data-color="primary"] {
-    --check-color: var(--color-primary);
-    --bg: var(--color-primary-alpha);
-    --check-color-checked: var(--color-on-primary);
-    --bg-checked: var(--color-primary);
-    --label-color-checked: var(--color-on-primary-container);
-  }
-  &[data-color="secondary"] {
-    --check-color: var(--color-on-secondary);
-    --bg: var(--color-secondary-alpha);
-    --check-color-checked: var(--color-on-secondary);
-    --bg-checked: var(--color-secondary);
-    --label-color-checked: var(--color-on-secondary-container);
-  }
-  &[data-color="tertiary"] {
-    --check-color: var(--color-on-tertiary);
-    --bg: var(--color-tertiary-alpha);
-    --check-color-checked: var(--color-on-tertiary);
-    --bg-checked: var(--color-tertiary);
-    --label-color-checked: var(--color-on-tertiary-container);
-  }
-  &[data-color="error"] {
-    --check-color: var(--color-on-error);
-    --bg: var(--color-error-alpha);
-    --check-color-checked: var(--color-on-error);
-    --bg-checked: var(--color-error);
-    --label-color-checked: var(--color-on-error-container);
-  }
+  height: fit-content;
+  font-size: var(--fs);
 }
 .inputWrapper {
   display: flex;
   align-items: center;
-  gap: var(--gap-2);
-  &:has(.input:focus-visible) {
-    font-weight: bold;
-  }
+  gap: 0.5em;
 }
 .checkbox {
   width: var(--size);
   height: var(--size);
   position: relative;
+  flex-shrink: 0;
 }
 .input {
   cursor: pointer;
@@ -141,14 +39,11 @@
   color: var(--check-color);
   background: var(--bg);
   border-radius: var(--br);
-  border: 1px solid var(--border-color);
+  border: var(--border-width) solid var(--border-color);
   backdrop-filter: blur(var(--blur-light));
   transition: all var(--transition-time) var(--transition-tf);
-  &:focus-visible {
-    border: var(--focus-ring);
-  }
 }
-.checkboxIconsWrapper {
+.checkIconsWrapper {
   position: absolute;
   inset: 0;
   color: var(--check-color);
@@ -156,8 +51,9 @@
   height: 100%;
   text-align: center;
 }
-.checkboxIconWrapper {
-  display: contents;
+.indeterminateIcon,
+.checkedIcon {
+  display: none;
   height: 100%;
   width: 100%;
   & svg {
@@ -166,24 +62,19 @@
     height: 100%;
     position: absolute;
   }
-  &.indeterminate {
-    display: none;
-  }
-  &.checked {
-    display: none;
-  }
 }
 .label {
-  font-size: var(--fs);
   cursor: pointer;
   color: var(--label-color);
 }
+
 /* For start and end icons */
 .iconContainer {
   display: flex;
   align-items: center;
   justify-content: center;
 }
+
 .helperText {
   font-size: 0.8em;
   color: var(--color-on-background-low);
@@ -192,3 +83,110 @@
   min-width: 100%;
 }
 
+/* Checked or indeterminate state */
+.root:has(.input:checked),
+.root:has(.input:indeterminate) {
+  --check-color: var(--check-color-checked);
+  --bg: var(--bg-checked);
+  & .input {
+    border: none;
+  }
+  & .label {
+    color: var(--label-color-checked);
+  }
+}
+/* Checked state */
+.root:has(.input:checked) {
+  & .checkedIcon {
+    display: block;
+  }
+  & .indeterminateIcon {
+    display: none;
+  }
+}
+/* Indeterminate state */
+.root:has(.input:indeterminate) {
+  & .indeterminateIcon {
+    display: block;
+  }
+  & .checkedIcon {
+    display: none;
+  }
+}
+/* Errored state */
+.root[data-error="true"],
+.root:has(.input:user-invalid) {
+  & .helperText {
+    color: var(--color-error);
+  }
+}
+/* Disabled state */
+.root:has(.input:disabled) {
+  opacity: 0.5;
+  cursor: not-allowed;
+  & .label,
+  & .input {
+    cursor: not-allowed;
+  }
+}
+
+/* Focused state */
+.root:has(.input:focus-visible) {
+  & .label {
+    font-weight: bold;
+  }
+  & .input {
+    outline: var(--focus-ring);
+  }
+}
+/* Size */
+.root[data-size="xs"] {
+  --fs: var(--fs-sm);
+  --size: 18px;
+  --br: var(--br-sm);
+}
+.root[data-size="sm"] {
+  --fs: var(--fs-sm);
+  --size: 20px;
+  --br: var(--br-sm);
+}
+.root[data-size="lg"] {
+  --fs: var(--fs-lg);
+  --size: 28px;
+  --br: var(--br-lg);
+}
+.root[data-size="xl"] {
+  --fs: var(--fs-xl);
+  --size: 32px;
+  --br: var(--br-lg);
+}
+
+/* Colors */
+.root[data-color="primary"] {
+  --check-color: var(--color-primary);
+  --bg: var(--color-primary-alpha);
+  --check-color-checked: var(--color-on-primary);
+  --bg-checked: var(--color-primary);
+  --label-color-checked: var(--color-on-primary-container);
+}
+.root[data-color="secondary"] {
+  --check-color: var(--color-on-secondary);
+  --bg: var(--color-secondary-alpha);
+  --check-color-checked: var(--color-on-secondary);
+  --bg-checked: var(--color-secondary);
+  --label-color-checked: var(--color-on-secondary-container);
+}
+.root[data-color="tertiary"] {
+  --check-color: var(--color-on-tertiary);
+  --bg: var(--color-tertiary-alpha);
+  --check-color-checked: var(--color-on-tertiary);
+  --bg-checked: var(--color-tertiary);
+  --label-color-checked: var(--color-on-tertiary-container);
+}
+.root[data-color="error"] {
+  --check-color: var(--color-on-error);
+  --bg: var(--color-error-alpha);
+  --check-color-checked: var(--color-on-error);
+  --bg-checked: var(--color-error);
+  --label-color-checked: var(--color-on-error-container);
+}

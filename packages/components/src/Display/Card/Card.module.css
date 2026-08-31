@@ -1,5 +1,25 @@
 .root {
   position: relative;
+  &[data-size="xs"] {
+    padding: var(--gap);
+    border-radius: var(--br-sm);
+  }
+  &[data-size="sm"] {
+    padding: var(--gap-2);
+    border-radius: var(--br-sm);
+  }
+  &[data-size="md"] {
+    padding: var(--gap-4);
+    border-radius: var(--br-md);
+  }
+  &[data-size="lg"] {
+    padding: var(--gap-6);
+    border-radius: var(--br-lg);
+  }
+  &[data-size="xl"] {
+    padding: var(--gap-8);
+    border-radius: var(--br-xl);
+  }
 }
 .square {
   aspect-ratio: 1;
@@ -15,27 +35,14 @@
   height: 100dvh;
 }
 
-.size_sm {
-  padding: var(--gap-2);
-  border-radius: var(--br-sm);
-}
-.size_md {
-  padding: var(--gap-4);
-  border-radius: var(--br-md);
-}
-.size_lg {
-  padding: var(--gap-6);
-  border-radius: var(--br-lg);
-}
-
-.outlined {
+.variant_outlined {
   border: 1px solid var(--color-outline);
-  background: none;
+  background: var(--color-surface);
 }
-.contained {
+.variant_contained {
   background: var(--color-surface-alpha);
-  backdrop-filter: var(--backdrop-blur);
+  backdrop-filter: blur(var(--blur-light));
 }
-.disableGutters {
+.disablePadding {
   padding: 0;
 }

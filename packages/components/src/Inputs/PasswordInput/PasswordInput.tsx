@@ -1,153 +1,105 @@
 "use client";
 
-import { useId, useRef, useState, type ReactElement } from "react";
-import { cn, mergeRefs } from "@cubicsui/utils";
-import { eventWithRipple, useRipple } from "../../Misc/Ripple/Ripple";
-import { InputHelperText } from "../../Typography/InputHelperText/InputHelperText";
-import { PasswordVisibilityToggle } from "./PasswordVisibilityToggle/PasswordVisibilityToggle";
-import { PasswordStrengthMeter } from "../../Display/PasswordStrengthMeter/PasswordStrengthMeter";
+import { useId, useState, type ReactElement } from "react";
+import { cn } from "@cubicsui/utils";
+import { InputField } from "../InputField/InputField";
+import { eventWithRipple } from "../../Misc/Ripple/Ripple";
+import type { InputFieldProps } from "../InputField/InputField.types";
 import type { PasswordInputProps } from "./PasswordInput.types";
-import iFStyles from "../../Bases/styles/InputField.module.css";
+import { PasswordStrengthMeter } from "./PasswordStrengthMeter/PasswordStrengthMeter";
+import { PasswordVisibilityIcon } from "./PasswordVisibilityIcon/PasswordVisibilityIcon";
 import styles from "./PasswordInput.module.css";
 
 export function PasswordInput(props: PasswordInputProps): ReactElement {
   const {
-    className,
     label,
-    id: _id,
-    helperText,
     error,
-    disabled,
+    helperText,
+    size,
+    beforeSurface,
+    afterSurface,
+    startAdornment,
+    endAdornment,
+    fullWidth,
+    disablePadding,
+    disableRipple,
+    rootClass,
+    slotProps: _slotProps = {},
+
+    id,
+    className,
+    htmlSize,
+    disableVisibilityToggle,
+    enableStrengthMeter,
     onTouchStart,
     onClick,
-    size = "md",
-    startIcon,
-    endIcon,
-    disableVisibilityToggle,
-    enableStrengthMeter = false,
-    disablePadding,
-    disableInputWidth,
-    htmlSize,
-    fullWidth,
-    required,
-    slotProps = {},
     ...inputProps
   } = props;
-  const wrapperRef = useRef<HTMLDivElement>(null);
-  const { rippleElements, createRipple } = useRipple(
-    slotProps.ripple,
-    wrapperRef,
-  );
+  const { strengthMeter, visibilityToggle, ...slotProps } = _slotProps;
   const [showPass, setShowPass] = useState(false);
   const fallbackId = useId();
-  const id = _id ?? fallbackId;
-  const inputComponent = (
-    <input
-      {...inputProps}
-      type={showPass ? "text" : "password"}
-      id={id}
-      className={cn(slotProps.input?.className, iFStyles.input, styles.input)}
-      onTouchStart={eventWithRipple(createRipple, onTouchStart)}
-      onClick={eventWithRipple(createRipple, onClick)}
-      aria-invalid={!!error}
-      size={htmlSize}
-      required={required}
-      disabled={disabled}
-    />
-  );
+  const inputId = id ?? fallbackId;
+  const descriptionId =
+    !!error || !!helperText ? `${inputId}-description` : undefined;
 
+  const inputFieldProps: InputFieldProps = {
+    label,
+    error,
+    helperText,
+    size,
+    beforeSurface,
+    afterSurface: (
+      <>
+        {enableStrengthMeter && <PasswordStrengthMeter {...strengthMeter} />}
+        {afterSurface}
+      </>
+    ),
+    startAdornment,
+    endAdornment,
+    fullWidth,
+    disablePadding,
+    disableRipple,
+    rootClass,
+    slotProps,
+
+    inputId,
+    descriptionId,
+  };
   return (
-    <div
-      {...slotProps.root}
-      className={cn(
-        className,
-        iFStyles.root,
-        fullWidth ? iFStyles.fullWidth : "",
-        disablePadding
-          ? cn(iFStyles.disablePadding, styles.disablePadding)
-          : "",
-        disableInputWidth ? iFStyles.disableInputWidth : "",
-      )}
-      data-size={size}
-      data-error={!!error}
-      data-disabled={disabled}
-    >
-      {label && (
-        <label
-          {...slotProps.label}
-          htmlFor={id}
-          className={cn(slotProps.label?.className, iFStyles.label)}
-          data-required={required}
-        >
-          {label}
-        </label>
-      )}
-      <div
-        {...slotProps.inputWrapper}
-        ref={mergeRefs(slotProps.inputWrapper?.ref, wrapperRef)}
-        className={cn(slotProps.inputWrapper?.className, iFStyles.inputWrapper)}
-      >
-        {startIcon && (
-          <span
-            {...slotProps.startIcon}
-            className={cn(
-              iFStyles.iconContainer,
-              styles.iconContainer,
-              slotProps.startIcon?.className,
-            )}
-          >
-            {startIcon}
-          </span>
-        )}
-        {disableVisibilityToggle ? (
-          inputComponent
-        ) : (
-          <span className={cn(styles.visibilityToggleWrapper)}>
-            {inputComponent}
-            <PasswordVisibilityToggle
-              {...slotProps.visibilityToggle}
-              showPass={showPass}
-              inputId={id}
-              onClick={() => setShowPass(!showPass)}
+    <InputField {...inputFieldProps}>
+      {({ createRipple }) => {
+        return (
+          <span className={styles.inputWrapper}>
+            <input
+              type={showPass ? "text" : "password"}
+              id={inputId}
+              className={cn(className, styles.input)}
+              onTouchStart={eventWithRipple(createRipple, onTouchStart)}
+              onClick={eventWithRipple(createRipple, onClick)}
+              aria-invalid={!!error}
+              aria-describedby={descriptionId}
+              size={htmlSize}
+              {...inputProps}
             />
-          </span>
-        )}
-        {endIcon && (
-          <span
-            {...slotProps.endIcon}
-            className={cn(
-              iFStyles.iconContainer,
-              styles.iconContainer,
-              slotProps.endIcon?.className,
+            {!disableVisibilityToggle && (
+              <button
+                {...visibilityToggle}
+                aria-pressed={showPass}
+                aria-controls={inputId}
+                type="button"
+                aria-label="Show password"
+                onClick={() => setShowPass(!showPass)}
+                className={cn(
+                  styles.visibilityToggle,
+                  visibilityToggle?.className,
+                )}
+              >
+                <PasswordVisibilityIcon closed={showPass} />
+              </button>
             )}
-          >
-            {endIcon}
           </span>
-        )}
-        {rippleElements}
-      </div>
-      {enableStrengthMeter && (
-        <PasswordStrengthMeter {...slotProps.strengthMeter} />
-      )}
-      <InputHelperText
-        {...slotProps.helperText}
-        className={cn(slotProps.helperText?.className, iFStyles.helperText)}
-        text={error ?? helperText}
-      />
-    </div>
+        );
+      }}
+    </InputField>
   );
 }
-/**
- * ```
- *  root
- *   |label
- *   |inputWrapper
- *   |   |startIcon
- *   |   |input
- *   |   |visibilityToggle
- *   |   |endIcon
- *   |   |ripple
- *   |strengthMeter
- *   |helperText
- * ```
- */

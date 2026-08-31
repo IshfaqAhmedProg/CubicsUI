@@ -1,13 +1,7 @@
 "use client";
 
-import {
-  Button,
-  Checkbox,
-  CheckboxProvider,
-  TextInput,
-} from "@cubicsui/components";
+import { Button, Checkbox, CheckboxProvider } from "@cubicsui/components";
 import { useState, type SubmitEvent } from "react";
-import styles from "../../page.module.css";
 
 export function HybridInput() {
   const [value, setValue] = useState(false);
@@ -23,17 +17,17 @@ export function HybridInput() {
       </h3>
       <form onSubmit={handleSubmit}>
         <CheckboxProvider>
-          <Checkbox
-            label="An uncontrolled checkbox, result will be empty if unchecked"
-            defaultChecked
-            name="uncontrolled-checkbox"
-            startIcon={<Button type="reset">Reset</Button>}
-            endIcon={
-              <Button type="submit" variant="contained">
-                Submit
-              </Button>
-            }
-          />
+          <div className="row">
+            <Button type="reset">Reset</Button>
+            <Checkbox
+              label="An uncontrolled checkbox, result will be empty if unchecked"
+              defaultChecked
+              name="uncontrolled-checkbox"
+            />
+            <Button type="submit" variant="contained">
+              Submit
+            </Button>
+          </div>
         </CheckboxProvider>
       </form>
       <hr />
@@ -41,7 +35,7 @@ export function HybridInput() {
       <h3>
         With value and onChange {"("}controlled{")"}
       </h3>
-      <div className={styles.column}>
+      <div className={"column"}>
         <Checkbox
           label="The checked status of the checkbox is shown below"
           checked={value}

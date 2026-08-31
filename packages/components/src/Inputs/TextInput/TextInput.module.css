@@ -1,4 +1,3 @@
 .input {
-  appearance: none;
-  -webkit-appearance: none;
+  composes: input from "../InputField/InputField.module.css";
 }

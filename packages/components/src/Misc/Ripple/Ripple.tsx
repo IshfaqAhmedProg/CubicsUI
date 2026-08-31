@@ -10,13 +10,13 @@ import type {
   TouchEvent,
 } from "react";
 import { useCallback, useState } from "react";
-import styles from "./Ripple.module.css";
 import type {
   Ripple,
   RippleEventHandler,
   UseRippleProps,
   UseRippleReturns,
 } from "./Ripple.types";
+import styles from "./Ripple.module.css";
 
 /**
  * Utitlity function to augment the trigger event with any other function
@@ -73,6 +73,7 @@ export function useRipple<C extends HTMLElement>(
         x: left,
         y: top,
         color,
+        blur: diameter * 0.168,
       };
 
       setRipples((prev) => (prev.length <= 2 ? [...prev, newRipple] : prev));
@@ -97,22 +98,21 @@ export function useRipple<C extends HTMLElement>(
 
   return { createRipple, rippleElements };
 }
-/**
- * The main ripple component that is rendered by useRipple
- */
+
 function Ripple({
   ripple,
   color,
   duration,
 }: { ripple: Ripple } & UseRippleProps) {
   return (
-    <span className={styles.container}>
+    <span className={styles.root}>
       <span
-        className={styles.ripple}
+        className={styles.main}
         style={{
           ...({
             "--ripple-color": color,
             "--ripple-duration": `${duration}ms`,
+            "--ripple-blur": `${ripple.blur}px`, // scales with diameter now
           } as CSSProperties),
           width: ripple.size,
           height: ripple.size,

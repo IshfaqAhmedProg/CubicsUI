@@ -27,12 +27,11 @@
         "types": "./dist/index.d.mts",
         "default": "./dist/index.mjs"
       }
-    },
-    "./styles.css": "./dist/index.css"
+    }
   },
   "sideEffects": true,
   "scripts": {
-    "build": "tsdown",
+    "build": "tsdown --clean",
     "dev": "tsdown --watch",
     "lint": "eslint .",
     "clean": "rimraf dist node_modules"

@@ -41,6 +41,11 @@
   --color-surface-highest: #ccbdc2;
   --color-surface-dim: #bfb1b6;
   --color-surface-bright: #f7f7f7;
+  --color-input-surface: color-mix(
+    in srgb,
+    var(--color-surface-highest) 30%,
+    transparent
+  );
 
   /* Alpha Colors */
   --color-primary-alpha: color-mix(var(--color-primary) 20%, transparent);
@@ -117,16 +122,18 @@
   /* Misc */
   --blur-heavy: 10px;
   --blur-light: 5px;
-  --blur-gradient: 90px;
+  --blur-gradient: 30px;
   --header-height: 7vh;
   --header-height-secondary: 64px;
   --column-grid-size: 8.33%;
   --z-header: 99;
   --z-drawer: 999;
   --z-modal: 9999;
-  --border-width: 2.3px;
+  --border-width: 2px;
+  --icon-stroke-width: 2.3px;
   --gr: 1.618;
   --focus-ring: var(--border-width) dashed var(--color-focus);
+  --pointer-light-size: 250px;
 }
 [data-theme="dark"] {
   color-scheme: dark;
@@ -284,7 +291,7 @@ code {
 } */
 
 .lucide {
-  stroke-width: var(--border-width);
+  stroke-width: var(--icon-stroke-width);
   stroke-linecap: round;
   stroke-linejoin: round;
 }

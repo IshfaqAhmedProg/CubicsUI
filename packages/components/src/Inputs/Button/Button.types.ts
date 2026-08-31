@@ -1,5 +1,6 @@
-import type { ComponentProps, ReactNode } from "react";
+import type { ComponentProps, ElementType, ReactNode } from "react";
 import type { UseRippleProps } from "../../Misc/Ripple/Ripple.types";
+import type { PolymorphicComponentProps } from "@cubicsui/types";
 
 /** Props specific to the Button component. */
 export interface ButtonBaseProps {
@@ -51,6 +52,9 @@ export interface ButtonBaseProps {
    */
   slotProps?: ButtonSlotProps;
 }
+
+export type ButtonProps<C extends ElementType = "button"> =
+  PolymorphicComponentProps<C, ButtonBaseProps>;
 
 /** The slot props for the button */
 export interface ButtonSlotProps {

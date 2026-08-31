@@ -6,14 +6,9 @@ import {
   CheckboxGroupControl,
   CheckboxProvider,
 } from "@cubicsui/components";
-import type { SubmitEvent } from "react";
-import styles from "../../page.module.css";
+import { alertFormData } from "@/lib/utils/alertFormData";
+
 export function InGroup() {
-  function handleSubmit(e: SubmitEvent) {
-    e.preventDefault();
-    const formData = new FormData(e.target);
-    alert(JSON.stringify(Object.fromEntries(formData.entries())));
-  }
   return (
     <section>
       <ul>
@@ -23,19 +18,20 @@ export function InGroup() {
           the group.
         </li>
         <li>
-          If the name is passed to <code>{"<CheckboxGroupControl/>"}</code> then
-          that will show up in FormData too along with the other checkboxes
+          If a name is passed to <code>{"<CheckboxGroupControl/>"}</code> then
+          that will show up in FormData too along with the other checkboxes.
         </li>
         <li>
           <code>{"<CheckboxGroupControl/>"}</code> will always skip group by
           default and wont show up in values inside{" "}
-          <code>{"<CheckboxProvider/>"}</code>, when using useCheckbox
+          <code>{"<CheckboxProvider/>"}</code> when using{" "}
+          <code>useCheckbox</code>.
         </li>
       </ul>
 
       <h3>With Form</h3>
-      <form onSubmit={handleSubmit}>
-        <div className={styles.column}>
+      <form onSubmit={alertFormData}>
+        <div className={"column"}>
           <CheckboxProvider>
             <CheckboxGroupControl size="sm" label="Select All" />
             <Checkbox label="Form Checkbox 1" name="form-checkbox-1" />
@@ -49,7 +45,7 @@ export function InGroup() {
         </div>
       </form>
       <h3>Without Form</h3>
-      <div className={styles.column}>
+      <div className={"column"}>
         <CheckboxProvider>
           <CheckboxGroupControl size="sm" label="Select All" />
           <Checkbox label="Group Checkbox 1" name="group-checkbox-1" />

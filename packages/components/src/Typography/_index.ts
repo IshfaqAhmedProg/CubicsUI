@@ -1,2 +1,2 @@
-export * from "./InputHelperText/InputHelperText";
-export * from "./InputHelperText/InputHelperText.types";
+export * from "./TextOrList/TextOrList";
+export * from "./TextOrList/TextOrList.types";

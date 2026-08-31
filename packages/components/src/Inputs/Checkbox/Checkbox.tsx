@@ -8,20 +8,20 @@ import {
   type ChangeEvent,
   type ReactElement,
 } from "react";
-import { eventWithRipple, useRipple } from "../../Misc/Ripple/Ripple";
 import { cn, mergeRefs } from "@cubicsui/utils";
-import styles from "./Checkbox.module.css";
 import type { CheckboxCurrentState, CheckboxProps } from "./Checkbox.types";
 import { useCheckbox } from "./CheckboxProvider";
-import { InputHelperText } from "../../Typography/InputHelperText/InputHelperText";
 import {
   CheckIconAnimated,
   DashIconAnimated,
-} from "./CheckboxCheckIcons/CheckboxCheckIcons";
+} from "./CheckboxIcons/CheckboxIcons";
+import { TextOrList } from "../../Typography/TextOrList/TextOrList";
+import styles from "./Checkbox.module.css";
 
 export function Checkbox(props: CheckboxProps): ReactElement {
   const {
     ref,
+    rootClass,
     className,
     label,
     id: _id,
@@ -31,10 +31,6 @@ export function Checkbox(props: CheckboxProps): ReactElement {
     defaultChecked,
     value,
     skipGroup,
-    onChange,
-    onTouchStart,
-    onClick,
-    htmlSize,
     size = "md",
     color,
     disabled,
@@ -43,15 +39,15 @@ export function Checkbox(props: CheckboxProps): ReactElement {
     "aria-label": ariaLabel,
     checkedIcon = <CheckIconAnimated />,
     indeterminateIcon = <DashIconAnimated />,
-    startIcon,
-    endIcon,
     slotProps = {},
+    onChange,
+    onTouchStart,
+    onClick,
     ...rest
   } = props;
 
   const isRegistered = useRef(false);
   const inputRef = useRef<HTMLInputElement>(null);
-  const { rippleElements, createRipple } = useRipple(slotProps.ripple);
   const [currentState, setCurrentState] = useState<CheckboxCurrentState>(
     defaultChecked || checked
       ? "checked"
@@ -59,13 +55,15 @@ export function Checkbox(props: CheckboxProps): ReactElement {
         ? "indeterminate"
         : "unchecked",
   );
-  const fallbackId = useId();
   const group = useCheckbox();
+  const fallbackId = useId();
+  const id = _id ?? fallbackId;
   const isChecked = currentState == "checked";
   const isIndeterminate = currentState == "indeterminate";
-  const id = _id ?? fallbackId;
+  const stringLabel = typeof label === "string" ? label : undefined;
 
   function handleChange(e: ChangeEvent<HTMLInputElement>) {
+    if (disabled) return;
     const next = e.target.checked;
     setCurrentState(next ? "checked" : "unchecked");
     if (group && !skipGroup && name) group.update(name, next);
@@ -81,7 +79,7 @@ export function Checkbox(props: CheckboxProps): ReactElement {
       indeterminate ? "indeterminate" : c ? "checked" : "unchecked",
     );
     // Register with group if inside <CheckboxProvider/>
-    if (group && !skipGroup && !isRegistered.current && name) {
+    if (group && !skipGroup && !isRegistered.current && name && !disabled) {
       isRegistered.current = true;
       group.register(name, c);
     }
@@ -96,13 +94,13 @@ export function Checkbox(props: CheckboxProps): ReactElement {
 
   // Sync to group state if group is present and checkbox is checked in group
   useEffect(() => {
-    if (!isRegistered.current || !inputRef.current || !name) return;
+    if (!isRegistered.current || !inputRef.current || !name || disabled) return;
     inputRef.current.checked = group.values[name];
     setCurrentState(group.values[name] ? "checked" : "unchecked");
   }, [group.values, name]);
 
   // Native form reset restores input.checked to defaultChecked but does not
-  // fire onChange, so currentState never changes
+  // fire onChange, so currentState never changes, this effect handles that
   useEffect(() => {
     const input = inputRef.current;
     const form = input?.form;
@@ -110,7 +108,7 @@ export function Checkbox(props: CheckboxProps): ReactElement {
 
     function handleReset() {
       // The reset event fires before the browser applies the reset
-      // algorithm (restoring each control's value)
+      // algorithm
       setTimeout(() => {
         if (!inputRef.current) return;
         // Explicitly set indeterminate if it was passed as prop from parent
@@ -135,36 +133,28 @@ export function Checkbox(props: CheckboxProps): ReactElement {
   return (
     <div
       {...slotProps.root}
-      className={cn(styles.root, className)}
+      className={cn(rootClass, slotProps.root?.className, styles.root)}
       data-size={size}
       data-color={error ? "error" : color}
       data-error={!!error}
     >
-      <span className={cn(styles.inputWrapper)}>
-        {/* Start Icon */}
-        {startIcon && (
-          <span
-            {...slotProps.startIcon}
-            className={cn(styles.iconContainer, slotProps.startIcon?.className)}
-          >
-            {startIcon}
-          </span>
-        )}
+      <div
+        {...slotProps.inputWrapper}
+        className={cn(slotProps.inputWrapper?.className, styles.inputWrapper)}
+      >
         {/* Main Checkbox */}
         <span
           {...slotProps.checkbox}
-          className={cn(styles.checkbox, slotProps.checkbox?.className)}
+          className={cn(slotProps.checkbox?.className, styles.checkbox)}
         >
           <input
             id={id}
             ref={mergeRefs(ref, inputRef)}
             type="checkbox"
             aria-checked={isIndeterminate ? "mixed" : isChecked}
-            aria-label={ariaLabel ?? label}
+            aria-label={ariaLabel ?? stringLabel}
             onChange={handleChange}
-            className={cn(slotProps.input?.className, styles.input)}
-            onTouchStart={eventWithRipple(createRipple, onTouchStart)}
-            onClick={eventWithRipple(createRipple, onClick)}
+            className={cn(className, styles.input)}
             disabled={disabled}
             value={value}
             name={name}
@@ -172,61 +162,49 @@ export function Checkbox(props: CheckboxProps): ReactElement {
             {...rest}
           />
           <span
-            {...slotProps.checkboxIconsWrapper}
+            {...slotProps.checkIconsWrapper}
             className={cn(
-              styles.checkboxIconsWrapper,
-              slotProps.checkboxIconsWrapper?.className,
+              slotProps.checkIconsWrapper?.className,
+              styles.checkIconsWrapper,
             )}
           >
-            <span className={cn(styles.checkboxIconWrapper, styles.checked)}>
+            <span
+              {...slotProps.checkedIcon}
+              className={cn(
+                slotProps.checkedIcon?.className,
+                styles.checkedIcon,
+              )}
+            >
               {checkedIcon}
             </span>
             <span
-              className={cn(styles.checkboxIconWrapper, styles.indeterminate)}
+              {...slotProps.indeterminateIcon}
+              className={cn(
+                slotProps.indeterminateIcon?.className,
+                styles.indeterminateIcon,
+              )}
             >
               {indeterminateIcon}
             </span>
           </span>
-          {rippleElements}
         </span>
         {/* Label */}
-        <label
-          {...slotProps.label}
-          htmlFor={id}
-          className={cn(slotProps.label?.className, styles.label)}
-        >
-          {label}
-        </label>
-        {/* End Icon */}
-        {endIcon && (
-          <span
-            {...slotProps.endIcon}
-            className={cn(styles.iconContainer, slotProps.endIcon?.className)}
+        {label && (
+          <label
+            {...slotProps.label}
+            htmlFor={id}
+            className={cn(slotProps.label?.className, styles.label)}
           >
-            {endIcon}
-          </span>
+            {label}
+          </label>
         )}
-      </span>
+      </div>
       {/* Helper text */}
-      <InputHelperText
+      <TextOrList
         {...slotProps.helperText}
-        className={cn(styles.helperText, slotProps.helperText?.className)}
+        className={cn(slotProps.helperText?.className, styles.helperText)}
         text={error ?? helperText}
       />
     </div>
   );
-}
-{
-  /*
-    root
-    |inputWrapper
-    |   |startIcon
-    |   |checkbox
-    |   |   |input
-    |   |   |checkboxIconsWrapper
-    |   |   |ripple
-    |   |label
-    |   |endIcon
-    |helperText
-*/
 }

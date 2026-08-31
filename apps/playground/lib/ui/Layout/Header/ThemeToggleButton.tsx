@@ -46,7 +46,7 @@ export function ThemeToggleButton(props: ThemeToggleButtonProps): ReactElement {
       return (
         <Button
           variant={buttonVariant}
-          icon
+          // icon
           onClick={(e) => {
             onClick?.(e);
             current.onClick?.(e);
@@ -59,7 +59,7 @@ export function ThemeToggleButton(props: ThemeToggleButtonProps): ReactElement {
     default:
       return (
         <Button
-          startIcon={current.icon}
+          // startIcon={current.icon}
           variant={buttonVariant}
           onClick={(e) => {
             onClick?.(e);

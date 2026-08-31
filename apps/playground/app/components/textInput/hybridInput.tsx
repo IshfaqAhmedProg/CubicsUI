@@ -2,7 +2,6 @@
 
 import { Button, TextInput } from "@cubicsui/components";
 import { useState } from "react";
-import styles from "../../page.module.css";
 
 export function HybridInput() {
   const [value, setValue] = useState("");
@@ -16,15 +15,16 @@ export function HybridInput() {
           label="Enter your name"
           defaultValue={"John Doe"}
           disablePadding
-          endIcon={<Button type="reset">Reset</Button>}
+          endAdornment={<Button type="reset">Reset</Button>}
         />
       </form>
+
       <hr />
 
       <h3>
         With value and onChange {"("}controlled{")"}
       </h3>
-      <div className={styles.column}>
+      <div className={"column"}>
         <TextInput
           label="Type something to change the value"
           value={value}

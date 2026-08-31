@@ -1,9 +1,9 @@
 "use client";
 
 import { useState } from "react";
-import styles from "../../page.module.css";
 import { Button, Card, PasswordInput, TextInput } from "@cubicsui/components";
 import Link from "next/link";
+
 export function StrengthMeter() {
   const scoreWords = ["Weak", "Okay", "Good", "Strong", "Very strong"];
   const strengths = [0, 1, 2, 3, 4];
@@ -18,7 +18,7 @@ export function StrengthMeter() {
 
   return (
     <section>
-      <div className={styles.column}>
+      <div className={"column"}>
         <p>
           Set strength below to see the meter change, see{" "}
           <Link href="/components/passwordStrengthMeter">
@@ -26,7 +26,7 @@ export function StrengthMeter() {
           </Link>{" "}
           to learn more
         </p>
-        <div className={styles.row}>
+        <div className={"row"}>
           {strengths.map((s) => (
             <Button
               key={s}
@@ -39,13 +39,13 @@ export function StrengthMeter() {
           ))}
         </div>
         <p>Modify the score words to see the custom score words</p>
-        <div className={styles.row}>
+        <div className={"row"}>
           {Array.from({ length: scoreWords.length }).map((_, i) => (
             <TextInput
               key={i}
               size="sm"
               value={customScoreWords[i]}
-              startIcon={<b>{i}</b>}
+              startAdornment={<b>{i}</b>}
               onChange={(e) =>
                 setCustomScoreWords((prev) => {
                   const next = [...prev];
@@ -57,7 +57,7 @@ export function StrengthMeter() {
           ))}
         </div>
         <p>Select a type of feedback to see below</p>
-        <div className={styles.row}>
+        <div className={"row"}>
           {(Object.keys(feedbacks) as Array<keyof typeof feedbacks>).map(
             (k) => (
               <Button
@@ -72,8 +72,11 @@ export function StrengthMeter() {
           )}
         </div>
         <Card style={{ marginTop: "var(--gap-5)" }}>
+          <TextInput label="Username" />
           <PasswordInput
-            label="Password with strength meter"
+            autoComplete="off"
+            autoCorrect="off"
+            label="Password"
             enableStrengthMeter
             slotProps={{
               strengthMeter: {

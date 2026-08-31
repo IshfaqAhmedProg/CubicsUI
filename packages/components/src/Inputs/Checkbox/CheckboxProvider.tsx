@@ -3,23 +3,14 @@
 import {
   createContext,
   useContext,
-  type ReactNode,
   type ReactElement,
   type Context,
   useState,
 } from "react";
-
-interface CheckboxContextProps {
-  values: Record<string, boolean>;
-  selected: string[];
-  register: (id: string, checked?: boolean) => void;
-  update: (id: string, checked: boolean) => void;
-  setAll: (checked: boolean) => void;
-}
-interface CheckboxProviderProps {
-  children: ReactNode;
-  onChange?: (checked: Record<string, boolean>) => void;
-}
+import type {
+  CheckboxContextProps,
+  CheckboxProviderProps,
+} from "./Checkbox.types";
 
 export const CheckboxContext: Context<CheckboxContextProps> =
   createContext<CheckboxContextProps>({

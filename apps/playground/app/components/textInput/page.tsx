@@ -1,61 +1,200 @@
-import { Labels } from "./labels";
+import { Button, Card, TextInput } from "@cubicsui/components";
 import { HybridInput } from "./hybridInput";
-import styles from "../../page.module.css";
-import { BackgroundCheck } from "./backgroundCheck";
-import { HelperText } from "./helperText";
-import { DisableInputWidth } from "./disableInputWidth";
-import { Disabled } from "./disabled";
-import { Sizes } from "./sizes";
-import { WithIcons } from "./withIcons";
-import { FullWidth } from "./fullWidth";
-import { DisablePadding } from "./disablePadding";
+import { CubicsUIFavicon } from "@cubicsui/icons";
 
 export default function Page() {
   return (
-    <div className={styles.root}>
-      <h1>TextInput</h1>
-
+    <main className="main">
+      <h1>
+        <code>{"<TextInput/>"}</code>
+      </h1>
       <h2>Labels</h2>
-      <Labels />
-      <hr />
+      <section>
+        <div className={"column"}>
+          <h3>
+            <code>{"<TextInput/>"}</code> with label
+          </h3>
+          <TextInput label="Enter your first name" />
+          <TextInput label="This is a really long label, a really really long label" />
+        </div>
+        <hr />
+        <div className={"column"}>
+          <h3>
+            <code>{"<TextInput/>"}</code> without label
+          </h3>
+          <p>
+            You have to use <code>placeholder</code> prop to do labelling
+          </p>
+          <TextInput placeholder="Enter your first name" />
+          <TextInput placeholder="This is a really long label, how long you say? Really long." />
+        </div>
+        <hr />
+        <div className={"column"}>
+          <h3>
+            A required <code>{"<TextInput/>"}</code>
+          </h3>
+          <TextInput required label="Enter your first name" />
+        </div>
+      </section>
 
       <h2>Hybrid input</h2>
       <HybridInput />
-      <hr />
 
       <h2>Sizes</h2>
-      <Sizes />
-      <hr />
+      <section>
+        <TextInput label="Extra Small" size="xs" />
+        <TextInput label="Small" size="sm" />
+        <TextInput label="Medium" size="md" />
+        <TextInput label="Large" size="lg" />
+        <TextInput label="Extra Large" size="xl" />
+      </section>
 
-      <h2>Background check</h2>
-      <BackgroundCheck />
-      <hr />
+      <h2>Background Check</h2>
+      <section>
+        <h3>On Card</h3>
+        <Card className={"column"}>
+          <TextInput label="On top of a card" />
+          <TextInput
+            label="On top of a card"
+            placeholder="This is a placeholder"
+          />
+        </Card>
+        <h3>On RGB</h3>
+        <div className={"column rgb_bg"}>
+          <TextInput label="On top of rgb colors" />
+          <TextInput
+            label="On top of rgb colors"
+            placeholder="This is a placeholder"
+          />
+        </div>
+        <h3>On Image</h3>
+        <div className={"column image_bg"}>
+          <TextInput label="On top of image" />
+          <TextInput
+            label="On top of image"
+            placeholder="This is a placeholder"
+          />
+        </div>
+      </section>
 
-      <h2>Helper text</h2>
-      <HelperText />
-      <hr />
-
-      <h2>Disable Input Width</h2>
-      <DisableInputWidth />
-      <hr />
-
-      <h2>With start and end icons</h2>
-      <WithIcons />
-      <hr />
-      
-      <h2>Disable Padding</h2>
-      <DisablePadding />
-      <hr />
-
-      <h2>Full Width</h2>
-      <FullWidth />
-      <hr />
+      <h2>Helper Text</h2>
+      <section>
+        <div className={"column"}>
+          <h3>Normal Helper text</h3>
+          <TextInput
+            label="Enter address"
+            helperText="Make sure to add in format city, state, country"
+          />
+          <TextInput
+            label="TextInput with multiple helper texts"
+            helperText={["Do this", "and then that"]}
+          />
+        </div>
+        <hr />
+        <div className={"column"}>
+          <h3>When Errored</h3>
+          <TextInput
+            label="Errored TextInput"
+            error="Make sure to check the TextInput here"
+          />
+          <TextInput
+            label="Errored TextInput with multiple errors"
+            error={["This textinput has", "multiple errors"]}
+          />
+        </div>
+      </section>
 
       <h2>
-        Disabled <code>{"<TextInput/>"}</code>
+        With <code>fullWidth</code>{" "}
       </h2>
-      <Disabled />
-      <hr />
-    </div>
+      <section>
+        <TextInput label="TextInput with fullWidth" fullWidth />
+        <TextInput
+          label="TextInput with fullWidth and helper text"
+          fullWidth
+          helperText={["This is helper text"]}
+        />
+        <TextInput
+          label="Lorem ipsum dolor sit amet consectetur adipisicing elit. Ab voluptatibus minima exercitationem ea quis quo vitae harum libero possimus, odio impedit quibusdam eos iure consequatur fugiat repellendus? Pariatur, repellendus atque!,Lorem ipsum dolor sit amet consectetur adipisicing elit. Ab voluptatibus minima exercitationem ea quis quo vitae harum libero possimus, odio impedit quibusdam eos iure consequatur fugiat repellendus? Pariatur, repellendus atque!"
+          fullWidth
+        />
+        <TextInput
+          startAdornment={<CubicsUIFavicon />}
+          endAdornment={<CubicsUIFavicon />}
+          label="TextInput with fullWidth and icons"
+          fullWidth
+        />
+      </section>
+
+      <h2>
+        With <code>disablePadding</code>
+      </h2>
+      <section>
+        <p>
+          Use to remove the padding of the inputWrapper, mainly used when using{" "}
+          <code>{"<Button/>"}</code> for start or end icons
+        </p>
+        <TextInput
+          disablePadding
+          label="Without icon is not supposed to be used"
+        />
+        <TextInput
+          label="Normal Icon Without disable padding"
+          startAdornment={<CubicsUIFavicon />}
+        />
+        <TextInput
+          label="Button Icon Without disable padding"
+          startAdornment={
+            <Button icon>
+              <CubicsUIFavicon />
+            </Button>
+          }
+        />
+
+        <TextInput
+          disablePadding
+          label="Button Start Icon with disable padding"
+          startAdornment={
+            <Button icon>
+              <CubicsUIFavicon />
+            </Button>
+          }
+        />
+        <TextInput
+          disablePadding
+          label="Button End Icon with disable padding"
+          endAdornment={
+            <Button variant="outlined" icon>
+              <CubicsUIFavicon />
+            </Button>
+          }
+        />
+        <TextInput
+          disablePadding
+          label="Button Both Icons with disable padding"
+          startAdornment={
+            <Button variant="contained" icon>
+              <CubicsUIFavicon />
+            </Button>
+          }
+          endAdornment={
+            <Button variant="contained" icon>
+              <CubicsUIFavicon />
+            </Button>
+          }
+        />
+      </section>
+
+      <h2>Disabled Input</h2>
+      <section>
+        <TextInput label="Disabled TextInput" disabled />
+        <TextInput label="Enabled TextInput" />
+        <TextInput
+          label="Disabled TextInput with default value"
+          defaultValue={"This is disabled"}
+          disabled
+        />
+      </section>
+    </main>
   );
 }

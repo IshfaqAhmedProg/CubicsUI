@@ -1,38 +1,13 @@
 "use client";
 
-import type {
-  PolymorphicComponentProps,
-  PolymorphicComponentType,
-} from "@cubicsui/types";
+import type { PolymorphicComponentType } from "@cubicsui/types";
 import { type ElementType, type ReactElement } from "react";
 import { eventWithRipple, useRipple } from "../../Misc/Ripple/Ripple";
 import { cn } from "@cubicsui/utils";
+import type { ButtonBaseProps, ButtonProps } from "./Button.types";
 import styles from "./Button.module.css";
-import type { ButtonBaseProps } from "./Button.types";
 
-const defaultElement = "button";
-export type ButtonDefaultElement = typeof defaultElement;
-
-/**
- * Polymorphic props for the Button component.
- *
- * `C` defines the element type rendered by the component (e.g. `"button"`, `"a"`, `"div"`).
- * All intrinsic props for `C` are supported unless overridden by `ButtonBaseProps`.
- *
- */
-export type ButtonProps<C extends ElementType = ButtonDefaultElement> =
-  PolymorphicComponentProps<C, ButtonBaseProps>;
-
-/**
- * Base implementation for the Button component.
- *
- * This is a polymorphic component that defaults to rendering a `<button>`.
- * Use the `as` prop to change the underlying element.
- *
- * @typeParam C - The intrinsic or custom element type to render.
- *
- */
-function ButtonBase<C extends ElementType = ButtonDefaultElement>(
+function ButtonBase<C extends ElementType = "button">(
   props: ButtonProps<C>,
 ): ReactElement {
   const {
@@ -41,8 +16,8 @@ function ButtonBase<C extends ElementType = ButtonDefaultElement>(
     children,
     variant,
     size = "md",
-    startIcon,
     color = "default",
+    startIcon,
     endIcon,
     icon,
     fullWidth = false,
@@ -51,24 +26,25 @@ function ButtonBase<C extends ElementType = ButtonDefaultElement>(
     disabled,
     slotProps: _slotProps,
     ...restProps
-  } = props as ButtonProps<ButtonDefaultElement>;
+  } = props as ButtonProps<"button">;
   const slotProps: NonNullable<ButtonBaseProps["slotProps"]> = _slotProps ?? {};
-  const Component = (as || defaultElement) as ElementType;
+  const Component = (as || "button") as ElementType;
   const { rippleElements, createRipple } = useRipple(slotProps.ripple);
 
   const componentProps = {
     className: cn(
       className,
       styles.root,
-      icon ? styles.icon : "",
-      fullWidth ? styles.fullWidth : "",
-      disabled ? styles.disabled : "",
-      variant ? styles[variant] : "",
+      icon && styles.iconButton,
+      fullWidth && styles.fullWidth,
+      disabled && styles.disabled,
+      variant && styles[`variant_${variant}`],
     ),
     onTouchStart: eventWithRipple(createRipple, onTouchStart),
     onClick: eventWithRipple(createRipple, onClick),
     "data-color": color,
     "data-size": size,
+    disabled,
     ...restProps,
   };
 
@@ -77,7 +53,7 @@ function ButtonBase<C extends ElementType = ButtonDefaultElement>(
       {startIcon && (
         <span
           {...slotProps.startIcon}
-          className={cn(styles.icon, slotProps.startIcon?.className)}
+          className={cn(styles.adornment, slotProps.startIcon?.className)}
         >
           {startIcon}
         </span>
@@ -86,7 +62,7 @@ function ButtonBase<C extends ElementType = ButtonDefaultElement>(
       {endIcon && (
         <span
           {...slotProps.endIcon}
-          className={cn(styles.icon, slotProps.endIcon?.className)}
+          className={cn(styles.adornment, slotProps.endIcon?.className)}
         >
           {endIcon}
         </span>
@@ -108,5 +84,5 @@ ButtonBase.displayName = "Button";
  */
 export const Button = ButtonBase as PolymorphicComponentType<
   ButtonBaseProps,
-  ButtonDefaultElement
+  "button"
 >;
