@@ -16,7 +16,7 @@ import type {
   UseRippleProps,
   UseRippleReturns,
 } from "./Ripple.types";
-import "./Ripple.styles.css";
+import styles from "./Ripple.module.css";
 
 /**
  * Utitlity function to augment the trigger event with any other function
@@ -98,18 +98,16 @@ export function useRipple<C extends HTMLElement>(
 
   return { createRipple, rippleElements };
 }
-/**
- * The main ripple component that is rendered by useRipple
- */
+
 function Ripple({
   ripple,
   color,
   duration,
 }: { ripple: Ripple } & UseRippleProps) {
   return (
-    <span className={"Ripple_root"}>
+    <span className={styles.root}>
       <span
-        className={"Ripple_main"}
+        className={styles.main}
         style={{
           ...({
             "--ripple-color": color,

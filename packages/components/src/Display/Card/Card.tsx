@@ -8,7 +8,7 @@ import { type ElementType } from "react";
 
 import { cn } from "@cubicsui/utils";
 import type { CardBaseProps } from "./Card.types";
-import "./Card.styles.css";
+import styles from "./Card.module.css";
 
 const defaultElement = "div";
 type DefaultElement = typeof defaultElement;
@@ -50,13 +50,13 @@ function CardBase<C extends ElementType = DefaultElement>(props: CardProps<C>) {
   const componentProps = {
     className: cn(
       className,
-      "Card_root",
-      square ? "Card_square" : "",
-      fullWidth ? "Card_fullWidth" : "",
-      fullHeight ? "Card_fullHeight" : "",
-      fullScreen ? "Card_fullScreen" : "",
-      disablePadding ? "Card_disablePadding" : "",
-      `Card_variant_${variant}`,
+      styles.root,
+      square && styles.square,
+      fullWidth && styles.fullWidth,
+      fullHeight && styles.fullHeight,
+      fullScreen && styles.fullScreen,
+      disablePadding && styles.disablePadding,
+      variant && styles[`variant_${variant}`],
     ),
     "data-size": size,
     ref,

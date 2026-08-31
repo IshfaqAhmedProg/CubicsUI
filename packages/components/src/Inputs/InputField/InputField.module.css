@@ -1,4 +1,4 @@
-.InputField_root {
+.root {
   --color: var(--color-on-surface);
   --bg: var(--color-input-surface);
   --border-color: color-mix(
@@ -24,13 +24,13 @@
   font-size: var(--fs);
   width: fit-content;
 }
-.InputField_label {
+.label {
   font-size: 0.9em;
   width: 0;
   min-width: 100%;
   color: var(--label-color);
 }
-.InputField_inputSurface {
+.inputSurface {
   display: flex;
   align-items: stretch;
   position: relative;
@@ -46,7 +46,8 @@
   transition: all var(--transition-time) var(--transition-tf);
 }
 
-.InputField_input {
+/* Using where to decrease specificity*/
+:where(.input) {
   flex: 1 1 100%;
   border: none;
   background: none;
@@ -55,14 +56,14 @@
   font-family: var(--ff);
 }
 
-.InputField_adornment {
+.adornment {
   display: flex;
   justify-content: center;
   height: 100%;
   flex-shrink: 0;
 }
 
-.InputField_helperText {
+.helperText {
   font-size: 0.8em;
   margin-left: calc(var(--gap-2) + var(--size));
   width: 0;
@@ -70,99 +71,99 @@
 }
 
 /* Has start icon */
-.InputField_inputSurface[data-start-adornment] .InputField_input {
+.inputSurface[data-start-adornment] .input {
   padding-left: var(--size);
 }
 /* Has end icon */
-.InputField_inputSurface[data-end-adornment] .InputField_input {
+.inputSurface[data-end-adornment] .input {
   padding-right: var(--size);
 }
-.InputField_root.fullWidth {
+.root.fullWidth {
   width: 100%;
 }
 /* With padding disabled */
-.InputField_root.disablePadding {
-  & .InputField_inputSurface {
+.root.disablePadding {
+  & .inputSurface {
     padding: 0;
   }
   /* Has start and end icon */
-  & .InputField_inputSurface[data-start-adornment] .InputField_input,
-  & .InputField_inputSurface[data-end-adornment] .InputField_input {
+  & .inputSurface[data-start-adornment] .input,
+  & .inputSurface[data-end-adornment] .input {
     padding: var(--size);
   }
 }
 /* Errored state */
-.InputField_root[data-error="true"],
-.InputField_root:has(.InputField_input:user-invalid) {
-  & .InputField_helperText,
-  & .InputField_label {
+.root[data-error="true"],
+.root:has(.input:user-invalid) {
+  & .helperText,
+  & .label {
     color: var(--color-error);
   }
-  & .InputField_inputSurface {
+  & .inputSurface {
     border-color: var(--color-error);
   }
   /* Focused */
-  &:has(.InputField_input:focus) {
-    & .InputField_helperText,
-    & .InputField_label {
+  &:has(.input:focus) {
+    & .helperText,
+    & .label {
       color: var(--color);
     }
-    & .InputField_inputSurface {
+    & .inputSurface {
       border-color: var(--border-color-focused);
     }
   }
 }
 
 /* Required Input */
-.InputField_root:has(.InputField_input:required) {
-  & .InputField_label {
+.root:has(.input:required) {
+  & .label {
     &::before {
       content: "*";
     }
   }
 }
 /* Disabled Input */
-.InputField_root:has(.InputField_input:disabled) {
+.root:has(.input:disabled) {
   opacity: 0.5;
 
-  & .InputField_inputSurface,
-  & .InputField_input,
-  & .InputField_label {
+  & .inputSurface,
+  & .input,
+  & .label {
     cursor: not-allowed;
   }
 }
 /* Focused input */
-.InputField_root:has(.InputField_input:focus) {
-  & .InputField_label {
+.root:has(.input:focus) {
+  & .label {
     color: var(--label-color-focused);
   }
-  & .InputField_inputSurface {
+  & .inputSurface {
     background: var(--bg-focused);
     border-color: var(--border-color-focused);
     color: var(--color-focused);
   }
-  & .InputField_input {
+  & .input {
     outline: none;
   }
 }
 
 /* Size styles  */
-.InputField_root[data-size="xs"] {
+.root[data-size="xs"] {
   --fs: var(--fs-xs);
   --br: var(--br-xs);
   --size: calc(var(--gap) / var(--gr));
 }
-.InputField_root[data-size="sm"] {
+.root[data-size="sm"] {
   --fs: var(--fs-sm);
   --br: var(--br-sm);
   --size: var(--gap);
 }
-.InputField_root[data-size="lg"] {
+.root[data-size="lg"] {
   --fs: var(--fs-lg);
   --br: var(--br-lg);
   --size: var(--gap-3);
 }
-.InputField_root[data-size="xl"] {
+.root[data-size="xl"] {
   --fs: var(--fs-xl);
   --br: var(--br-xl);
   --size: var(--gap-3);

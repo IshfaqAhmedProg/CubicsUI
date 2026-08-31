@@ -30,12 +30,12 @@
   border-radius: var(--br);
 }
 /* Variant styles */
-.root.contained {
+.root.variant_contained {
   --color: var(--color-background);
   --bg: var(--color-on-background);
 }
 
-.root.outlined {
+.root.variant_outlined {
   outline: var(--border-width) solid var(--border-color);
   outline-offset: calc(-1 * var(--border-width));
   &:not(:disabled):hover {
@@ -83,7 +83,7 @@
   --color-hover: var(--color-on-primary-container);
   --bg-hover: var(--color-primary-container);
   --border-color: var(--color-primary);
-  &.Button_variant_contained {
+  &.variant_contained {
     --color: var(--color-on-primary);
     --bg: var(--color-primary);
   }
@@ -94,7 +94,7 @@
   --color-hover: var(--color-on-secondary-container);
   --bg-hover: var(--color-secondary-container);
   --border-color: var(--color-secondary);
-  &.Button_variant_contained {
+  &.variant_contained {
     --color: var(--color-on-secondary);
     --bg: var(--color-secondary);
   }
@@ -105,7 +105,7 @@
   --color-hover: var(--color-on-tertiary-container);
   --bg-hover: var(--color-tertiary-container);
   --border-color: var(--color-tertiary);
-  &.Button_variant_contained {
+  &.variant_contained {
     --color: var(--color-on-tertiary);
     --bg: var(--color-tertiary);
   }
@@ -116,7 +116,7 @@
   --color-hover: var(--color-on-error-container);
   --bg-hover: var(--color-error-container);
   --border-color: var(--color-error);
-  &.Button_variant_contained {
+  &.variant_contained {
     --color: var(--color-on-error);
     --bg: var(--color-error);
   }
@@ -127,7 +127,7 @@
   --color-hover: var(--color-on-warn-container);
   --bg-hover: var(--color-warn-container);
   --border-color: var(--color-warn);
-  &.Button_variant_contained {
+  &.variant_contained {
     --color: var(--color-on-warn);
     --bg: var(--color-warn);
   }
@@ -138,7 +138,7 @@
   --color-hover: var(--color-on-success-container);
   --bg-hover: var(--color-success-container);
   --border-color: var(--color-success);
-  &.Button_variant_contained {
+  &.variant_contained {
     --color: var(--color-on-success);
     --bg: var(--color-success);
   }

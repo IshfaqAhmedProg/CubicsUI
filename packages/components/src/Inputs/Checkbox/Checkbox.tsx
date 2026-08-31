@@ -16,7 +16,7 @@ import {
   DashIconAnimated,
 } from "./CheckboxIcons/CheckboxIcons";
 import { TextOrList } from "../../Typography/TextOrList/TextOrList";
-import "./Checkbox.styles.css";
+import styles from "./Checkbox.module.css";
 
 export function Checkbox(props: CheckboxProps): ReactElement {
   const {
@@ -133,22 +133,19 @@ export function Checkbox(props: CheckboxProps): ReactElement {
   return (
     <div
       {...slotProps.root}
-      className={cn(rootClass, slotProps.root?.className, "Checkbox_root")}
+      className={cn(rootClass, slotProps.root?.className, styles.root)}
       data-size={size}
       data-color={error ? "error" : color}
       data-error={!!error}
     >
       <div
         {...slotProps.inputWrapper}
-        className={cn(
-          slotProps.inputWrapper?.className,
-          "Checkbox_inputWrapper",
-        )}
+        className={cn(slotProps.inputWrapper?.className, styles.inputWrapper)}
       >
         {/* Main Checkbox */}
         <span
           {...slotProps.checkbox}
-          className={cn(slotProps.checkbox?.className, "Checkbox_checkbox")}
+          className={cn(slotProps.checkbox?.className, styles.checkbox)}
         >
           <input
             id={id}
@@ -157,7 +154,7 @@ export function Checkbox(props: CheckboxProps): ReactElement {
             aria-checked={isIndeterminate ? "mixed" : isChecked}
             aria-label={ariaLabel ?? stringLabel}
             onChange={handleChange}
-            className={cn(className, "Checkbox_input")}
+            className={cn(className, styles.input)}
             disabled={disabled}
             value={value}
             name={name}
@@ -168,14 +165,14 @@ export function Checkbox(props: CheckboxProps): ReactElement {
             {...slotProps.checkIconsWrapper}
             className={cn(
               slotProps.checkIconsWrapper?.className,
-              "Checkbox_checkIconsWrapper",
+              styles.checkIconsWrapper,
             )}
           >
             <span
               {...slotProps.checkedIcon}
               className={cn(
                 slotProps.checkedIcon?.className,
-                "Checkbox_checkedIcon",
+                styles.checkedIcon,
               )}
             >
               {checkedIcon}
@@ -184,7 +181,7 @@ export function Checkbox(props: CheckboxProps): ReactElement {
               {...slotProps.indeterminateIcon}
               className={cn(
                 slotProps.indeterminateIcon?.className,
-                "Checkbox_indeterminateIcon",
+                styles.indeterminateIcon,
               )}
             >
               {indeterminateIcon}
@@ -196,7 +193,7 @@ export function Checkbox(props: CheckboxProps): ReactElement {
           <label
             {...slotProps.label}
             htmlFor={id}
-            className={cn(slotProps.label?.className, "Checkbox_label")}
+            className={cn(slotProps.label?.className, styles.label)}
           >
             {label}
           </label>
@@ -205,7 +202,7 @@ export function Checkbox(props: CheckboxProps): ReactElement {
       {/* Helper text */}
       <TextOrList
         {...slotProps.helperText}
-        className={cn(slotProps.helperText?.className, "Checkbox_helperText")}
+        className={cn(slotProps.helperText?.className, styles.helperText)}
         text={error ?? helperText}
       />
     </div>

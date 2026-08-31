@@ -38,7 +38,7 @@ function ButtonBase<C extends ElementType = "button">(
       icon && styles.iconButton,
       fullWidth && styles.fullWidth,
       disabled && styles.disabled,
-      variant && styles[variant],
+      variant && styles[`variant_${variant}`],
     ),
     onTouchStart: eventWithRipple(createRipple, onTouchStart),
     onClick: eventWithRipple(createRipple, onClick),

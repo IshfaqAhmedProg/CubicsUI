@@ -1,14 +1,14 @@
 "use client";
 
 import { useId, useState, type ReactElement } from "react";
+import { cn } from "@cubicsui/utils";
 import { InputField } from "../InputField/InputField";
 import { eventWithRipple } from "../../Misc/Ripple/Ripple";
-import { cn } from "@cubicsui/utils";
 import type { InputFieldProps } from "../InputField/InputField.types";
 import type { PasswordInputProps } from "./PasswordInput.types";
-import { PasswordVisibilityIcon } from "./PasswordVisibilityIcon/PasswordVisibilityIcon";
 import { PasswordStrengthMeter } from "./PasswordStrengthMeter/PasswordStrengthMeter";
-import "./PasswordInput.styles.css";
+import { PasswordVisibilityIcon } from "./PasswordVisibilityIcon/PasswordVisibilityIcon";
+import styles from "./PasswordInput.module.css";
 
 export function PasswordInput(props: PasswordInputProps): ReactElement {
   const {
@@ -69,11 +69,11 @@ export function PasswordInput(props: PasswordInputProps): ReactElement {
     <InputField {...inputFieldProps}>
       {({ createRipple }) => {
         return (
-          <span className={"PasswordInput_inputWrapper"}>
+          <span className={styles.inputWrapper}>
             <input
               type={showPass ? "text" : "password"}
               id={inputId}
-              className={cn(className, "InputField_input")}
+              className={cn(className, styles.input)}
               onTouchStart={eventWithRipple(createRipple, onTouchStart)}
               onClick={eventWithRipple(createRipple, onClick)}
               aria-invalid={!!error}
@@ -90,7 +90,7 @@ export function PasswordInput(props: PasswordInputProps): ReactElement {
                 aria-label="Show password"
                 onClick={() => setShowPass(!showPass)}
                 className={cn(
-                  "PasswordInput_visibilityToggle",
+                  styles.visibilityToggle,
                   visibilityToggle?.className,
                 )}
               >
@@ -103,19 +103,3 @@ export function PasswordInput(props: PasswordInputProps): ReactElement {
     </InputField>
   );
 }
-
-/**
- * ```
- *  root
- *   |label
- *   |inputSurface
- *   |   |startIcon
- *   |   |inputWrapper
- *   |   |   |input
- *   |   |   |visibilityToggle
- *   |   |endIcon
- *   |   |ripple
- *   |strengthMeter
- *   |helperText
- * ```
- */

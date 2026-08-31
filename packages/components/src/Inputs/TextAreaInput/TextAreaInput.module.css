@@ -1,0 +1,8 @@
+.disableResize {
+  & .input {
+    resize: none;
+  }
+}
+.input {
+  composes: input from "../InputField/InputField.module.css";
+}

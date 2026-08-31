@@ -1,4 +1,4 @@
-.PointerLight_root {
+.root {
   --cursor-color-a: color-mix(in srgb, var(--color-primary) 50%, transparent);
   --cursor-color-b: color-mix(in srgb, var(--color-secondary) 50%, transparent);
   position: fixed;
@@ -10,17 +10,17 @@
   isolation: isolate;
   pointer-events: none;
 }
-.PointerLight_overlay::after {
+.overlay::after {
   content: "";
   position: fixed;
   inset: 0;
   z-index: 2;
   background: var(--color-background-alpha);
 }
-.PointerLight_overlay > .PointerLight_main {
+.overlay > .main {
   z-index: -1;
 }
-.PointerLight_main {
+.main {
   background: radial-gradient(
     41.94% 82.95% at 50% 50%,
     var(--cursor-color-a) 0%,

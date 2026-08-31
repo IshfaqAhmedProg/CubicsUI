@@ -1,18 +1,20 @@
-.Ripple_root {
+.root {
+  --ripple-color: currentColor;
+  --ripple-blur: var(--blur-gradient);
   position: absolute;
   overflow: hidden;
   inset: 0;
   border-radius: inherit;
   pointer-events: none;
 }
-.Ripple_main {
-  filter: blur(var(--ripple-blur, 30px));
+.main {
+  filter: blur(var(--ripple-blur));
   position: absolute;
   border-radius: 50%;
-  background: var(--ripple-color, currentColor);
+  background: var(--ripple-color);
   transform: scale(0);
   opacity: 0.5;
-  animation: ripple-expand var(--ripple-duration, 750ms) var(--transition-tf);
+  animation: ripple-expand var(--transition-time-slow) var(--transition-tf);
   pointer-events: none;
 }
 @keyframes ripple-expand {

@@ -4,8 +4,8 @@ import { useRef, type ReactElement } from "react";
 import { useRipple } from "../../Misc/Ripple/Ripple";
 import { TextOrList } from "../../Typography/TextOrList/TextOrList";
 import { cn, mergeRefs } from "@cubicsui/utils";
-import "./InputField.style.css";
 import type { InputFieldProps } from "./InputField.types";
+import styles from "./InputField.module.css";
 
 export function InputField(props: InputFieldProps): ReactElement {
   const {
@@ -41,9 +41,9 @@ export function InputField(props: InputFieldProps): ReactElement {
       {...slotProps.root}
       className={cn(
         rootClass,
-        "InputField_root",
-        fullWidth && "fullWidth",
-        disablePadding && "disablePadding",
+        styles.root,
+        fullWidth && styles.fullWidth,
+        disablePadding && styles.disablePadding,
       )}
       data-size={size}
       data-error={!!error}
@@ -51,7 +51,7 @@ export function InputField(props: InputFieldProps): ReactElement {
       {label && (
         <label
           {...slotProps.label}
-          className={cn(slotProps.label?.className, "InputField_label")}
+          className={cn(slotProps.label?.className, styles.label)}
           htmlFor={inputId}
         >
           {label}
@@ -61,10 +61,7 @@ export function InputField(props: InputFieldProps): ReactElement {
       <div
         {...slotProps.inputSurface}
         ref={mergeRefs(slotProps.inputSurface?.ref, surfaceRef)}
-        className={cn(
-          slotProps.inputSurface?.className,
-          "InputField_inputSurface",
-        )}
+        className={cn(slotProps.inputSurface?.className, styles.inputSurface)}
         data-start-adornment={!!startAdornment || undefined}
         data-end-adornment={!!endAdornment || undefined}
       >
@@ -73,7 +70,7 @@ export function InputField(props: InputFieldProps): ReactElement {
             {...slotProps.startAdornment}
             className={cn(
               slotProps.startAdornment?.className,
-              "InputField_adornment",
+              styles.adornment,
             )}
           >
             {startAdornment}
@@ -83,10 +80,7 @@ export function InputField(props: InputFieldProps): ReactElement {
         {endAdornment && (
           <span
             {...slotProps.endAdornment}
-            className={cn(
-              slotProps.endAdornment?.className,
-              "InputField_adornment",
-            )}
+            className={cn(slotProps.endAdornment?.className, styles.adornment)}
           >
             {endAdornment}
           </span>
@@ -97,7 +91,7 @@ export function InputField(props: InputFieldProps): ReactElement {
       <TextOrList
         {...slotProps.helperText}
         id={(slotProps.helperText?.id, descriptionId)}
-        className={cn(slotProps.helperText?.className, "InputField_helperText")}
+        className={cn(slotProps.helperText?.className, styles.helperText)}
         text={error ?? helperText}
       />
     </div>
