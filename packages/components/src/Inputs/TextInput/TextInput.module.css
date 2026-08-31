@@ -1,0 +1,3 @@
+.input {
+  composes: input from "../InputField/InputField.module.css";
+}

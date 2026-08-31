@@ -1,4 +1,4 @@
-.Switch_root {
+.root {
   --track-color: var(--color-on-surface);
   --track-bg: var(--color-input-surface);
   --thumb-color: var(--color-surface-highest);
@@ -25,12 +25,12 @@
   font-size: var(--fs);
 }
 
-.Switch_inputWrapper {
+.inputWrapper {
   display: flex;
   align-items: center;
   gap: 0.5em;
 }
-.Switch_switch {
+.switch {
   /* Dont ask i was ill (1.618+(1.618/2))/1.392 */
   width: var(--track-width);
   height: var(--size);
@@ -38,7 +38,7 @@
   flex-shrink: 0;
 }
 
-.Switch_input {
+.input {
   cursor: pointer;
   -webkit-appearance: none;
   appearance: none;
@@ -51,7 +51,7 @@
     outline: none;
   }
 }
-.Switch_track {
+.track {
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -66,7 +66,7 @@
   transition: all var(--transition-time) var(--transition-tf);
   pointer-events: none;
 }
-.Switch_thumb {
+.thumb {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -83,12 +83,12 @@
   transition: all var(--transition-time) var(--transition-tf);
   animation: turnOffSwitch var(--transition-time) var(--transition-tf) forwards;
 }
-.Switch .Switch_label {
+.Switch .label {
   cursor: pointer;
   color: var(--label-color);
 }
 
-.Switch_helperText {
+.helperText {
   font-size: 0.8em;
   color: var(--color-on-background-low);
   margin-left: var(--size);
@@ -97,7 +97,7 @@
   min-width: 100%;
 }
 
-.Switch_trackIcons {
+.trackIcons {
   position: absolute;
   width: var(--thumb-width);
   height: 100%;
@@ -107,8 +107,8 @@
   animation: turnOnSwitch var(--transition-time) var(--transition-tf) forwards;
 }
 
-.Switch_thumbIcons,
-.Switch_trackIcons {
+.thumbIcons,
+.trackIcons {
   display: grid;
   place-items: center;
   scale: 0.95;
@@ -128,58 +128,57 @@
   }
 }
 /* When both trackIcons and thumbIcons exist trackIcons should only fade not slide */
-.Switch_root:has(.Switch_trackIcons):has(.Switch_thumbIcons)
-  .Switch_trackIcons {
+.root:has(.trackIcons):has(.thumbIcons) .trackIcons {
   animation: none;
 }
 /* Not disabled */
-.Switch_root:has(.Switch_input:not(:disabled)) {
-  & .Switch_switch:hover .Switch_thumb {
+.root:has(.input:not(:disabled)) {
+  & .switch:hover .thumb {
     scale: 1;
   }
 }
 /* Disabled */
-.Switch_root:has(.Switch_input:disabled) {
+.root:has(.input:disabled) {
   opacity: 0.3;
-  & .Switch_input,
-  & .Switch_label {
+  & .input,
+  & .label {
     cursor: not-allowed;
   }
 }
 /* Errored */
-.Switch_root[data-error="true"],
-.Switch_root:has(.Switch_input:user-invalid) {
-  & .Switch_helperText {
+.root[data-error="true"],
+.root:has(.input:user-invalid) {
+  & .helperText {
     color: var(--color-error);
   }
 }
 /* Focused state */
-.Switch_root:has(.Switch_input:focus-visible) {
-  & .Switch_label {
+.root:has(.input:focus-visible) {
+  & .label {
     font-weight: bold;
   }
-  & .Switch_track {
+  & .track {
     outline: var(--focus-ring);
   }
 }
 /* isOn */
-.Switch_root:has(.Switch_input:checked) {
+.root:has(.input:checked) {
   --track-border-width: 0;
-  & .Switch_track {
+  & .track {
     background-color: var(--track-bg-checked);
     color: var(--track-color-checked);
   }
-  & .Switch_thumb {
+  & .thumb {
     background-color: var(--thumb-bg-checked);
     color: var(--thumb-color-checked);
     animation: turnOnSwitch var(--transition-time) var(--transition-tf) forwards;
   }
-  .Switch_trackIcons {
+  .trackIcons {
     animation: turnOffSwitch var(--transition-time) var(--transition-tf)
       forwards;
   }
-  .Switch_thumbIcons,
-  .Switch_trackIcons {
+  .thumbIcons,
+  .trackIcons {
     & .on {
       opacity: 1;
     }
@@ -187,59 +186,59 @@
       opacity: 0;
     }
   }
-  &:has(.Switch_trackIcons):has(.Switch_thumbIcons) .Switch_trackIcons {
+  &:has(.trackIcons):has(.thumbIcons) .trackIcons {
     animation: none;
     left: 0;
   }
 }
 /* Size */
-.Switch_root[data-size="xs"] {
+.root[data-size="xs"] {
   --fs: var(--fs-sm);
   --size: 20px;
   --br: var(--br-sm);
 }
-.Switch_root[data-size="sm"] {
+.root[data-size="sm"] {
   --fs: var(--fs-sm);
   --size: 24px;
   --br: var(--br-sm);
 }
-.Switch_root[data-size="lg"] {
+.root[data-size="lg"] {
   --fs: var(--fs-lg);
   --size: 32px;
   --br: var(--br-lg);
 }
-.Switch_root[data-size="xl"] {
+.root[data-size="xl"] {
   --fs: var(--fs-xl);
   --size: 36px;
   --br: var(--br-lg);
 }
 
 /* Colors */
-.Switch_root[data-color] {
+.root[data-color] {
   --track-color-checked: var(--track-bg);
   --track-bg-checked: var(--track-color);
   --thumb-color-checked: var(--thumb-bg);
   --thumb-bg-checked: var(--thumb-color);
 }
-.Switch_root[data-color="primary"] {
+.root[data-color="primary"] {
   --track-color: var(--color-primary);
   --track-bg: var(--color-primary-alpha);
   --thumb-color: var(--color-on-primary);
   --thumb-bg: var(--color-primary);
 }
-.Switch_root[data-color="secondary"] {
+.root[data-color="secondary"] {
   --track-color: var(--color-secondary);
   --track-bg: var(--color-secondary-alpha);
   --thumb-color: var(--color-on-secondary);
   --thumb-bg: var(--color-secondary);
 }
-.Switch_root[data-color="tertiary"] {
+.root[data-color="tertiary"] {
   --track-color: var(--color-tertiary);
   --track-bg: var(--color-tertiary-alpha);
   --thumb-color: var(--color-on-tertiary);
   --thumb-bg: var(--color-tertiary);
 }
-.Switch_root[data-color="error"] {
+.root[data-color="error"] {
   --track-color: var(--color-error);
   --track-bg: var(--color-error-alpha);
   --thumb-color: var(--color-on-error);

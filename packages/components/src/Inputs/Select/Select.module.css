@@ -1,9 +1,10 @@
-.Select_input {
+.input {
+  composes: input from "../InputField/InputField.module.css";
   width: 100%;
   background: none;
   border: none;
 }
-.Select_input option {
+.input option {
   appearance: base-select;
   cursor: pointer;
   font-family: var(--font-p), sans-serif;
@@ -28,20 +29,20 @@
     }
   }
 }
-.Select_input optgroup {
+.input optgroup {
   background-color: var(--color-surface-high);
 }
 
-.Select_input::picker(select) {
+.input::picker(select) {
   appearance: base-select;
   border-radius: var(--br-md);
   background-color: var(--color-surface);
   border: 1px solid var(--border-color);
   padding: var(--size);
 }
-.Select_input::picker-icon {
+.input::picker-icon {
   transition: rotate var(--transition-time) var(--transition-tf);
 }
-.Select_input:open::picker-icon {
+.input:open::picker-icon {
   rotate: 180deg;
 }

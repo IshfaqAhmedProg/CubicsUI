@@ -7,7 +7,7 @@ import type {
 } from "@cubicsui/types";
 import { mergeRefs, cn } from "@cubicsui/utils";
 import { type ElementType, useRef, useEffect } from "react";
-import "./GlassCard.styles.css";
+import styles from "./GlassCard.module.css";
 
 export type GlassCardProps<C extends ElementType = "div"> =
   PolymorphicComponentProps<C, object>;
@@ -61,7 +61,7 @@ function GlassCardBase<C extends ElementType = "div">(
   return (
     <Component
       ref={mergeRefs(ref, cardRef)}
-      className={cn(className, "GlassCard_root")}
+      className={cn(className, styles.root)}
       {...restProps}
     >
       {children}

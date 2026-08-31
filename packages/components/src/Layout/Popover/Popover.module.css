@@ -1,6 +1,4 @@
-/* Popover.styles.css */
-
-.Popover_root {
+.root {
   --popover-duration: var(--transition-time-fast);
   --popover-easing: var(--transition-tf);
   --popover-scale-from: 0.5;
@@ -31,14 +29,14 @@
 }
 
 /* open state */
-.Popover_root:popover-open {
+.root:popover-open {
   opacity: 1;
   scale: 1;
   translate: 0;
 }
 
 @starting-style {
-  .Popover_root:popover-open {
+  .root:popover-open {
     opacity: 0;
     scale: var(--popover-scale-from);
     translate: var(--popover-translate-from);

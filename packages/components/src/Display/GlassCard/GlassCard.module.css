@@ -1,4 +1,4 @@
-.GlassCard_root {
+.root {
   --tint: var(--color-primary);
   --br: var(--br-md);
   --border-color: var(--color-outline);

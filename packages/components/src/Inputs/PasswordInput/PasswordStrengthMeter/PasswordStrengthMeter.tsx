@@ -9,7 +9,7 @@ import {
 import type { PasswordStrengthMeterProps } from "./PasswordStrengthMeter.types";
 import { cn } from "@cubicsui/utils";
 import { TextOrList } from "../../../Typography/TextOrList/TextOrList";
-import "./PasswordStrengthMeter.styles.css";
+import styles from "./PasswordStrengthMeter.module.css";
 
 export function PasswordStrengthMeter(
   props: PasswordStrengthMeterProps,
@@ -32,39 +32,27 @@ export function PasswordStrengthMeter(
   }, [score, scoreWords]);
 
   return (
-    <div className={cn("PasswordStrengthMeter_root", className)} {...rest}>
+    <div className={cn(styles.root, className)} {...rest}>
       <div
         {...slotProps.meterWrapper}
-        className={cn(
-          "PasswordStrengthMeter_container",
-          slotProps.meterWrapper?.className,
-        )}
+        className={cn(styles.container, slotProps.meterWrapper?.className)}
       >
         <div
           {...slotProps.meter}
-          className={cn(
-            "PasswordStrengthMeter_meter",
-            slotProps.meter?.className,
-          )}
+          className={cn(styles.meter, slotProps.meter?.className)}
           style={{ ...slotProps.meter?.style, ...scoreStyles }}
           data-score={!!score}
         />
         <div
           {...slotProps.scoreWord}
-          className={cn(
-            "PasswordStrengthMeter_scoreWord",
-            slotProps.scoreWord?.className,
-          )}
+          className={cn(styles.scoreWord, slotProps.scoreWord?.className)}
         >
           {scoreWord}
         </div>
       </div>
       <TextOrList
         {...slotProps.feedback}
-        className={cn(
-          "PasswordStrengthMeter_feedback",
-          slotProps.feedback?.className,
-        )}
+        className={cn(styles.feedback, slotProps.feedback?.className)}
         data-warning={!!feedback?.warning}
         text={feedback?.warning ?? feedback?.suggestions}
       />

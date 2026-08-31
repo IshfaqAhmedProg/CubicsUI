@@ -3,13 +3,13 @@
 import { usePointerPosition } from "@cubicsui/hooks";
 import { cn, remap } from "@cubicsui/utils";
 import type { CSSProperties, ReactElement } from "react";
-import "./PointerLight.styles.css";
 import type { PointerLightProps } from "./PointerLight.types";
+import styles from "./PointerLight.module.css";
 
 function getSpeedAdjustedSize(value: number, mouseSpeed: number) {
   return value - Math.round(remap(mouseSpeed, [33, 1000], [0, 100]));
 }
-
+// TODO fix functionality
 export function PointerLight(props: PointerLightProps): ReactElement {
   const {
     overlay = false,
@@ -26,9 +26,9 @@ export function PointerLight(props: PointerLightProps): ReactElement {
     <div
       {...slotProps.root}
       className={cn(
-        "PointerLight_root",
+        styles.root,
         slotProps.root?.className,
-        overlay ? "PointerLight_overlay" : "",
+        overlay ? styles.overlay : "",
       )}
       style={
         {
@@ -39,7 +39,7 @@ export function PointerLight(props: PointerLightProps): ReactElement {
     >
       <div
         {...rest}
-        className={cn("PointerLight_main", className)}
+        className={cn(styles.main, className)}
         style={{
           left: `${pointerPosition.x}px`,
           top: `${pointerPosition.y}px`,

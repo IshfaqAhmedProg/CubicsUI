@@ -14,11 +14,6 @@
         "CLERK_SIGN_UP_FORCE_REDIRECT_URL"
       ]
     },
-    "build:packages": {
-      "dependsOn": ["^build:packages"],
-      "inputs": ["src/**", "tsconfig.json", "tsdown.config.js", "package.json"],
-      "outputs": ["dist/**"]
-    },
     "lint": {
       "dependsOn": ["^lint"]
     },

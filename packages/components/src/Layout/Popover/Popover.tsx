@@ -4,7 +4,7 @@ import type { PolymorphicComponentType } from "@cubicsui/types";
 import { cn } from "@cubicsui/utils";
 import type { CSSProperties, ElementType } from "react";
 import type { PopoverBaseProps, PopoverProps } from "./Popover.types";
-import "./Popover.styles.css";
+import styles from "./Popover.module.css";
 
 function PopoverBase<C extends ElementType = "div">(props: PopoverProps<C>) {
   const {
@@ -21,7 +21,7 @@ function PopoverBase<C extends ElementType = "div">(props: PopoverProps<C>) {
   const componentProps = {
     ...rest,
     popover: popover,
-    className: cn(className, "Popover_root"),
+    className: cn(className, styles.root),
     style: {
       ...style,
       "--popover-position-area": positionArea,

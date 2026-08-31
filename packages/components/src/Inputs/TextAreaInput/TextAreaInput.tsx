@@ -5,8 +5,8 @@ import { InputField } from "../InputField/InputField";
 import { eventWithRipple } from "../../Misc/Ripple/Ripple";
 import { cn } from "@cubicsui/utils";
 import type { TextAreaInputProps } from "./TextAreaInput.types";
-import "./TextAreaInput.styles.css";
 import type { InputFieldProps } from "../InputField/InputField.types";
+import styles from "./TextAreaInput.module.css";
 
 export function TextAreaInput(props: TextAreaInputProps): ReactElement {
   const {
@@ -48,7 +48,7 @@ export function TextAreaInput(props: TextAreaInputProps): ReactElement {
     fullWidth,
     disablePadding,
     disableRipple,
-    rootClass: cn(rootClass, disableResize && "TextAreaInput_disableResize"),
+    rootClass: cn(rootClass, disableResize && styles.disableResize),
     slotProps,
 
     inputId,
@@ -60,7 +60,7 @@ export function TextAreaInput(props: TextAreaInputProps): ReactElement {
         return (
           <textarea
             id={inputId}
-            className={cn(className, "InputField_input", "TextAreaInput_input")}
+            className={cn(className, styles.input)}
             onTouchStart={eventWithRipple(createRipple, onTouchStart)}
             onClick={eventWithRipple(createRipple, onClick)}
             aria-invalid={!!error}

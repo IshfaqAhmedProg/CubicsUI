@@ -4,7 +4,7 @@ import type { PolymorphicComponentType } from "@cubicsui/types";
 import { type ElementType } from "react";
 import { cn } from "@cubicsui/utils";
 import type { ChipBaseProps, ChipProps } from "./Chip.types";
-import "./Chip.styles.css";
+import styles from "./Chip.module.css";
 
 function ChipBase<C extends ElementType = "span">(props: ChipProps<C>) {
   const {
@@ -19,7 +19,11 @@ function ChipBase<C extends ElementType = "span">(props: ChipProps<C>) {
   const Component = (as || "span") as ElementType;
 
   const componentProps = {
-    className: cn(className, "Chip_root", variant && `variant_${variant}`),
+    className: cn(
+      className,
+      styles.root,
+      variant && styles[`variant_${variant}`],
+    ),
     "data-color": color,
     "data-size": size,
     ...restProps,

@@ -1,4 +1,4 @@
-.CloseButton_root {
+.root {
   &[data-pos-x="center"] {
     left: 50%;
     translate: -50% 0;

@@ -5,9 +5,8 @@ import { cn } from "@cubicsui/utils";
 import { eventWithRipple } from "../../Misc/Ripple/Ripple";
 import { InputField } from "../InputField/InputField";
 import type { SelectProps } from "./Select.types";
-import "./Select.styles.css";
 import type { InputFieldProps } from "../InputField/InputField.types";
-
+import styles from "./Select.module.css";
 /**
  * Interchangeable with the native `<select/>` element for more control like combobox, multiselect, autocomplete, async or creatable support use <Combobox/> component.
  * You cannot use any element inside a native `<option/>` element currently in browsers like firefox and safari, only text.
@@ -65,7 +64,7 @@ export function Select(props: SelectProps): ReactElement {
       {({ createRipple }) => (
         <select
           id={id}
-          className={cn(className, "InputField_input", "Select_input")}
+          className={cn(className, styles.input)}
           onTouchStart={eventWithRipple(createRipple, onTouchStart)}
           onClick={eventWithRipple(createRipple, onClick)}
           aria-invalid={!!error}
