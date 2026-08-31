@@ -1,0 +1,65 @@
+.GlassCard_root {
+  --tint: var(--color-primary);
+  --br: var(--br-md);
+  --border-color: var(--color-outline);
+  --pointer-color: color-mix(in srgb, var(--tint) 70%, transparent);
+  --shadow: color-mix(in srgb, var(--tint) 15%, transparent);
+  --position: relative;
+  --gradient-angle: 255deg;
+  --reflection-intensity: 1;
+  --mouse-x: -9999;
+  --mouse-y: -9999;
+
+  isolation: isolate;
+  border-radius: var(--br);
+  position: var(--position);
+  box-shadow: inset 0px 0px 4px var(--shadow);
+  backdrop-filter: blur(var(--blur-light));
+
+  /* Border */
+  &::after {
+    --internal-reflection: color-mix(in srgb, var(--tint) 10%, transparent);
+    --source-light: color-mix(in srgb, var(--tint) 30%, transparent);
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    padding: var(--border-width);
+    background-image: linear-gradient(
+      var(--gradient-angle, 255deg),
+      var(--source-light) 0%,
+      transparent 30%,
+      transparent 80%,
+      var(--internal-reflection) 100%
+    );
+    opacity: var(--reflection-intensity, 1);
+    mask:
+      linear-gradient(#000 0 0) exclude,
+      linear-gradient(#000 0 0) content-box;
+
+    z-index: -2;
+  }
+
+  /* Mouse Pointer Light */
+  &::before {
+    content: "";
+    inset: 0;
+    position: absolute;
+    transition: opacity var(--transition-time);
+    pointer-events: none;
+    opacity: 1;
+    padding: var(--border-width);
+    mask:
+      linear-gradient(#000 0 0) exclude,
+      linear-gradient(#000 0 0) content-box;
+    border-radius: inherit;
+    background: radial-gradient(
+      var(--pointer-light-size) circle at var(--mouse-x) var(--mouse-y),
+      var(--pointer-color),
+      transparent 40%
+    );
+    z-index: -1;
+  }
+}
+
+/* conic-gradient(from 0deg at 50% 50%, #073AFF79 0%, #446DF900 16%, #073AFFC7 33%, #073AFFC7 66%, #446DF900 84%, #073AFF79 100%) */

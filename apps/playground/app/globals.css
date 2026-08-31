@@ -129,10 +129,11 @@
   --z-header: 99;
   --z-drawer: 999;
   --z-modal: 9999;
-  --border-width: 2.3px;
+  --border-width: 2px;
   --icon-stroke-width: 2.3px;
   --gr: 1.618;
   --focus-ring: var(--border-width) dashed var(--color-focus);
+  --pointer-light-size: 250px;
 }
 [data-theme="dark"] {
   color-scheme: dark;
