@@ -1,4 +1,6 @@
-:root {
+:root,
+[data-theme="light"] {
+  color-scheme: light;
   /* Brand Colors */
   --color-primary: #514faa;
   --color-on-primary: #ffffff;
@@ -34,7 +36,7 @@
   /* Surface colors */
   --color-background: #f5f0f1;
   --color-on-background: #313133;
-  --color-on-background-low: #858585;
+  --color-on-background-low: #5c5c5c;
   --color-surface: #e6dbde;
   --color-on-surface: #4b4b4b;
   --color-surface-high: #d9c9ce;
@@ -54,8 +56,6 @@
   --color-error-alpha: color-mix(var(--color-error) 20%, transparent);
   --color-warn-alpha: color-mix(var(--color-warn) 20%, transparent);
   --color-success-alpha: color-mix(var(--color-success) 20%, transparent);
-  --color-background-alpha: color-mix(var(--color-background) 70%, transparent);
-  --color-surface-alpha: color-mix(var(--color-surface) 80%, transparent);
 
   /* Misc Colors */
   --color-outline: #c8c8cc;
@@ -178,6 +178,11 @@
   --color-surface-highest: #393842;
   --color-surface-dim: #18181e;
   --color-surface-bright: #34343d;
+  --color-input-surface: color-mix(
+    in srgb,
+    var(--color-surface-highest) 30%,
+    transparent
+  );
 
   /* Alpha Colors */
   --color-primary-alpha: color-mix(var(--color-primary) 20%, transparent);
