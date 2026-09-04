@@ -29,3 +29,7 @@ export * from "./TextInput/TextInput.types";
 
 export * from "./TextAreaInput/TextAreaInput";
 export * from "./TextAreaInput/TextAreaInput.types";
+
+export * from "./ThemeToggle/ThemeToggle";
+export * from "./ThemeToggle/ThemeToggleIcon/ThemeToggleIcon";
+export * from "./ThemeToggle/ThemeToggle.types";

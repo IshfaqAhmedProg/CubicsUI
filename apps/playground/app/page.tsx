@@ -30,6 +30,7 @@ export default function Page() {
         <Item href={"/components/switch"}>Switch ✅</Item>
         <Item href={"/components/textAreaInput"}>TextAreaInput ✅</Item>
         <Item href={"/components/textInput"}>TextInput ✅</Item>
+        <Item href={"/components/themeToggle"}>ThemeToggle ✅</Item>
       </ol>
       <h2>Layout</h2>
       <ol className="column">
@@ -37,7 +38,7 @@ export default function Page() {
       </ol>
       <h2>Misc</h2>
       <ol className={"column"}>
-        <Item href="/components/pointerLight">PointerLight</Item>
+        <Item href="/components/pointerLight">PointerLight 🚧</Item>
       </ol>
       <h2>Providers</h2>
       <ol className={"column"}>
