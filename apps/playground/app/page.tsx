@@ -19,9 +19,6 @@ export default function Page() {
       <ol className={"column"}>
         <Item href={"/components/chip"}>Chip ✅</Item>
         <Item href={"/components/glassCard"}>GlassCard ✅</Item>
-        {/* <Item href={"/components/passwordStrengthMeter"}>
-          PasswordStrengthMeter
-        </Item> */}
       </ol>
       <h2>Inputs</h2>
       <ol className={"column"}>
@@ -38,15 +35,17 @@ export default function Page() {
       <ol className="column">
         <Item href="/components/popover">Popover ✅</Item>
       </ol>
+      <h2>Misc</h2>
+      <ol className={"column"}>
+        <Item href="/components/pointerLight">PointerLight</Item>
+      </ol>
+      <h2>Providers</h2>
+      <ol className={"column"}>
+        <Item href="/components/themeProvider">ThemeProvider ✅</Item>
+      </ol>
       <h2>Typography</h2>
       <ol className={"column"}>
         <Item href="/">TextOrList ✅</Item>
-        {/* <Item href={"/components/inputErrors"}>InputHelperText</Item> */}
-      </ol>
-      <h2>Misc</h2>
-      <ol className={"column"}>
-        {/* <Item href={"/"}>Ripple</Item> */}
-        <Item href="/components/pointerLight">PointerLight</Item>
       </ol>
     </div>
   );

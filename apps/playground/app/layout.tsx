@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { Fira_Code, Outfit, Titillium_Web } from "next/font/google";
-import { ThemeProvider } from "@/lib/providers/ThemeProvider";
 import { Header } from "@/lib/ui/Layout/Header/Header";
+import { ThemeProvider } from "@cubicsui/components";
 import "./globals.css";
 import "./pg-globals.css";
 
